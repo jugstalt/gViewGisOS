@@ -58,11 +58,7 @@ namespace gView.Framework.IO
         }
     }
 
-    public interface IMetadataProvider : IPersistable
-    {
-        bool ApplyTo(object Object);
-        string Name { get; }
-    }
+    
 
     public interface IMetadataObjectParameter
     {

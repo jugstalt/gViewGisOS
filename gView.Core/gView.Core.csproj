@@ -130,6 +130,7 @@
     <Compile Include="Framework\Data\Framework_Data.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Framework\IO\IPersistable.cs" />
     <Compile Include="Framework\MapServer\IMapServerInstanceService.cs" />
     <Compile Include="Framework\UI\Framework_UI.cs">
       <SubType>Code</SubType>
