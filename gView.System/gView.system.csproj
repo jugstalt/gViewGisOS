@@ -1,0 +1,153 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="12.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{A6FBA7E4-AAB9-4595-B87A-60334AFC312B}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>gView.Framework.system</RootNamespace>
+    <AssemblyName>gView.system</AssemblyName>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>gView.system.snk</AssemblyOriginatorKeyFile>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Framework\system\Acl.cs" />
+    <Compile Include="Framework\system\ColorConverter2.cs" />
+    <Compile Include="Framework\system\Const.cs" />
+    <Compile Include="Framework\system\Environment.cs" />
+    <Compile Include="Framework\system\ExceptionQueue.cs" />
+    <Compile Include="Framework\system\FileReadWrite.cs" />
+    <Compile Include="Framework\system\gViewGIS.cs" />
+    <Compile Include="Framework\system\Identity.cs" />
+    <Compile Include="Framework\system\JSON.cs" />
+    <Compile Include="Framework\system\Logger.cs" />
+    <Compile Include="Framework\system\MapServerResponse.cs" />
+    <Compile Include="Framework\system\Numbers.cs" />
+    <Compile Include="Framework\system\PlugInManager.cs" />
+    <Compile Include="Framework\system\CancelTracker.cs" />
+    <Compile Include="Framework\system\CmdArgs.cs" />
+    <Compile Include="Framework\system\Encryption.cs" />
+    <Compile Include="Framework\system\Globals.cs" />
+    <Compile Include="Framework\system\IndexedList.cs" />
+    <Compile Include="Framework\IO\IO.cs" />
+    <Compile Include="Framework\system\LicenseManager.cs" />
+    <Compile Include="Framework\system\MapServerConfig.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Framework\system\Sequence.cs" />
+    <Compile Include="Framework\system\Serializer.cs" />
+    <Compile Include="Framework\system\SmartDatabaseConnection.cs" />
+    <Compile Include="Framework\system\Sorter.cs" />
+    <Compile Include="Framework\system\SystemInfo.cs" />
+    <Compile Include="Framework\system\SystemVariables.cs" />
+    <Compile Include="Framework\system\TimeStatistcs.cs" />
+    <Compile Include="Framework\system\Tokenizer.cs" />
+    <Compile Include="Framework\system\Trial.cs" />
+    <Compile Include="Framework\system\TypeHelper.cs" />
+    <Compile Include="Framework\system\Unique.cs" />
+    <Compile Include="Framework\system\Wildcard.cs" />
+    <Compile Include="Framework\system\WMSConfig.cs" />
+    <Compile Include="Framework\system\Wow.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\gView.Core\gView.Core.csproj">
+      <Project>{59A33161-474E-4B3C-882D-D8411A9F6AE3}</Project>
+      <Name>gView.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="gView.system.snk" />
+    <None Include="gViewGisOS.nsi" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="MapServerConfig.setup.xml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

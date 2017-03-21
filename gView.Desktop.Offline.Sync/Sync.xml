@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<sync>
+  <datasets>
+    <dataset name="PW OFFLINE EDITING" pluginguid="6F540340-74C9-4b1a-BD4D-B1C5FE946CA1"
+             connectionstring="mdb=C:\daten\fdb_neu.mdb;dsname=NewDataset" >
+    </dataset>
+  </datasets>
+</sync> 

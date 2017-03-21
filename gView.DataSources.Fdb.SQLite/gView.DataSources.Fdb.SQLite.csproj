@@ -1,0 +1,158 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{4B54BD6B-2E09-4D09-926B-872FF008BBF3}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>gView.DataSources.Fdb.SQLite</RootNamespace>
+    <AssemblyName>gView.DataSources.Fdb.SQLite</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>gView.DataSources.Fdb.SQLite.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net40\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net40\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.SQLite, Version=1.0.104.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Data.SQLite.Core.1.0.104.0\lib\net40\System.Data.SQLite.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Data.SQLite.EF6, Version=1.0.104.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Data.SQLite.EF6.1.0.104.0\lib\net40\System.Data.SQLite.EF6.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Data.SQLite.Linq, Version=1.0.104.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Data.SQLite.Linq.1.0.104.0\lib\net40\System.Data.SQLite.Linq.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SQLiteConn.cs" />
+    <Compile Include="SQLiteFDB.cs" />
+    <Compile Include="SQLiteFDBDataset.cs" />
+    <Compile Include="SQLiteFDBFeatureClass.cs" />
+    <Compile Include="SQLiteFDBImageCatalogClass.cs" />
+    <Compile Include="SQLiteFDBNetworkFeatureClass.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\gView.Core\gView.Core.csproj">
+      <Project>{59a33161-474e-4b3c-882d-d8411a9f6ae3}</Project>
+      <Name>gView.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\gView.Datasources.Fdb.Access\gView.DataSources.Fdb.MSAccess.csproj">
+      <Project>{698381dd-5acc-4f7f-9eb5-727ea3552ca2}</Project>
+      <Name>gView.DataSources.Fdb.MSAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\gView.Datasources.Raster\gView.DataSources.Raster.csproj">
+      <Project>{67618cb7-3b4a-4a4e-87b0-9bb2bfbdd96f}</Project>
+      <Name>gView.DataSources.Raster</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\gView.Data\gView.Data.csproj">
+      <Project>{a129277c-c5f1-4408-a136-12c74296f335}</Project>
+      <Name>gView.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\gView.Db\gView.Db.csproj">
+      <Project>{af546a19-9255-40e1-bc38-7874b394d6b1}</Project>
+      <Name>gView.Db</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\gView.Editor.Core\gView.Editor.Core.csproj">
+      <Project>{b79df0aa-a2bf-40b2-84dc-5498202ea9db}</Project>
+      <Name>gView.Editor.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\gView.Geometry\gView.Geometry.csproj">
+      <Project>{18a87854-e0de-481c-b00c-b3362cace7b1}</Project>
+      <Name>gView.Geometry</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\gView.Network\gView.Network.csproj">
+      <Project>{6d7d876a-e919-4499-a53c-4a23552c4fe5}</Project>
+      <Name>gView.Network</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\gView.Offline\gView.Offline.csproj">
+      <Project>{bfeead21-d9f4-43b7-b60c-08ac1d628100}</Project>
+      <Name>gView.Offline</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\gView.system\gView.system.csproj">
+      <Project>{a6fba7e4-aab9-4595-b87a-60334afc312b}</Project>
+      <Name>gView.system</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="gView.DataSources.Fdb.SQLite.snk" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="x64\SQLite.Interop.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="x86\SQLite.Interop.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\System.Data.SQLite.Core.1.0.104.0\build\net40\System.Data.SQLite.Core.targets" Condition="Exists('..\packages\System.Data.SQLite.Core.1.0.104.0\build\net40\System.Data.SQLite.Core.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\System.Data.SQLite.Core.1.0.104.0\build\net40\System.Data.SQLite.Core.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\System.Data.SQLite.Core.1.0.104.0\build\net40\System.Data.SQLite.Core.targets'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

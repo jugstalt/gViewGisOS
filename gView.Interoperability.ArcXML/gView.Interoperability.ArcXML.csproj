@@ -1,0 +1,153 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="12.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{2E3DF019-C2CC-43CD-A05F-47F885E413E8}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>gView.Interoperability.ArcXML</RootNamespace>
+    <AssemblyName>gView.Interoperability.ArcXML</AssemblyName>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>Request\gView.Interoperability.ArcXML.snk</AssemblyOriginatorKeyFile>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Dataset\ArcIMSClass.cs" />
+    <Compile Include="Dataset\ArcIMSDataset.cs" />
+    <Compile Include="Dataset\ArcIMSThemes.cs" />
+    <Compile Include="Dataset\dotNETConnector.cs" />
+    <Compile Include="Dataset\Metadata.cs" />
+    <Compile Include="Dataset\ServiceDataset.cs" />
+    <Compile Include="Request\ArcXMLRequest.cs" />
+    <Compile Include="Request\ArcXML.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\gView.Carto.Rendering\gView.Carto.Rendering.csproj">
+      <Project>{9B068E3C-21F4-4342-806C-B9108D2A5179}</Project>
+      <Name>gView.Carto.Rendering</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\gView.Carto\gView.Carto.csproj">
+      <Project>{CD663C87-7D1F-44DA-A593-018B08CC4159}</Project>
+      <Name>gView.Carto</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\gView.Core\gView.Core.csproj">
+      <Project>{59A33161-474E-4B3C-882D-D8411A9F6AE3}</Project>
+      <Name>gView.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\gView.Data\gView.Data.csproj">
+      <Project>{A129277C-C5F1-4408-A136-12C74296F335}</Project>
+      <Name>gView.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\gView.Geometry\gView.Geometry.csproj">
+      <Project>{18A87854-E0DE-481C-B00C-B3362CACE7B1}</Project>
+      <Name>gView.Geometry</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\gView.Network\gView.Network.csproj">
+      <Project>{6d7d876a-e919-4499-a53c-4a23552c4fe5}</Project>
+      <Name>gView.Network</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\gView.Symbology\gView.Symbology.csproj">
+      <Project>{543D62C1-539F-465D-9D26-F201D06E57FB}</Project>
+      <Name>gView.Symbology</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\gView.system\gView.system.csproj">
+      <Project>{A6FBA7E4-AAB9-4595-B87A-60334AFC312B}</Project>
+      <Name>gView.system</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\gView.Web\gView.Web.csproj">
+      <Project>{19B6BE9E-7094-4800-B257-CEC0682B0009}</Project>
+      <Name>gView.Web</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\gView.XML2\gView.XML2.csproj">
+      <Project>{3B4B5B7D-81F7-4362-B420-656447FD2F5C}</Project>
+      <Name>gView.XML2</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\gView.XML\gView.XML.csproj">
+      <Project>{283B25C7-52F6-45DD-8D53-636569FE1DC7}</Project>
+      <Name>gView.XML</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Request\gView.Interoperability.ArcXML.snk" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,79 @@
+﻿body
+{
+    font-family: Verdana;
+    font-size: 8pt;
+}
+
+h1
+{
+    font-size: 14pt;
+}
+
+a
+{
+    text-decoration: none;
+}
+
+ul
+{
+    list-style-type: none;
+}
+
+
+.head
+{
+    background: #3f579b;
+    color: White;
+    padding: 5px;
+    margin: 2px;
+    border-radius: 5px 5px 5px 5px;
+}
+
+.nav
+{
+    background: #b3bce1;
+    color: #3b477a;
+    padding: 5px;
+    margin: 2px;
+    border-radius: 5px 5px 5px 5px;
+    font-size: 10pt;
+}
+
+.navlink
+{
+    color: #3b477a;
+    font-size: 10pt;
+}
+
+.servicelink
+{
+    background: #fff;
+    color: #3b477a;
+    padding: 5px;
+    margin: 2px;
+    border-radius: 5px 5px 5px 5px;
+}
+
+.listbox
+{
+    background: #b3bce1;
+    color: #3b477a;
+    padding: 5px;
+    margin: 2px;
+    border-radius: 5px 5px 5px 5px;
+    font-size: 10pt;
+}
+
+.itembox
+{
+    background-color: White;
+    border-radius: 5px 5px 5px 5px;
+    font-size: 8.5pt;
+    padding: 2px;
+}
+
+.content
+{
+    padding: 5px;
+    margin: 2px;
+}

@@ -1,0 +1,382 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="12.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{37E82053-2326-4642-BF93-CBF19B6CEB35}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>gView.Symbology.UI</RootNamespace>
+    <AssemblyName>gView.Symbology.UI</AssemblyName>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>gView.Symbology.UI.snk</AssemblyOriginatorKeyFile>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Framework\Symbology\UI\Controls\ColorGradientComboBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Framework\Symbology\UI\CustomClass.cs" />
+    <Compile Include="Framework\Symbology\UI\Controls\FormColorGradient.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Framework\Symbology\UI\Controls\FormColorGradient.Designer.cs">
+      <DependentUpon>FormColorGradient.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Framework\Symbology\UI\Controls\FormColorTransparency.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Framework\Symbology\UI\Controls\FormSymbol.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Framework\Symbology\UI\Controls\Form_UITypeEditor_Character.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Framework\Symbology\UI\Controls\Form_UITypeEditor_Color.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Framework\Symbology\UI\Controls\Form_UITypeEditor_DashStyle.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Framework\Symbology\UI\Controls\Kopie von FormSymbol.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Framework\Symbology\UI\Controls\ShadeAngleSetter.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Framework\Symbology\UI\Controls\ShadeAngleSetter.Designer.cs">
+      <DependentUpon>ShadeAngleSetter.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Framework\Symbology\UI\Controls\SymbolControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Framework\Symbology\UI\Controls\ComboBoxColorPicker.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Framework\Symbology\UI\Controls\ComboBoxColorPicker.designer.cs">
+      <DependentUpon>ComboBoxColorPicker.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Framework\Symbology\UI\Controls\OfficeColorPicker.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Framework\Symbology\UI\Controls\OfficeColorPicker.designer.cs">
+      <DependentUpon>OfficeColorPicker.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Framework\Symbology\UI\Controls\OfficeDashStylePicker.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Framework\Symbology\UI\Controls\OfficeDashStylePicker.Designer.cs">
+      <DependentUpon>OfficeDashStylePicker.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Framework\Symbology\UI\Controls\OfficeLineWidthPicker.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Framework\Symbology\UI\Controls\OfficeLineWidthPicker.Designer.cs">
+      <DependentUpon>OfficeLineWidthPicker.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Framework\Symbology\UI\Controls\SelectableColor.cs" />
+    <Compile Include="Framework\Symbology\UI\Controls\ToolStripColorPicker.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Framework\Symbology\UI\Controls\ToolStripDashStylePicker.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Framework\Symbology\UI\Controls\ToolStripLineWidthPicker.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Framework\Symbology\UI\Controls\PropertyForm_SimpleFillSymbol.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Framework\Symbology\UI\Controls\PropertyForm_SimpleLineSymbol.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Framework\Symbology\UI\Controls\PropertyForm_SimplePointSymbol.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Framework\Symbology\UI\Controls\PropertyForm_SimpleTextSymbol.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Framework\Symbology\UI\Controls\PropertyForm_SimpleTextSymbol.Designer.cs">
+      <DependentUpon>PropertyForm_SimpleTextSymbol.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Framework\Symbology\UI\Controls\SymbolCollectionComposer.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Framework\Symbology\UI\Tool.GraphicShape.cs" />
+    <Compile Include="Framework\Symbology\UI\UITypeEditors.cs" />
+    <Compile Include="Framework\Symbology\UI\Controls\ContextMenuForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Framework\Symbology\UI\Controls\ContextMenuForm.designer.cs">
+      <DependentUpon>ContextMenuForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Framework\Symbology\UI\Controls\CustomColors.cs" />
+    <Compile Include="Framework\Symbology\UI\Controls\GradientPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Framework\Symbology\UI\Controls\FormColorTransparency.resx">
+      <DependentUpon>FormColorTransparency.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Framework\Symbology\UI\Controls\FormSymbol.resx">
+      <DependentUpon>FormSymbol.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Framework\Symbology\UI\Controls\Form_UITypeEditor_Character.resx">
+      <DependentUpon>Form_UITypeEditor_Character.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Framework\Symbology\UI\Controls\Form_UITypeEditor_Color.resx">
+      <DependentUpon>Form_UITypeEditor_Color.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Framework\Symbology\UI\Controls\Form_UITypeEditor_DashStyle.resx">
+      <DependentUpon>Form_UITypeEditor_DashStyle.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Framework\Symbology\UI\Controls\PropertyForm_SimpleFillSymbol.resx">
+      <DependentUpon>PropertyForm_SimpleFillSymbol.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Framework\Symbology\UI\Controls\PropertyForm_SimpleLineSymbol.resx">
+      <DependentUpon>PropertyForm_SimpleLineSymbol.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Framework\Symbology\UI\Controls\PropertyForm_SimplePointSymbol.resx">
+      <DependentUpon>PropertyForm_SimplePointSymbol.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Framework\Symbology\UI\Controls\PropertyForm_SimpleTextSymbol.resx">
+      <DependentUpon>PropertyForm_SimpleTextSymbol.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Framework\Symbology\UI\Controls\SymbolCollectionComposer.resx">
+      <DependentUpon>SymbolCollectionComposer.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\gView.Datasources.Fdb.Access\gView.DataSources.Fdb.MSAccess.csproj">
+      <Project>{698381DD-5ACC-4F7F-9EB5-727EA3552CA2}</Project>
+      <Name>gView.DataSources.Fdb.MSAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\gView.Carto\gView.Carto.csproj">
+      <Project>{CD663C87-7D1F-44DA-A593-018B08CC4159}</Project>
+      <Name>gView.Carto</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\gView.Core.UI\gView.Core.UI.csproj">
+      <Project>{87D25021-C77A-4A5A-94E7-1364E55AD5F8}</Project>
+      <Name>gView.Core.UI</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\gView.Core\gView.Core.csproj">
+      <Project>{59A33161-474E-4B3C-882D-D8411A9F6AE3}</Project>
+      <Name>gView.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\gView.Geometry\gView.Geometry.csproj">
+      <Project>{18A87854-E0DE-481C-B00C-B3362CACE7B1}</Project>
+      <Name>gView.Geometry</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\gView.Globalisation\gView.Globalisation.csproj">
+      <Project>{29BC6562-A3F2-4811-A3F5-130BDCF7AEBF}</Project>
+      <Name>gView.Globalisation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\gView.Math\gView.Math.csproj">
+      <Project>{A3DDEDE4-2530-412C-835E-A90473E8F252}</Project>
+      <Name>gView.Math</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\gView.Symbology\gView.Symbology.csproj">
+      <Project>{543D62C1-539F-465D-9D26-F201D06E57FB}</Project>
+      <Name>gView.Symbology</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\gView.system\gView.system.csproj">
+      <Project>{A6FBA7E4-AAB9-4595-B87A-60334AFC312B}</Project>
+      <Name>gView.system</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Framework\Symbology\UI\Controls\ComboBoxColorPicker.bmp" />
+    <EmbeddedResource Include="Framework\Symbology\UI\Controls\ComboBoxColorPicker.resx">
+      <DependentUpon>ComboBoxColorPicker.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Framework\Symbology\UI\Controls\OfficeColorPicker.bmp" />
+    <EmbeddedResource Include="Framework\Symbology\UI\Controls\OfficeColorPicker.resx">
+      <DependentUpon>OfficeColorPicker.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Framework\Symbology\UI\Controls\OfficeDashStylePicker.resx">
+      <DependentUpon>OfficeDashStylePicker.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Framework\Symbology\UI\Controls\OfficeLineWidthPicker.resx">
+      <DependentUpon>OfficeLineWidthPicker.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Framework\Symbology\UI\Controls\ToolStripColorPicker.bmp" />
+    <EmbeddedResource Include="Framework\Symbology\UI\Controls\ToolStripColorPicker.resx">
+      <DependentUpon>ToolStripColorPicker.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Framework\Symbology\UI\Controls\ContextMenuForm.resx">
+      <DependentUpon>ContextMenuForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Framework\Symbology\UI\Controls\ColorGradientComboBox.resx">
+      <DependentUpon>ColorGradientComboBox.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Framework\Symbology\UI\Controls\FormColorGradient.de.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>FormColorGradient.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Framework\Symbology\UI\Controls\FormColorGradient.resx">
+      <DependentUpon>FormColorGradient.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Framework\Symbology\UI\Controls\FormColorTransparency.de.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>FormColorTransparency.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Framework\Symbology\UI\Controls\FormSymbol.de.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>FormSymbol.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Framework\Symbology\UI\Controls\Form_UITypeEditor_Color.de.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>Form_UITypeEditor_Color.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Framework\Symbology\UI\Controls\Kopie von FormSymbol.resx">
+      <DependentUpon>Kopie von FormSymbol.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Framework\Symbology\UI\Controls\PropertyForm_SimpleFillSymbol.de.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>PropertyForm_SimpleFillSymbol.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Framework\Symbology\UI\Controls\PropertyForm_SimpleLineSymbol.de.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>PropertyForm_SimpleLineSymbol.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Framework\Symbology\UI\Controls\PropertyForm_SimplePointSymbol.de.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>PropertyForm_SimplePointSymbol.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Framework\Symbology\UI\Controls\PropertyForm_SimpleTextSymbol.de.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>PropertyForm_SimpleTextSymbol.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Framework\Symbology\UI\Controls\ShadeAngleSetter.de.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ShadeAngleSetter.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Framework\Symbology\UI\Controls\ShadeAngleSetter.resx">
+      <DependentUpon>ShadeAngleSetter.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Framework\Symbology\UI\Controls\SymbolCollectionComposer.de.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>SymbolCollectionComposer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Framework\Symbology\UI\Controls\SymbolControl.de.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>SymbolControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Framework\Symbology\UI\Controls\SymbolControl.resx">
+      <DependentUpon>SymbolControl.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Framework\Symbology\UI\Controls\GradientPanel.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="gView.Symbology.UI.snk" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

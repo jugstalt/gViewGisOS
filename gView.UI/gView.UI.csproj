@@ -1,0 +1,185 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="12.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{24C4DA8D-D2FF-4643-82EE-AB0E8AC6C3DD}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>gView.UI</RootNamespace>
+    <AssemblyName>gView.UI</AssemblyName>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>gView.UI.snk</AssemblyOriginatorKeyFile>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Framework\UI\Dialogs\FormComponents.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Framework\UI\Dialogs\FormCopyrightInformation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Framework\UI\Dialogs\FormCopyrightInformation.Designer.cs">
+      <DependentUpon>FormCopyrightInformation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Framework\UI\Dialogs\FormLoadMap.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Framework\UI\Dialogs\FormLoadMap.Designer.cs">
+      <DependentUpon>FormLoadMap.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Framework\UI\MapDocument.cs" />
+    <Compile Include="Framework\UI\Events\MapEvent.cs" />
+    <Compile Include="Framework\UI\Controls\MapView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Framework\UI\ROP2.cs" />
+    <Compile Include="Framework\UI\Controls\ToolbarStrip.cs">
+      <SubType>Component</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\gView.Carto\gView.Carto.csproj">
+      <Project>{CD663C87-7D1F-44DA-A593-018B08CC4159}</Project>
+      <Name>gView.Carto</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\gView.Core.UI\gView.Core.UI.csproj">
+      <Project>{87D25021-C77A-4A5A-94E7-1364E55AD5F8}</Project>
+      <Name>gView.Core.UI</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\gView.Core\gView.Core.csproj">
+      <Project>{59A33161-474E-4B3C-882D-D8411A9F6AE3}</Project>
+      <Name>gView.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\gView.Data\gView.Data.csproj">
+      <Project>{A129277C-C5F1-4408-A136-12C74296F335}</Project>
+      <Name>gView.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\gView.Geometry\gView.Geometry.csproj">
+      <Project>{18A87854-E0DE-481C-B00C-B3362CACE7B1}</Project>
+      <Name>gView.Geometry</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\gView.Snapping.Core\gView.Snapping.Core.csproj">
+      <Project>{16E0EE2D-FCAA-44F1-B27B-E0726F523E33}</Project>
+      <Name>gView.Snapping.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\gView.system.UI\gView.system.UI.csproj">
+      <Project>{C2DC5D59-BE58-488A-94E1-ED092352406C}</Project>
+      <Name>gView.system.UI</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\gView.system\gView.system.csproj">
+      <Project>{A6FBA7E4-AAB9-4595-B87A-60334AFC312B}</Project>
+      <Name>gView.system</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Framework\UI\Dialogs\FormComponents.de.resx">
+      <DependentUpon>FormComponents.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Framework\UI\Dialogs\FormComponents.resx">
+      <DependentUpon>FormComponents.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Framework\UI\Dialogs\FormCopyrightInformation.resx">
+      <DependentUpon>FormCopyrightInformation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Framework\UI\Dialogs\FormLoadMap.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>FormLoadMap.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Framework\UI\Controls\MapView.resx">
+      <DependentUpon>MapView.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="gView.UI.snk" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Framework\UI\Controls\Wpf\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

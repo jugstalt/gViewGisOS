@@ -1,0 +1,151 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{F79F18AE-E63B-49A4-8FCC-744146BBDC73}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>gView</RootNamespace>
+    <AssemblyName>gView.DataSources.TileCache.UI</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="gView.Dialogs, Version=4.0.0.0, Culture=neutral, PublicKeyToken=efad02b76f1a6407, processorArchitecture=MSIL" />
+    <Reference Include="gView.Explorer.UI, Version=4.0.0.0, Culture=neutral, PublicKeyToken=35651acf169842ec, processorArchitecture=MSIL" />
+    <Reference Include="gView.MapServer.Lib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=35a1cc86532e1e60, processorArchitecture=MSIL" />
+    <Reference Include="gView.Metadata, Version=4.0.0.0, Culture=neutral, PublicKeyToken=3f4f567e5512f698, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DataSources\TileCache\UI\ExplorerObjects.cs" />
+    <Compile Include="DataSources\TileCache\UI\FormLocalCacheProperties.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DataSources\TileCache\UI\FormLocalCacheProperties.Designer.cs">
+      <DependentUpon>FormLocalCacheProperties.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DataSources\TileCache\UI\FormTileCacheConnection.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DataSources\TileCache\UI\FormTileCacheConnection.Designer.cs">
+      <DependentUpon>FormTileCacheConnection.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DataSources\TileCache\UI\IFileInfo.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="DataSources\TileCache\UI\FormLocalCacheProperties.resx">
+      <DependentUpon>FormLocalCacheProperties.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DataSources\TileCache\UI\FormTileCacheConnection.resx">
+      <DependentUpon>FormTileCacheConnection.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\gView.Core.UI\gView.Core.UI.csproj">
+      <Project>{87D25021-C77A-4A5A-94E7-1364E55AD5F8}</Project>
+      <Name>gView.Core.UI</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\gView.Core\gView.Core.csproj">
+      <Project>{59A33161-474E-4B3C-882D-D8411A9F6AE3}</Project>
+      <Name>gView.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\gView.DataSources.TileCache\gView.DataSources.TileCache.csproj">
+      <Project>{A45ACA47-94DF-472E-B139-07C13F64DE83}</Project>
+      <Name>gView.DataSources.TileCache</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\gView.Data\gView.Data.csproj">
+      <Project>{A129277C-C5F1-4408-A136-12C74296F335}</Project>
+      <Name>gView.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\gView.Geometry\gView.Geometry.csproj">
+      <Project>{18A87854-E0DE-481C-B00C-B3362CACE7B1}</Project>
+      <Name>gView.Geometry</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\gView.Globalisation\gView.Globalisation.csproj">
+      <Project>{29BC6562-A3F2-4811-A3F5-130BDCF7AEBF}</Project>
+      <Name>gView.Globalisation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\gView.Metadata.UI\gView.Metadata.UI.csproj">
+      <Project>{785016A9-21CB-4D63-99F6-6BA9B596E5D4}</Project>
+      <Name>gView.Metadata.UI</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\gView.system.UI\gView.system.UI.csproj">
+      <Project>{C2DC5D59-BE58-488A-94E1-ED092352406C}</Project>
+      <Name>gView.system.UI</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\gView.system\gView.system.csproj">
+      <Project>{A6FBA7E4-AAB9-4595-B87A-60334AFC312B}</Project>
+      <Name>gView.system</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\tiles.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pointer_new.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\folder-open_16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\save_16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\properties.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

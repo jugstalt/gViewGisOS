@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<mapserver>
+
+  <globals outputurl="http://localhost/output"
+           outputpath="c:\output"
+           tilecachepath="C:\output\tiles"
+           removeinterval="20" 
+           onlineresource="http://localhost:{port}"
+           />
+  
+  <servers>
+    <server port="8001">
+      <instances>
+        <instance port="8011" />
+        <instance port="8012" />
+      </instances>
+    </server>     
+  </servers>
+  
+  
+</mapserver>

@@ -1,0 +1,59 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+
+    <title>gView Map Service</title>
+
+    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.10/themes/smoothness/jquery-ui.css">
+    <style>
+        
+        body {
+					padding: 0;
+					margin: 0;
+					font-family:verdana;
+            		font-size:8.0pt;
+		}
+		html, body {
+					height: 100%;
+		}
+    </style>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+
+    <script type="text/javascript" src="../file/xMap.min.js"></script>
+
+	<script type="text/javascript">  
+        var map;
+        $(document).ready(function () {
+            // Init xMap
+            xMap.Init();
+            // Create a simple tile service config "config" = Extent & Scale levels 
+            var config = new xMap.Globals.WebMercatorTileConfig(19);
+			var scales=[];
+            for(var i=0;i<config.scales.length;i++)
+              scales.push(config.scales[i][1]);
+             
+            // Create Map & append it to html element, set extent and/or set scale
+            map = new xMap.Map(document.getElementById('map'), 'EPSG:900913', scales);
+            map.SetExtent(new xMap.Geometry.Bounds(config.extent));
+            map.SetScale(scales[3]);
+            
+            // Add a tile service to the map (e.g a prepared Yahoo Serverice, also 
+            // Google Tiles are available... see the release example)
+            map.AddService(new xMap.YahooStreetTileService());
+            alert(0); 
+
+            // At this position you can append map tools etc (Zoom)
+            map.AddTools([new xMap.Tools.Navigate(null)]);
+            
+			alert(1);
+            map.Refresh();alert(2);
+        });
+      </script>
+
+</head>
+<body>
+	<div id="map" style="position:absolute;left:0px;right:0px;top:0px;bottom:0px">
+    </div>
+</body>
+</html>

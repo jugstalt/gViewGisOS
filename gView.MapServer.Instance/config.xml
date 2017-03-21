@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<MapServer>
+  <onstart>
+
+    <alias>
+      <services>
+        <service alias="gdi1">strom,wms_deutschland</service>
+        <service alias="gdi2">gis_1_kat,wms_deutschland</service>
+      </services>
+    </alias>
+
+    <load>
+      <services>
+        <service>wms_deutschland</service>
+        <service>wfs_deutschland</service>
+        <service>strom</service>
+        <service>topo</service>
+        <service>gdi2</service>
+      </services>
+    </load>
+    
+  </onstart>
+</MapServer>

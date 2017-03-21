@@ -1,0 +1,65 @@
+﻿{
+  "elastic_search_connection": {
+    "url": "http://localhost:9200",
+    "default_index": "gview",
+    "delete_index": true
+  },
+  "datasets": [
+    {
+      "dataset_guid": "80F48262-D412-41fb-BF43-2D611A2ABF42",
+      "connection_string": "C:\\temp\\shapes",
+      "feature_classes": [
+        {
+          "name": "addresses",
+          "srs": 31256,
+          "gemoetry": true,
+          "category": "Adresse",
+          "index_proto": {
+            "suggested_text": "{PLZ} {ORT} {STR} {HNR}",
+            "subtext": "Adresse",
+            "thumbnail_url": "img/icons/addresses.png"
+          },
+          "metadata": {
+            "sample": "8010 Graz Leonhardgürtel 10",
+            "description": "Adressen für die Steiermark",
+            "service": "estag_basis",
+            "query": "adresspunkte"
+          }
+        },
+        /*{
+          "name": "gemeinden",
+          "srs": 31256,
+          "gemoetry": true,
+          "category": "Gemeinde",
+          "index_proto": {
+            "suggested_text": "{GEMEINDE}",
+            "subtext": "Gemeinde",
+            "thumbnail_url": "img/icons/gemeinde.png"
+          }
+        },
+        {
+          "name": "bezirke",
+          "srs": 31256,
+          "gemoetry": true,
+          "category": "Bezirk",
+          "index_proto": {
+            "suggested_text": "{BEZIRK}",
+            "subtext": "Bezirke",
+            "thumbnail_url": "img/icons/bezirk.png"
+          }
+        },
+        {
+          "name": "laender",
+          "srs": 31256,
+          "gemoetry": true,
+          "category": "Bundesland",
+          "index_proto": {
+            "suggested_text": "{LAND}",
+            "subtext": "Bundesland",
+            "thumbnail_url": "img/icons/land.png"
+          }
+        }*/
+      ]
+    }
+  ]
+}

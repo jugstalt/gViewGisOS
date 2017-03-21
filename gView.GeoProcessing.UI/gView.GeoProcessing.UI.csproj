@@ -1,0 +1,399 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="12.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{DC5FAD03-F4C8-4A1D-9F2E-3C9677A0BB21}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>gView.GeoProcessing.UI</RootNamespace>
+    <AssemblyName>gView.GeoProcessing.UI</AssemblyName>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Framework\GeoProcessing\UI\ActivityBase\BufferControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Framework\GeoProcessing\UI\ActivityBase\BufferControl.Designer.cs">
+      <DependentUpon>BufferControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Framework\GeoProcessing\UI\DataSelectorControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Framework\GeoProcessing\UI\DataSelectorControl.Designer.cs">
+      <DependentUpon>DataSelectorControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Framework\GeoProcessing\UI\FeatureImportMethodControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Framework\GeoProcessing\UI\FeatureImportMethodControl.Designer.cs">
+      <DependentUpon>FeatureImportMethodControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Framework\GeoProcessing\UI\FilterFeaturesControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Framework\GeoProcessing\UI\FilterFeaturesControl.Designer.cs">
+      <DependentUpon>FilterFeaturesControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Framework\GeoProcessing\UI\FormGeoProcessor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Framework\GeoProcessing\UI\FormGeoProcessor.Designer.cs">
+      <DependentUpon>FormGeoProcessor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Framework\GeoProcessing\UI\GeoProcessingTool.cs" />
+    <Compile Include="IDE\Collections\CollectionWithEvents.cs" />
+    <Compile Include="IDE\Collections\ContentCollection.cs" />
+    <Compile Include="IDE\Collections\HotZoneCollection.cs" />
+    <Compile Include="IDE\Collections\ManagerContentCollection.cs" />
+    <Compile Include="IDE\Collections\MenuCommandCollection.cs" />
+    <Compile Include="IDE\Collections\StringCollection.cs" />
+    <Compile Include="IDE\Collections\TabGroupBaseCollection.cs" />
+    <Compile Include="IDE\Collections\TabPageCollection.cs" />
+    <Compile Include="IDE\Collections\TargetCollection.cs" />
+    <Compile Include="IDE\Collections\WindowCollection.cs" />
+    <Compile Include="IDE\Collections\WindowDetailCollection.cs" />
+    <Compile Include="IDE\Collections\WizardPageCollection.cs" />
+    <Compile Include="IDE\Collections\ZoneCollection.cs" />
+    <Compile Include="IDE\Common\ColorHelper.cs" />
+    <Compile Include="IDE\Common\ControlHelper.cs" />
+    <Compile Include="IDE\Common\ConversionHelper.cs" />
+    <Compile Include="IDE\Common\DebugHelper.cs" />
+    <Compile Include="IDE\Common\DrawHelper.cs" />
+    <Compile Include="IDE\Common\Enums.cs" />
+    <Compile Include="IDE\Common\ResourceHelper.cs" />
+    <Compile Include="IDE\Controls\BorderForControl\BorderForControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="IDE\Controls\InertButton\InertButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="IDE\Controls\ResizeBar\ResizeBar.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="IDE\Controls\TabbedGroups\TabbedGroupEventArgs.cs" />
+    <Compile Include="IDE\Controls\TabbedGroups\TabbedGroups.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="IDE\Controls\TabbedGroups\TabGroupBase.cs" />
+    <Compile Include="IDE\Controls\TabbedGroups\TabGroupLeaf.cs" />
+    <Compile Include="IDE\Controls\TabbedGroups\TabGroupSequence.cs" />
+    <Compile Include="IDE\Controls\TabbedGroups\Target.cs" />
+    <Compile Include="IDE\Controls\TabControl\TabControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="IDE\Controls\TabControl\TabControlDesigner.cs" />
+    <Compile Include="IDE\Controls\TabControl\TabPage.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="IDE\Controls\WizardControl\WizardControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="IDE\Controls\WizardControl\WizardControlDesigner.cs" />
+    <Compile Include="IDE\Controls\WizardControl\WizardPage.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="IDE\Docking\AutoHidePanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="IDE\Docking\Content.cs" />
+    <Compile Include="IDE\Docking\Definitions.cs" />
+    <Compile Include="IDE\Docking\DockingManager.cs" />
+    <Compile Include="IDE\Docking\FloatinglForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="IDE\Docking\HotZone.cs" />
+    <Compile Include="IDE\Docking\HotZoneFloating.cs" />
+    <Compile Include="IDE\Docking\HotZoneNull.cs" />
+    <Compile Include="IDE\Docking\HotZoneReposition.cs" />
+    <Compile Include="IDE\Docking\HotZoneSequence.cs" />
+    <Compile Include="IDE\Docking\HotZoneTabbed.cs" />
+    <Compile Include="IDE\Docking\Redocker.cs" />
+    <Compile Include="IDE\Docking\RedockerContent.cs" />
+    <Compile Include="IDE\Docking\Restore.cs" />
+    <Compile Include="IDE\Docking\TabStub.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="IDE\Docking\Window.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="IDE\Docking\WindowContent.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="IDE\Docking\WindowContentTabbed.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="IDE\Docking\WindowDetail.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="IDE\Docking\WindowDetailCaption.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="IDE\Docking\Zone.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="IDE\Docking\ZoneHelper.cs" />
+    <Compile Include="IDE\Docking\ZoneSequence.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="IDE\Forms\WizardDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="IDE\Menus\DrawCommand.cs" />
+    <Compile Include="IDE\Menus\MenuCommand.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="IDE\Menus\MenuControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="IDE\Menus\MenuControlDesigner.cs" />
+    <Compile Include="IDE\Menus\PopupMenu.cs" />
+    <Compile Include="IDE\Win32\Enums.cs" />
+    <Compile Include="IDE\Win32\Gdi32.cs" />
+    <Compile Include="IDE\Win32\Structs.cs" />
+    <Compile Include="IDE\Win32\User32.cs" />
+    <Compile Include="Framework\GeoProcessing\UI\ActivityBase\MergeFeaturesControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Framework\GeoProcessing\UI\ActivityBase\MergeFeaturesControl.Designer.cs">
+      <DependentUpon>MergeFeaturesControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="IDE\Controls\BorderForControl\BorderForControl.resx">
+      <DependentUpon>BorderForControl.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="IDE\Controls\InertButton\InertButton.resx">
+      <DependentUpon>InertButton.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="IDE\Controls\ResizeBar\ResizeBar.resx">
+      <DependentUpon>ResizeBar.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="IDE\Controls\TabbedGroups\TabbedGroups.resx">
+      <DependentUpon>TabbedGroups.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="IDE\Controls\TabControl\TabControl.resx">
+      <DependentUpon>TabControl.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="IDE\Controls\TabControl\TabPage.resx">
+      <DependentUpon>TabPage.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="IDE\Controls\WizardControl\WizardControl.resx">
+      <DependentUpon>WizardControl.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="IDE\Controls\WizardControl\WizardPage.resx">
+      <DependentUpon>WizardPage.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="IDE\Docking\AutoHidePanel.resx">
+      <DependentUpon>AutoHidePanel.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="IDE\Docking\FloatinglForm.resx">
+      <DependentUpon>FloatinglForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="IDE\Docking\Window.resx">
+      <DependentUpon>Window.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="IDE\Docking\WindowDetail.resx">
+      <DependentUpon>WindowDetail.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="IDE\Docking\WindowDetailCaption.resx">
+      <DependentUpon>WindowDetailCaption.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="IDE\Docking\Zone.resx">
+      <DependentUpon>Zone.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="IDE\Forms\WizardDialog.resx">
+      <DependentUpon>WizardDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="IDE\Menus\MenuCommand.resx">
+      <DependentUpon>MenuCommand.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="IDE\Menus\MenuControl.resx">
+      <DependentUpon>MenuControl.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="IDE\Controls\InertButton.bmp" />
+    <Content Include="IDE\Controls\TabbedGroups.bmp" />
+    <Content Include="IDE\Controls\TabControl.bmp" />
+    <Content Include="IDE\Menus\MenuControl.bmp" />
+    <None Include="Resources\save_16.png" />
+    <None Include="Resources\add_32.png" />
+    <None Include="Resources\add_16.png" />
+    <None Include="Resources\24-tools.png" />
+    <None Include="Resources\wizard1.bmp" />
+    <EmbeddedResource Include="Framework\GeoProcessing\UI\ActivityBase\BufferControl.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>BufferControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Framework\GeoProcessing\UI\DataSelectorControl.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>DataSelectorControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Framework\GeoProcessing\UI\FeatureImportMethodControl.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>FeatureImportMethodControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Framework\GeoProcessing\UI\FilterFeaturesControl.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>FilterFeaturesControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Framework\GeoProcessing\UI\FormGeoProcessor.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>FormGeoProcessor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="IDE\Resources\WizardPicture.bmp" />
+    <EmbeddedResource Include="IDE\Resources\TabbedValid.cur" />
+    <EmbeddedResource Include="IDE\Resources\TabbedInvalid.cur" />
+    <EmbeddedResource Include="IDE\Resources\LibraryIcon.ico" />
+    <EmbeddedResource Include="IDE\Resources\ImagesTabControl.bmp" />
+    <EmbeddedResource Include="IDE\Resources\ImagesTabbedGroups.bmp" />
+    <EmbeddedResource Include="IDE\Resources\ImagesPopupMenu.bmp" />
+    <EmbeddedResource Include="IDE\Resources\ImagesMenuControl.bmp" />
+    <EmbeddedResource Include="IDE\Resources\ImagesCaptionPlain.bmp" />
+    <EmbeddedResource Include="IDE\Resources\ImagesCaptionIDE.bmp" />
+    <EmbeddedResource Include="Framework\GeoProcessing\UI\ActivityBase\MergeFeaturesControl.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>MergeFeaturesControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <SubType>Designer</SubType>
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\gView.Core.UI\gView.Core.UI.csproj">
+      <Project>{87D25021-C77A-4A5A-94E7-1364E55AD5F8}</Project>
+      <Name>gView.Core.UI</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\gView.Core\gView.Core.csproj">
+      <Project>{59A33161-474E-4B3C-882D-D8411A9F6AE3}</Project>
+      <Name>gView.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\gView.Data\gView.Data.csproj">
+      <Project>{A129277C-C5F1-4408-A136-12C74296F335}</Project>
+      <Name>gView.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\gView.Dialogs\gView.Dialogs.csproj">
+      <Project>{273764E5-FDE6-4F20-9B22-893EB0B3AD91}</Project>
+      <Name>gView.Dialogs</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\gView.Explorer.UI\gView.Explorer.UI.csproj">
+      <Project>{12A98392-CAA9-4F8B-8A95-9E243BD378F6}</Project>
+      <Name>gView.Explorer.UI</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\gView.GeoProcessing\gView.GeoProcessing.csproj">
+      <Project>{0E38F023-08A8-43BF-8EE2-EAFADD91629E}</Project>
+      <Name>gView.GeoProcessing</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\gView.system\gView.system.csproj">
+      <Project>{A6FBA7E4-AAB9-4595-B87A-60334AFC312B}</Project>
+      <Name>gView.system</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<processes>
+  
+  <process port="8001">
+    <output path="C:\ArcIMS\Output" url="http://localhost/output" />
+    <queue maxThreads="2" queueLength="100" />
+  </process>
+  <process port="8002">
+    <output path="C:\ArcIMS\Output" url="http://localhost/output" />
+    <queue maxThreads="2" queueLength="100" />
+  </process>
+  
+</processes> 

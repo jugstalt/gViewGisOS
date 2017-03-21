@@ -1,0 +1,438 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="12.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{9F0C2B74-C097-4C90-AF01-7C0EB13937CF}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>gView.Carto.Rendering.UI</RootNamespace>
+    <AssemblyName>gView.Carto.Rendering.UI</AssemblyName>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Framework\Carto\Rendering\UI\PropertyForm_ManyValueMapRenderer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Framework\Carto\Rendering\UI\FormCartographicInterpretation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Framework\Carto\Rendering\UI\FormCartographicInterpretation.Designer.cs">
+      <DependentUpon>FormCartographicInterpretation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Framework\Carto\Rendering\UI\FormFeatureRenderers.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Framework\Carto\Rendering\UI\FormFeatureRenderers.Designer.cs">
+      <DependentUpon>FormFeatureRenderers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Framework\Carto\Rendering\UI\FormGroupRendererProperties.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Framework\Carto\Rendering\UI\FormGroupRendererProperties.Designer.cs">
+      <DependentUpon>FormGroupRendererProperties.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Framework\Carto\Rendering\UI\FormLabelExpression.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Framework\Carto\Rendering\UI\FormLabelExpression.Designer.cs">
+      <DependentUpon>FormLabelExpression.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Framework\Carto\Rendering\UI\FormLineLabellingOrientation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Framework\Carto\Rendering\UI\FormLineLabellingOrientation.Designer.cs">
+      <DependentUpon>FormLineLabellingOrientation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Framework\Carto\Rendering\UI\FormRotationType.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Framework\Carto\Rendering\UI\Helper.cs" />
+    <Compile Include="Framework\Carto\Rendering\UI\NetworkRendererControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Framework\Carto\Rendering\UI\NetworkRendererControl.Designer.cs">
+      <DependentUpon>NetworkRendererControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Framework\Carto\Rendering\UI\PropertyForm_ChartLabelRenderer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Framework\Carto\Rendering\UI\PropertyForm_ChartLabelRenderer.Designer.cs">
+      <DependentUpon>PropertyForm_ChartLabelRenderer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Framework\Carto\Rendering\UI\PropertyForm_ChartLabelRenderer_MaxValues.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Framework\Carto\Rendering\UI\PropertyForm_ChartLabelRenderer_MaxValues.Designer.cs">
+      <DependentUpon>PropertyForm_ChartLabelRenderer_MaxValues.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Framework\Carto\Rendering\UI\PropertyForm_DimensionRenderer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Framework\Carto\Rendering\UI\PropertyForm_DimensionRenderer.Designer.cs">
+      <DependentUpon>PropertyForm_DimensionRenderer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Framework\Carto\Rendering\UI\PropertyForm_QuantityRenderer_Dialog_InsertValue.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Framework\Carto\Rendering\UI\PropertyForm_QuantityRenderer_Dialog_InsertValue.Designer.cs">
+      <DependentUpon>PropertyForm_QuantityRenderer_Dialog_InsertValue.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Framework\Carto\Rendering\UI\PropertyForm_QuantityRenderer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Framework\Carto\Rendering\UI\PropertyForm_FeatureGroupRenderer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Framework\Carto\Rendering\UI\PropertyForm_FeatureGroupRenderer.Designer.cs">
+      <DependentUpon>PropertyForm_FeatureGroupRenderer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Framework\Carto\Rendering\UI\PropertyForm_LabelGroupRenderer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Framework\Carto\Rendering\UI\PropertyForm_LabelGroupRenderer.Designer.cs">
+      <DependentUpon>PropertyForm_LabelGroupRenderer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Framework\Carto\Rendering\UI\PropertyForm_QuantityRenderer_Wizard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Framework\Carto\Rendering\UI\PropertyForm_QuantityRenderer_Wizard.Designer.cs">
+      <DependentUpon>PropertyForm_QuantityRenderer_Wizard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Framework\Carto\Rendering\UI\PropertyForm_SimpleLabelRenderer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Framework\Carto\Rendering\UI\PropertyForm_SimpleLabelRenderer.Designer.cs">
+      <DependentUpon>PropertyForm_SimpleLabelRenderer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Framework\Carto\Rendering\UI\PropertyForm_SimpleRenderer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Framework\Carto\Rendering\UI\PropertyForm_UniversalGeometryRenderer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Framework\Carto\Rendering\UI\PropertyForm_UniversalGeometryRenderer.Designer.cs">
+      <DependentUpon>PropertyForm_UniversalGeometryRenderer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Framework\Carto\Rendering\UI\PropertyForm_ValueMapRenderer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Framework\Carto\Rendering\UI\PropertyForm_ValueMapRenderer_Dialog_InsertValue.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Framework\Carto\Rendering\UI\PropertyForm_ValueMapRenderer_Dialog_InsertValue.Designer.cs">
+      <DependentUpon>PropertyForm_ValueMapRenderer_Dialog_InsertValue.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Framework\Carto\Rendering\UI\PropertyForm_ManyValueMapRenderer.de.resx">
+      <DependentUpon>PropertyForm_ManyValueMapRenderer.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Framework\Carto\Rendering\UI\PropertyForm_ManyValueMapRenderer.resx">
+      <DependentUpon>PropertyForm_ManyValueMapRenderer.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Framework\Carto\Rendering\UI\FormCartographicInterpretation.de.resx">
+      <DependentUpon>FormCartographicInterpretation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Framework\Carto\Rendering\UI\FormCartographicInterpretation.resx">
+      <DependentUpon>FormCartographicInterpretation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Framework\Carto\Rendering\UI\FormFeatureRenderers.de.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>FormFeatureRenderers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Framework\Carto\Rendering\UI\FormFeatureRenderers.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>FormFeatureRenderers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Framework\Carto\Rendering\UI\FormGroupRendererProperties.de.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>FormGroupRendererProperties.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Framework\Carto\Rendering\UI\FormGroupRendererProperties.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>FormGroupRendererProperties.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Framework\Carto\Rendering\UI\FormLabelExpression.de.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>FormLabelExpression.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Framework\Carto\Rendering\UI\FormLabelExpression.resx">
+      <DependentUpon>FormLabelExpression.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Framework\Carto\Rendering\UI\FormLineLabellingOrientation.de.resx">
+      <DependentUpon>FormLineLabellingOrientation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Framework\Carto\Rendering\UI\FormLineLabellingOrientation.resx">
+      <DependentUpon>FormLineLabellingOrientation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Framework\Carto\Rendering\UI\FormRotationType.de.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>FormRotationType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Framework\Carto\Rendering\UI\FormRotationType.resx">
+      <DependentUpon>FormRotationType.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Framework\Carto\Rendering\UI\NetworkRendererControl.resx">
+      <DependentUpon>NetworkRendererControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Framework\Carto\Rendering\UI\PropertyForm_ChartLabelRenderer.resx">
+      <DependentUpon>PropertyForm_ChartLabelRenderer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Framework\Carto\Rendering\UI\PropertyForm_ChartLabelRenderer_MaxValues.resx">
+      <DependentUpon>PropertyForm_ChartLabelRenderer_MaxValues.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Framework\Carto\Rendering\UI\PropertyForm_DimensionRenderer.de.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>PropertyForm_DimensionRenderer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Framework\Carto\Rendering\UI\PropertyForm_DimensionRenderer.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>PropertyForm_DimensionRenderer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Framework\Carto\Rendering\UI\PropertyForm_QuantityRenderer_Dialog_InsertValue.de-DE.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>PropertyForm_QuantityRenderer_Dialog_InsertValue.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Framework\Carto\Rendering\UI\PropertyForm_QuantityRenderer_Dialog_InsertValue.de.resx">
+      <DependentUpon>PropertyForm_QuantityRenderer_Dialog_InsertValue.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Framework\Carto\Rendering\UI\PropertyForm_QuantityRenderer_Dialog_InsertValue.resx">
+      <DependentUpon>PropertyForm_QuantityRenderer_Dialog_InsertValue.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Framework\Carto\Rendering\UI\PropertyForm_QuantityRenderer.de.resx">
+      <DependentUpon>PropertyForm_QuantityRenderer.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Framework\Carto\Rendering\UI\PropertyForm_QuantityRenderer.resx">
+      <DependentUpon>PropertyForm_QuantityRenderer.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <SubType>Designer</SubType>
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Framework\Carto\Rendering\UI\PropertyForm_FeatureGroupRenderer.resx">
+      <DependentUpon>PropertyForm_FeatureGroupRenderer.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Framework\Carto\Rendering\UI\PropertyForm_LabelGroupRenderer.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>PropertyForm_LabelGroupRenderer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Framework\Carto\Rendering\UI\PropertyForm_QuantityRenderer_Wizard.de.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>PropertyForm_QuantityRenderer_Wizard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Framework\Carto\Rendering\UI\PropertyForm_QuantityRenderer_Wizard.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>PropertyForm_QuantityRenderer_Wizard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Framework\Carto\Rendering\UI\PropertyForm_SimpleLabelRenderer.de-DE.resx">
+      <DependentUpon>PropertyForm_SimpleLabelRenderer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Framework\Carto\Rendering\UI\PropertyForm_SimpleLabelRenderer.de.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>PropertyForm_SimpleLabelRenderer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Framework\Carto\Rendering\UI\PropertyForm_SimpleLabelRenderer.resx">
+      <DependentUpon>PropertyForm_SimpleLabelRenderer.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Framework\Carto\Rendering\UI\PropertyForm_SimpleRenderer.de-DE.resx">
+      <DependentUpon>PropertyForm_SimpleRenderer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Framework\Carto\Rendering\UI\PropertyForm_SimpleRenderer.de.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>PropertyForm_SimpleRenderer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Framework\Carto\Rendering\UI\PropertyForm_SimpleRenderer.resx">
+      <DependentUpon>PropertyForm_SimpleRenderer.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Framework\Carto\Rendering\UI\PropertyForm_UniversalGeometryRenderer.de.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>PropertyForm_UniversalGeometryRenderer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Framework\Carto\Rendering\UI\PropertyForm_UniversalGeometryRenderer.resx">
+      <DependentUpon>PropertyForm_UniversalGeometryRenderer.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Framework\Carto\Rendering\UI\PropertyForm_ValueMapRenderer.de-DE.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>PropertyForm_ValueMapRenderer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Framework\Carto\Rendering\UI\PropertyForm_ValueMapRenderer.de.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>PropertyForm_ValueMapRenderer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Framework\Carto\Rendering\UI\PropertyForm_ValueMapRenderer.resx">
+      <DependentUpon>PropertyForm_ValueMapRenderer.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Framework\Carto\Rendering\UI\PropertyForm_ValueMapRenderer_Dialog_InsertValue.de.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>PropertyForm_ValueMapRenderer_Dialog_InsertValue.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Framework\Carto\Rendering\UI\PropertyForm_ValueMapRenderer_Dialog_InsertValue.resx">
+      <DependentUpon>PropertyForm_ValueMapRenderer_Dialog_InsertValue.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\gView.Carto.Rendering\gView.Carto.Rendering.csproj">
+      <Project>{9B068E3C-21F4-4342-806C-B9108D2A5179}</Project>
+      <Name>gView.Carto.Rendering</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\gView.Carto\gView.Carto.csproj">
+      <Project>{CD663C87-7D1F-44DA-A593-018B08CC4159}</Project>
+      <Name>gView.Carto</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\gView.Core\gView.Core.csproj">
+      <Project>{59A33161-474E-4B3C-882D-D8411A9F6AE3}</Project>
+      <Name>gView.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\gView.Data\gView.Data.csproj">
+      <Project>{A129277C-C5F1-4408-A136-12C74296F335}</Project>
+      <Name>gView.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\gView.Dialogs\gView.Dialogs.csproj">
+      <Project>{273764E5-FDE6-4F20-9B22-893EB0B3AD91}</Project>
+      <Name>gView.Dialogs</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\gView.Symbology.UI\gView.Symbology.UI.csproj">
+      <Project>{37E82053-2326-4642-BF93-CBF19B6CEB35}</Project>
+      <Name>gView.Symbology.UI</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\gView.Symbology\gView.Symbology.csproj">
+      <Project>{543D62C1-539F-465D-9D26-F201D06E57FB}</Project>
+      <Name>gView.Symbology</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\gView.system\gView.system.csproj">
+      <Project>{A6FBA7E4-AAB9-4595-B87A-60334AFC312B}</Project>
+      <Name>gView.system</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CollapseIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ExpandIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\curvedtext.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\horizontal.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\parallel.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\perpenticlar.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\feature_order.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\legend_ordering.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\roads_legende.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\symbol_ordering.PNG" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

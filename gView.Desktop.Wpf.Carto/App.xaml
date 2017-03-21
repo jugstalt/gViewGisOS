@@ -1,0 +1,10 @@
+﻿<Application x:Class="gView.Desktop.Wpf.Carto.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:gView.Desktop.Wpf.Carto"
+             StartupUri="MainWindow.xaml" Startup="Application_Startup">
+    <Application.Resources>
+        <!--Attach Default Fluent Control's Theme-->
+        <ResourceDictionary Source="pack://application:,,,/Fluent;Component/Themes/Office2010/blue.xaml" />
+    </Application.Resources>
+</Application>
