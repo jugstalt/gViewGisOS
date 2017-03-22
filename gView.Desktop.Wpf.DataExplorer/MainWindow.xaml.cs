@@ -42,64 +42,70 @@ namespace gView.Desktop.Wpf.DataExplorer
 
         public MainWindow()
         {
-            InitializeComponent();
-
-            _application = new ExplorerApplication(this);
-            _application.DockWindowAdded += new DockWindowAddedEvent(_application_DockWindowAdded);
-            _application.OnShowDockableWindow += new OnShowDockableWindowEvent(_application_OnShowDockableWindow);
-            #region Windows Forms Control Disign
-            _toolStripAddress = new System.Windows.Forms.ToolStrip();
-            _toolStripAddress.Stretch = true;
-            _toolStripAddress.GripMargin = new System.Windows.Forms.Padding(1);
-            _toolStripAddress.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.Flow;
-            _toolStripAddress.BackColor = System.Drawing.Color.White;
-            winFormsHostStripAddress.Child = _toolStripAddress;
-            #endregion
-
-            _tree = new gView.Framework.UI.Dialogs.FormCatalogTree(_application, false);
-            _tree.NodeSelected += new gView.Framework.UI.Dialogs.FormCatalogTree.NodeClickedEvent(tree_NodeSelected);
-            _tree.NodeRenamed += new gView.Framework.UI.Dialogs.FormCatalogTree.NodeRenamedEvent(tree_NodeRenamed);
-            _tree.NodeDeleted += new gView.Framework.UI.Dialogs.FormCatalogTree.NodeDeletedEvent(tree_NodeDeleted);
-            //winFormsHostExplorerTree.Child = _tree;
-
-            PlugInManager compMan = new PlugInManager();
-            foreach (XmlNode tabNode in compMan.GetPluginNodes(Plugins.Type.IExplorerTabPage))
-            {
-                IExplorerTabPage page = (IExplorerTabPage)compMan.CreateInstance(tabNode);
-                if (page == null || page.Control == null)
-                    continue;
-
-                page.OnCreate(_application);
-
-                LayoutDocument layoutDoc = new LayoutDocument();
-                layoutDoc.Title = layoutDoc.ContentId = page.Title;
-                layoutDoc.CanClose = false;
-                layoutDoc.CanFloat = false;
-                layoutDoc.Content = new WindowsFormsHost();
-                ((WindowsFormsHost)layoutDoc.Content).Child = page.Control;
-                _tabPages.Add(new TabPage(page, layoutDoc));
-                if (page is gView.Framework.UI.Controls.ContentsList)
-                {
-                    ((gView.Framework.UI.Controls.ContentsList)page).ItemSelected += new gView.Framework.UI.Controls.ContentsList.ItemClickedEvent(ContentsList_ItemSelected);
-                    _content = (gView.Framework.UI.Controls.ContentsList)page;
-                }
-            }
-            explorerDocPane.PropertyChanged += new System.ComponentModel.PropertyChangedEventHandler(explorerDocPane_PropertyChanged);
-
-            anchorPaneRight.Children[0].Hide();
-            _application.AddDockableWindow(_tree, DockWindowState.left);
-
             try
             {
-                XmlDocument doc = new XmlDocument();
-                doc.Load("menu.explorer.xml");
+                InitializeComponent();
 
-                MakeMainMenuBar(doc.SelectSingleNode("//Menubar"));
+                _application = new ExplorerApplication(this);
+                _application.DockWindowAdded += new DockWindowAddedEvent(_application_DockWindowAdded);
+                _application.OnShowDockableWindow += new OnShowDockableWindowEvent(_application_OnShowDockableWindow);
+                #region Windows Forms Control Disign
+                _toolStripAddress = new System.Windows.Forms.ToolStrip();
+                _toolStripAddress.Stretch = true;
+                _toolStripAddress.GripMargin = new System.Windows.Forms.Padding(1);
+                _toolStripAddress.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.Flow;
+                _toolStripAddress.BackColor = System.Drawing.Color.White;
+                winFormsHostStripAddress.Child = _toolStripAddress;
+                #endregion
+
+                _tree = new gView.Framework.UI.Dialogs.FormCatalogTree(_application, false);
+                _tree.NodeSelected += new gView.Framework.UI.Dialogs.FormCatalogTree.NodeClickedEvent(tree_NodeSelected);
+                _tree.NodeRenamed += new gView.Framework.UI.Dialogs.FormCatalogTree.NodeRenamedEvent(tree_NodeRenamed);
+                _tree.NodeDeleted += new gView.Framework.UI.Dialogs.FormCatalogTree.NodeDeletedEvent(tree_NodeDeleted);
+                //winFormsHostExplorerTree.Child = _tree;
+
+                PlugInManager compMan = new PlugInManager();
+                foreach (XmlNode tabNode in compMan.GetPluginNodes(Plugins.Type.IExplorerTabPage))
+                {
+                    IExplorerTabPage page = (IExplorerTabPage)compMan.CreateInstance(tabNode);
+                    if (page == null || page.Control == null)
+                        continue;
+
+                    page.OnCreate(_application);
+
+                    LayoutDocument layoutDoc = new LayoutDocument();
+                    layoutDoc.Title = layoutDoc.ContentId = page.Title;
+                    layoutDoc.CanClose = false;
+                    layoutDoc.CanFloat = false;
+                    layoutDoc.Content = new WindowsFormsHost();
+                    ((WindowsFormsHost)layoutDoc.Content).Child = page.Control;
+                    _tabPages.Add(new TabPage(page, layoutDoc));
+                    if (page is gView.Framework.UI.Controls.ContentsList)
+                    {
+                        ((gView.Framework.UI.Controls.ContentsList)page).ItemSelected += new gView.Framework.UI.Controls.ContentsList.ItemClickedEvent(ContentsList_ItemSelected);
+                        _content = (gView.Framework.UI.Controls.ContentsList)page;
+                    }
+                }
+                explorerDocPane.PropertyChanged += new System.ComponentModel.PropertyChangedEventHandler(explorerDocPane_PropertyChanged);
+
+                anchorPaneRight.Children[0].Hide();
+                _application.AddDockableWindow(_tree, DockWindowState.left);
+
+                try
+                {
+                    XmlDocument doc = new XmlDocument();
+                    doc.Load("menu.explorer.xml");
+
+                    MakeMainMenuBar(doc.SelectSingleNode("//Menubar"));
+                }
+                catch { }
+
+                MakeRibbon();
+                ValidateButtons();
+            } catch(Exception ex)
+            {
+                System.Windows.MessageBox.Show(ex.Message + "\n" + ex.StackTrace);
             }
-            catch { }
-
-            MakeRibbon();
-            ValidateButtons();
         }
 
         #region DockWindow Events
