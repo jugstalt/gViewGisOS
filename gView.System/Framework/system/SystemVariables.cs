@@ -57,7 +57,8 @@ namespace gView.Framework.system
                         return PortableRootDirectory;
 
                     RegistryKey key = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\gViewGisOS", false);
-                    if (key == null) return String.Empty;
+                    if (key == null)
+                        return String.Empty;
                     object val = key.GetValue("Install_Dir");
                     string ret = (val != null) ? val.ToString() : String.Empty;
                     key.Close();

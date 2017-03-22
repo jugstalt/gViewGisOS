@@ -16,7 +16,8 @@ namespace gView.MapServer.Tasker.Service
 {
     [ServiceBehavior(
         InstanceContextMode = InstanceContextMode.Single,
-        ConcurrencyMode = ConcurrencyMode.Multiple
+        ConcurrencyMode = ConcurrencyMode.Multiple,
+        IncludeExceptionDetailInFaults = true
         /*,UseSynchronizationContext = false*/)]
     public class TaskerServiceType : ITaskerService
     {
