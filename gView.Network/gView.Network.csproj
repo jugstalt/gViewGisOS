@@ -69,12 +69,6 @@
     <Compile Include="Framework\Network\Algorthm\GraphTable.cs" />
     <Compile Include="Framework\Network\Algorthm\GraphTableRow.cs" />
     <Compile Include="Framework\Network\Algorthm\RoadBook.cs" />
-    <Compile Include="Framework\Network\Build\NetworkBuilder.cs" />
-    <Compile Include="Framework\Network\Build\NetworkEdge.cs" />
-    <Compile Include="Framework\Network\Build\NetworkGraphEdge.cs" />
-    <Compile Include="Framework\Network\Build\NetworkNode.cs" />
-    <Compile Include="Framework\Network\Build\NetworkNodes.cs" />
-    <Compile Include="Framework\Network\Build\NetworkObjectSerializer.cs" />
     <Compile Include="Framework\Network\Tracers\TraceConnectionNodes.cs" />
     <Compile Include="Framework\Network\Tracers\TraceNextTargetNode.cs" />
     <Compile Include="Framework\Network\Tracers\Helper.cs" />
@@ -123,6 +117,9 @@
       <ProductName>Windows Installer 3.1</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Framework\Network\Build\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
