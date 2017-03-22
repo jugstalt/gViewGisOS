@@ -37,6 +37,15 @@
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release_portable|AnyCPU'">
+    <OutputPath>bin\Release_portable\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="gView.Dialogs, Version=4.0.0.0, Culture=neutral, PublicKeyToken=efad02b76f1a6407, processorArchitecture=MSIL" />
     <Reference Include="gView.Explorer.UI, Version=4.0.0.0, Culture=neutral, PublicKeyToken=35651acf169842ec, processorArchitecture=MSIL" />

@@ -1,9 +1,10 @@
-﻿using System.Collections.Generic;
-using System.ServiceProcess;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text;
-using gView.Framework.system;
+using System.Threading.Tasks;
 
-namespace gView.MapServer.Tasker
+namespace gView.MapServer.Portable
 {
     static class Program
     {
@@ -15,30 +16,19 @@ namespace gView.MapServer.Tasker
             System.Net.ServicePointManager.MaxServicePoints = 256;
             //System.Net.ServicePointManager.CertificatePolicy = new gView.Framework.Web.SimpleHttpsPolicy();
 
-            bool console = false, startInstances = true;
+            bool startInstances = true;
 
             for (int i = 0; i < args.Length; i++)
             {
-                if (args[i] == "-c") console = true;
                 if (args[i] == "-debug") startInstances = false;
             }
 
 
-            if (console)
+            using (TaskerService service = Program.Tasker = new TaskerService(startInstances))
             {
-                TaskerService service = Program.Tasker = new TaskerService(startInstances);
                 service.StartFromConsole();
 
                 System.Console.ReadLine();
-
-                service.Stop();
-            }
-            else
-            {
-                ServiceBase[] ServicesToRun;
-
-                ServicesToRun = new ServiceBase[] { Program.Tasker = new TaskerService() };
-                ServiceBase.Run(ServicesToRun);
             }
         }
     }

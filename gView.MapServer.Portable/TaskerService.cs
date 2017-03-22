@@ -1,18 +1,18 @@
-﻿using System;
+﻿using gView.Framework.system;
+using gView.MapServer.Tasker.Service;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Diagnostics;
-using System.ServiceProcess;
-using System.Text;
-using gView.Framework.system;
-using System.Threading;
 using System.IO;
+using System.Linq;
 using System.ServiceModel;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 
-namespace gView.MapServer.Tasker
+namespace gView.MapServer.Portable
 {
-    public partial class TaskerService : ServiceBase
+    class TaskerService : IDisposable
     {
         private bool _running = false, _startInstances;
         private Thread _delThread = null;
@@ -24,8 +24,6 @@ namespace gView.MapServer.Tasker
         }
         public TaskerService(bool startInstances)
         {
-            InitializeComponent();
-
             _startInstances = startInstances;
             //_host = new ServiceHost(typeof(Service.TaskerServiceType), new Uri("http://localhost:" + _port));
         }
@@ -35,7 +33,7 @@ namespace gView.MapServer.Tasker
             OnStart(new string[] { });
         }
 
-        protected override void OnStart(string[] args)
+        protected void OnStart(string[] args)
         {
             try
             {
@@ -47,7 +45,6 @@ namespace gView.MapServer.Tasker
 
                     if (_startInstances)
                     {
-                        Logger.Log(loggingMethod.request, "Start Instances...");
                         _running = true;
                         for (int i = 0; i < serverConfig.Instances.Length; i++)
                         {
@@ -59,7 +56,7 @@ namespace gView.MapServer.Tasker
                         }
                     }
 
-                    Service.TaskerServiceType serviceType=new Service.TaskerServiceType();
+                    TaskerServiceType serviceType = new TaskerServiceType();
                     serviceType.Init(serverConfig.Port);
                     ServiceHost host = new ServiceHost(/*typeof(Service.TaskerServiceType)*/serviceType, new Uri("http://localhost:" + serverConfig.Port));
 
@@ -87,17 +84,19 @@ namespace gView.MapServer.Tasker
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Exception: " + ex.Message);
-                Logger.Log(loggingMethod.error, "Error: " + ex.Message + "\n" + ex.StackTrace);
+                Console.WriteLine("Exception: " + ex.Message + "\n" + ex.StackTrace);
             }
         }
 
-        protected override void OnStop()
+        public void Dispose()
+        {
+            OnStop();
+        }
+
+        protected void OnStop()
         {
             try
             {
-                Logger.Log(loggingMethod.request, "Stop Service...");
-
                 KillProcesses();
 
                 if (_delThread != null)
@@ -112,7 +111,7 @@ namespace gView.MapServer.Tasker
             }
             catch (Exception ex)
             {
-                Logger.Log(loggingMethod.error, "Error: " + ex.Message + "\n" + ex.StackTrace);
+                Console.WriteLine("Exception: " + ex.Message + "\n" + ex.StackTrace);
             }
         }
 
@@ -123,24 +122,16 @@ namespace gView.MapServer.Tasker
                 if (p == null || p.GetType() != typeof(int)) return;
                 int port = (int)p;
 
-                bool first = true;
                 while (_running)
                 {
-                    Logger.Log(loggingMethod.request,
-                        ((first) ? "Start" : "Recircle") +
-                        " map server on port " + port.ToString());
 
                     Process proc = new Process();
-                    proc.StartInfo.FileName = gView.Framework.system.SystemVariables.ApplicationDirectory + @"\gView.MapServer.Instance.exe";
+                    proc.StartInfo.FileName = gView.Framework.system.SystemVariables.PortableRootDirectory + @"\gView.MapServer.Instance.exe";
                     proc.StartInfo.Arguments = "-port " + port.ToString();
                     proc.StartInfo.UseShellExecute = false;
 
                     proc.Start();
                     proc.WaitForExit();
-
-                    Logger.Log(loggingMethod.request,
-                        "Map server on port " + port.ToString() + " killed");
-                    first = false;
 
                     try
                     {
@@ -151,7 +142,7 @@ namespace gView.MapServer.Tasker
             }
             catch (Exception ex)
             {
-                Logger.Log(loggingMethod.error, "Error: " + ex.Message + "\n" + ex.StackTrace);
+                Console.WriteLine("Exception: " + ex.Message + "\n" + ex.StackTrace);
             }
         }
 

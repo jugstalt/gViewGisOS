@@ -521,8 +521,9 @@ namespace gView.MapServer.Instance
                 //ImageService service = new ImageService();
                 //service.Start(args);
 
+                Console.WriteLine("Server Instance " + port + " starting...");
                 ServerProcess process = new ServerProcess(port, false);
-                Console.WriteLine("Server is running...");
+                Console.WriteLine("Server Instance is listing on port " + port);
                 Console.ReadLine();
 
                 process.Stop();
@@ -544,8 +545,10 @@ namespace gView.MapServer.Instance
                 }
             }
 #else
-                ServerProcess process = new ServerProcess((port != -1) ? port : 8001, false);
-                Console.WriteLine("Server Instance is running...");
+                port = (port != -1) ? port : 8001;
+                Console.WriteLine("Server Instance " + port + " starting...");
+                ServerProcess process = new ServerProcess(port, false);
+                Console.WriteLine("Server Instance is listing on port " + port);
                 Console.ReadLine();
 
                 process.Stop();
