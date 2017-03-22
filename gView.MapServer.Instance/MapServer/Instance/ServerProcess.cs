@@ -59,7 +59,7 @@ namespace gView.MapServer.Instance
                 IMS.LoadConfigAsync();
 
                 _channel = new HttpServerChannel(IMS.Port);
-                ChannelServices.RegisterChannel(_channel); //Register channel
+                ChannelServices.RegisterChannel(_channel, false); //Register channel
 
                 RemotingConfiguration.RegisterWellKnownServiceType(
                     typeof(MapServerInstanceType),
