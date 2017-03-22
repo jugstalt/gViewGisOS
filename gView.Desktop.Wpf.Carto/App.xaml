@@ -5,6 +5,7 @@
              StartupUri="MainWindow.xaml" Startup="Application_Startup">
     <Application.Resources>
         <!--Attach Default Fluent Control's Theme-->
-        <ResourceDictionary Source="pack://application:,,,/Fluent;Component/Themes/Office2010/blue.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Fluent;Component/Themes/Generic.xaml" />
+        <!--<ResourceDictionary Source="pack://application:,,,/Fluent;Component/Themes/Office2010/Silver.xaml" />-->
     </Application.Resources>
 </Application>

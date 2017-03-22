@@ -122,7 +122,10 @@
             </StatusBarItem>
             
             <StatusBarItem  HorizontalAlignment="Right" Grid.Column="7">
+                <!--<Slider x:Name="sliderScale" Width="150" Value="0" Minimum="-200" Maximum="200" Margin="-2" ValueChanged="sliderScale_ValueChanged" />
+                -->
                 <Slider x:Name="sliderScale" Width="150" Style="{StaticResource ZoomSliderStyle}" Value="0" Minimum="-200" Maximum="200" Margin="-2" ValueChanged="sliderScale_ValueChanged" />
+                
             </StatusBarItem>
             <StatusBarItem Grid.Column="8">
                 <StackPanel Orientation="Horizontal">
