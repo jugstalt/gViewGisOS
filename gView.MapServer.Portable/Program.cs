@@ -29,6 +29,8 @@ namespace gView.MapServer.Portable
                 service.StartFromConsole();
 
                 System.Console.ReadLine();
+
+                Console.WriteLine("Stopping MapServer...");
             }
         }
     }

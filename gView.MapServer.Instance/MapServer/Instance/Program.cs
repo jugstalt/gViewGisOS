@@ -549,7 +549,9 @@ namespace gView.MapServer.Instance
                 Console.WriteLine("Server Instance " + port + " starting...");
                 ServerProcess process = new ServerProcess(port, false);
                 Console.WriteLine("Server Instance is listing on port " + port);
+
                 Console.ReadLine();
+                Console.WriteLine("Stopping Instance on port " + port);
 
                 process.Stop();
 #endif

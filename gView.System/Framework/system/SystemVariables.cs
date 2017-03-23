@@ -56,19 +56,14 @@ namespace gView.Framework.system
                     if (IsPortable)
                         return PortableRootDirectory;
 
-                    RegistryKey key = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\gViewGisOS", false);
-                    if (key == null)
-                        return String.Empty;
-                    object val = key.GetValue("Install_Dir");
-                    string ret = (val != null) ? val.ToString() : String.Empty;
-                    key.Close();
+                    string ret = GetRegistryKeyValue<string>(RegistryHive.LocalMachine, @"SOFTWARE\gViewGisOS", "Install_Dir");
 
-                    return ret;
+                    return ret ?? String.Empty;
                 }
 
                 catch
                 {
-                    return "";
+                    return String.Empty;
                 }
             }
             set
@@ -189,7 +184,7 @@ namespace gView.Framework.system
             {
                 return Path.GetDirectoryName(Assembly.GetAssembly(typeof(SystemVariables)).Location);
             }
-         }
+        }
 
         static public bool IsWebHosted
         {
@@ -198,7 +193,7 @@ namespace gView.Framework.system
                 return AppDomainConfigurationFile.ToLower() == "web.config";
             }
         }
-        
+
         static public DateTime InstallationTime
         {
             get
@@ -241,7 +236,7 @@ namespace gView.Framework.system
                     }
                     return DateTime.FromBinary(Convert.ToInt64(x));
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     string msg = ex.Message;
                     return new DateTime(1980, 1, 1);
@@ -311,6 +306,45 @@ namespace gView.Framework.system
 
                 return _primaryScreenDPI;
             }
+        }
+
+        static private T GetRegistryKeyValue<T>(RegistryHive hive, string keyPath, string valueName)
+        {
+            try
+            {
+                if (Wow.Is64BitProcess || Wow.Is64BitOperatingSystem)
+                {
+
+                    using (var hklm = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry64))
+                    using (var key = hklm.OpenSubKey(keyPath))
+                    {
+                        if (key != null)
+                        {
+                            object val = key.GetValue(valueName);
+                            if (val != null)
+                                return (T)Convert.ChangeType(val, typeof(T));
+                        }
+                    }
+                }
+            }
+            catch { }
+
+            try
+            {
+                using (var hklm = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry32))
+                using (var key = hklm.OpenSubKey(keyPath))
+                {
+                    if (key != null)
+                    {
+                        object val = key.GetValue(valueName);
+                        if (val != null)
+                            return (T)Convert.ChangeType(val, typeof(T));
+                    }
+                }
+            }
+            catch { }
+
+            return default(T);
         }
     }
 

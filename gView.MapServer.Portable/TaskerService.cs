@@ -124,7 +124,6 @@ namespace gView.MapServer.Portable
 
                 while (_running)
                 {
-
                     Process proc = new Process();
                     proc.StartInfo.FileName = gView.Framework.system.SystemVariables.PortableRootDirectory + @"\gView.MapServer.Instance.exe";
                     proc.StartInfo.Arguments = "-port " + port.ToString();
@@ -148,21 +147,23 @@ namespace gView.MapServer.Portable
 
         private void KillProcesses()
         {
-            foreach (ServiceHost host in _hosts)
-            {
-                host.Close();
-            }
-            _hosts.Clear();
-
             _running = false;
             foreach (Process proc in Process.GetProcessesByName("gView.MapServer.Instance"))
             {
                 try
                 {
                     proc.Kill();
+                    Console.WriteLine("Killed process " + proc.ProcessName + " " + proc.Id);
                 }
                 catch { }
             }
+
+            foreach (ServiceHost host in _hosts)
+            {
+                host.Close();
+                Console.WriteLine("Service closed " + (host.BaseAddresses.Count() > 0 ? host.BaseAddresses.First().ToString() : String.Empty));
+            }
+            _hosts.Clear();
         }
     }
 
