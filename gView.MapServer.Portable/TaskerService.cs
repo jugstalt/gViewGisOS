@@ -84,7 +84,9 @@ namespace gView.MapServer.Portable
             }
             catch (Exception ex)
             {
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Exception: " + ex.Message + "\n" + ex.StackTrace);
+                Console.ResetColor();
             }
         }
 
@@ -111,7 +113,9 @@ namespace gView.MapServer.Portable
             }
             catch (Exception ex)
             {
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Exception: " + ex.Message + "\n" + ex.StackTrace);
+                Console.ResetColor();
             }
         }
 
@@ -141,7 +145,9 @@ namespace gView.MapServer.Portable
             }
             catch (Exception ex)
             {
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Exception: " + ex.Message + "\n" + ex.StackTrace);
+                Console.ResetColor();
             }
         }
 
