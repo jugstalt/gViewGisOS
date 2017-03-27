@@ -708,6 +708,8 @@ namespace gView.Framework.system
                     node.Attributes["assembly"] == null) return null;
 
                 string path = node.Attributes["assembly"].Value;
+                if (path.Contains("{APP_PATH}"))
+                    path = path.Replace("{APP_PATH}", SystemVariables.ApplicationDirectory);
                 if (path.Contains("[APP_PATH]"))
                     path = path.Replace("[APP_PATH]", SystemVariables.ApplicationDirectory);
 

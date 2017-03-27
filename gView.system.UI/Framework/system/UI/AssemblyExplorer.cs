@@ -64,6 +64,8 @@ namespace gView.Framework.system.UI
             };
         }
 
+
+
         public string Explore(string path)
         {
             try
@@ -91,7 +93,7 @@ namespace gView.Framework.system.UI
 
                             string attr = " guid=\"" + plugin.Value + "\"";
                             attr += " fullname=\"" + type.FullName + "\"";
-                            attr += " assembly=\"" + path + "\"";
+                            attr += " assembly=\"" + ToAssemblyPath(path) + "\"";
 
                             if (wObject is IPlugInDependencies)
                             {
@@ -308,6 +310,20 @@ namespace gView.Framework.system.UI
                 return "";
             }
         }
+
+        #region Helper
+
+        private string ToAssemblyPath(string path)
+        {
+            if(SystemVariables.IsPortable)
+            {
+                path = path.Replace(SystemVariables.ApplicationDirectory, "{APP_PATH}");
+            }
+
+            return path;
+        }
+
+        #endregion
     }
 
     public class AddPluginExceptionEventArgs : EventArgs

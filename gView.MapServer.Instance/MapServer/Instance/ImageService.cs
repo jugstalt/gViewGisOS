@@ -25,7 +25,7 @@ namespace gView.MapServer.Instance
             {
                 InitializeComponent();
 
-                System.Environment.CurrentDirectory = gView.Framework.system.SystemVariables.RegistryApplicationDirectory;
+                System.Environment.CurrentDirectory = gView.Framework.system.SystemVariables.ApplicationDirectory;
 
                 // init globals....
                 IMS dummy = new IMS();
