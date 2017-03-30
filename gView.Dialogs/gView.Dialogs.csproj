@@ -69,6 +69,10 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Design" />
@@ -160,6 +164,7 @@
     <Compile Include="Framework\UI\Dialogs\Network\ComplexEdgesControl.Designer.cs">
       <DependentUpon>ComplexEdgesControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Framework\UI\Dialogs\Network\CreateNetworkExcecute.cs" />
     <Compile Include="Framework\UI\Dialogs\Network\FormNewNetworkclass.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -671,6 +676,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="packages.config" />
     <None Include="Resources\polyline.png" />
   </ItemGroup>
   <ItemGroup>

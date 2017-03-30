@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Text;
+using System.Linq;
 using System.Windows.Forms;
 using gView.Framework.Data;
 using gView.Framework.FDB;
 using gView.Framework.Network;
 using gView.Framework.UI.Controls.Wizard;
+using Newtonsoft.Json;
 
 namespace gView.Framework.UI.Dialogs.Network
 {
@@ -115,6 +113,8 @@ namespace gView.Framework.UI.Dialogs.Network
             gridFcs.Rows.Add(row);
         }
 
+        #region Properties
+
         public Dictionary<int, string> SwitchNodeFcIds
         {
             get
@@ -144,7 +144,7 @@ namespace gView.Framework.UI.Dialogs.Network
                 Dictionary<int, gView.Framework.Network.NetworkNodeType> ret = new Dictionary<int, gView.Framework.Network.NetworkNodeType>();
                 foreach (DataGridViewRow row in gridFcs.Rows)
                 {
-                    foreach (gView.Framework.Network.NetworkNodeType nodeType in Enum.GetValues(typeof(NetworkNodeType)))
+                    foreach (NetworkNodeType nodeType in Enum.GetValues(typeof(NetworkNodeType)))
                     {
                         if ((string)row.Cells[4].Value == nodeType.ToString())
                         {
@@ -157,6 +157,70 @@ namespace gView.Framework.UI.Dialogs.Network
                 return ret;
             }
         }
+
+        public Serialized Serialize
+        {
+            get
+            {
+                List<Serialized.Row> rows = new List<Serialized.Row>();
+
+                foreach (DataGridViewRow gridRow in gridFcs.Rows)
+                {
+                    rows.Add(new Serialized.Row()
+                    {
+                        IsSwitch = (bool)gridRow.Cells[1].Value,
+                        FeatureclassName = (string)gridRow.Cells[2].Value,
+                        FieldName = (string)gridRow.Cells[3].Value,
+                        NodeType = gridRow.Cells[4].Value?.ToString()
+                    });
+                }
+
+                return new Serialized
+                {
+                    Rows = rows.ToArray()
+                };
+            }
+            set
+            {
+                if (value == null || value.Rows == null)
+                    return;
+
+                foreach (DataGridViewRow gridRow in gridFcs.Rows)
+                {
+                    var row = value.Rows.Where(m => m.FeatureclassName == (string)gridRow.Cells[2].Value).FirstOrDefault();
+                    if (row != null)
+                    {
+                        gridRow.Cells[1].Value = row.IsSwitch;
+                        gridRow.Cells[3].Value = row.FieldName;
+                        gridRow.Cells[4].Value = row.NodeType;
+                    }
+                }
+            }
+        }
+
+        #endregion
+
+        #region Serialization Class
+
+        public class Serialized
+        {
+            [JsonProperty(PropertyName = "rows")]
+            public Row[] Rows { get; set; }
+
+            public class Row
+            {
+                [JsonProperty(PropertyName = "switch")]
+                public bool IsSwitch { get; set; }
+                [JsonProperty(PropertyName = "fcname")]
+                public string FeatureclassName { get; set; }
+                [JsonProperty(PropertyName = "fieldname")]
+                public string FieldName { get; set; }
+                [JsonProperty(PropertyName = "nodetype")]
+                public string NodeType { get; set; }
+            }
+        }
+
+        #endregion
 
         #region IWizardPageNotification Member
 

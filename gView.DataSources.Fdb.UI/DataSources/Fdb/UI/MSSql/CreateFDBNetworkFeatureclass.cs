@@ -17,7 +17,7 @@ using gView.DataSources.Fdb.MSAccess;
 
 namespace gView.DataSources.Fdb.UI.MSSql
 {
-    public class CreateFDBNetworkFeatureclass : IProgressReporter
+    public class CreateFDBNetworkFeatureclass : IProgressReporter, INetworkCreator
     {
         private IFeatureDataset _dataset = null;
         private gView.DataSources.Fdb.MSAccess.AccessFDB _fdb = null;
@@ -31,6 +31,7 @@ namespace gView.DataSources.Fdb.UI.MSSql
         private double _tolerance = double.Epsilon;
         private GraphWeights _graphWeights = null;
 
+        public CreateFDBNetworkFeatureclass() { }
         public CreateFDBNetworkFeatureclass(IFeatureDataset dataset,
             string networkName,
             List<IFeatureClass> edgeFcs, List<IFeatureClass> nodeFcs)
@@ -42,14 +43,44 @@ namespace gView.DataSources.Fdb.UI.MSSql
             _fdb = (AccessFDB)_dataset.Database;
 
             _networkName = networkName;
-            _edgeFcs = edgeFcs;
-            _nodeFcs = nodeFcs;
+            this.EdgeFeatureClasses = edgeFcs;
+            this.NodeFeatureClasses = nodeFcs;
 
             // Zum Testen -> wenn -1 -> alle als ComplexEdges möglich
             _complexEdgeFcs = new List<int>();
         }
 
         #region Properties
+
+        public IFeatureDataset FeatureDataset
+        {
+            get { return _dataset; }
+            set
+            {
+                if (value == null || !(value.Database is AccessFDB))
+                    throw new Exception("Dataset is not an FDB Dataset");
+                _dataset = value;
+                _fdb = (AccessFDB)_dataset.Database;
+            }
+        }
+
+        public string NetworkName
+        {
+            get { return _networkName; }
+            set { _networkName = value; }
+        }
+
+        public List<IFeatureClass> EdgeFeatureClasses
+        {
+            get { return _edgeFcs; }
+            set { _edgeFcs = value; }
+        }
+        public List<IFeatureClass> NodeFeatureClasses
+        {
+            get { return _nodeFcs; }
+            set { _nodeFcs = value; }
+        }
+
         public double SnapTolerance
         {
             get { return _tolerance; }
@@ -77,7 +108,7 @@ namespace gView.DataSources.Fdb.UI.MSSql
         }
         #endregion
 
-        private void Run()
+        public void Run()
         {
             if (_dataset == null || !(_fdb is IFeatureDatabaseReplication) || _edgeFcs == null)
                 return;
@@ -100,7 +131,7 @@ namespace gView.DataSources.Fdb.UI.MSSql
                     return;
 
                 NetworkBuilder networkBuilder = new NetworkBuilder(_dataset.Envelope, _tolerance);
-                if (reportProgress != null)
+                if (ReportProgress != null)
                     networkBuilder.reportProgress += new ProgressReporterEvent(networkBuilder_reportProgress);
 
                 #region Spatial Index
@@ -190,7 +221,7 @@ namespace gView.DataSources.Fdb.UI.MSSql
                         report.Message = "Analize Edges: " + fc.Name;
                         report.featureMax = fc.CountFeatures;
                         report.featurePos = 0;
-                        if (reportProgress != null) reportProgress(report);
+                        if (ReportProgress != null) ReportProgress(report);
                         #endregion
 
                         IFeature feature;
@@ -222,7 +253,7 @@ namespace gView.DataSources.Fdb.UI.MSSql
                             #region Report
                             report.featurePos++;
                             if (report.featurePos % 1000 == 0)
-                                if (reportProgress != null) reportProgress(report);
+                                if (ReportProgress != null) ReportProgress(report);
                             #endregion
                         }
                     }
@@ -238,7 +269,7 @@ namespace gView.DataSources.Fdb.UI.MSSql
                     report.Message = "Create Complex Edges...";
                     report.featureMax = networkNodes.Count;
                     report.featurePos = 0;
-                    if (reportProgress != null) reportProgress(report);
+                    if (ReportProgress != null) ReportProgress(report);
                     #endregion
 
                     foreach (NetworkNode node in networkNodes)
@@ -248,7 +279,7 @@ namespace gView.DataSources.Fdb.UI.MSSql
                         #region Report
                         report.featurePos++;
                         if (report.featurePos % 1000 == 0)
-                            if (reportProgress != null) reportProgress(report);
+                            if (ReportProgress != null) ReportProgress(report);
                         #endregion
                     }
                 }
@@ -286,7 +317,7 @@ namespace gView.DataSources.Fdb.UI.MSSql
                             report.Message = "Analize Nodes: " + fc.Name;
                             report.featureMax = fc.CountFeatures;
                             report.featurePos = 0;
-                            if (reportProgress != null) reportProgress(report);
+                            if (ReportProgress != null) ReportProgress(report);
                             #endregion
 
                             IFeature feature;
@@ -315,7 +346,7 @@ namespace gView.DataSources.Fdb.UI.MSSql
                                 #region Report
                                 report.featurePos++;
                                 if (report.featurePos % 1000 == 0)
-                                    if (reportProgress != null) reportProgress(report);
+                                    if (ReportProgress != null) ReportProgress(report);
                                 #endregion
                             }
                         }
@@ -327,7 +358,7 @@ namespace gView.DataSources.Fdb.UI.MSSql
                 #region Report
                 report.Message = "Create Graph";
                 report.featurePos = 0;
-                if (reportProgress != null) reportProgress(report);
+                if (ReportProgress != null) ReportProgress(report);
                 #endregion
 
                 networkBuilder.CreateGraph();
@@ -383,7 +414,7 @@ namespace gView.DataSources.Fdb.UI.MSSql
                 report.Message = "Create Edges";
                 if (c is ICount) report.featureMax = ((ICount)c).Count;
                 report.featurePos = 0;
-                if (reportProgress != null) reportProgress(report);
+                if (ReportProgress != null) ReportProgress(report);
                 #endregion
 
                 string tabEdgesName = _fdb.TableName(_networkName + "_Edges");
@@ -400,7 +431,7 @@ namespace gView.DataSources.Fdb.UI.MSSql
                         report.featurePos++;
                         if (features.Count > 0 && features.Count % 1000 == 0)
                         {
-                            if (reportProgress != null) reportProgress(report);
+                            if (ReportProgress != null) ReportProgress(report);
                             _fdb.Insert(edgeFc, features);
                             features.Clear();
                         }
@@ -447,7 +478,7 @@ namespace gView.DataSources.Fdb.UI.MSSql
                 }
                 if (features.Count > 0)
                 {
-                    if (reportProgress != null) reportProgress(report);
+                    if (ReportProgress != null) ReportProgress(report);
                     _fdb.Insert(edgeFc, features);
                 }
                 _fdb.CalculateExtent(edgeFc);
@@ -534,7 +565,7 @@ namespace gView.DataSources.Fdb.UI.MSSql
                 report.Message = "Create Nodes";
                 if (c is ICount) report.featureMax = ((ICount)c).Count;
                 report.featurePos = 0;
-                if (reportProgress != null) reportProgress(report);
+                if (ReportProgress != null) ReportProgress(report);
                 #endregion
 
                 while ((f = c.NextFeature) != null)
@@ -544,14 +575,14 @@ namespace gView.DataSources.Fdb.UI.MSSql
                     report.featurePos++;
                     if (features.Count > 0 && features.Count % 1000 == 0)
                     {
-                        if (reportProgress != null) reportProgress(report);
+                        if (ReportProgress != null) ReportProgress(report);
                         _fdb.Insert(nodeFc, features);
                         features.Clear();
                     }
                 }
                 if (features.Count > 0)
                 {
-                    if (reportProgress != null) reportProgress(report);
+                    if (ReportProgress != null) ReportProgress(report);
                     _fdb.Insert(nodeFc, features);
                 }
                 _fdb.CalculateExtent(nodeFc);
@@ -584,7 +615,7 @@ namespace gView.DataSources.Fdb.UI.MSSql
                 report.Message = "Create Network";
                 if (c is ICount) report.featureMax = ((ICount)c).Count;
                 report.featurePos = 0;
-                if (reportProgress != null) reportProgress(report);
+                if (ReportProgress != null) ReportProgress(report);
                 #endregion
 
                 string fcNetworkName = _fdb.TableName("FC_" + _networkName);
@@ -597,7 +628,7 @@ namespace gView.DataSources.Fdb.UI.MSSql
                     // bestehende, vor neuem Einfügen speichern und pageIndex erhöhen (graph_page++)
                     if (NetworkObjectSerializer.Page((int)f["N1"]) > graph_page)
                     {
-                        if (reportProgress != null) reportProgress(report);
+                        if (ReportProgress != null) ReportProgress(report);
                         IRow row = new Row();
                         row.Fields.Add(new FieldValue("Page", graph_page++));
                         row.Fields.Add(new FieldValue("Data", NetworkObjectSerializer.SerializeGraph(features)));
@@ -701,8 +732,8 @@ namespace gView.DataSources.Fdb.UI.MSSql
 
         void networkBuilder_reportProgress(ProgressReport progressEventReport)
         {
-            if (reportProgress != null)
-                reportProgress(progressEventReport);
+            if (ReportProgress != null)
+                ReportProgress(progressEventReport);
         }
         public Thread Thread
         {
@@ -714,7 +745,7 @@ namespace gView.DataSources.Fdb.UI.MSSql
 
         #region IProgressReporter Member
 
-        public event ProgressReporterEvent reportProgress = null;
+        public event ProgressReporterEvent ReportProgress = null;
 
         public gView.Framework.system.ICancelTracker CancelTracker
         {

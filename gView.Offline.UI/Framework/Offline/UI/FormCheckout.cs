@@ -439,22 +439,22 @@ namespace gView.Framework.Offline.UI
 
             void FeatureClassImportProgressReporter_ReportProgress(FDBImport sender, int progress)
             {
-                if (reportProgress == null) return;
+                if (ReportProgress == null) return;
 
                 _report.featureMax = Math.Max(_report.featureMax, progress);
                 _report.featurePos = progress;
 
-                reportProgress(_report);
+                ReportProgress(_report);
             }
 
             void FeatureClassImportProgressReporter_ReportAction(FDBImport sender, string action)
             {
-                if (reportProgress == null) return;
+                if (ReportProgress == null) return;
 
                 _report.featurePos = 0;
                 _report.Message = action;
 
-                reportProgress(_report);
+                ReportProgress(_report);
             }
             #endregion
 
@@ -469,27 +469,27 @@ namespace gView.Framework.Offline.UI
 
             void import_ReportProgress(FeatureImport sender, int progress)
             {
-                if (reportProgress == null) return;
+                if (ReportProgress == null) return;
 
                 _report.featureMax = Math.Max(_report.featureMax, progress);
                 _report.featurePos = progress;
 
-                reportProgress(_report);
+                ReportProgress(_report);
             }
 
             void import_ReportAction(FeatureImport sender, string action)
             {
-                if (reportProgress == null) return;
+                if (ReportProgress == null) return;
 
                 _report.featurePos = 0;
                 _report.Message = action;
 
-                reportProgress(_report);
+                ReportProgress(_report);
             }
 
             #region IProgressReporter Member
 
-            public event ProgressReporterEvent reportProgress;
+            public event ProgressReporterEvent ReportProgress;
 
             public ICancelTracker CancelTracker
             {

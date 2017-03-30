@@ -37,21 +37,21 @@ namespace gView.DataSources.Fdb.UI
             if (!(argument is List<IClass>)) return;
             List<IClass> classes = argument as List<IClass>;
 
-            if (reportProgress != null)
+            if (ReportProgress != null)
             {
                 _report.featureMax = classes.Count;
                 _report.featurePos = 0;
-                reportProgress(_report);
+                ReportProgress(_report);
             }
             foreach (IClass cl in classes)
             {
                 if (!(cl is IFeatureClass) || cl.Dataset == null || !(cl.Dataset.Database is AccessFDB)) continue;
 
-                if (reportProgress != null)
+                if (ReportProgress != null)
                 {
                     _report.featurePos = classes.IndexOf(cl);
                     _report.Message = "Featureclass " + cl.Name;
-                    reportProgress(_report);
+                    ReportProgress(_report);
                 }
                 
                 AccessFDB fdb = cl.Dataset.Database as AccessFDB;
@@ -66,7 +66,7 @@ namespace gView.DataSources.Fdb.UI
 
         #region IProgressReporter Member
 
-        public event ProgressReporterEvent reportProgress;
+        public event ProgressReporterEvent ReportProgress;
 
         public ICancelTracker CancelTracker
         {

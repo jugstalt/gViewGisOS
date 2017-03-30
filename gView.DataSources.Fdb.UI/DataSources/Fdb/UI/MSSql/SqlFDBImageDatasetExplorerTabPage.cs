@@ -687,28 +687,28 @@ namespace gView.DataSources.Fdb.UI.MSSql
 
         void import_ReportProgress(FDBImageDataset sender, int progress)
         {
-            if (reportProgress == null) return;
+            if (ReportProgress == null) return;
 
             _progress += progress;
             _report.featureMax = Math.Max(_report.featureMax, _progress);
             _report.featurePos = _progress;
 
-            reportProgress(_report);
+            ReportProgress(_report);
         }
 
         void import_ReportAction(FDBImageDataset sender, string action)
         {
-            if (reportProgress == null) return;
+            if (ReportProgress == null) return;
 
             _report.featurePos = 0;
             _report.Message = action;
 
-            reportProgress(_report);
+            ReportProgress(_report);
         }
 
         #region IProgressReporter Member
 
-        public event ProgressReporterEvent reportProgress;
+        public event ProgressReporterEvent ReportProgress;
 
         public ICancelTracker CancelTracker
         {

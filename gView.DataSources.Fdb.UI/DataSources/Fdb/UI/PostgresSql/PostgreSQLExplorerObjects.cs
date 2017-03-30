@@ -1340,7 +1340,7 @@ namespace gView.DataSources.Fdb.UI.PostgreSql
             if (dataset == null || !(dataset.Database is pgFDB))
                 return null;
 
-            FormNewNetworkclass dlg = new FormNewNetworkclass(dataset);
+            FormNewNetworkclass dlg = new FormNewNetworkclass(dataset, typeof(CreateFDBNetworkFeatureclass));
             if (dlg.ShowDialog() != DialogResult.OK)
                 return null;
 

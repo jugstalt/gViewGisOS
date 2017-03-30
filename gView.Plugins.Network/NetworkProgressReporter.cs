@@ -23,7 +23,7 @@ namespace gView.Plugins.Network
 
         #region IProgressReporter Member
 
-        public event ProgressReporterEvent reportProgress = null;
+        public event ProgressReporterEvent ReportProgress = null;
 
         public ICancelTracker CancelTracker
         {
@@ -34,8 +34,8 @@ namespace gView.Plugins.Network
 
         public void FireProgressReporter(ProgressReport progressEventReport)
         {
-            if (reportProgress != null)
-                reportProgress(progressEventReport);
+            if (ReportProgress != null)
+                ReportProgress(progressEventReport);
         }
     }
 }

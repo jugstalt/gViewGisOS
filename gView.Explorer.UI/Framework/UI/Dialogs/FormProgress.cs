@@ -52,7 +52,7 @@ namespace gView.Framework.UI.Dialogs
 
             if (reporter != null)
             {
-                reporter.reportProgress += new ProgressReporterEvent(progressEvent);
+                reporter.ReportProgress += new ProgressReporterEvent(progressEvent);
             }
         }
         public FormProgress(IProgressReporter reporter, Thread thread, object argument)
@@ -68,7 +68,7 @@ namespace gView.Framework.UI.Dialogs
                 _cancelTracker = reporter.CancelTracker;
                 btnCancel.Visible = (_cancelTracker != null);
 
-                reporter.reportProgress += new ProgressReporterEvent(progressEvent);
+                reporter.ReportProgress += new ProgressReporterEvent(progressEvent);
             }
         }
 
@@ -90,7 +90,7 @@ namespace gView.Framework.UI.Dialogs
             {
                 _cancelTracker = reporter.CancelTracker;
                 btnCancel.Visible = (_cancelTracker != null);
-                reporter.reportProgress += new ProgressReporterEvent(progressEvent);
+                reporter.ReportProgress += new ProgressReporterEvent(progressEvent);
             }
 
             this.ShowDialog();

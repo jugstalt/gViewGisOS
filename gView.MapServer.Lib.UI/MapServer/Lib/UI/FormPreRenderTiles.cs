@@ -254,10 +254,10 @@ namespace gView.MapServer.Lib.UI
                 col0 = Math.Min(col0, col1);
                 row0 = Math.Min(row0, row1);
 
-                if (reportProgress != null)
+                if (ReportProgress != null)
                 {
                     report.Message = "Scale: " + scale.ToString() + " - " + Math.Max(1, (rows * cols) / step / step).ToString() + " tiles...";
-                    reportProgress(report);
+                    ReportProgress(report);
                 }
 
                 string boundingTiles = _cacheFormat == "compact" ? "/" + row0 + "|" + (row0 + rows) + "|" + col0 + "|" + (col0 + cols) : String.Empty;
@@ -277,11 +277,11 @@ namespace gView.MapServer.Lib.UI
                         else
                             thread.Start("tile:render/" + _cacheFormat + "/ll/" + cmbEpsg.SelectedItem.ToString() + "/" + scale.ToString(_nhi) + "/" + row + "/" + col + _imgExt + boundingTiles);
 
-                        if (reportProgress != null)
+                        if (ReportProgress != null)
                         {
                             report.featurePos++;
                             if (report.featurePos % 5 == 0 || _cacheFormat == "compact")
-                                reportProgress(report);
+                                ReportProgress(report);
                         }
                         if (!_cancelTracker.Continue)
                             return;
@@ -302,7 +302,7 @@ namespace gView.MapServer.Lib.UI
 
         #region IProgressReporter Member
 
-        public event ProgressReporterEvent reportProgress;
+        public event ProgressReporterEvent ReportProgress;
 
         private CancelTracker _cancelTracker = new CancelTracker();
         public ICancelTracker CancelTracker

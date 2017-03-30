@@ -188,7 +188,7 @@ namespace gView.DataSources.Fdb.UI.MSSql
 
                 #region Report
                 double tx = _tileSizeX, ty = _tileSizeY;
-                if (reportProgress != null)
+                if (ReportProgress != null)
                 {
                     report.featureMax = 0;
                     for (int i = 0; i < _levels; i++)
@@ -207,7 +207,7 @@ namespace gView.DataSources.Fdb.UI.MSSql
                     }
                     report.Message = "Create Tiles";
                     report.featurePos = 0;
-                    reportProgress(report);
+                    ReportProgress(report);
                 }
                 int reportInterval = (_createTiles ? 10 : 1000);
                 #endregion
@@ -254,8 +254,8 @@ namespace gView.DataSources.Fdb.UI.MSSql
                                         {
                                             column++;
                                             report.featurePos++;
-                                            if (reportProgress != null && report.featurePos % reportInterval == 0)
-                                                reportProgress(report);
+                                            if (ReportProgress != null && report.featurePos % reportInterval == 0)
+                                                ReportProgress(report);
                                             continue;
                                         }
                                     }
@@ -277,8 +277,8 @@ namespace gView.DataSources.Fdb.UI.MSSql
                                         {
                                             column++;
                                             report.featurePos++;
-                                            if (reportProgress != null && report.featurePos % reportInterval == 0)
-                                                reportProgress(report);
+                                            if (ReportProgress != null && report.featurePos % reportInterval == 0)
+                                                ReportProgress(report);
                                             continue;
                                         }
                                         StoreFloatArray(filename + ".bin", x, y, _resX, _resY, vals);
@@ -306,7 +306,7 @@ namespace gView.DataSources.Fdb.UI.MSSql
                                 report.featurePos++;
                                 if (features.Count >= reportInterval)
                                 {
-                                    if (reportProgress != null) reportProgress(report);
+                                    if (ReportProgress != null) ReportProgress(report);
                                     if (!_fdb.Insert(fc, features))
                                     {
                                         MessageBox.Show(_fdb.lastErrorMsg, "DB Insert Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -334,7 +334,7 @@ namespace gView.DataSources.Fdb.UI.MSSql
                 }
                 if (features.Count > 0)
                 {
-                    if (reportProgress != null) reportProgress(report);
+                    if (ReportProgress != null) ReportProgress(report);
                     _fdb.Insert(fc, features);
                 }
                 _fdb.CalculateExtent(fc);
@@ -365,7 +365,7 @@ namespace gView.DataSources.Fdb.UI.MSSql
 
         #region IProgressReporter Member
 
-        public event ProgressReporterEvent reportProgress = null;
+        public event ProgressReporterEvent ReportProgress = null;
 
         public gView.Framework.system.ICancelTracker CancelTracker
         {

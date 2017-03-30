@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using gView.Framework.Data;
 using gView.Framework.Geometry;
 using gView.Framework.system;
+using gView.Framework.Network;
 
 namespace gView.Framework.FDB
 {

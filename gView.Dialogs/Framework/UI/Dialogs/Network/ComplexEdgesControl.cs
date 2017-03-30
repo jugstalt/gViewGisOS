@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Text;
 using System.Windows.Forms;
 using gView.Framework.Data;
 using gView.Framework.FDB;
 using gView.Framework.UI.Controls.Wizard;
+using Newtonsoft.Json;
 
 namespace gView.Framework.UI.Dialogs.Network
 {
@@ -23,8 +20,8 @@ namespace gView.Framework.UI.Dialogs.Network
             if (dataset != null)
                 _database = dataset.Database as IFeatureDatabase3;
 
-            if (_database == null)
-                throw new ArgumentException();
+            //if (_database == null)
+            //    throw new ArgumentException();
 
             _selected = selected;
         }
@@ -78,6 +75,61 @@ namespace gView.Framework.UI.Dialogs.Network
                 return fcIds;
             }
         }
+
+        public Serialized Serialize
+        {
+            get
+            {
+                List<string> names = new List<string>();
+
+                foreach (SelectFeatureclassesControl.FcListViewItem item in lstEdges.Items)
+                {
+                    if (item.Checked == true)
+                    {
+                        names.Add(item.Featureclass.Name);
+                    }
+                }
+
+                return new Serialized()
+                {
+                    UserComplexEdges = chkCreateComplexEdges.Checked,
+                    ComplexEdgeNames = names.ToArray()
+                };
+            }
+            set
+            {
+                if (value == null)
+                    return;
+
+                chkCreateComplexEdges.Checked = value.UserComplexEdges;
+
+                foreach (SelectFeatureclassesControl.FcListViewItem item in lstEdges.Items)
+                    item.Checked = false;
+
+                foreach (var name in value.ComplexEdgeNames)
+                {
+                    foreach (SelectFeatureclassesControl.FcListViewItem item in lstEdges.Items)
+                    {
+                        if (item.Featureclass.Name == name)
+                            item.Checked = true;
+                    }
+                }
+            }
+        }
+
+        #endregion
+
+        #region Serializer Class
+
+        public class Serialized
+        {
+            [JsonProperty(PropertyName = "user_complexedges")]
+            public bool UserComplexEdges { get; set; }
+
+            [JsonProperty(PropertyName = "complexedges")]
+            public string[] ComplexEdgeNames { get; set; }
+        }
+
         #endregion
     }
 }

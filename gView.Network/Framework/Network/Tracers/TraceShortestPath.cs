@@ -43,7 +43,7 @@ namespace gView.Framework.Network.Tracers
                     null;
 
             Dijkstra dijkstra = new Dijkstra(cancelTraker);
-            dijkstra.reportProgress += this.reportProgress;
+            dijkstra.reportProgress += this.ReportProgress;
             if (weight != null)
             {
                 dijkstra.GraphWeight = weight.Weight;
@@ -93,7 +93,7 @@ namespace gView.Framework.Network.Tracers
 
         #region IProgressReporterEvent Member
 
-        public event ProgressReporterEvent reportProgress;
+        public event ProgressReporterEvent ReportProgress;
 
         #endregion
     }

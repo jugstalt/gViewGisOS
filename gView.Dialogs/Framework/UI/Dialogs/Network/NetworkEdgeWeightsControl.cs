@@ -236,6 +236,22 @@ namespace gView.Framework.UI.Dialogs.Network
                 return weights.Count > 0 ? weights : null;
             }
         }
+
+        public Seriazlized Serialize
+        {
+            get { return null; }  // ToDO
+            set { }
+        }
+
+        #endregion
+
+        #region Serialization Class
+
+        public class Seriazlized
+        {
+            // ToDO:
+        }
+
         #endregion
     }
 }

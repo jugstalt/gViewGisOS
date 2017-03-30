@@ -787,16 +787,16 @@ namespace gView.DataSources.Fdb.UI.MSSql
 
         void interpreter_ExecuteCommand(string command)
         {
-            if (reportProgress == null) return;
+            if (ReportProgress == null) return;
 
             _report.Message = command.Substring(0, Math.Min(255, command.Length));
             _report.featurePos++;
-            reportProgress(_report);
+            ReportProgress(_report);
         }
 
         #region IProgressReporter Member
 
-        public event ProgressReporterEvent reportProgress;
+        public event ProgressReporterEvent ReportProgress;
 
         public ICancelTracker CancelTracker
         {
@@ -1620,7 +1620,7 @@ namespace gView.DataSources.Fdb.UI.MSSql
             if (dataset == null || !(dataset.Database is SqlFDB))
                 return null;
 
-            FormNewNetworkclass dlg = new FormNewNetworkclass(dataset);
+            FormNewNetworkclass dlg = new FormNewNetworkclass(dataset, typeof(CreateFDBNetworkFeatureclass));
             if (dlg.ShowDialog() != DialogResult.OK)
                 return null;
 

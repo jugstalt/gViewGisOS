@@ -67,7 +67,7 @@ namespace gView.Framework.Network.Tracers
             }
 
             Dijkstra dijkstra = new Dijkstra(cancelTraker);
-            dijkstra.reportProgress += this.reportProgress;
+            dijkstra.reportProgress += this.ReportProgress;
             dijkstra.ApplySwitchState = input.Contains(NetworkTracerInputType.IgnoreSwitches) == false &&
                                         network.HasDisabledSwitches;
             dijkstra.TargetNodeFcIds = neighborNodeFcIds;
@@ -148,7 +148,7 @@ namespace gView.Framework.Network.Tracers
             if (dijkstraEndNodes == null)
                 return null;
 
-            ProgressReport report = (reportProgress != null ? new ProgressReport() : null);
+            ProgressReport report = (ReportProgress != null ? new ProgressReport() : null);
 
             #region Collect End Nodes
             if (report != null)
@@ -156,7 +156,7 @@ namespace gView.Framework.Network.Tracers
                 report.Message = "Collect End Nodes...";
                 report.featurePos = 0;
                 report.featureMax = dijkstraEndNodes.Count;
-                reportProgress(report);
+                ReportProgress(report);
             }
 
             int counter = 0;
@@ -181,7 +181,7 @@ namespace gView.Framework.Network.Tracers
                 if (report != null && counter % 1000 == 0)
                 {
                     report.featurePos = counter;
-                    reportProgress(report);
+                    ReportProgress(report);
                 }
             }
             #endregion
@@ -192,7 +192,7 @@ namespace gView.Framework.Network.Tracers
                 report.Message = "Collect Edges...";
                 report.featurePos = 0;
                 report.featureMax = dijkstra.DijkstraNodes.Count;
-                reportProgress(report);
+                ReportProgress(report);
             }
 
             counter = 0;
@@ -214,7 +214,7 @@ namespace gView.Framework.Network.Tracers
                     if (report != null && counter % 1000 == 0)
                     {
                         report.featurePos = counter;
-                        reportProgress(report);
+                        ReportProgress(report);
                     }
                 }
             }
@@ -230,7 +230,7 @@ namespace gView.Framework.Network.Tracers
 
         #region IProgressReporterEvent Member
 
-        public event ProgressReporterEvent reportProgress;
+        public event ProgressReporterEvent ReportProgress;
 
         #endregion
     }

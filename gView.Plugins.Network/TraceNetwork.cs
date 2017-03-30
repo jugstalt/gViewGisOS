@@ -101,7 +101,7 @@ namespace gView.Plugins.Network
                 return;
 
             if (reporter != null && _module.SelectedNetworkTracer is IProgressReporterEvent)
-                ((IProgressReporterEvent)_module.SelectedNetworkTracer).reportProgress += reporter.FireProgressReporter;
+                ((IProgressReporterEvent)_module.SelectedNetworkTracer).ReportProgress += reporter.FireProgressReporter;
 
 
             NetworkTracerOutputCollection outputCollection = _module.SelectedNetworkTracer.Trace(

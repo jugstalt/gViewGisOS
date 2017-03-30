@@ -1098,7 +1098,7 @@ namespace gView.DataSources.Fdb.UI.SQLite
             if (dataset == null || !(dataset.Database is SQLiteFDB))
                 return null;
 
-            FormNewNetworkclass dlg = new FormNewNetworkclass(dataset);
+            FormNewNetworkclass dlg = new FormNewNetworkclass(dataset, typeof(CreateFDBNetworkFeatureclass));
             if (dlg.ShowDialog() != DialogResult.OK)
                 return null;
 

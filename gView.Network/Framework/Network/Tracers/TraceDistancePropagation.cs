@@ -43,7 +43,7 @@ namespace gView.Framework.Network.Tracers
                     null;
 
             Dijkstra dijkstra = new Dijkstra(cancelTraker);
-            dijkstra.reportProgress += this.reportProgress;
+            dijkstra.reportProgress += this.ReportProgress;
             dijkstra.MaxDistance = _properties.Distance;
             if (weight != null)
             {
@@ -145,7 +145,7 @@ namespace gView.Framework.Network.Tracers
 
         #region IProgressReporterEvent Member
 
-        public event ProgressReporterEvent reportProgress = null;
+        public event ProgressReporterEvent ReportProgress = null;
 
         #endregion
 

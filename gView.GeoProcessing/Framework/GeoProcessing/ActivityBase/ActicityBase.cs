@@ -95,7 +95,7 @@ namespace gView.Framework.GeoProcessing.ActivityBase
 
         #region IProgressReporter Member
 
-        virtual public event ProgressReporterEvent reportProgress;
+        virtual public event ProgressReporterEvent ReportProgress;
 
         public ICancelTracker CancelTracker
         {
@@ -266,8 +266,8 @@ namespace gView.Framework.GeoProcessing.ActivityBase
             if (!String.IsNullOrEmpty(msg))
                 _report.Message = msg;
 
-            if (reportProgress != null)
-                reportProgress(_report);
+            if (ReportProgress != null)
+                ReportProgress(_report);
         }
         #endregion
     }
@@ -459,11 +459,11 @@ namespace gView.Framework.GeoProcessing.ActivityBase
 
         #endregion
 
-        public override event ProgressReporterEvent reportProgress;
+        public override event ProgressReporterEvent ReportProgress;
         protected void MergePolygonReport(ProgressReport report)
         {
-            if (reportProgress != null)
-                reportProgress(report);
+            if (ReportProgress != null)
+                ReportProgress(report);
         }
     }
 

@@ -367,7 +367,7 @@ namespace gView.Framework.UI
     public delegate void ProgressReporterEvent(ProgressReport progressEventReport);
     public interface IProgressReporterEvent
     {
-        event ProgressReporterEvent reportProgress;
+        event ProgressReporterEvent ReportProgress;
     }
 
     public interface IProgressReporter : IProgressReporterEvent
@@ -398,6 +398,17 @@ namespace gView.Framework.UI
     public interface IExporerOjectSchema
     {
         string Schema { get; }
+    }
+
+    public interface ISerializableObject
+    {
+        void DeserializeObject(string config);
+        string SerializeObject();
+    }
+
+    public interface ISerializableExecute : ISerializableObject
+    {
+        void Execute(ProgressReporterEvent reporter);
     }
 
     public interface ISerializableExplorerObject
@@ -544,6 +555,7 @@ namespace gView.Framework.UI
         void ShowProgressDialog(IProgressReporter reporter, object argument, Thread thread);
         bool UserInteractive { get; }
     }
+
 
     public interface IConnectionStringDialog
     {

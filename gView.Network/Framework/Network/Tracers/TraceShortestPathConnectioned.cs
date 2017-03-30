@@ -37,7 +37,7 @@ namespace gView.Framework.Network.Tracers
             NetworkSinkInput sink = input.Collect(NetworkTracerInputType.SinkNode)[0] as NetworkSinkInput;
 
             Dijkstra dijkstra = new Dijkstra(cancelTraker);
-            dijkstra.reportProgress += this.reportProgress;
+            dijkstra.reportProgress += this.ReportProgress;
             dijkstra.ApplySwitchState = input.Contains(NetworkTracerInputType.IgnoreSwitches) == false &&
                                         network.HasDisabledSwitches;
             Dijkstra.ApplyInputIds(dijkstra, input);
@@ -71,7 +71,7 @@ namespace gView.Framework.Network.Tracers
 
         #region IProgressReporterEvent Member
 
-        public event ProgressReporterEvent reportProgress = null;
+        public event ProgressReporterEvent ReportProgress = null;
 
         #endregion
     }

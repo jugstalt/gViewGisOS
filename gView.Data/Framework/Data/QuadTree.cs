@@ -725,13 +725,13 @@ namespace gView.Framework.Data
 		public bool AddShape(SHPObject shape) 
 		{
             _featureCount++;
-            if ((_featureCount % 100) == 0 && reportProgress != null)
+            if ((_featureCount % 100) == 0 && ReportProgress != null)
             {
                 if (_report == null) _report = new ProgressReport();
                 _report.Message = "Add Features...";
                 _report.featureMax = -1;
                 _report.featurePos = _featureCount;
-                reportProgress(_report);
+                ReportProgress(_report);
             }
 
 			return _root.AddShape(shape);
@@ -824,27 +824,27 @@ namespace gView.Framework.Data
 		public int _NID;
         public bool writeIDXIndex(string filename)
         {
-            if (reportProgress != null) _report = new ProgressReport();
+            if (ReportProgress != null) _report = new ProgressReport();
 
             StreamWriter sw = new StreamWriter(filename, false);
             BinaryWriter bw = new BinaryWriter(sw.BaseStream);
 
             _NID = 0;
             List<SpatialIndexNode> nodes = new List<SpatialIndexNode>();
-            if (reportProgress != null)
+            if (ReportProgress != null)
             {
                 _report.Message = "Collect Nodes...";
-                reportProgress(_report);
+                ReportProgress(_report);
             }
 
             writeFDB_FC_Index_nodes(_root, nodes, _NID++, -1);
 
-            if (reportProgress != null)
+            if (ReportProgress != null)
             {
                 _report.Message = "Write IDX...";
                 _report.featurePos = 0;
                 _report.featureMax = nodes.Count / 100;
-                reportProgress(_report);
+                ReportProgress(_report);
             }
 
             int counter = 0;
@@ -863,10 +863,10 @@ namespace gView.Framework.Data
                     bw.Write((int)id);
                 }
                 counter++;
-                if ((counter % 100)==0 && reportProgress!=null)
+                if ((counter % 100)==0 && ReportProgress!=null)
                 {
                     _report.featurePos++;
-                    reportProgress(_report);
+                    ReportProgress(_report);
                 }
             }
             bw.Write((int)-999);
@@ -977,7 +977,7 @@ namespace gView.Framework.Data
 
         #region IProgressReporter Members
 
-        public event ProgressReporterEvent reportProgress;
+        public event ProgressReporterEvent ReportProgress;
 
         public ICancelTracker CancelTracker
         {

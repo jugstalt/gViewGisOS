@@ -43,7 +43,7 @@ namespace gView.Framework.Network.Tracers
                 return null;
 
             Dijkstra dijkstra = new Dijkstra(cancelTraker);
-            dijkstra.reportProgress += this.reportProgress;
+            dijkstra.reportProgress += this.ReportProgress;
             dijkstra.ApplySwitchState = input.Contains(NetworkTracerInputType.IgnoreSwitches) == false &&
                                         network.HasDisabledSwitches;
             Dijkstra.ApplyInputIds(dijkstra, input);
@@ -76,7 +76,7 @@ namespace gView.Framework.Network.Tracers
             if (dijkstraNodes == null)
                 return null;
 
-            ProgressReport report = (reportProgress != null ? new ProgressReport() : null);
+            ProgressReport report = (ReportProgress != null ? new ProgressReport() : null);
             int counter = 0;
 
             #region Collect Disconnected Nodes
@@ -86,7 +86,7 @@ namespace gView.Framework.Network.Tracers
                 report.Message = "Collected Disconnected Nodes...";
                 report.featurePos = 0;
                 report.featureMax = maxNodeId;
-                reportProgress(report);
+                ReportProgress(report);
             }
             List<int> connectedNodeIds = dijkstraNodes.IdsToList();
             connectedNodeIds.Sort();
@@ -97,7 +97,7 @@ namespace gView.Framework.Network.Tracers
                 if (report != null && counter % 1000 == 0)
                 {
                     report.featurePos = counter;
-                    reportProgress(report);
+                    ReportProgress(report);
                 }
 
                 if (connectedNodeIds.BinarySearch(id) >= 0)
@@ -113,7 +113,7 @@ namespace gView.Framework.Network.Tracers
                 report.Message = "Collected Edges...";
                 report.featurePos = 0;
                 report.featureMax = dijkstraNodes.Count;
-                reportProgress(report);
+                ReportProgress(report);
             }
             List<int> edgeIds = new List<int>();
             foreach (int id in disconnectedNodeIds)
@@ -133,7 +133,7 @@ namespace gView.Framework.Network.Tracers
                 if (report != null && counter % 1000 == 0)
                 {
                     report.featurePos = counter;
-                    reportProgress(report);
+                    ReportProgress(report);
                 }
             }
             #endregion
@@ -145,7 +145,7 @@ namespace gView.Framework.Network.Tracers
                 report.Message = "Add Edges...";
                 report.featurePos = 0;
                 report.featureMax = edgeIds.Count;
-                reportProgress(report);
+                ReportProgress(report);
             }
             counter = 0;
             NetworkPathOutput pathOutput = new NetworkPathOutput();
@@ -156,7 +156,7 @@ namespace gView.Framework.Network.Tracers
                 if (report != null && counter % 1000 == 0)
                 {
                     report.featurePos = counter;
-                    reportProgress(report);
+                    ReportProgress(report);
                 }
             }
             output.Add(pathOutput);
@@ -171,7 +171,7 @@ namespace gView.Framework.Network.Tracers
 
         #region IProgressReporterEvent Member
 
-        public event ProgressReporterEvent reportProgress = null;
+        public event ProgressReporterEvent ReportProgress = null;
 
         #endregion
     }

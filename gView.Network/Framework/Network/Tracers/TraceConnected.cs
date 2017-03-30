@@ -45,7 +45,7 @@ namespace gView.Framework.Network.Tracers
                 return null;
 
             Dijkstra dijkstra = new Dijkstra(cancelTraker);
-            dijkstra.reportProgress += this.reportProgress;
+            dijkstra.reportProgress += this.ReportProgress;
             dijkstra.ApplySwitchState = input.Contains(NetworkTracerInputType.IgnoreSwitches) == false &&
                                         network.HasDisabledSwitches;
             Dijkstra.ApplyInputIds(dijkstra, input);
@@ -78,7 +78,7 @@ namespace gView.Framework.Network.Tracers
             if (dijkstraNodes == null)
                 return null;
 
-            ProgressReport report = (reportProgress != null ? new ProgressReport() : null);
+            ProgressReport report = (ReportProgress != null ? new ProgressReport() : null);
 
             #region Collect EdgedIds
             if (report != null)
@@ -86,7 +86,7 @@ namespace gView.Framework.Network.Tracers
                 report.Message = "Collected Edges...";
                 report.featurePos = 0;
                 report.featureMax = dijkstraNodes.Count;
-                reportProgress(report);
+                ReportProgress(report);
             }
 
             NetworkInputForbiddenEdgeIds forbiddenEdgeIds = (input.Contains(NetworkTracerInputType.ForbiddenEdgeIds)) ? input.Collect(NetworkTracerInputType.ForbiddenEdgeIds)[0] as NetworkInputForbiddenEdgeIds : null;
@@ -129,7 +129,7 @@ namespace gView.Framework.Network.Tracers
                 if (report != null && counter % 1000 == 0)
                 {
                     report.featurePos = counter;
-                    reportProgress(report);
+                    ReportProgress(report);
                 }
             }
             #endregion
@@ -141,7 +141,7 @@ namespace gView.Framework.Network.Tracers
                 report.Message = "Add Edges...";
                 report.featurePos = 0;
                 report.featureMax = edgeIds.Count;
-                reportProgress(report);
+                ReportProgress(report);
             }
             counter = 0;
             NetworkPathOutput pathOutput = new NetworkPathOutput();
@@ -152,7 +152,7 @@ namespace gView.Framework.Network.Tracers
                 if (report != null && counter % 1000 == 0)
                 {
                     report.featurePos = counter;
-                    reportProgress(report);
+                    ReportProgress(report);
                 }
                 //var x = network.GetEdgeFeatureAttributes(edgeId, null);
             }
@@ -168,7 +168,7 @@ namespace gView.Framework.Network.Tracers
 
         #region IProgressReporterEvent Member
 
-        public event ProgressReporterEvent reportProgress = null;
+        public event ProgressReporterEvent ReportProgress = null;
 
         #endregion
     }
