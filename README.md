@@ -19,3 +19,31 @@ Features
 * Presentation of factual data in tabular form 
 * Selection of data due to physical and / or attribute queries
 * Redlining functionality (lines, circles, text, points, polylines, polygons) and transaction data storage in the map documents Several maps and data tables in a map document 
+
+
+Main Components
+
+## gView.Carto (Desktop):
+* Query, visualize and edit your spatial data
+* Create, save and publish map documents from your geospatial data
+* Import ArcXml documents and publish as gView.MapServer service 
+
+![alt tag](http://download-codeplex.sec.s-msft.com/Download?ProjectName=gviewgis&DownloadId=524809)
+
+## gView.Data.Explorer (Desktop):
+* explore, manage and copy your spatial data 
+
+![alt tag](http://download-codeplex.sec.s-msft.com/Download?ProjectName=gviewgis&DownloadId=524810)
+
+## gView.MapServer:
+* Publish your maps and data in various formats (WMS, WFS, AXL, GeoJSON, KML, ...)  
+
+Architecture of the MapServer:
+
+![alt-tag](http://download-codeplex.sec.s-msft.com/Download?ProjectName=gviewgis&DownloadId=437963)
+
+Browse the capabilities of your server and services via a simple web interface
+
+![alt-tag](http://download-codeplex.sec.s-msft.com/Download?ProjectName=gviewgis&DownloadId=437964)
+
+
