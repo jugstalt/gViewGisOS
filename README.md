@@ -6,15 +6,15 @@ gView GIS OS is a user-friendly open source GI framework for visualizing and man
 
 Features
 
-    Reading popular vector and raster formats including ESRI shapefiles, ArcSDE, Postgre SQL, and raster formats including MrSid, JPEG2000, ...
-    Zoom in / out, pan
-    Free adjustable scale for viewing and printingAdding, removing, and sorting of layers 
-    Changing the look (color, style, fill, outline, symbols, transparency, etc.) for vector data layers
-    Transparent raster data layerThematic maps based on vector attribute information
-    Property-related data query using query editor
-    Measure distances, areas and angles 
-    Conjunction with external GPS receivers via Bluetooth to display and record the position
-    Representation composed of labels and topics of the texts of several attribute fields
-    Presentation of factual data in tabular form 
-    Selection of data due to physical and / or attribute queries
-    Redlining functionality (lines, circles, text, points, polylines, polygons) and transaction data storage in the map documents Several maps and data tables in a map document 
+* Reading popular vector and raster formats including ESRI shapefiles, ArcSDE, Postgre SQL, and raster formats including MrSid, JPEG2000, ...
+* Zoom in / out, pan
+* Free adjustable scale for viewing and printingAdding, removing, and sorting of layers 
+* Changing the look (color, style, fill, outline, symbols, transparency, etc.) for vector data layers
+* Transparent raster data layerThematic maps based on vector attribute information
+* Property-related data query using query editor
+* Measure distances, areas and angles 
+* Conjunction with external GPS receivers via Bluetooth to display and record the position
+* Representation composed of labels and topics of the texts of several attribute fields
+* Presentation of factual data in tabular form 
+* Selection of data due to physical and / or attribute queries
+* Redlining functionality (lines, circles, text, points, polylines, polygons) and transaction data storage in the map documents Several maps and data tables in a map document 
