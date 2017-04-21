@@ -531,9 +531,9 @@ namespace gView.DataSources.Fdb.UI
 
         private bool CopyFeatures2(IFeatureClass source, IFeatureUpdater fdb, IFeatureClass dest, FieldTranslation fTrans, BinaryTree2Builder treeBuilder)
         {
-            List<BinaryTree2BuilderNode> Nodes;
+            List<BinaryTree2BuilderNode> nodes;
 
-            if (treeBuilder == null || (Nodes = treeBuilder.Nodes) == null)
+            if (treeBuilder == null || (nodes = treeBuilder.Nodes) == null)
             {
                 _errMsg = "Spatial Index is not defined...";
                 return false;
@@ -544,7 +544,7 @@ namespace gView.DataSources.Fdb.UI
                 ReportAction(this, "Copy Features (" + dest.Name + ")");
             }
             int featcounter = 0;
-            foreach (BinaryTree2BuilderNode node in Nodes)
+            foreach (BinaryTree2BuilderNode node in nodes)
             {
                 if (!_cancelTracker.Continue) break;
 

@@ -5,6 +5,7 @@ using System.Runtime.InteropServices;
 using gView.SDEWrapper.a10;
 using gView.Framework.Data;
 using gView.Framework.Geometry;
+using System.Linq;
 
 namespace gView.Interoperability.Sde.a10
 {
@@ -174,7 +175,38 @@ namespace gView.Interoperability.Sde.a10
                 }
 
                 if(String.IsNullOrEmpty(_shapeFieldName)) // nur wenn bei den Felder nix gefunden wurde...
-                    _shapeFieldName = Functions.GetASCIIString(shapeColumnName); 
+                    _shapeFieldName = Functions.GetASCIIString(shapeColumnName);
+
+                if (String.IsNullOrWhiteSpace(_idFieldName))
+                {
+                    // If there is no ID (Views), try to find a UNIQUE integer field
+                    foreach (var field in _fields)
+                    {
+                        if (field.type == FieldType.integer)
+                        {
+                            QueryFilter qFilter = new QueryFilter();
+                            qFilter.SubFields = field.name;
+
+                            List<int> ids = new List<int>();
+                            using (IFeatureCursor cursor = this.GetFeatures(qFilter))
+                            {
+                                IFeature feature;
+                                while ((feature = cursor.NextFeature) != null)
+                                {
+                                    int id = Convert.ToInt32(feature[field.name]);
+                                    ids.Add(id);
+                                }
+                            }
+
+                            if (ids.Count > 0 && ids.Count == ids.Distinct().Count())  // Check if Unique
+                            {
+                                _idFieldName = field.name;
+                                ((Field)field).type = FieldType.ID;
+                                break;
+                            }
+                        }
+                    }
+                }
 
                 Wrapper10.SE_table_free_descriptions(ptr);
             }

@@ -90,6 +90,8 @@ namespace gView.Interoperability.OGC.Request.WMTS
             string service = context.ServiceRequest.Service;
             string request = context.ServiceRequest.Request;
 
+            //_mapServer.Log("WMTSRequest", loggingMethod.request_detail, request);
+
             if (request.Contains("=")) // QueryString
             {
                 QueryString queryString = new QueryString(request);
@@ -230,7 +232,7 @@ namespace gView.Interoperability.OGC.Request.WMTS
 
             if (new FileInfo(bundleFilename).Exists)
             {
-                return GetCompactTileBytes(context, path, row, col);
+                return GetCompactTileBytes(context, path, row, col, format);
             }
 
 
@@ -341,7 +343,7 @@ namespace gView.Interoperability.OGC.Request.WMTS
                             {
                                 for (int c2 = col2_0; c2 <= col2_1; c2++)
                                 {
-                                    byte[] buffer = GetCompactTileBytes(context, path2, r2, c2);
+                                    byte[] buffer = GetCompactTileBytes(context, path2, r2, c2, format);
                                     if (buffer != null && buffer.Length > 0)
                                     {
                                         MemoryStream ms = new MemoryStream(buffer);
@@ -384,7 +386,7 @@ namespace gView.Interoperability.OGC.Request.WMTS
             return null;
         }
 
-        private byte[] GetCompactTileBytes(IServiceRequestContext context, string path, int row, int col)
+        private byte[] GetCompactTileBytes(IServiceRequestContext context, string path, int row, int col, string format)
         {
             string compactTileName = CompactTileName(row, col);
 
@@ -394,7 +396,7 @@ namespace gView.Interoperability.OGC.Request.WMTS
             FileInfo fi = new FileInfo(bundleIndexFilename);
             if (!fi.Exists)
             {
-                return null;
+                return CreateEmpty(format);
             }
 
             CompactTileIndex bundleIndex = new CompactTileIndex(bundleIndexFilename);
@@ -408,7 +410,7 @@ namespace gView.Interoperability.OGC.Request.WMTS
                 int tileLength, tilePosition = bundleIndex.TilePosition(row - bundleStartRow, col - bundleStartCol, out tileLength);
 
                 if (tilePosition < 0)
-                    return null;
+                    return CreateEmpty(format);
 
                 using (FileStream fs = File.Open(bundleFilename, FileMode.Open, FileAccess.Read, FileShare.Read)) //new FileStream(bundleFilename, FileMode.Open, FileAccess.Read))
                 {
@@ -429,13 +431,23 @@ namespace gView.Interoperability.OGC.Request.WMTS
                     gr.DrawString(ex.Message, font, Brushes.Red, new RectangleF(0f, 0f, (float)bm.Width, (float)bm.Height));
 
                     MemoryStream ms = new MemoryStream();
-                    bm.Save(ms, ImageFormat.Png);
+                    bm.Save(ms, format == ".png" ? ImageFormat.Png : ImageFormat.Jpeg);
 
                     return ms.ToArray();
                 }
             }
         }
 
+        private byte[] CreateEmpty(string format)
+        {
+            using (Bitmap bm = new Bitmap(1, 1))
+            {
+                MemoryStream ms = new MemoryStream();
+                bm.Save(ms, format == ".png" ? ImageFormat.Png : ImageFormat.Jpeg);
+
+                return ms.ToArray();
+            }
+        }
 
         #endregion
 

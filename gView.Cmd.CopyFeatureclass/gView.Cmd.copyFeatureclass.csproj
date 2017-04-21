@@ -84,6 +84,18 @@
       <Project>{698381DD-5ACC-4F7F-9EB5-727EA3552CA2}</Project>
       <Name>gView.DataSources.Fdb.MSAccess</Name>
     </ProjectReference>
+    <ProjectReference Include="..\gView.DataSources.Fdb.MSSql\gView.DataSources.Fdb.MSSql.csproj">
+      <Project>{c7357f2d-8cde-47da-a82f-d7c2176e4fd3}</Project>
+      <Name>gView.DataSources.Fdb.MSSql</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\gView.DataSources.Fdb.PostgreSql\gView.DataSources.Fdb.PostgreSql.csproj">
+      <Project>{4c9a35f2-7ef5-49f5-80a3-5c570537fd37}</Project>
+      <Name>gView.DataSources.Fdb.PostgreSql</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\gView.DataSources.Fdb.SQLite\gView.DataSources.Fdb.SQLite.csproj">
+      <Project>{4b54bd6b-2e09-4d09-926b-872ff008bbf3}</Project>
+      <Name>gView.DataSources.Fdb.SQLite</Name>
+    </ProjectReference>
     <ProjectReference Include="..\gView.DataSources.Fdb.UI\gView.DataSources.Fdb.UI.csproj">
       <Project>{5157A7AD-FD87-4D4B-B38A-A22ABEC6D44C}</Project>
       <Name>gView.DataSources.Fdb.UI</Name>

@@ -116,6 +116,23 @@ namespace copyFeatureClass
                 return;
             }
 
+     
+            if (String.IsNullOrWhiteSpace(sourceFC.IDFieldName))
+            {
+                Console.WriteLine("WARNING: Souorce FeatureClass has no IDField -> Bad performance!!");
+            }
+            Console.WriteLine("Source FeatureClass: " + sourceFC.Name);
+            Console.WriteLine("-----------------------------------------------------");
+            Console.WriteLine("Shape Field: " + sourceFC.ShapeFieldName);
+            if (String.IsNullOrWhiteSpace(sourceFC.IDFieldName))
+            {
+                Console.WriteLine("WARNING: Souorce FeatureClass has no IDField -> Bad performance!!");
+            }
+            else
+            {
+                Console.WriteLine("Id Field   : " + sourceFC.IDFieldName);
+            }
+
             Console.WriteLine();
             Console.WriteLine("Import: " + source_fc);
             Console.WriteLine("-----------------------------------------------------");

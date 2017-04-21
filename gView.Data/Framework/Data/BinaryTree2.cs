@@ -51,6 +51,7 @@ namespace gView.Framework.Data
         public int MaxPerNode
         {
             get { return _maxPerNode; }
+            set { _maxPerNode = value; }
         }
         public int maxLevels
         {
