@@ -135,7 +135,7 @@ namespace gView.Interoperability.OGC.Request.WMTS
                     {
                         ImageProcessingFilters filter;
                         if (Enum.TryParse<ImageProcessingFilters>(style, true, out filter))
-                            imageData = ImageProcessing.ApplyFilter(imageData, filter);
+                            imageData = ImageProcessing.ApplyFilter(imageData, filter, format == ".png" ? ImageFormat.Png : ImageFormat.Jpeg);
                     }
                 }
 
