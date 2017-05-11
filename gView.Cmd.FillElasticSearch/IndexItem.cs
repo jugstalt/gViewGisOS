@@ -11,57 +11,57 @@ namespace gView.Cmd.FillElasticSearch
     [ElasticsearchType(Name="item")]
     public class Item
     {
-        [String(Name = "id", Index = FieldIndexOption.No)]
+        [Text(Name = "id", Index = false)]
         [JsonProperty(PropertyName = "id")]
         public string Id { get; set; }
 
-        [String(Name="suggested_text", Boost = 2.0, Index = FieldIndexOption.Analyzed)]
+        [Text(Name="suggested_text", Boost = 2.0, Index = true)]
         [JsonProperty(PropertyName = "suggested_text")]
         public string SuggestedText { get; set; }
 
-        [String(Name = "subtext", Boost = 1.0, Index = FieldIndexOption.Analyzed)]
+        [Text(Name = "subtext", Boost = 1.0, Index = true)]
         [JsonProperty(PropertyName = "subtext")]
         public string SubText { get; set; }
 
-        [String(Name = "category", Boost = 0.8, Index = FieldIndexOption.NotAnalyzed)]
+        [Text(Name = "category", Boost = 0.8, Index = true)]
         [JsonProperty(PropertyName = "category")]
         public string Category { get; set; }
 
-        [String(Name = "thumbnail_url", Index = FieldIndexOption.No, Store = false)]
+        [Text(Name = "thumbnail_url", Index = false, Store = false)]
         [JsonProperty(PropertyName = "thumbnail_url")]
         public string ThumbnailUrl { get; set; }
 
         [GeoPoint()]
         public Nest.GeoLocation Geo { get; set; }
 
-        [String(Name = "bbox", Index = FieldIndexOption.No, Store = false)]
+        [Text(Name = "bbox", Index = false, Store = false)]
         public string BBox { get; set; }
     }
 
     [ElasticsearchType(Name = "meta")]
     public class Meta
     {
-        [String(Name = "id", Index = FieldIndexOption.No)]
+        [Text(Name = "id", Index = false)]
         [JsonProperty(PropertyName = "id")]
         public string Id { get; set; }
 
-        [String(Name = "category",Index = FieldIndexOption.NotAnalyzed)]
+        [Text(Name = "category",Index = true)]
         [JsonProperty(PropertyName = "category")]
         public string Category { get; set; }
 
-        [String(Name = "sample", Index = FieldIndexOption.No, Store = false)]
+        [Text(Name = "sample", Index = false, Store = false)]
         [JsonProperty(PropertyName = "sample")]
         public string Sample { get; set; }
 
-        [String(Name = "description", Index = FieldIndexOption.No, Store = false)]
+        [Text(Name = "description", Index = false, Store = false)]
         [JsonProperty(PropertyName = "description")]
         public string Descrption { get; set; }
 
-        [String(Name = "service", Index = FieldIndexOption.No, Store = false)]
+        [Text(Name = "service", Index = false, Store = false)]
         [JsonProperty(PropertyName = "service")]
         public string Service { get; set; }
 
-        [String(Name = "query", Index = FieldIndexOption.No, Store = false)]
+        [Text(Name = "query", Index = false, Store = false)]
         [JsonProperty(PropertyName = "query")]
         public string Query { get; set; }
     }

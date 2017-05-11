@@ -442,6 +442,18 @@ namespace gView.Interoperability.OGC.Request.WMTS
         {
             using (Bitmap bm = new Bitmap(1, 1))
             {
+                if (format == ".jpg" || format == ".jpeg")
+                {
+                    // Return an white image
+                    try
+                    {
+                        using (Graphics gr = Graphics.FromImage(bm))
+                        {
+                            gr.FillRectangle(Brushes.White, new Rectangle(0, 0, bm.Width, bm.Height));
+                        }
+                    }
+                    catch { }
+                }
                 MemoryStream ms = new MemoryStream();
                 bm.Save(ms, format == ".png" ? ImageFormat.Png : ImageFormat.Jpeg);
 
