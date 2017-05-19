@@ -15,15 +15,15 @@ namespace gView.Cmd.FillElasticSearch
         [JsonProperty(PropertyName = "id")]
         public string Id { get; set; }
 
-        [Text(Name="suggested_text", Boost = 2.0, Index = true)]
+        [Text(Name="suggested_text", Boost = 2.0, Index = true, Analyzer = "german")]
         [JsonProperty(PropertyName = "suggested_text")]
         public string SuggestedText { get; set; }
 
-        [Text(Name = "subtext", Boost = 1.0, Index = true)]
+        [Text(Name = "subtext", Boost = 1.0, Index = true, Analyzer = "german")]
         [JsonProperty(PropertyName = "subtext")]
         public string SubText { get; set; }
 
-        [Text(Name = "category", Boost = 0.8, Index = true)]
+        [Text(Name = "category", Boost = 0.8, Index = true, Analyzer = "german")]
         [JsonProperty(PropertyName = "category")]
         public string Category { get; set; }
 

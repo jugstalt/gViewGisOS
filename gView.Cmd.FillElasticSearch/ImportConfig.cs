@@ -75,6 +75,9 @@ namespace gView.Cmd.FillElasticSearch
 
             [JsonProperty(PropertyName = "replace")]
             public IEnumerable<Replacements> Replacements { get; set; }
+
+            [JsonProperty(PropertyName = "filter")]
+            public string Filter { get; set; }
         }
 
         public class IndexSchema
