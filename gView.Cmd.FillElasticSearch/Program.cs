@@ -19,11 +19,12 @@ namespace gView.Cmd.FillElasticSearch
 
         static void Main(string[] args)
         {
-            string cmd = "fill", jsonFile = (args.Length == 0 ? args[0] : String.Empty), indexUrl = String.Empty, indexName=String.Empty, category = String.Empty;
+            string cmd = "fill", jsonFile = (args.Length == 1  && args[0]!="fill" ? args[0] : String.Empty), indexUrl = String.Empty, indexName=String.Empty, category = String.Empty;
+            bool replace = false;
 
-            for (int i = 0; i < args.Length - 1; i++)
+            for (int i = 0; i < args.Length; i++)
             {
-                if (args[i] == "fill")
+                if (args[i] == "fill" && i < args.Length - 1)
                 {
                     cmd = "fill";
                     jsonFile = args[i + 1];
@@ -33,12 +34,14 @@ namespace gView.Cmd.FillElasticSearch
                 {
                     cmd = "remove-category";
                 }
-                if (args[i] == "-s")
+                if (args[i] == "-s" && i < args.Length - 1)
                     indexUrl = args[i + 1];
-                if (args[i] == "-i")
+                if (args[i] == "-i" && i < args.Length - 1)
                     indexName = args[i + 1];
-                if (args[i] == "-c")
+                if (args[i] == "-c" && i < args.Length - 1)
                     category = args[i + 1];
+                if (args[i] == "-r")
+                    replace = true;
             }
 
             if (args.Length == 0)
@@ -54,7 +57,11 @@ namespace gView.Cmd.FillElasticSearch
             }
             else if (cmd == "remove-category" && (String.IsNullOrWhiteSpace(indexUrl) || String.IsNullOrWhiteSpace(category)))
             {
-                Console.WriteLine("Usage: gView.cmd.ElasticSearch remove-catetory -s {index-url} -i {index-name} -c {category}");
+                Console.WriteLine("Usage: gView.cmd.ElasticSearch remove-category -s {index-url} -i {index-name} -c {category} [-r]");
+                Console.WriteLine("  -r ... raplace german Umlaute:");
+                Console.WriteLine("            _ae_, _oe_, _ue_   =>  ä, ö, ü");
+                Console.WriteLine("            _Ae_, _Oe_, _Ue_   =>  Ä, Ö, Ü");
+                Console.WriteLine("            _sz_               =>  ß");
                 return;
             }
 
@@ -184,7 +191,7 @@ namespace gView.Cmd.FillElasticSearch
                 {
                     #region Remove Category
 
-                    RemoveCategory(indexUrl, indexName, category);
+                    RemoveCategory(indexUrl, indexName, replace ? Replace(category) : category);
 
                     #endregion
                 }
@@ -369,6 +376,18 @@ namespace gView.Cmd.FillElasticSearch
                        Math.Round(env.maxy, 7).ToString(_nhi);
             }
             catch { return String.Empty; }
+        }
+
+        static private string Replace(string str)
+        {
+            return str
+                .Replace("_ae_", "ä")
+                .Replace("_oe_", "ö")
+                .Replace("_üe_", "ü")
+                .Replace("_Ae_", "Ä")
+                .Replace("_Oe_", "Ö")
+                .Replace("_Üe_", "Ü")
+                .Replace("_sz_", "ß");
         }
     }
 }
