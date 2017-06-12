@@ -9,6 +9,7 @@ using System.IO;
 using AForge.Imaging;
 using AForge.Math.Random;
 using AForge;
+using System.Drawing.Imaging;
 
 namespace gView.Drawing.Pro
 {
@@ -70,7 +71,7 @@ namespace gView.Drawing.Pro
     {
         #region Filters
 
-        private static byte[] ApplyFilter(byte[] imageBytes, IFilter filter)
+        private static byte[] ApplyFilter(byte[] imageBytes, IFilter filter, ImageFormat format = null)
         {
             if (imageBytes == null)
                 return null;
@@ -81,7 +82,7 @@ namespace gView.Drawing.Pro
                 {
                     using (Bitmap bm = filter.Apply(from))
                     {
-                        return ImageOperations.Image2Bytes(bm);
+                        return ImageOperations.Image2Bytes(bm, format ?? from.RawFormat);
                     }
 
                 }
@@ -94,16 +95,16 @@ namespace gView.Drawing.Pro
             return null;
         }
 
-        public static byte[] ApplyFilter(System.Drawing.Image image, ImageProcessingFilters filter)
+        public static byte[] ApplyFilter(System.Drawing.Image image, ImageProcessingFilters filter, ImageFormat format = null)
         {
             try
             {
-                return ApplyFilter(ImageOperations.Image2Bytes(image), filter);
+                return ApplyFilter(ImageOperations.Image2Bytes(image), filter, format);
             }
             catch { return null; }
         }
 
-        public static byte[] ApplyFilter(byte[] imageBytes, ImageProcessingFilters filter)
+        public static byte[] ApplyFilter(byte[] imageBytes, ImageProcessingFilters filter, ImageFormat format = null)
         {
             IFilter baseFilter = null;
 
@@ -286,7 +287,7 @@ namespace gView.Drawing.Pro
             if (baseFilter == null)
                 return null;
 
-            return ApplyFilter(imageBytes, baseFilter);
+            return ApplyFilter(imageBytes, baseFilter, format);
         }
 
         public static ImageProcessingFilters[] Filters(ImageProcessingFilterCategory cat)

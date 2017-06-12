@@ -19,9 +19,49 @@ namespace gView.Cmd.FillElasticSearch
 
         static void Main(string[] args)
         {
+            string cmd = "fill", jsonFile = (args.Length == 1  && args[0]!="fill" ? args[0] : String.Empty), indexUrl = String.Empty, indexName=String.Empty, category = String.Empty;
+            bool replace = false;
+
+            for (int i = 0; i < args.Length; i++)
+            {
+                if (args[i] == "fill" && i < args.Length - 1)
+                {
+                    cmd = "fill";
+                    jsonFile = args[i + 1];
+                    i++;
+                }
+                if (args[i] == "remove-category")
+                {
+                    cmd = "remove-category";
+                }
+                if (args[i] == "-s" && i < args.Length - 1)
+                    indexUrl = args[i + 1];
+                if (args[i] == "-i" && i < args.Length - 1)
+                    indexName = args[i + 1];
+                if (args[i] == "-c" && i < args.Length - 1)
+                    category = args[i + 1];
+                if (args[i] == "-r")
+                    replace = true;
+            }
+
             if (args.Length == 0)
             {
-                Console.WriteLine("Usage: gView.Cmd.FillElasticSearch [json-file]");
+                Console.WriteLine("Usage: gView.Cmd.ElasticSearch fill|remove-catetory [Options]");
+                return;
+            }
+
+            if (cmd == "fill" && String.IsNullOrEmpty(jsonFile))
+            {
+                Console.WriteLine("Usage: gView.Cmd.ElasticSearch fill {json-file}");
+                return;
+            }
+            else if (cmd == "remove-category" && (String.IsNullOrWhiteSpace(indexUrl) || String.IsNullOrWhiteSpace(category)))
+            {
+                Console.WriteLine("Usage: gView.cmd.ElasticSearch remove-category -s {index-url} -i {index-name} -c {category} [-r]");
+                Console.WriteLine("  -r ... raplace german Umlaute:");
+                Console.WriteLine("            _ae_, _oe_, _ue_   =>  ä, ö, ü");
+                Console.WriteLine("            _Ae_, _Oe_, _Ue_   =>  Ä, Ö, Ü");
+                Console.WriteLine("            _sz_               =>  ß");
                 return;
             }
 
@@ -35,112 +75,181 @@ namespace gView.Cmd.FillElasticSearch
                 Console.WriteLine("Working Directory: " + gView.Framework.system.SystemVariables.StartupDirectory);
                 Console.WriteLine("64Bit=" + gView.Framework.system.Wow.Is64BitProcess);
 
-                var importConfig = JsonConvert.DeserializeObject<ImportConfig>(File.ReadAllText(args[0]));
-
-                var searchContext = new ElasticSearchContext(importConfig.Connection.Url, importConfig.Connection.DefaultIndex);
-
-                if (importConfig.Connection.DeleteIndex)
-                    searchContext.DeleteIndex();
-
-                searchContext.CreateIndex();
-                searchContext.Map<Item>();
-                searchContext.Map<Meta>();
-
-                ISpatialReference sRefTarget = SpatialReference.FromID("epsg:4326");
-
-                Console.WriteLine("Target Spatial Reference: " + sRefTarget.Name + " " + String.Join(" ", sRefTarget.Parameters));
-
-                foreach (var datasetConfig in importConfig.Datasets)
+                if (cmd == "fill")
                 {
-                    if (datasetConfig.FeatureClasses == null)
-                        continue;
+                    #region Fill Index (with Json File)
 
-                    IDataset dataset = new PlugInManager().CreateInstance(datasetConfig.DatasetGuid) as IDataset;
-                    if (dataset == null)
-                        throw new ArgumentException("Can't load dataset with guid " + datasetConfig.DatasetGuid.ToString());
+                    var importConfig = JsonConvert.DeserializeObject<ImportConfig>(File.ReadAllText(jsonFile));
 
-                    dataset.ConnectionString = datasetConfig.ConnectionString;
-                    dataset.Open();
+                    var searchContext = new ElasticSearchContext(importConfig.Connection.Url, importConfig.Connection.DefaultIndex);
 
-                    foreach (var featureClassConfig in datasetConfig.FeatureClasses)
+                    if (importConfig.Connection.DeleteIndex)
+                        searchContext.DeleteIndex();
+
+                    searchContext.CreateIndex();
+                    searchContext.Map<Item>();
+                    searchContext.Map<Meta>();
+
+                    ISpatialReference sRefTarget = SpatialReference.FromID("epsg:4326");
+
+                    Console.WriteLine("Target Spatial Reference: " + sRefTarget.Name + " " + String.Join(" ", sRefTarget.Parameters));
+
+                    foreach (var datasetConfig in importConfig.Datasets)
                     {
-                        var itemProto = featureClassConfig.IndexItemProto;
-                        if (itemProto == null)
+                        if (datasetConfig.FeatureClasses == null)
                             continue;
 
-                        string metaId = Guid.NewGuid().ToString("N").ToLower();
-                        string category = featureClassConfig.Category;
-                        if(!String.IsNullOrWhiteSpace(category))
+                        IDataset dataset = new PlugInManager().CreateInstance(datasetConfig.DatasetGuid) as IDataset;
+                        if (dataset == null)
+                            throw new ArgumentException("Can't load dataset with guid " + datasetConfig.DatasetGuid.ToString());
+
+                        dataset.ConnectionString = datasetConfig.ConnectionString;
+                        dataset.Open();
+
+                        foreach (var featureClassConfig in datasetConfig.FeatureClasses)
                         {
-                            var meta = new Meta()
+                            var itemProto = featureClassConfig.IndexItemProto;
+                            if (itemProto == null)
+                                continue;
+
+                            string metaId = Guid.NewGuid().ToString("N").ToLower();
+                            category = featureClassConfig.Category;
+                            if (!String.IsNullOrWhiteSpace(category))
                             {
-                                Id = metaId,
-                                Category = category,
-                                Descrption = featureClassConfig.Meta?.Descrption,
-                                Sample = featureClassConfig?.Meta.Sample,
-                                Service = featureClassConfig?.Meta.Service,
-                                Query = featureClassConfig?.Meta.Query
-                            };
-                            searchContext.Index<Meta>(meta);
-                        }
-
-                        bool useGeometry = featureClassConfig.UserGeometry;
-
-                        IDatasetElement dsElement = dataset[featureClassConfig.Name];
-                        if (dsElement == null)
-                            throw new ArgumentException("Unknown dataset element " + featureClassConfig.Name);
-                        IFeatureClass fc = dsElement.Class as IFeatureClass;
-                        if (fc == null)
-                            throw new ArgumentException("Dataobject is not a featureclass " + featureClassConfig.Name);
-
-                        Console.WriteLine("Index " + fc.Name);
-                        Console.WriteLine("=====================================================================");
-
-                        QueryFilter filter = new QueryFilter();
-                        filter.SubFields = "*";
-
-                        List<Item> items = new List<Item>();
-                        int count = 0;
-
-                        ISpatialReference sRef = fc.SpatialReference ?? SpatialReference.FromID("epsg:" + featureClassConfig.SRefId);
-                        Console.WriteLine("Source Spatial Reference: " + sRef.Name + " " + String.Join(" ", sRef.Parameters));
-
-                        using (GeometricTransformer transformer = new GeometricTransformer())
-                        {
-                            if (useGeometry)
-                                transformer.SetSpatialReferences(sRef, sRefTarget);
-
-                            IFeatureCursor cursor = (IFeatureCursor)fc.GetFeatures(filter);
-                            IFeature feature;
-                            while ((feature = cursor.NextFeature) != null)
-                            {
-                                var indexItem = ParseFeature(metaId, category, feature, itemProto, useGeometry, transformer, featureClassConfig);
-                                items.Add(indexItem);
-                                count++;
-
-                                if (items.Count >= 500)
+                                var meta = new Meta()
                                 {
-                                    searchContext.IndexMany<Item>(items.ToArray());
-                                    items.Clear();
-
-                                    Console.Write(count + "...");
-                                }
+                                    Id = metaId,
+                                    Category = category,
+                                    Descrption = featureClassConfig.Meta?.Descrption,
+                                    Sample = featureClassConfig?.Meta.Sample,
+                                    Service = featureClassConfig?.Meta.Service,
+                                    Query = featureClassConfig?.Meta.Query
+                                };
+                                searchContext.Index<Meta>(meta);
                             }
 
-                            if (items.Count > 0)
+                            bool useGeometry = featureClassConfig.UserGeometry;
+
+                            IDatasetElement dsElement = dataset[featureClassConfig.Name];
+                            if (dsElement == null)
+                                throw new ArgumentException("Unknown dataset element " + featureClassConfig.Name);
+                            IFeatureClass fc = dsElement.Class as IFeatureClass;
+                            if (fc == null)
+                                throw new ArgumentException("Dataobject is not a featureclass " + featureClassConfig.Name);
+
+                            Console.WriteLine("Index " + fc.Name);
+                            Console.WriteLine("=====================================================================");
+
+                            QueryFilter filter = new QueryFilter();
+                            filter.SubFields = "*";
+                            if (!String.IsNullOrWhiteSpace(featureClassConfig.Filter))
                             {
-                                searchContext.IndexMany<Item>(items.ToArray());
-                                Console.WriteLine(count + "...finish");
+                                filter.WhereClause = featureClassConfig.Filter;
+                                Console.WriteLine("Filter: " + featureClassConfig.Filter);
+                            }
+
+                            List<Item> items = new List<Item>();
+                            int count = 0;
+
+                            ISpatialReference sRef = fc.SpatialReference ?? SpatialReference.FromID("epsg:" + featureClassConfig.SRefId);
+                            Console.WriteLine("Source Spatial Reference: " + sRef.Name + " " + String.Join(" ", sRef.Parameters));
+
+                            using (GeometricTransformer transformer = new GeometricTransformer())
+                            {
+                                if (useGeometry)
+                                    transformer.SetSpatialReferences(sRef, sRefTarget);
+
+                                IFeatureCursor cursor = (IFeatureCursor)fc.GetFeatures(filter);
+                                IFeature feature;
+                                while ((feature = cursor.NextFeature) != null)
+                                {
+                                    var indexItem = ParseFeature(metaId, category, feature, itemProto, useGeometry, transformer, featureClassConfig);
+                                    items.Add(indexItem);
+                                    count++;
+
+                                    if (items.Count >= 500)
+                                    {
+                                        searchContext.IndexMany<Item>(items.ToArray());
+                                        items.Clear();
+
+                                        Console.Write(count + "...");
+                                    }
+                                }
+
+                                if (items.Count > 0)
+                                {
+                                    searchContext.IndexMany<Item>(items.ToArray());
+                                    Console.WriteLine(count + "...finish");
+                                }
                             }
                         }
                     }
-                }
 
+                    #endregion
+                }
+                else if (cmd == "remove-category")
+                {
+                    #region Remove Category
+
+                    RemoveCategory(indexUrl, indexName, replace ? Replace(category) : category);
+
+                    #endregion
+                }
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }
+        }
+
+        static private bool RemoveCategory(string indexUrl, string indexName, string category)
+        {
+            var searchContext = new ElasticSearchContext(indexUrl, indexName);
+
+            var metas = searchContext.Query<Meta>(new ElasticSearchContext.SearchFilter()
+            {
+                Field = "category",
+                Value = "\"" + category + "\""
+            }, indexName: indexName).Where(m => m.Category.ToLower() == category.ToLower());  // Exact suchen!!
+
+            if (metas.Count() == 0)
+            {
+                Console.WriteLine("ERROR: No metadata definition found for " + category);
+                return false;
+            }
+
+            foreach (var meta in metas)
+            {
+                Console.WriteLine("Delete items (" + meta.Id + ")...");
+                int count = 0;
+
+                while (true)
+                {
+                    var items = searchContext.Query<Item>(new ElasticSearchContext.SearchFilter()
+                    {
+                        Field = "category",
+                        Value = "\"" + category + "\""
+                    }, indexName: indexName).Where(i => i.Category.ToLower() == category.ToLower() && i.Id.StartsWith(meta.Id + ".")); // exakt suchen ... nach ID kann man nur exact suchen... darum über Category suchen und dann einschränken
+
+                    count += items.Count();
+                    if (items.Count() == 0 || count > 1e7)
+                        break;
+
+                    if (searchContext.RemoveMany<Item>(items, indexName))
+                        Console.WriteLine("Successfully deleted " + items.Count() + " items");
+
+                    System.Threading.Thread.Sleep(1000);
+                }
+
+                Console.WriteLine("================================================================");
+                Console.WriteLine(count + " items deleted");
+                Console.WriteLine();
+
+                if (searchContext.Remove<Meta>(meta.Id, indexName))
+                    Console.WriteLine("Successfully deleted meta info " + meta.Category + " id=" + meta.Id);
+            }
+
+            return true;
         }
 
         static private Item ParseFeature(string metaId, string category, IFeature feature, Item proto, bool useGeometry, GeometricTransformer transformer, ImportConfig.FeatureClassDefinition featureClassDef)
@@ -267,6 +376,18 @@ namespace gView.Cmd.FillElasticSearch
                        Math.Round(env.maxy, 7).ToString(_nhi);
             }
             catch { return String.Empty; }
+        }
+
+        static private string Replace(string str)
+        {
+            return str
+                .Replace("_ae_", "ä")
+                .Replace("_oe_", "ö")
+                .Replace("_üe_", "ü")
+                .Replace("_Ae_", "Ä")
+                .Replace("_Oe_", "Ö")
+                .Replace("_Üe_", "Ü")
+                .Replace("_sz_", "ß");
         }
     }
 }

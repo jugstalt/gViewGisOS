@@ -8,7 +8,7 @@
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>gView.Cmd.FillElasticSearch</RootNamespace>
-    <AssemblyName>gView.Cmd.FillElasticSearch</AssemblyName>
+    <AssemblyName>gView.Cmd.ElasticSearch</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>

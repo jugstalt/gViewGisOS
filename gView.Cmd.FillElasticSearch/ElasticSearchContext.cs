@@ -50,7 +50,9 @@ namespace gView.Cmd.FillElasticSearch
             if (String.IsNullOrWhiteSpace(indexName))
                 throw new ArgumentException("No Index name");
 
-            var mapResult = _client.Map<T>(c => c.AutoMap().Index(indexName));
+            var mapResult = _client.Map<T>(c => c
+                .AutoMap()
+                .Index(indexName));
         }
 
         public bool DeleteIndex(string indexName="")
@@ -88,6 +90,30 @@ namespace gView.Cmd.FillElasticSearch
             string[] type = typeof(T).ToString().Split('.');
 
             var response = _client.IndexMany<T>(documents, indexName, type[type.Length - 1].ToLower());
+
+            return response.Errors == false;
+        }
+
+        public bool Remove<T>(string id, string indexName = "")
+            where T : class, new()
+        {
+            indexName = CurrentIndexName(indexName);
+            if (String.IsNullOrWhiteSpace(indexName))
+                throw new ArgumentException("No Index name");
+
+            var response = _client.Delete<T>(id, idx => idx.Index(indexName));
+            
+            return response.Found;
+        }
+
+        public bool RemoveMany<T>(IEnumerable<T> objects, string indexName="")
+            where T : class, new()
+        {
+            indexName = CurrentIndexName(indexName);
+            if (String.IsNullOrWhiteSpace(indexName))
+                throw new ArgumentException("No Index name");
+
+            var response = _client.DeleteMany<T>(objects, indexName);
 
             return response.Errors == false;
         }
@@ -130,13 +156,13 @@ namespace gView.Cmd.FillElasticSearch
             indexName = CurrentIndexName(indexName);
 
             List<T> ret = new List<T>();
-            int pos = 0, size = 100;
+            int pos = 0, size = 10000;
             while (true)
             {
                 var request = new SearchRequest<T>
                 {
                     From = pos,
-                    Size = 100
+                    Size = Math.Min(max, size)
                 };
                 AppendFilters<T>(request, filters);
                 var result = _client.Search<T>(request);
@@ -330,8 +356,9 @@ namespace gView.Cmd.FillElasticSearch
                     if (filter.Value == null)
                         continue;
 
-                    //MatchQuery mq=new MatchQuery { Field = key.ToLower(), Query = nvc[key] };
-                    QueryStringQuery qsq = new QueryStringQuery { DefaultField = filter.Field, Query = filter.Value.ToString() };
+                    //var qsq = new TermQuery { Field = new Field(filter.Field), Value = filter.Value };
+                    //MatchQuery qsq=new MatchQuery { Field = filter.Field,  Query = new  };
+                    QueryStringQuery qsq = new QueryStringQuery { DefaultField = filter.Field, Query = filter.Value.ToString() };  // Fuzzy
                     if (request.Query == null)
                         request.Query = qsq;
                     else
