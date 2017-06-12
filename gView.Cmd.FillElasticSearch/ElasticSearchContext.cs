@@ -12,7 +12,7 @@ namespace gView.Cmd.FillElasticSearch
         private ElasticClient _client;
         private string _defalutIndex = String.Empty;
 
-        public ElasticSearchContext(string url = "http.//localhost:9200", string defaultIndex = "")
+        public ElasticSearchContext(string url = "http://localhost:9200", string defaultIndex = "")
         {
             var node = new Uri(url);
 
