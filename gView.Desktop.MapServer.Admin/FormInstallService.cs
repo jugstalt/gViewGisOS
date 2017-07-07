@@ -577,7 +577,7 @@ namespace gView.Desktop.MapServer.Admin
             try
             {
                 IntPtr sc_handle = OpenSCManager(null, null, (uint)SCM_ACCESS.SC_MANAGER_CREATE_SERVICE);
-                if (sc_handle.ToInt32() != 0)
+                if (sc_handle.ToInt64() != 0)
                 {
                     uint tagId = 0;
                     IntPtr sv_handle = CreateService(
@@ -589,7 +589,7 @@ namespace gView.Desktop.MapServer.Admin
                         (uint)SERVICE_START.SERVICE_DEMAND_START,
                         (uint)SERVICE_ERROR.SERVICE_ERROR_NORMAL,
                         svcPath, null, tagId, null, null, null);
-                    if (sv_handle.ToInt32() == 0)
+                    if (sv_handle.ToInt64() == 0)
                     {
                         CloseServiceHandle(sc_handle);
                         return false;
@@ -629,12 +629,12 @@ namespace gView.Desktop.MapServer.Admin
         public bool UnInstallService(string svcName)
         {
             IntPtr sc_hndl = OpenSCManager(null, null, (uint)SCM_ACCESS.GENERIC_WRITE);
-            if (sc_hndl.ToInt32() != 0)
+            if (sc_hndl.ToInt64() != 0)
             {
                 int DELETE = 0x10000;
                 IntPtr svc_hndl = OpenService(sc_hndl, svcName, DELETE);
-                //Console.WriteLine(svc_hndl.ToInt32());
-                if (svc_hndl.ToInt32() != 0)
+                //Console.WriteLine(svc_hndl.ToInt64());
+                if (svc_hndl.ToInt64() != 0)
                 {
                     int i = DeleteService(svc_hndl);
                     if (i != 0)
@@ -718,10 +718,10 @@ namespace gView.Desktop.MapServer.Admin
             try
             {
                 IntPtr sc_handle = OpenSCManager(null, null, SC_MANAGER_CREATE_SERVICE);
-                if (sc_handle.ToInt32() != 0)
+                if (sc_handle != IntPtr.Zero)
                 {
                     IntPtr sv_handle = CreateService(sc_handle, svcName, svcDispName, SERVICE_ALL_ACCESS, SERVICE_WIN32_OWN_PROCESS, SERVICE_DEMAND_START, SERVICE_ERROR_NORMAL, svcPath, null, 0, null, null, null);
-                    if (sv_handle.ToInt32() == 0)
+                    if (sv_handle == IntPtr.Zero)
                     {
                         CloseServiceHandle(sc_handle);
                         return false;
@@ -762,12 +762,12 @@ namespace gView.Desktop.MapServer.Admin
         {
             int GENERIC_WRITE = 0x40000000;
             IntPtr sc_hndl = OpenSCManager(null, null, GENERIC_WRITE);
-            if (sc_hndl.ToInt32() != 0)
+            if (sc_hndl != IntPtr.Zero)
             {
                 int DELETE = 0x10000;
                 IntPtr svc_hndl = OpenService(sc_hndl, svcName, DELETE);
                 //Console.WriteLine(svc_hndl.ToInt32());
-                if (svc_hndl.ToInt32() != 0)
+                if (svc_hndl != IntPtr.Zero)
                 {
                     int i = DeleteService(svc_hndl);
                     if (i != 0)
