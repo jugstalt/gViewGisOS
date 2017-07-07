@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("gView.Drawing.Pro")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("E-Stmk")]
+[assembly: AssemblyCompany("gView")]
 [assembly: AssemblyProduct("gView.Drawing.Pro")]
-[assembly: AssemblyCopyright("Copyright © E-Stmk 2016")]
+[assembly: AssemblyCopyright("Copyright © gView 2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

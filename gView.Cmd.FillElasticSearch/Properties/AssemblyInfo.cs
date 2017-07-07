@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("gView.Cmd.FillElasticSearch")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("E-Stmk")]
+[assembly: AssemblyCompany("gView")]
 [assembly: AssemblyProduct("gView.Cmd.FillElasticSearch")]
-[assembly: AssemblyCopyright("Copyright © E-Stmk 2016")]
+[assembly: AssemblyCopyright("Copyright © gView 2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

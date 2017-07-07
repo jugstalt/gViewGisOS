@@ -20,7 +20,7 @@
             "thumbnail_url": "img/icons/addresses.png"
           },
           "metadata": {
-            "sample": "8010 Graz Leonhardgürtel 10",
+            "sample": "8010 Graz Hauptplatz 10",
             "description": "Adressen für die Steiermark",
             "service": "estag_basis",
             "query": "adresspunkte"

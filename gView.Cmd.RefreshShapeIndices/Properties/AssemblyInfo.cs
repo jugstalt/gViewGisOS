@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("gView.Cmd.RefreshShapeIndices")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("E-Stmk")]
+[assembly: AssemblyCompany("gView")]
 [assembly: AssemblyProduct("gView.Cmd.RefreshShapeIndices")]
 [assembly: AssemblyCopyright("Copyright © gView 2014")]
 [assembly: AssemblyTrademark("")]

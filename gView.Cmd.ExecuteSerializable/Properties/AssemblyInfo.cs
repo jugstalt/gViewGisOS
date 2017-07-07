@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("gView.Cmd.ExecuteSerializable")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("E-Stmk")]
+[assembly: AssemblyCompany("gView")]
 [assembly: AssemblyProduct("gView.Cmd.ExecuteSerializable")]
-[assembly: AssemblyCopyright("Copyright © E-Stmk 2017")]
+[assembly: AssemblyCopyright("Copyright © gView 2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
