@@ -27,7 +27,7 @@ namespace gView.Framework.Carto.Rendering.UI
         {
             cmbChartType.SelectedIndex = (int)_renderer.ChartType;
 
-            foreach (IField field in _fc.Fields)
+            foreach (IField field in _fc.Fields.ToEnumerable())
             {
                 if (field.type == FieldType.biginteger ||
                     field.type == FieldType.Double ||

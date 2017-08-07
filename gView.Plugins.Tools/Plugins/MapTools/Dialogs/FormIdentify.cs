@@ -99,7 +99,7 @@ namespace gView.Plugins.MapTools.Dialogs
                 List<FieldValue> fvs = gView.Framework.system.ListOperations<FieldValue>.Clone(feature.Fields);
                 feature.Fields.Clear();
 
-                foreach (IField field in fields)
+                foreach (IField field in fields.ToEnumerable())
                 {
                     if (!field.visible) continue;
                     for (int i = 0; i < fvs.Count; i++)
@@ -446,7 +446,7 @@ namespace gView.Plugins.MapTools.Dialogs
             StringBuilder fields = new StringBuilder();
             if (target is IFeatureLayer && ((IFeatureLayer)target).Fields != null)
             {
-                foreach (IField field in ((IFeatureLayer)target).Fields)
+                foreach (IField field in ((IFeatureLayer)target).Fields.ToEnumerable())
                 {
                     if (!field.visible) continue;
                     if (fields.Length > 0) fields.Append(" ");

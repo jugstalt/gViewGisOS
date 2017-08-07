@@ -508,7 +508,7 @@ namespace gView.DataSources.Fdb.MSSql
                 //((SqlFDBFeatureClass)layer.FeatureClass).SetSpatialTreeInfo(this.SpatialTreeInfo(row["Name"].ToString()));
                 ((SqlFDBFeatureClass)layer.Class).SpatialReference = sRef;
             }
-            List<IField> fields = this.FeatureClassFields(dataset._dsID, layer.Class.Name);
+            var fields = this.FeatureClassFields(dataset._dsID, layer.Class.Name);
             if (fields != null && layer.Class is ITableClass)
             {
                 foreach (IField field in fields)
@@ -564,7 +564,7 @@ namespace gView.DataSources.Fdb.MSSql
                     ((SqlFDBFeatureClass)fc).IDFieldName = "FDB_OID";
                     ((SqlFDBFeatureClass)fc).ShapeFieldName = "FDB_SHAPE";
 
-                    List<IField> fields = this.FeatureClassFields(dataset.DatasetName, fc.Name);
+                    var fields = this.FeatureClassFields(dataset.DatasetName, fc.Name);
                     if (fields != null)
                     {
                         foreach (IField field in fields)
@@ -649,7 +649,7 @@ namespace gView.DataSources.Fdb.MSSql
                         ((SqlFDBFeatureClass)layer.Class).SpatialReference = (ISpatialReference)(new SpatialReference((SpatialReference)sRef));
                     }
                 }
-                List<IField> fields = this.FeatureClassFields(dataset.DatasetName, layer.Class.Name);
+                var fields = this.FeatureClassFields(dataset.DatasetName, layer.Class.Name);
                 if (fields != null && layer.Class is ITableClass)
                 {
                     foreach (IField field in fields)
@@ -813,7 +813,7 @@ namespace gView.DataSources.Fdb.MSSql
 
                 string idField = "";
 
-                foreach (IField field in Fields)
+                foreach (IField field in Fields.ToEnumerable())
                 {
                     //if( field.type==FieldType.ID ||
                     //if(	field.type==FieldType.Shape ) continue;
@@ -3326,7 +3326,7 @@ namespace gView.DataSources.Fdb.MSSql
             {
                 filter = (IQueryFilter)filter.Clone();
                 filter.SubFields = "";
-                foreach (IField field in fc.Fields)
+                foreach (IField field in fc.Fields.ToEnumerable())
                     filter.AddField(field.name);
             }
             if (filter is ISpatialFilter && ((ISpatialFilter)filter).Geometry != null)

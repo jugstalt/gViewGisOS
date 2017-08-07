@@ -192,7 +192,7 @@ namespace gView.Framework.UI.Dialogs
             if (_filter != null)
             {
                 _filter.SubFields = String.Empty;
-                foreach (IField field in _class.Fields)
+                foreach (IField field in _class.Fields.ToEnumerable())
                 {
                     if (field.type == FieldType.binary || field.type == FieldType.Shape) continue;
                     _filter.AddField(field.name);

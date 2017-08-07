@@ -52,7 +52,7 @@ namespace gView.Interoperability.OGC.Dataset.WFS
                 _fields = schemaReader.ElementFields(name, out _shapefieldName, out _geomtype);
 
                 // Id Feld suchen
-                foreach (IField field in _fields)
+                foreach (IField field in _fields.ToEnumerable())
                 {
                     if (field.type == FieldType.ID)
                     {
@@ -123,7 +123,7 @@ namespace gView.Interoperability.OGC.Dataset.WFS
 
         override public IField FindField(string name)
         {
-            foreach (IField field in _fields)
+            foreach (IField field in _fields.ToEnumerable())
             {
                 if (field.name == name) return field;
             }

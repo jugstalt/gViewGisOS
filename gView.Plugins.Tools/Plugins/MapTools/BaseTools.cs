@@ -2612,7 +2612,7 @@ namespace gView.Plugins.MapTools
                     }
                     else
                     {
-                        foreach (IField field in fields)
+                        foreach (IField field in fields.ToEnumerable())
                         {
                             if (!field.visible) continue;
                             filter.AddField(field.name);
@@ -2673,7 +2673,7 @@ namespace gView.Plugins.MapTools
                             {
                                 fields = new Fields();
 
-                                foreach (IField field in layer.Fields)
+                                foreach (IField field in layer.Fields.ToEnumerable())
                                 {
                                     if (table.VisibleFieldDef.PrimaryDisplayField == field.name)
                                         primaryDisplayField = field;
@@ -2712,7 +2712,7 @@ namespace gView.Plugins.MapTools
                             }
                             else
                             {
-                                foreach (IField field in fields)
+                                foreach (IField field in fields.ToEnumerable())
                                 {
                                     if (!field.visible) continue;
                                     filter.AddField(field.name);

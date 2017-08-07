@@ -45,7 +45,7 @@ namespace gView.DataSources.Fdb.UI
             IFeatureClass fc = (IFeatureClass)_exObject.Object;
 
             if (fc.Fields == null) return;
-            foreach (IField field in fc.Fields)
+            foreach (IField field in fc.Fields.ToEnumerable())
             {
                 int iIndex = (field is IAutoField) ? 5 : 0;
                 switch (field.type)

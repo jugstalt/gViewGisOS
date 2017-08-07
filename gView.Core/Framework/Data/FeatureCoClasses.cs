@@ -124,7 +124,7 @@ namespace gView.Framework.Data
             if (!(tClass is IFeatureClass)) return false;
 
             IFeatureClass fc = (IFeatureClass)tClass;
-            foreach (IField field in fc.Fields)
+            foreach (IField field in fc.Fields.ToEnumerable())
             {
                 if (field is IAutoField)
                 {
@@ -140,7 +140,7 @@ namespace gView.Framework.Data
             if (!(tClass is IFeatureClass)) return false;
 
             IFeatureClass fc = (IFeatureClass)tClass;
-            foreach (IField field in fc.Fields)
+            foreach (IField field in fc.Fields.ToEnumerable())
             {
                 if (field is IAutoField)
                 {

@@ -128,7 +128,7 @@ namespace gView.DataSources.OGR
 
         public IField FindField(string name)
         {
-            foreach (IField field in _fields)
+            foreach (IField field in _fields.ToEnumerable())
             {
                 if (field.name == name) return field;
             }

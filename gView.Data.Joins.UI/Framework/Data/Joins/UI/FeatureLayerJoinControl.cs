@@ -28,7 +28,7 @@ namespace gView.Framework.Data.Joins.UI
             IDatasetElement element = ((DatasetElementItem)cmbJoinedLayer.SelectedItem).DatasetElement;
             if (element != null && element.Class is ITableClass)
             {
-                foreach (IField field in ((ITableClass)element.Class).Fields)
+                foreach (IField field in ((ITableClass)element.Class).Fields.ToEnumerable())
                 {
                     cmbJoinedFeatureLayerJoinField.Items.Add(field.name);
                 }

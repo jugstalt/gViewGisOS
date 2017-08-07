@@ -117,6 +117,7 @@ namespace gView.Interoperability.Sde
 
                             string colName = Functions.GetASCIIString(colDef.column_name);
                             FieldType colType = FieldType.unknown;
+
                             switch (colDef.sde_type)
                             {
                                 case CONST.SE_SMALLINT_TYPE:
@@ -325,7 +326,7 @@ namespace gView.Interoperability.Sde
         {
             if (_fields == null) return null;
 
-            foreach (IField field in _fields)
+            foreach (IField field in _fields.ToEnumerable())
             {
                 if (field.name == name ||
                     this.Name + "." + field.name == name) return field;

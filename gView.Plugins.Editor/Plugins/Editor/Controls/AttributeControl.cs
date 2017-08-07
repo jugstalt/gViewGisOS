@@ -56,7 +56,7 @@ namespace gView.Plugins.Editor.Controls
 
                 List<IField> fields = new List<IField>();
 
-                foreach (IField f in layer.Fields)
+                foreach (IField f in layer.Fields.ToEnumerable())
                     fields.Add(f);
 
                 int height = 20;

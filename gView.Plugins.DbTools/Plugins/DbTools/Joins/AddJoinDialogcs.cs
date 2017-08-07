@@ -25,7 +25,7 @@ namespace gView.Plugins.DbTools.Joins
 
             InitializeComponent();
 
-            foreach (IField field in layer.Fields)
+            foreach (IField field in layer.Fields.ToEnumerable())
             {
                 cmbFeatureLayerField.Items.Add(field.name);
             }

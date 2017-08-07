@@ -114,7 +114,7 @@ namespace gView.DataSources.EventTable.UI
             Fields fields = FilterFields(FieldType.integer);
             if (fields != null)
             {
-                foreach (IField field in fields)
+                foreach (IField field in fields.ToEnumerable())
                 {
                     cmbID.Items.Add(field.name);
                 }
@@ -128,7 +128,7 @@ namespace gView.DataSources.EventTable.UI
             Fields fields = FilterFields(FieldType.Double);
             if (fields != null)
             {
-                foreach (IField field in fields)
+                foreach (IField field in fields.ToEnumerable())
                 {
                     cmbX.Items.Add(field.name);
                 }
@@ -142,7 +142,7 @@ namespace gView.DataSources.EventTable.UI
             Fields fields = FilterFields(FieldType.Double);
             if (fields != null)
             {
-                foreach (IField field in fields)
+                foreach (IField field in fields.ToEnumerable())
                 {
                     cmbY.Items.Add(field.name);
                 }
@@ -182,7 +182,7 @@ namespace gView.DataSources.EventTable.UI
                 Fields fields = new Fields(conn.schemaTable);
                 Fields f = new Fields();
 
-                foreach (IField field in fields)
+                foreach (IField field in fields.ToEnumerable())
                 {
                     if (field.type == fType)
                         f.Add(field);

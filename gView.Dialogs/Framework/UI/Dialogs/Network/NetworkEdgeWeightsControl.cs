@@ -85,7 +85,7 @@ namespace gView.Framework.UI.Dialogs.Network
 
                     DataGridViewComboBoxCell fieldCell = new DataGridViewComboBoxCell();
                     fieldCell.Items.Add("<none>");
-                    foreach (IField field in fc.Fields)
+                    foreach (IField field in fc.Fields.ToEnumerable())
                     {
                         switch (field.type)
                         {

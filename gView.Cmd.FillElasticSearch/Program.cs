@@ -153,6 +153,9 @@ namespace gView.Cmd.FillElasticSearch
 
                             ISpatialReference sRef = fc.SpatialReference ?? SpatialReference.FromID("epsg:" + featureClassConfig.SRefId);
                             Console.WriteLine("Source Spatial Reference: " + sRef.Name + " " + String.Join(" ", sRef.Parameters));
+                            Console.WriteLine("IDField: " + fc.IDFieldName);
+
+                            return;
 
                             using (GeometricTransformer transformer = new GeometricTransformer())
                             {

@@ -34,7 +34,7 @@ namespace gView.DataSources.Shape
             string filename = _directoryName + @"\" + fcname;
             Fields f = new Fields();
 
-            foreach (IField field in fields)
+            foreach (IField field in fields.ToEnumerable())
                 f.Add(field);
 
             if (!SHPFile.Create(filename, geomDef, f))

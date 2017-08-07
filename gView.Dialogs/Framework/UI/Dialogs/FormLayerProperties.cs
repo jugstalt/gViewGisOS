@@ -1369,7 +1369,7 @@ namespace gView.Framework.UI.Dialogs
             IFeatureLayer fLayer = _layer as IFeatureLayer;
             if (fLayer.FeatureClass == null || fLayer.FeatureClass.Fields == null) return;
 
-            foreach (IField field in fLayer.Fields)
+            foreach (IField field in fLayer.Fields.ToEnumerable())
             {
                 dgFields.Rows.Add(
                     new object[]{
@@ -1382,7 +1382,7 @@ namespace gView.Framework.UI.Dialogs
             dgFields.Sort(colOrder, ListSortDirection.Ascending);
 
             // Primary Display Field
-            foreach (IField field in fLayer.Fields)
+            foreach (IField field in fLayer.Fields.ToEnumerable())
             {
                 cmbPrimaryField.Items.Add(field.name);
                 if (field == fLayer.Fields.PrimaryDisplayField)
@@ -1450,7 +1450,7 @@ namespace gView.Framework.UI.Dialogs
                 IFeatureLayer fLayer = _layer as IFeatureLayer;
                 if (fLayer.Fields != null)
                 {
-                    foreach (IField field in fLayer.Fields)
+                    foreach (IField field in fLayer.Fields.ToEnumerable())
                     {
                         foreach (DataGridViewRow row in dgFields.Rows)
                         {

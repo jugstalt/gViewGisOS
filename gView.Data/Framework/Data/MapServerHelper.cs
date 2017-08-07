@@ -383,7 +383,7 @@ namespace gView.Framework.Data
                 ((Fields)featureClass.Fields).Add(new Field(MergedObjectIDName, FieldType.ID));
 
                 // Fields
-                foreach (IField field in fc.Fields)
+                foreach (IField field in fc.Fields.ToEnumerable())
                 {
                     if (featureClass.FindField(field.name) != null) continue;
 

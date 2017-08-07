@@ -110,7 +110,7 @@ namespace gView.Framework.Data.Joins.UI
             Fields fields = FilterFields(FieldType.unknown);
             if (fields != null)
             {
-                foreach (IField field in fields)
+                foreach (IField field in fields.ToEnumerable())
                 {
                     cmbJoinTableField.Items.Add(field.name);
                 }
@@ -132,7 +132,7 @@ namespace gView.Framework.Data.Joins.UI
             _fields = FilterFields(FieldType.unknown);
             if (_fields != null)
             {
-                foreach (IField field in _fields)
+                foreach (IField field in _fields.ToEnumerable())
                 {
                     lstJoinTableFields.Items.Add(field);
                 }
@@ -168,7 +168,7 @@ namespace gView.Framework.Data.Joins.UI
                 Fields fields = new Fields(conn.schemaTable);
                 Fields f = new Fields();
 
-                foreach (IField field in fields)
+                foreach (IField field in fields.ToEnumerable())
                 {
                     if (field.type == fType || fType == FieldType.unknown)
                     {

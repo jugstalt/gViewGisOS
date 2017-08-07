@@ -402,7 +402,7 @@ namespace gView.DataSources.Fdb.MSSql
                 if (element.Class is SqlFDBFeatureClass &&
                     ((SqlFDBFeatureClass)element.Class).Name == table)
                 {
-                    List<IField> fields = _fdb.FeatureClassFields(this._dsID, table);
+                    var fields = _fdb.FeatureClassFields(this._dsID, table);
 
                     SqlFDBFeatureClass fc = element.Class as SqlFDBFeatureClass;
                     ((Fields)fc.Fields).Clear();

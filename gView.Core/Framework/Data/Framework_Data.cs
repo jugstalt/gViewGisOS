@@ -371,12 +371,13 @@ namespace gView.Framework.Data
         List<ILayer> ChildLayer { get; }
     }
 
-    public interface IFields : IEnumerable<IField>, IClone
+    public interface IFields : /*IEnumerable<IField>,*/ IClone
     {
         IField FindField(string aliasname);
         IField PrimaryDisplayField { get; set; }
         IField this[int i] { get; }
         int Count { get; }
+        IEnumerable<IField> ToEnumerable();
     }
 
     public interface ITableLayer : IDatasetElement

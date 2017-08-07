@@ -98,7 +98,7 @@ namespace gView.Interoperability.OGC.Dataset.GML
             string filename = _directoryName + @"\" + fcname + ".gml";
             Fields f = new Fields();
 
-            foreach (IField field in fields)
+            foreach (IField field in fields.ToEnumerable())
                 f.Add(field);
 
             if (!GMLFile.Create(filename, geomDef, f, _gmlVersion))

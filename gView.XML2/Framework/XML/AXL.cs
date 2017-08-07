@@ -178,7 +178,7 @@ namespace gView.Framework.XML
 
             string fieldname = axl.Attributes["field"].Value;
             bool found = false;
-            foreach (IField field in fc.Fields)
+            foreach (IField field in fc.Fields.ToEnumerable())
             {
                 if (field.name == fieldname)
                 {

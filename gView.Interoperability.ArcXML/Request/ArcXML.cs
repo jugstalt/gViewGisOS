@@ -1465,7 +1465,7 @@ namespace gView.Interoperability.ArcXML
                             }
                             if (fields)
                             {
-                                foreach (IField field in fClass.Fields)
+                                foreach (IField field in fClass.Fields.ToEnumerable())
                                 {
                                     if (field.type == FieldType.Shape) continue;
                                     xWriter.WriteStartElement("FIELD");

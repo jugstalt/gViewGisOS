@@ -29,7 +29,7 @@ namespace gView.Plugins.Editor.Controls
             if (!ShowWith(dataset, layer)) return null;
 
             _fLayer = (IFeatureLayer)layer;
-            foreach (IField field in _fLayer.Fields)
+            foreach (IField field in _fLayer.Fields.ToEnumerable())
             {
                 if (field.type == FieldType.Shape ||
                     field.type == FieldType.ID ||

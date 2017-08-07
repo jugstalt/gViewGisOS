@@ -141,7 +141,7 @@ namespace gView.Framework.UI.Dialogs
             {
                 if (value == null) return;
 
-                foreach (IField field in value)
+                foreach (IField field in value.ToEnumerable())
                 {
                     if (field.type == FieldType.ID ||
                         field.type == FieldType.Shape) continue;

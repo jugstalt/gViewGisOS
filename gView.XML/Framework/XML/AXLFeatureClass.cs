@@ -193,7 +193,7 @@ namespace gView.Framework.XML
         {
             if (_fields == null) return null;
 
-            foreach (IField field in _fields)
+            foreach (IField field in _fields.ToEnumerable())
             {
                 if (field.name == name) return field;
             }

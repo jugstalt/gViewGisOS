@@ -126,7 +126,7 @@ namespace gView.Framework.GeoProcessing.UI.ActivityBase
             cmbField.Items.Add(new FieldItem(null));
 
             if (_fc.Fields == null) return;
-            foreach (IField field in _fc.Fields)
+            foreach (IField field in _fc.Fields.ToEnumerable())
             {
                 if (field.type == FieldType.ID ||
                     field.type == FieldType.Shape ||

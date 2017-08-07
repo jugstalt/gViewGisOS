@@ -79,7 +79,7 @@ namespace gView.Framework.GeoProcessing.MemData
         {
             if (_fields!=null)
             {
-                foreach (IField field in _fields)
+                foreach (IField field in _fields.ToEnumerable())
                     if (field.name == name)
                         return field;
             }

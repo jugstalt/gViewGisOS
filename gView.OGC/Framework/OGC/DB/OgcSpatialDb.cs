@@ -366,7 +366,7 @@ namespace gView.Framework.OGC.DB
                 sb.Append(DbDictionary(shapeField));
             }
 
-            foreach (IField field in Fields)
+            foreach (IField field in Fields.ToEnumerable())
             {
                 if (field.type == FieldType.ID ||
                     field.type == FieldType.Shape) continue;
@@ -933,7 +933,7 @@ namespace gView.Framework.OGC.DB
             {
                 filter.SubFields = "";
 
-                foreach (IField field in fc.Fields)
+                foreach (IField field in fc.Fields.ToEnumerable())
                 {
                     filter.AddField(field.name);
                 }

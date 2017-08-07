@@ -160,7 +160,7 @@ namespace copyFeatureClass
             }
             else
             {
-                foreach (IField field in sourceFC.Fields)
+                foreach (IField field in sourceFC.Fields.ToEnumerable())
                 {
                     if (field.type == FieldType.ID ||
                         field.type == FieldType.Shape) continue;

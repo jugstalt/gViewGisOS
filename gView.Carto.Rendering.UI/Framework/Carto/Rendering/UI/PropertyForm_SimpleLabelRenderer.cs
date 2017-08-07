@@ -28,7 +28,7 @@ namespace gView.Framework.Carto.Rendering.UI
         {
             if (_fc != null && _renderer != null)
             {
-                foreach (IField field in _fc.Fields)
+                foreach (IField field in _fc.Fields.ToEnumerable())
                 {
                     if (field.type == FieldType.binary || field.type == FieldType.Shape) continue;
 

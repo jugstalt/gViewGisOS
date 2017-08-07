@@ -214,7 +214,7 @@ namespace gView.DataSources.MSSqlSpatial
             {
                 filter.SubFields = "";
 
-                foreach (IField field in fc.Fields)
+                foreach (IField field in fc.Fields.ToEnumerable())
                 {
                     filter.AddField(field.name);
                 }
@@ -692,7 +692,7 @@ namespace gView.DataSources.MSSqlSpatial
             {
                 filter.SubFields = "";
 
-                foreach (IField field in fc.Fields)
+                foreach (IField field in fc.Fields.ToEnumerable())
                 {
                     filter.AddField(field.name);
                 }

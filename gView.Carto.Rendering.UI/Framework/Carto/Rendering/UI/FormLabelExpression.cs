@@ -27,7 +27,7 @@ namespace gView.Framework.Carto.Rendering.UI
 
             lstFields.Items.Clear();
 
-            foreach (IField field in _fc.Fields)
+            foreach (IField field in _fc.Fields.ToEnumerable())
             {
                 if (field == null) continue;
 

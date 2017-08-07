@@ -356,7 +356,7 @@ namespace gView.DataSources.Fdb.MSAccess
                 if (element.Class is AccessFDBFeatureClass &&
                     ((AccessFDBFeatureClass)element.Class).Name == table)
                 {
-                    List<IField> fields = _fdb.FeatureClassFields(this._dsID, table);
+                    var fields = _fdb.FeatureClassFields(this._dsID, table);
 
                     AccessFDBFeatureClass fc = element.Class as AccessFDBFeatureClass;
                     ((Fields)fc.Fields).Clear();
@@ -663,7 +663,7 @@ namespace gView.DataSources.Fdb.MSAccess
         {
             if (m_fields == null) return null;
 
-            foreach (IField field in m_fields)
+            foreach (IField field in m_fields.ToEnumerable())
             {
                 if (field.name == name) return field;
             }

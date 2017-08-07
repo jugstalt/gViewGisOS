@@ -533,9 +533,9 @@ namespace gView.DataSources.Fdb.MSAccess
                 if (fields == null) fields = new Fields();
 
                 Fields FieldsCopy = new Fields();
-                foreach (IField f in fields) FieldsCopy.Add(f);
+                foreach (IField f in fields.ToEnumerable()) FieldsCopy.Add(f);
 
-                foreach (IField f in FieldsCopy)
+                foreach (IField f in FieldsCopy.ToEnumerable())
                 {
                     if (f.type == FieldType.ID || ColumnName(f.name) == ColumnName("FDB_OID"))
                     {
@@ -670,7 +670,7 @@ namespace gView.DataSources.Fdb.MSAccess
                 {
                     ds.Tables[0].Rows.Remove(row_);
                 }
-                foreach (IField field_ in fields)
+                foreach (IField field_ in fields.ToEnumerable())
                 {
                     if (field_.name.ToLower().IndexOf("fdb_") == 0) continue;
                     row = ds.Tables[0].NewRow();
@@ -1101,7 +1101,7 @@ namespace gView.DataSources.Fdb.MSAccess
 
                 string idField = "";
 
-                foreach (IField field in Fields)
+                foreach (IField field in Fields.ToEnumerable())
                 {
                     //if( field.type==FieldType.ID ||
                     if (field.type == FieldType.Shape) continue;
@@ -2860,7 +2860,7 @@ namespace gView.DataSources.Fdb.MSAccess
             fields.Add(new Field(ColumnName("LEVELS"), FieldType.integer));
             if (additionalFields != null)
             {
-                foreach (IField field in additionalFields)
+                foreach (IField field in additionalFields.ToEnumerable())
                     fields.Add(field);
             }
 
@@ -3668,7 +3668,7 @@ namespace gView.DataSources.Fdb.MSAccess
                 ((AccessFDBFeatureClass)fc).IDFieldName = ColumnName("FDB_OID");
                 ((AccessFDBFeatureClass)fc).ShapeFieldName = ColumnName("FDB_SHAPE");
 
-                List<IField> fields = this.FeatureClassFields(dataset.DatasetName, fc.Name);
+                var fields = this.FeatureClassFields(dataset.DatasetName, fc.Name);
                 if (fields != null)
                 {
                     foreach (IField field in fields)
@@ -3748,7 +3748,7 @@ namespace gView.DataSources.Fdb.MSAccess
                     ((AccessFDBFeatureClass)layer.Class).SpatialReference = (ISpatialReference)(new SpatialReference((SpatialReference)sRef));
                 }
 
-                List<IField> fields = this.FeatureClassFields(dsID, layer.Class.Name);
+                var fields = this.FeatureClassFields(dsID, layer.Class.Name);
                 if (fields != null && layer.Class is ITableClass)
                 {
                     foreach (IField field in fields)
@@ -3859,7 +3859,7 @@ namespace gView.DataSources.Fdb.MSAccess
             }
             */
 
-            List<IField> fields = this.FeatureClassFields(dataset._dsID, layer.Class.Name);
+           var fields = this.FeatureClassFields(dataset._dsID, layer.Class.Name);
             if (fields != null && layer.Class is ITableClass)
             {
                 foreach (IField field in fields)
@@ -3952,7 +3952,7 @@ namespace gView.DataSources.Fdb.MSAccess
                 return "";
             }
         }
-        virtual public List<IField> FeatureClassFields(int dsID, string fcname)
+        virtual public IEnumerable<IField> FeatureClassFields(int dsID, string fcname)
         {
             _errMsg = "";
             if (dsID == -1) return null;
@@ -4068,7 +4068,7 @@ namespace gView.DataSources.Fdb.MSAccess
 
                 if (addFields != null)
                 {
-                    foreach (IField f in addFields)
+                    foreach (IField f in addFields.ToEnumerable())
                     {
                         if (fields.FindField(f.name) != null)
                             continue;
@@ -4076,9 +4076,9 @@ namespace gView.DataSources.Fdb.MSAccess
                     }
                 }
             }
-            return fields.ToArray();
+            return fields.ToEnumerable();
         }
-        virtual public List<IField> FeatureClassFields(string dsname, string fcname)
+        virtual public IEnumerable<IField> FeatureClassFields(string dsname, string fcname)
         {
             _errMsg = "";
             if (_conn == null) return null;

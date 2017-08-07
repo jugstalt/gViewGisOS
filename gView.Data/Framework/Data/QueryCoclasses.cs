@@ -1012,7 +1012,7 @@ namespace gView.Framework.Data
             {
                 if (fields == null) return false;
 
-                foreach (IField pField in fields)
+                foreach (IField pField in fields.ToEnumerable())
                 {
                     if (pField.type == FieldType.Shape) continue;
                     switch (pField.type)
@@ -1205,7 +1205,7 @@ namespace gView.Framework.Data
             {
                 if (fields == null) return false;
 
-                foreach (IField pField in fields)
+                foreach (IField pField in fields.ToEnumerable())
                 {
                     if (pField.type == FieldType.Shape) continue;
                     switch (pField.type)

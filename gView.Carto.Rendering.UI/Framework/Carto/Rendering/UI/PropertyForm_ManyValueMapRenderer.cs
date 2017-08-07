@@ -447,7 +447,7 @@ namespace gView.Framework.Carto.Rendering.UI
 
             cmbField2.Items.Add("<none>");
             cmbField3.Items.Add("<none>");
-            foreach (IField field in _fc.Fields)
+            foreach (IField field in _fc.Fields.ToEnumerable())
             {
                 if (field.type == FieldType.binary || field.type == FieldType.Shape) continue;
 

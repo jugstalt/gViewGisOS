@@ -112,7 +112,7 @@ namespace gView.Plugins.MapTools.Dialogs
                     // Collect Fields
                     //
                     Fields queryFields = new Fields();
-                    foreach (IField field in fc.Fields)
+                    foreach (IField field in fc.Fields.ToEnumerable())
                     {
                         if (field.type == FieldType.binary || field.type == FieldType.Shape) continue;
                         if (field.name.Contains(":")) continue;  // No Joined Fields
@@ -133,7 +133,7 @@ namespace gView.Plugins.MapTools.Dialogs
                     // Build SQL Where Clause
                     //
                     StringBuilder sql = new StringBuilder();
-                    foreach (IField field in queryFields)
+                    foreach (IField field in queryFields.ToEnumerable())
                     {
                         switch (field.type)
                         {
@@ -332,7 +332,7 @@ namespace gView.Plugins.MapTools.Dialogs
                     {
                         fields = new Fields();
 
-                        foreach (IField field in layer.Fields)
+                        foreach (IField field in layer.Fields.ToEnumerable())
                         {
                             if (table.VisibleFieldDef.PrimaryDisplayField == field.name)
                                 primaryDisplayField = field;
@@ -356,7 +356,7 @@ namespace gView.Plugins.MapTools.Dialogs
                     }
                     else
                     {
-                        foreach (IField field in fields)
+                        foreach (IField field in fields.ToEnumerable())
                         {
                             if (!field.visible) continue;
                             filter.AddField(field.name);
@@ -609,7 +609,7 @@ namespace gView.Plugins.MapTools.Dialogs
                 IFeatureClass fc = element.Class as IFeatureClass;
                 if (fc.Fields == null) continue;
 
-                foreach (IField field in fc.Fields)
+                foreach (IField field in fc.Fields.ToEnumerable())
                 {
                     if (field.type == FieldType.binary || field.type == FieldType.Shape) continue;
 

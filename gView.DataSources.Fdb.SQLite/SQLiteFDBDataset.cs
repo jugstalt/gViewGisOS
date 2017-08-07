@@ -387,7 +387,7 @@ namespace gView.DataSources.Fdb.SQLite
                 if (element.Class is SQLiteFDBFeatureClass &&
                     ((SQLiteFDBFeatureClass)element.Class).Name == table)
                 {
-                    List<IField> fields = _fdb.FeatureClassFields(this._dsID, table);
+                    var fields = _fdb.FeatureClassFields(this._dsID, table);
 
                     SQLiteFDBFeatureClass fc = element.Class as SQLiteFDBFeatureClass;
                     ((Fields)fc.Fields).Clear();

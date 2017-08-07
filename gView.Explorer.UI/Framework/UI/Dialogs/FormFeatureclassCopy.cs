@@ -279,14 +279,14 @@ namespace gView.Framework.UI.Dialogs
                     FieldTranslation ftrans = item.ImportFieldTranslation;
                     StringBuilder sb1 = new StringBuilder();
                     StringBuilder sb2 = new StringBuilder();
-                    foreach (IField field in ftrans.SourceFields)
+                    foreach (IField field in ftrans.SourceFields.ToEnumerable())
                     {
                         if (field.type == FieldType.ID || field.type == FieldType.Shape) continue;
 
                         if (sb1.Length != 0) sb1.Append(";");
                         sb1.Append(field.name);
                     }
-                    foreach (IField field in ftrans.DestinationFields)
+                    foreach (IField field in ftrans.DestinationFields.ToEnumerable())
                     {
                         if (field.type == FieldType.ID || field.type == FieldType.Shape) continue;
 
@@ -422,7 +422,7 @@ namespace gView.Framework.UI.Dialogs
             if (_fc == null || _fc.Fields == null) return;
             this.Text = fc.Name;
 
-            foreach (IField field in _fc.Fields)
+            foreach (IField field in _fc.Fields.ToEnumerable())
             {
                 DataRow row = _fields.NewRow();
                 row["Source Name"] = field.name;

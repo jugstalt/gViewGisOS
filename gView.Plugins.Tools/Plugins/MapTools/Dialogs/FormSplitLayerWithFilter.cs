@@ -23,7 +23,7 @@ namespace gView.Plugins.MapTools.Dialogs
 
             cmbOperator.SelectedIndex = 0;
 
-            foreach (IField field in ((IFeatureClass)layer.Class).Fields)
+            foreach (IField field in ((IFeatureClass)layer.Class).Fields.ToEnumerable())
             {
                 if (field == null) continue;
                 cmbFilterField.Items.Add(new FieldItem(field));

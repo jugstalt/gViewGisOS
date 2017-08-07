@@ -35,7 +35,7 @@ namespace gView.DataSources.Shape
             if (bw == null || fields == null) return false;
 
             int c = 0, rl = 1;  // deleted Flag
-            foreach (IField field in fields)
+            foreach (IField field in fields.ToEnumerable())
             {
                 switch (field.type)
                 {
@@ -96,7 +96,7 @@ namespace gView.DataSources.Shape
             bw.Write((byte)CodePage.DOS_Multilingual);   // LanguageDriver  Codepage 850
             bw.Write((short)0);  // Reserved4
 
-            foreach (IField field in fields)
+            foreach (IField field in fields.ToEnumerable())
             {
                 FieldDescriptor.Write(bw, field);
             }

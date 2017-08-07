@@ -193,7 +193,7 @@ namespace gView.Plugins.DbTools.Relates
             
             IDatasetElement element = ((DatasetElementItem)cmbLeftTable.SelectedItem).DatasetElement;
 
-            foreach (IField field in ((ITableClass)element.Class).Fields)
+            foreach (IField field in ((ITableClass)element.Class).Fields.ToEnumerable())
             {
                 cmbLeftTableField.Items.Add(field.name);
             }
@@ -207,7 +207,7 @@ namespace gView.Plugins.DbTools.Relates
 
             IDatasetElement element = ((DatasetElementItem)cmbRightTable.SelectedItem).DatasetElement;
 
-            foreach (IField field in ((ITableClass)element.Class).Fields)
+            foreach (IField field in ((ITableClass)element.Class).Fields.ToEnumerable())
             {
                 cmbRightTableField.Items.Add(field.name);
             }

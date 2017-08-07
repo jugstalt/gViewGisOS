@@ -461,7 +461,7 @@ namespace gView.Framework.UI.Dialogs
                 grid.DefaultCellStyle.BackColor = Color.White;
 
                 gView.Framework.Data.QueryFilter filter = new gView.Framework.Data.QueryFilter();
-                foreach (IField field in _tableClass.Fields)
+                foreach (IField field in _tableClass.Fields.ToEnumerable())
                 {
                     if (field.type == FieldType.binary || field.type == FieldType.Shape) continue;
                     filter.AddField(field.name);

@@ -49,7 +49,7 @@ namespace gView.Framework.UI.Dialogs
             }
 
             cmbMethod.SelectedIndex = 0;
-            foreach (IField field in _tc.Fields)
+            foreach (IField field in _tc.Fields.ToEnumerable())
             {
                 if (field.type == FieldType.binary ||
                     field.type == FieldType.Shape) continue;

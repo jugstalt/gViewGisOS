@@ -97,7 +97,7 @@ namespace gView.Interoperability.Sde.a10
                 if (filter.SubFields == "" || filter.SubFields.Contains("*") || filter.SubFields == null)
                 {
                     StringBuilder subFields = new StringBuilder();
-                    foreach (IField field in tc.Fields)
+                    foreach (IField field in tc.Fields.ToEnumerable())
                     {
                         if (subFields.Length != 0) subFields.Append(" ");
                         subFields.Append(tc.Name + "." + field.name);

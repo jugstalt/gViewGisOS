@@ -25,7 +25,7 @@ namespace gView.Framework.Data
         {
             _fields = new Fields();
 
-            foreach (IField field in _fc.Fields)
+            foreach (IField field in _fc.Fields.ToEnumerable())
                 _fields.Add(field);
 
             if (_joins == null)
@@ -36,7 +36,7 @@ namespace gView.Framework.Data
                 if (join.JoinFields == null)
                     continue;
 
-                foreach (IField field in join.JoinFields)
+                foreach (IField field in join.JoinFields.ToEnumerable())
                 {
                     Field f = new Field(field);
                     f.name = join.JoinName + ":" + field.name;
@@ -223,7 +223,7 @@ namespace gView.Framework.Data
             {
                 string where = filter.WhereClause.ToLower();
                 bool isCrossTableQuery = false;
-                foreach (IField field in this.Fields)
+                foreach (IField field in this.Fields.ToEnumerable())
                 {
                     if (field.name.Contains(":") && where.Contains("[" + field.name.ToLower() + "]"))
                     {
@@ -314,7 +314,7 @@ namespace gView.Framework.Data
             if (_fields == null)
                 return null;
 
-            foreach (IField field in _fields)
+            foreach (IField field in _fields.ToEnumerable())
             {
                 if (field.name == name)
                     return field;
@@ -483,7 +483,7 @@ namespace gView.Framework.Data
                             {
                                 if (fieldName == "*" && join.JoinFields != null)
                                 {
-                                    foreach (IField f in join.JoinFields)
+                                    foreach (IField f in join.JoinFields.ToEnumerable())
                                     {
                                         object v = row[f.name];
                                         feature.Fields.Add(new FieldValue(joinName + ":" + f.name, v));

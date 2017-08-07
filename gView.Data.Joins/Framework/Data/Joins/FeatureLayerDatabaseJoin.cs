@@ -65,7 +65,7 @@ namespace gView.Framework.Data.Joins
                 _fields = value;
                 if (_fields != null)
                 {
-                    foreach (IField field in _fields)
+                    foreach (IField field in _fields.ToEnumerable())
                     {
                         if (field is Field)
                             ((Field)field).SaveType = true;

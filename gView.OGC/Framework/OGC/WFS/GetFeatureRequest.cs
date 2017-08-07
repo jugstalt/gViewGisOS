@@ -38,7 +38,7 @@ xsi:schemaLocation=""http://www.opengis.net/wfs ../wfs/1.1.0/WFS.xsd"">
             }
             else
             {
-                foreach (IField field in fc.Fields)
+                foreach (IField field in fc.Fields.ToEnumerable())
                 {
                     sw.Write("<wfs:PropertyName>" + field.name + "</wfs:PropertyName>");
                 }

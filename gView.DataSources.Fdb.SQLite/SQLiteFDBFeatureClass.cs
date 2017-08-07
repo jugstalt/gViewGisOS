@@ -131,7 +131,7 @@ namespace gView.DataSources.Fdb.SQLite
         {
             if (m_fields == null) return null;
 
-            foreach (IField field in m_fields)
+            foreach (IField field in m_fields.ToEnumerable())
             {
                 if (field.name == name) return field;
             }

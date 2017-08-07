@@ -10,6 +10,7 @@ using gView.Framework.Symbology;
 using gView.Framework.system;
 using gView.Framework.Geometry;
 using System.Data;
+using System.Linq;
 
 namespace gView.Framework.Data
 {
@@ -407,6 +408,7 @@ namespace gView.Framework.Data
     {
         protected List<IField> _fields = null;
         protected IField _primaryField = null;
+        private object _privateLocker = new object();
 
         public Fields()
         {
@@ -417,7 +419,7 @@ namespace gView.Framework.Data
         {
             if (fields == null) return;
 
-            foreach (IField field in fields)
+            foreach (IField field in fields.ToEnumerable())
             {
                 if (field == null) continue;
                 _fields.Add(field);
@@ -440,7 +442,7 @@ namespace gView.Framework.Data
             if (fields != null)
             {
                 _fields = new List<IField>();
-                foreach (IField field in fields)
+                foreach (IField field in fields.ToEnumerable())
                 {
                     if (Class is ITableClass && ((ITableClass)Class).Fields != null)
                     {
@@ -477,7 +479,7 @@ namespace gView.Framework.Data
                 IFields classFields = ((ITableClass)Class).Fields;
                 if (_fields == null) _fields = new List<IField>();
 
-                foreach (IField classField in classFields)
+                foreach (IField classField in classFields.ToEnumerable())
                 {
                     bool found = false;
 
@@ -568,7 +570,7 @@ namespace gView.Framework.Data
             }
 
             int priority = 0;
-            foreach (IField fieldPriority in this)
+            foreach (IField fieldPriority in this.ToEnumerable())
             {
                 if (fieldPriority is Field)
                     ((Field)fieldPriority).Priority = priority++;
@@ -585,7 +587,7 @@ namespace gView.Framework.Data
         {
             if (_fields != null)
             {
-                foreach (IField field in this)
+                foreach (IField field in this.ToEnumerable())
                 {
                     stream.Save("Field", field);
                 }
@@ -597,19 +599,19 @@ namespace gView.Framework.Data
 
         #region IEnumerable<IField> Member
 
-        public IEnumerator<IField> GetEnumerator()
-        {
-            return new FieldsEnumerator(_fields);
-        }
+        //public IEnumerator<IField> GetEnumerator()
+        //{
+        //    return new FieldsEnumerator(_fields);
+        //}
 
         #endregion
 
         #region IEnumerable Member
 
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            throw new Exception("The method or operation is not implemented.");
-        }
+        //IEnumerator IEnumerable.GetEnumerator()
+        //{
+        //    throw new Exception("The method or operation is not implemented.");
+        //}
 
         #endregion
 
@@ -693,7 +695,7 @@ namespace gView.Framework.Data
         {
             Fields fields = new Fields();
 
-            foreach (IField field in this)
+            foreach (IField field in this.ToEnumerable())
             {
                 if (field == null) continue;
                 fields.Add(new Field(field));
@@ -705,7 +707,6 @@ namespace gView.Framework.Data
         #endregion
 
         #region IFields Member
-
 
         public IField this[int i]
         {
@@ -724,6 +725,15 @@ namespace gView.Framework.Data
                 return (_fields != null) ? _fields.Count : 0;
             }
         }
+
+        public IEnumerable<IField> ToEnumerable()
+        {
+            lock(_privateLocker)  // Threadsafe
+            {
+                return _fields.ToArray().OrderBy(f => f is IPriority ? ((IPriority)f).Priority : int.MaxValue);
+            }
+        }
+
         #endregion
 
         #region HelperClasses
@@ -747,11 +757,12 @@ namespace gView.Framework.Data
         }
         #endregion
 
-        public List<IField> ToArray()
-        {
-            List<IField> array = new List<IField>(_fields);
-            return array;
-        }
+        //public IEnumerable<IField> ToArray()
+        //{
+        //    //List<IField> array = new List<IField>(_fields);
+        //    //return array;
+        //    return ToEnumerable();
+        //}
     }
     
     public class FeatureLayer : Layer, IFeatureLayer
@@ -839,7 +850,7 @@ namespace gView.Framework.Data
             Fields newFields = new Fields();
             if (_class is ITableClass)
             {
-                foreach (IField field in ((ITableClass)_class).Fields)
+                foreach (IField field in ((ITableClass)_class).Fields.ToEnumerable())
                 {
                     Field f = new Field(field);
                     newFields.Add(f);
@@ -850,7 +861,7 @@ namespace gView.Framework.Data
                 }
                 if (newFields.PrimaryDisplayField == null)
                 {
-                    foreach (IField field in _fields)
+                    foreach (IField field in _fields.ToEnumerable())
                     {
                         if (field.type != FieldType.Shape &&
                             field.type != FieldType.binary &&
@@ -864,7 +875,7 @@ namespace gView.Framework.Data
 
                 if (_fields != null)
                 {
-                    foreach (IField field in _fields)
+                    foreach (IField field in _fields.ToEnumerable())
                     {
                         IField f = newFields.FindField(field.name);
                         if (f != null)
@@ -1770,7 +1781,7 @@ namespace gView.Framework.Data
 
         public IField FindField(string name)
         {
-            foreach (IField field in _fields)
+            foreach (IField field in _fields.ToEnumerable())
             {
                 if (field.name == name) return field;
             }

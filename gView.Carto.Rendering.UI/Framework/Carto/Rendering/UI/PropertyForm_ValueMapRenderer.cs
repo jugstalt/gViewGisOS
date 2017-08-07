@@ -396,7 +396,7 @@ namespace gView.Framework.Carto.Rendering.UI
 
             _renderer.GeometryType = layer.LayerGeometryType; // _fc.GeometryType;
 
-            foreach (IField field in _fc.Fields)
+            foreach (IField field in _fc.Fields.ToEnumerable())
             {
                 if (field.type == FieldType.binary || field.type == FieldType.Shape) continue;
 

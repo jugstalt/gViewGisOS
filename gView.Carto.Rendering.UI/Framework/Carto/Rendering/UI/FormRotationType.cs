@@ -71,7 +71,7 @@ namespace gView.Framework.Carto.Rendering.UI
             if (tableClass != null)
             {
                 cmbFields.Items.Add(new FieldItem(null));
-                foreach (IField field in tableClass.Fields)
+                foreach (IField field in tableClass.Fields.ToEnumerable())
                 {
                     if (field.type == FieldType.Double ||
                         field.type == FieldType.Float ||

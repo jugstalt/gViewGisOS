@@ -32,7 +32,7 @@ namespace gView.DataSources.Fdb.UI
             if (tcFrom == null || tcTo == null || 
                 tcFrom.Fields == null || tcTo.Fields == null) return;
 
-            foreach (IField field in tcFrom.Fields)
+            foreach (IField field in tcFrom.Fields.ToEnumerable())
             {
                 if (field == null ||
                     field.type == FieldType.ID || field.type == FieldType.Shape ||

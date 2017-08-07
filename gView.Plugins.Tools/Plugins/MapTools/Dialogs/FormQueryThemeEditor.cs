@@ -71,7 +71,7 @@ namespace gView.Plugins.MapTools.Dialogs
 
                 table = _actTableNode.VisibleFieldDef;
                 table.Rows.Clear();
-                foreach (IField field in fLayer.Fields)
+                foreach (IField field in fLayer.Fields.ToEnumerable())
                 {
                     for (int i = 0; i < dgVisibleFields.Rows.Count; i++)
                     {
@@ -114,7 +114,7 @@ namespace gView.Plugins.MapTools.Dialogs
                     colField.Items.Clear();
                     if (layer.Fields != null)
                     {
-                        foreach (IField field in layer.Fields)
+                        foreach (IField field in layer.Fields.ToEnumerable())
                         {
                             colField.Items.Add(field.name);
                         }
@@ -159,7 +159,7 @@ namespace gView.Plugins.MapTools.Dialogs
                     cmbPrimaryField.Items.Clear();
                     dgVisibleFields.Rows.Clear();
 
-                    foreach (IField field in layer.Fields)
+                    foreach (IField field in layer.Fields.ToEnumerable())
                     {
                         cmbPrimaryField.Items.Add(field.name);
                         if (field.name == visFields.PrimaryDisplayField ||

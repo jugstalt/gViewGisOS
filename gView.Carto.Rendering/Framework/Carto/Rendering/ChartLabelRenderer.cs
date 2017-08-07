@@ -133,7 +133,7 @@ namespace gView.Framework.Carto.Rendering
             if (layer.FeatureClass == null) return false;
 
             int count = 0;
-            foreach (IField field in layer.FeatureClass.Fields)
+            foreach (IField field in layer.FeatureClass.Fields.ToEnumerable())
             {
                 if (field.type == FieldType.biginteger ||
                     field.type == FieldType.Double ||

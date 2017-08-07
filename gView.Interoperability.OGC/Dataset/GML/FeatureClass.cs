@@ -81,7 +81,7 @@ namespace gView.Interoperability.OGC.Dataset.GML
 
         public IField FindField(string name)
         {
-            foreach (IField field in _fields)
+            foreach (IField field in _fields.ToEnumerable())
                 if (field.name == name) return field;
 
             return null;

@@ -279,7 +279,7 @@ namespace gView.DataSources.Shape
 
         public gView.Framework.Data.IField FindField(string name)
         {
-            foreach (IField field in Fields)
+            foreach (IField field in Fields.ToEnumerable())
             {
                 if (field.name == name) return field;
             }
@@ -546,7 +546,7 @@ namespace gView.DataSources.Shape
 
                 QueryFilter f = new QueryFilter();
                 f.SubFields = _filter.SubFields;
-                foreach (IField field in _file.Fields)
+                foreach (IField field in _file.Fields.ToEnumerable())
                 {
                     if (field.name == "FID") continue;
                     if (filter.WhereClause.IndexOf(" " + field.name + " ") != -1 ||

@@ -76,7 +76,7 @@ namespace gView.Plugins.MapTools.Dialogs
             #region Tab Data
 
             ITableClass tc = (ITableClass)_layer.Class;
-            foreach (IField field in _layer.Fields)
+            foreach (IField field in _layer.Fields.ToEnumerable())
             {
                 if (field.type == FieldType.biginteger ||
                     field.type == FieldType.Double ||

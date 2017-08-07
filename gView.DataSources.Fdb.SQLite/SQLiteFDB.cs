@@ -118,7 +118,7 @@ namespace gView.DataSources.Fdb.SQLite
                     ((SQLiteFDBFeatureClass)fc).IDFieldName = "FDB_OID";
                     ((SQLiteFDBFeatureClass)fc).ShapeFieldName = "FDB_SHAPE";
 
-                    List<IField> fields = this.FeatureClassFields(dataset.DatasetName, fc.Name);
+                    var fields = this.FeatureClassFields(dataset.DatasetName, fc.Name);
                     if (fields != null)
                     {
                         foreach (IField field in fields)
@@ -203,7 +203,7 @@ namespace gView.DataSources.Fdb.SQLite
                         ((SQLiteFDBFeatureClass)layer.Class).SpatialReference = (ISpatialReference)(new SpatialReference((SpatialReference)sRef));
                     }
                 }
-                List<IField> fields = this.FeatureClassFields(dataset.DatasetName, layer.Class.Name);
+                var fields = this.FeatureClassFields(dataset.DatasetName, layer.Class.Name);
                 if (fields != null && layer.Class is ITableClass)
                 {
                     foreach (IField field in fields)
@@ -913,7 +913,7 @@ namespace gView.DataSources.Fdb.SQLite
                 //((SqlFDBFeatureClass)layer.FeatureClass).SetSpatialTreeInfo(this.SpatialTreeInfo(row["Name"].ToString()));
                 ((SQLiteFDBFeatureClass)layer.Class).SpatialReference = sRef;
             }
-            List<IField> fields = this.FeatureClassFields(dataset._dsID, layer.Class.Name);
+            var fields = this.FeatureClassFields(dataset._dsID, layer.Class.Name);
             if (fields != null && layer.Class is ITableClass)
             {
                 foreach (IField field in fields)
@@ -1156,7 +1156,7 @@ namespace gView.DataSources.Fdb.SQLite
 
                 string idField = "";
 
-                foreach (IField field in Fields)
+                foreach (IField field in Fields.ToEnumerable())
                 {
                     //if( field.type==FieldType.ID ||
                     if (field.type == FieldType.Shape) continue;

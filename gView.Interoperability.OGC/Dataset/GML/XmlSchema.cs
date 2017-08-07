@@ -301,7 +301,7 @@ namespace gView.Interoperability.OGC.Dataset.GML
                 }
                 sb.Append(@"<element name=""" + fc.ShapeFieldName.Replace("#", "") + @""" type=""" + geomTypeName + @""" minOccurs=""0"" maxOccurs=""1""/>");
 
-                foreach (IField field in fc.Fields)
+                foreach (IField field in fc.Fields.ToEnumerable())
                 {
                     if (field.name == fc.ShapeFieldName) continue;
 

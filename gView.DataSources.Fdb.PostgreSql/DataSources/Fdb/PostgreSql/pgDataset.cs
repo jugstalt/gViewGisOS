@@ -381,7 +381,7 @@ namespace gView.DataSources.Fdb.PostgreSql
                 if (element.Class is pgFeatureClass &&
                     ((pgFeatureClass)element.Class).Name == table)
                 {
-                    List<IField> fields = _fdb.FeatureClassFields(this._dsID, table);
+                    var fields = _fdb.FeatureClassFields(this._dsID, table);
 
                     pgFeatureClass fc = element.Class as pgFeatureClass;
                     ((Fields)fc.Fields).Clear();

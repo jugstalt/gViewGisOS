@@ -132,7 +132,7 @@ namespace gView.Framework.Data
 
         static private string CheckNameLength(IFields fields, IField field, string fieldname, int maxLength, int counter)
         {
-            foreach (IField f in fields)
+            foreach (IField f in fields.ToEnumerable())
             {
                 if (f.Equals(field)) 
                     return fieldname.Substring(0, Math.Min(fieldname.Length, maxLength));

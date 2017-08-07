@@ -2941,7 +2941,7 @@ SELECT " + c.parentFc_id + @"," + c.parentDb.DbColName("OBJECT_GUID") + ",0," + 
                 string repl_field_name = Replication.FeatureClassReplicationIDFieldname(FeatureClass);
 
                 FieldConflicts.Add(new FieldConflict(this, FeatureClass.ShapeFieldName));
-                foreach (IField field in FeatureClass.Fields)
+                foreach (IField field in FeatureClass.Fields.ToEnumerable())
                 {
                     if (field == null ||
                         field.type == FieldType.ID ||
