@@ -1,3 +1,5 @@
+# donate
+
 # gViewGisOS
 gView GIS - Userfriendly open source GI framework
 
