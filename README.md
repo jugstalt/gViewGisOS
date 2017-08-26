@@ -1,3 +1,15 @@
+´´´html
+<div style="text-align:center">
+          <div
+              id="coinwidget"
+              data-icon="true"
+              data-type="primary",
+              data-wallet="1Gc317G5YdGm4Mx27RXpaa2vToFQR8J1bt"
+          ></div>
+          <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/ivandiazwm/coinwidget@0.1.1/builds/full.js" charset="utf-8"></script>
+      </div>
+´´´
+
 # gViewGisOS
 gView GIS - Userfriendly open source GI framework
 
