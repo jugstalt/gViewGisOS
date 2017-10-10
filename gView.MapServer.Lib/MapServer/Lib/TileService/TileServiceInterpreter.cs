@@ -417,9 +417,6 @@ namespace gView.MapServer.Lib.TileService
                         // Temp
                         //map.MapImage.Save(pathTemp + @"\matrix_" + (startRow + r) + "_" + (startCol + c) + ".png", ImageFormat.Png);
 
-                        bool maketrans = map.Display.MakeTransparent;
-                        map.Display.MakeTransparent = true;
-
                         for (int j = 0; j < tileMatrixHeight; j++)
                         {
                             for (int i = 0; i < tileMatrixWidth; i++)
@@ -453,6 +450,13 @@ namespace gView.MapServer.Lib.TileService
                                     // Temp
                                     //bm.Save(pathTemp + @"\tile_" + tileRow + "_" + tileCol + ".png", ImageFormat.Png);
 
+                                    //try
+                                    {
+                                        if (format != ".jpg")   // Make PNG Transparent
+                                            bm.MakeTransparent(map.Display.BackgroundColor);
+                                    }
+                                    //catch { }
+
                                     MemoryStream ms = new MemoryStream();
                                     bm.Save(ms, format == ".jpg" ? System.Drawing.Imaging.ImageFormat.Jpeg : System.Drawing.Imaging.ImageFormat.Png);
 
@@ -469,8 +473,6 @@ namespace gView.MapServer.Lib.TileService
                                 }
                             }
                         }
-
-                        map.Display.MakeTransparent = maketrans;
                     }
                     GC.Collect();
                 }
