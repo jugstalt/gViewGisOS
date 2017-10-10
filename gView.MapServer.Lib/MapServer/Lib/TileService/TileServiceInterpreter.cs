@@ -409,6 +409,10 @@ namespace gView.MapServer.Lib.TileService
                         double x = origin.X + W * currentCol;
 
                         map.Display.ZoomTo(new Envelope(x, y, x + W * tileMatrixWidth, y + H * tileMatrixHeight));
+                        if (format != ".jpg") // Make PNG Transparent
+                            map.Display.BackgroundColor = System.Drawing.Color.Transparent;
+
+                        map.ReleaseImage();  // Delete old Image !!! Because there is no map.SaveImage()!!!!
                         map.Render();
 
                         if (IsEmptyBitmap(map.MapImage, map.Display.BackgroundColor))
@@ -451,10 +455,10 @@ namespace gView.MapServer.Lib.TileService
                                     //bm.Save(pathTemp + @"\tile_" + tileRow + "_" + tileCol + ".png", ImageFormat.Png);
 
                                     //try
-                                    {
-                                        if (format != ".jpg")   // Make PNG Transparent
-                                            bm.MakeTransparent(map.Display.BackgroundColor);
-                                    }
+                                    //{
+                                    //    if (format != ".jpg" && map.Display.BackgroundColor.A > 0)   // Make PNG Transparent
+                                    //        bm.MakeTransparent(map.Display.BackgroundColor);
+                                    //}
                                     //catch { }
 
                                     MemoryStream ms = new MemoryStream();
@@ -474,6 +478,8 @@ namespace gView.MapServer.Lib.TileService
                             }
                         }
                     }
+
+                    map.ReleaseImage();
                     GC.Collect();
                 }
                 
@@ -733,7 +739,8 @@ namespace gView.MapServer.Lib.TileService
                 int stride = bmData.Stride;
                 IntPtr Scan0 = bmData.Scan0;
 
-                int backgroundColorValue = Color.FromArgb(backgroundColor.A,
+                int backgroundColorValue = Color.FromArgb(
+                    backgroundColor.A,
                     backgroundColor.R,
                     backgroundColor.G,
                     backgroundColor.B).ToArgb();
@@ -753,16 +760,14 @@ namespace gView.MapServer.Lib.TileService
                             byte red = p[2];
                             byte alpha = p[3];
 
-                            if (alpha == 0) // Transparent
-                                continue;
+                            if (alpha != 0)  // Not transparent
+                            {  
+                                int pixelValue = Color.FromArgb(alpha, red, green, blue).ToArgb();
 
-                            int pixelValue = Color.FromArgb(alpha, red, green, blue).ToArgb();
-
-                            if (pixelValue != backgroundColorValue)
-                                return false;
-
+                                if (pixelValue != backgroundColorValue)
+                                    return false;
+                            }
                             p += 4;
-
                         }
 
                         p += nOffset;

@@ -287,6 +287,19 @@ namespace gView.MapServer.Instance
             }
         }
 
+        public void ReleaseImage()
+        {
+            if (_image == null)
+                return;
+
+            try
+            {
+                _image.Dispose();
+                _image = null;
+            }
+            catch { }
+        }
+
         public System.Drawing.Bitmap MapImage
         {
             get { return _image; }
@@ -411,7 +424,6 @@ namespace gView.MapServer.Instance
             if (_image == null)
             {
                 _image = new System.Drawing.Bitmap(iWidth, iHeight, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
-                
             }
 
             _graphics = System.Drawing.Graphics.FromImage(_image);
@@ -422,7 +434,6 @@ namespace gView.MapServer.Instance
                 using (System.Drawing.SolidBrush brush = new System.Drawing.SolidBrush(BackgroundColor))
                 {
                     _graphics.FillRectangle(brush, 0, 0, _image.Width, _image.Height);
-                    brush.Dispose();
                 }
             }
 

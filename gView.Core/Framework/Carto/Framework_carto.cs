@@ -127,6 +127,7 @@ namespace gView.Framework.Carto
         System.Drawing.Bitmap MapImage { get; }
         bool SaveImage(string path, System.Drawing.Imaging.ImageFormat format);
         bool SaveImage(Stream ms, System.Drawing.Imaging.ImageFormat format);
+        void ReleaseImage();
 
         float ScaleSymbolFactor { get; set; }
     }
