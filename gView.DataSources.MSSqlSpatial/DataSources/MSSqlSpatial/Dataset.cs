@@ -324,12 +324,6 @@ namespace gView.DataSources.MSSqlSpatial
             return String.Empty;
         }
 
-        public override string SelectReadSchema(string tableName)
-        {
-             
-            return base.SelectReadSchema(tableName);
-        }
-
         protected string IDFieldName(string tabName)
         {
             try
@@ -457,18 +451,20 @@ namespace gView.DataSources.MSSqlSpatial
 
                 foreach (DataRow row in tables.Rows)
                 {
-                    if (row["tabName"].ToString() == title)
+                    string tableName = row["tabName"].ToString();
+                    if (EqualsTableName(tableName, title, false))
                         return new DatasetElement(new Featureclass(this,
-                            title,
+                            tableName,
                             IDFieldName(title),
                             row["colName"].ToString(), false));
                 }
 
                 foreach (DataRow row in views.Rows)
                 {
-                    if (row["tabName"].ToString() == title)
+                    string tableName = row["tabName"].ToString();
+                    if (EqualsTableName(tableName, title, true))
                         return new DatasetElement(new Featureclass(this,
-                            title,
+                            tableName,
                             IDFieldName(title),
                             row["colName"].ToString(), true));
                 }
@@ -514,7 +510,17 @@ namespace gView.DataSources.MSSqlSpatial
             return tableName;
         }
 
-        
+        protected bool EqualsTableName(string tableName, string title, bool isView)
+        {
+            if (tableName.ToLower() == title.ToLower())
+                return true;
+
+            tableName = TableNamePlusSchema(tableName, isView);
+            if (tableName.ToLower() == title.ToLower())
+                return true;
+
+            return false;
+        }
 
         #region IFeatureImportEvents Member
 
@@ -913,17 +919,19 @@ namespace gView.DataSources.MSSqlSpatial
 
                 foreach (DataRow row in tables.Rows)
                 {
-                    if (row["tabName"].ToString() == title)
+                    string tableName = row["tabName"].ToString();
+                    if (EqualsTableName(tableName, title, false))
                         return new DatasetElement(new Featureclass(this,
-                            title,
+                            tableName,
                             IDFieldName(title),
                             row["colName"].ToString(), false));
                 }
                 foreach (DataRow row in views.Rows)
                 {
-                    if (row["tabName"].ToString() == title)
+                    string tableName = row["tabName"].ToString();
+                    if (EqualsTableName(tableName, title, true))
                         return new DatasetElement(new Featureclass(this,
-                            title,
+                            tableName,
                             IDFieldName(title),
                             row["colName"].ToString(), true));
                 }

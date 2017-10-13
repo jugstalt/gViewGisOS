@@ -155,8 +155,6 @@ namespace gView.Cmd.FillElasticSearch
                             Console.WriteLine("Source Spatial Reference: " + sRef.Name + " " + String.Join(" ", sRef.Parameters));
                             Console.WriteLine("IDField: " + fc.IDFieldName);
 
-                            return;
-
                             using (GeometricTransformer transformer = new GeometricTransformer())
                             {
                                 if (useGeometry)
