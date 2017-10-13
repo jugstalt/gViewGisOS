@@ -324,6 +324,12 @@ namespace gView.DataSources.MSSqlSpatial
             return String.Empty;
         }
 
+        public override string SelectReadSchema(string tableName)
+        {
+             
+            return base.SelectReadSchema(tableName);
+        }
+
         protected string IDFieldName(string tabName)
         {
             try
@@ -390,7 +396,7 @@ namespace gView.DataSources.MSSqlSpatial
                             Featureclass fc = new Featureclass(this,
                                 row["tabName"].ToString(),
                                 IDFieldName(row["tabName"].ToString()),
-                                row["colName"].ToString());
+                                row["colName"].ToString(), false);
 
                             if (fc.Fields.Count > 0)
                                 layers.Add(new DatasetElement(fc));
@@ -404,7 +410,7 @@ namespace gView.DataSources.MSSqlSpatial
                             Featureclass fc = new Featureclass(this,
                                 row["tabName"].ToString(),
                                 IDFieldName(row["tabName"].ToString()),
-                                row["colName"].ToString());
+                                row["colName"].ToString(), true);
 
                             if (fc.Fields.Count > 0)
                                 layers.Add(new DatasetElement(fc));
@@ -455,7 +461,7 @@ namespace gView.DataSources.MSSqlSpatial
                         return new DatasetElement(new Featureclass(this,
                             title,
                             IDFieldName(title),
-                            row["colName"].ToString()));
+                            row["colName"].ToString(), false));
                 }
 
                 foreach (DataRow row in views.Rows)
@@ -464,7 +470,7 @@ namespace gView.DataSources.MSSqlSpatial
                         return new DatasetElement(new Featureclass(this,
                             title,
                             IDFieldName(title),
-                            row["colName"].ToString()));
+                            row["colName"].ToString(), true));
                 }
 
                 return null;
@@ -480,6 +486,35 @@ namespace gView.DataSources.MSSqlSpatial
 
             return command;
         }
+
+        internal string TableNamePlusSchema(string tableName, bool isView)
+        {
+            if (tableName.Contains("."))
+                return tableName;
+
+            try
+            {
+                using (DbConnection conn = this.ProviderFactory.CreateConnection())
+                {
+                    conn.ConnectionString = _connectionString;
+                    conn.Open();
+
+                    var command = this.ProviderFactory.CreateCommand();
+                    command.Connection = conn;
+                    string sysTable = isView ? "sys.views" : "sys.tables";
+                    command.CommandText = "select SCHEMA_NAME(schema_id) from " + sysTable + " where name='" + tableName + "'";
+                    string schema = command.ExecuteScalar()?.ToString();
+
+                    if (!string.IsNullOrWhiteSpace(schema))
+                        return schema + "." + tableName;
+                }
+            }
+            catch { }
+
+            return tableName;
+        }
+
+        
 
         #region IFeatureImportEvents Member
 
@@ -827,7 +862,7 @@ namespace gView.DataSources.MSSqlSpatial
                         Featureclass fc = new Featureclass(this,
                             row["tabName"].ToString(),
                             IDFieldName(row["tabName"].ToString()),
-                            row["colName"].ToString());
+                            row["colName"].ToString(), false);
                         layers.Add(new DatasetElement(fc));
                     }
                     foreach (DataRow row in views.Rows)
@@ -835,7 +870,7 @@ namespace gView.DataSources.MSSqlSpatial
                         Featureclass fc = new Featureclass(this,
                             row["tabName"].ToString(),
                             IDFieldName(row["tabName"].ToString()),
-                            row["colName"].ToString());
+                            row["colName"].ToString(), true);
                         layers.Add(new DatasetElement(fc));
                     }
 
@@ -882,7 +917,7 @@ namespace gView.DataSources.MSSqlSpatial
                         return new DatasetElement(new Featureclass(this,
                             title,
                             IDFieldName(title),
-                            row["colName"].ToString()));
+                            row["colName"].ToString(), false));
                 }
                 foreach (DataRow row in views.Rows)
                 {
@@ -890,7 +925,7 @@ namespace gView.DataSources.MSSqlSpatial
                         return new DatasetElement(new Featureclass(this,
                             title,
                             IDFieldName(title),
-                            row["colName"].ToString()));
+                            row["colName"].ToString(), true));
                 }
 
                 return null;
@@ -940,9 +975,9 @@ namespace gView.DataSources.MSSqlSpatial
 
     public class Featureclass : gView.Framework.OGC.DB.OgcSpatialFeatureclass
     {
-        public Featureclass(GeometryDataset dataset, string name, string idFieldName, string shapeFieldName)
+        public Featureclass(GeometryDataset dataset, string name, string idFieldName, string shapeFieldName, bool isView)
         {
-            _name = name;
+            _name = dataset.TableNamePlusSchema(name, isView);
             _idfield = idFieldName;
             _shapefield = shapeFieldName;
             _geomType = geometryType.Unknown;
