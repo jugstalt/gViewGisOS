@@ -12,10 +12,6 @@
     <AssemblyName>gView.MapServer.Instance</AssemblyName>
     <StartupObject>
     </StartupObject>
-    <ManifestCertificateThumbprint>B6573FEC6D8A9922804A72A245C57D5E978F5904</ManifestCertificateThumbprint>
-    <ManifestKeyFile>gView.MapServer.Instance_TemporaryKey.pfx</ManifestKeyFile>
-    <GenerateManifests>false</GenerateManifests>
-    <SignManifests>true</SignManifests>
     <IsWebBootstrapper>true</IsWebBootstrapper>
     <TargetZone>LocalIntranet</TargetZone>
     <SignAssembly>true</SignAssembly>
@@ -149,11 +145,11 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="app.manifest" />
+    <None Include="gView.MapServer.Instance.2.snk" />
     <None Include="gView.MapServer.Instance.snk">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <BaseApplicationManifest Include="Properties\app.manifest" />
-    <None Include="gView.MapServer.Instance_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="config.xml">
