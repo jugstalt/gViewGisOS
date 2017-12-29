@@ -1330,6 +1330,20 @@ namespace gView.Framework.IO
             }
             return String.Empty;
         }
+
+        public static string ExtractOracleValue(string @params, string param)
+        {
+            @params = @params.Trim();
+            int pos = @params.ToLower().IndexOf("(" + param.ToLower() + "=");
+            if(pos>=0)
+            {
+                int pos2 = @params.IndexOf(")", pos + param.Length + 1);
+                if (pos2 > pos)
+                    return @params.Substring(pos + param.Length + 2, pos2 - pos - param.Length - 2);
+            }
+            return String.Empty;
+        }
+
         public static string RemoveValue(string Params, string Param)
         {
             Param = Param.ToLower().Trim();

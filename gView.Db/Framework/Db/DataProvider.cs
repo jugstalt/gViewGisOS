@@ -3,12 +3,12 @@ using System.Data;
 using System.Data.Common;
 using System.Data.OleDb;
 using System.Data.Odbc;
-using System.Data.OracleClient;
 using System.Data.SqlClient;
 using System.Xml;
 using System.Text;
 using System.Reflection;
 using gView.Framework.system;
+using Oracle.ManagedDataAccess.Client;
 
 namespace gView.Framework.Db
 {
@@ -17,10 +17,10 @@ namespace gView.Framework.Db
 	/// </summary>
     public class DataProvider
     {
-        private System.Data.OleDb.OleDbConnection oledbConnection = null;
-        private System.Data.Odbc.OdbcConnection odbcConnection = null;
-        private System.Data.SqlClient.SqlConnection sqlConnection = null;
-        private System.Data.OracleClient.OracleConnection oracleConnection = null;
+        private OleDbConnection oledbConnection = null;
+        private OdbcConnection odbcConnection = null;
+        private SqlConnection sqlConnection = null;
+        private OracleConnection oracleConnection = null;
         private DbConnection dbConnection = null;
         private DbProviderFactory dbFactory = null;
         private string _errMsg = "";

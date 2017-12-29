@@ -4,10 +4,10 @@ using System.Data.Common;
 using System.Data.Odbc;
 using System.Data.OleDb;
 using System.Data.SqlClient;
-using System.Data.OracleClient;
 using System.Xml;
 using System.Text;
 using System.Collections.Generic;
+using Oracle.ManagedDataAccess.Client;
 
 namespace gView.Framework.Db
 {

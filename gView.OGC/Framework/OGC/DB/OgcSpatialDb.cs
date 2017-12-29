@@ -385,7 +385,7 @@ namespace gView.Framework.OGC.DB
                 }
 
                 sb.Append(",\n");
-                sb.Append(" \"" + fieldName + "\" ");
+                sb.Append(DbColumnName(fieldName) + " ");
 
                 sb.Append(DbDictionary(field));
             }
@@ -439,6 +439,11 @@ namespace gView.Framework.OGC.DB
                 _errMsg = ex.Message;
                 return -1;
             }
+        }
+
+        virtual protected string DbColumnName(string colName)
+        {
+            return "\"" + colName + "\"";
         }
 
         IFeatureDataset IFeatureDatabase.this[string name]

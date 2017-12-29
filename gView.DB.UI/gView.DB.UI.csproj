@@ -87,6 +87,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Framework\Db\UI\FormConnectionString.de-DE.resx">
+      <DependentUpon>FormConnectionString.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Framework\Db\UI\FormConnectionString.de.resx">
       <SubType>Designer</SubType>
       <DependentUpon>FormConnectionString.cs</DependentUpon>

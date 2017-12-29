@@ -1,0 +1,137 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{5C2FA884-2147-425B-AE0C-F454E61D4039}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>gView.DataSources.Oracle.UI</RootNamespace>
+    <AssemblyName>gView.DataSources.Oracle.UI</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DataSources\Oracle\UI\ExplorerObjects.cs" />
+    <Compile Include="DataSources\Oracle\UI\Icons.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\gView.Core.UI\gView.Core.UI.csproj">
+      <Project>{87d25021-c77a-4a5a-94e7-1364e55ad5f8}</Project>
+      <Name>gView.Core.UI</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\gView.Core\gView.Core.csproj">
+      <Project>{59a33161-474e-4b3c-882d-d8411a9f6ae3}</Project>
+      <Name>gView.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\gView.DataSources.Oracle\gView.DataSources.Oracle.csproj">
+      <Project>{5eb6ea8b-82ca-4ed3-aacc-0385506a9da1}</Project>
+      <Name>gView.DataSources.Oracle</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\gView.Data\gView.Data.csproj">
+      <Project>{a129277c-c5f1-4408-a136-12c74296f335}</Project>
+      <Name>gView.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\gView.DB.UI\gView.DB.UI.csproj">
+      <Project>{9014107c-7aea-4ba1-999e-45d6f1122dfa}</Project>
+      <Name>gView.DB.UI</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\gView.Db\gView.Db.csproj">
+      <Project>{af546a19-9255-40e1-bc38-7874b394d6b1}</Project>
+      <Name>gView.Db</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\gView.Dialogs\gView.Dialogs.csproj">
+      <Project>{273764e5-fde6-4f20-9b22-893eb0b3ad91}</Project>
+      <Name>gView.Dialogs</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\gView.Editor.Core\gView.Editor.Core.csproj">
+      <Project>{b79df0aa-a2bf-40b2-84dc-5498202ea9db}</Project>
+      <Name>gView.Editor.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\gView.Globalisation\gView.Globalisation.csproj">
+      <Project>{29bc6562-a3f2-4811-a3f5-130bdcf7aebf}</Project>
+      <Name>gView.Globalisation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\gView.OGC.UI\gView.OGC.UI.csproj">
+      <Project>{0b61ded9-3138-4aef-99b6-cf8088f22b15}</Project>
+      <Name>gView.OGC.UI</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\gView.OGC\gView.OGC.csproj">
+      <Project>{00c31fbb-6784-4f25-88c1-b2364a1b6970}</Project>
+      <Name>gView.OGC</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\gView.system.UI\gView.system.UI.csproj">
+      <Project>{c2dc5d59-be58-488a-94e1-ed092352406c}</Project>
+      <Name>gView.system.UI</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\gView.system\gView.system.csproj">
+      <Project>{a6fba7e4-aab9-4595-b87a-60334afc312b}</Project>
+      <Name>gView.system</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cat6.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\gps_point.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\img-32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\img-33.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\img-34.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

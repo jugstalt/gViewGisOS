@@ -11,14 +11,16 @@
       </schema>	
    	</provider>
      <provider id="oracle" name="Oracle" provider="OracleClient" >
+       <!--
        <schema name="Standard">
          Data Source=[Data Source];Integrated Security=yes;
        </schema>
        <schema name="Specifying username and password">
          Data Source=[Data Source];User Id=[User];Password=[Password];Integrated Security=no;
        </schema>
+       -->
        <schema name="Omiting tnsnames.ora">
-         SERVER=(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=[Host])(PORT=[Port]))(CONNECT_DATA=(SERVICE_NAME=[OracleSID])));uid=[User];pwd=[Password];
+         Data Source=(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=[Host])(PORT=[Port])))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=[OracleSID])));User Id=[User];Password=[Password];
        </schema>
      </provider>
      <provider id="oledb" name="Ole DB" provider="OleDB" >

@@ -93,151 +93,97 @@ namespace gView.Framework.Db.UI
             // 
             // cmbConnections
             // 
-            this.cmbConnections.AccessibleDescription = null;
-            this.cmbConnections.AccessibleName = null;
             resources.ApplyResources(this.cmbConnections, "cmbConnections");
-            this.cmbConnections.BackgroundImage = null;
             this.cmbConnections.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbConnections.Font = null;
             this.cmbConnections.Name = "cmbConnections";
             this.cmbConnections.SelectedIndexChanged += new System.EventHandler(this.cmbConnections_SelectedIndexChanged);
             // 
             // label1
             // 
-            this.label1.AccessibleDescription = null;
-            this.label1.AccessibleName = null;
             resources.ApplyResources(this.label1, "label1");
-            this.label1.Font = null;
             this.label1.Name = "label1";
             // 
             // label2
             // 
-            this.label2.AccessibleDescription = null;
-            this.label2.AccessibleName = null;
             resources.ApplyResources(this.label2, "label2");
-            this.label2.Font = null;
             this.label2.Name = "label2";
             // 
             // cmbTypes
             // 
-            this.cmbTypes.AccessibleDescription = null;
-            this.cmbTypes.AccessibleName = null;
             resources.ApplyResources(this.cmbTypes, "cmbTypes");
-            this.cmbTypes.BackgroundImage = null;
             this.cmbTypes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbTypes.Font = null;
             this.cmbTypes.Name = "cmbTypes";
             this.cmbTypes.SelectedIndexChanged += new System.EventHandler(this.cmbTypes_SelectedIndexChanged);
             // 
             // panel1
             // 
-            this.panel1.AccessibleDescription = null;
-            this.panel1.AccessibleName = null;
             resources.ApplyResources(this.panel1, "panel1");
-            this.panel1.BackgroundImage = null;
             this.panel1.Controls.Add(this.cmbConnections);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.cmbTypes);
-            this.panel1.Font = null;
             this.panel1.Name = "panel1";
             // 
             // panel2
             // 
-            this.panel2.AccessibleDescription = null;
-            this.panel2.AccessibleName = null;
             resources.ApplyResources(this.panel2, "panel2");
-            this.panel2.BackgroundImage = null;
             this.panel2.Controls.Add(this.btnCancel);
             this.panel2.Controls.Add(this.button1);
             this.panel2.Controls.Add(this.btnOK);
-            this.panel2.Font = null;
             this.panel2.Name = "panel2";
             // 
             // btnCancel
             // 
-            this.btnCancel.AccessibleDescription = null;
-            this.btnCancel.AccessibleName = null;
             resources.ApplyResources(this.btnCancel, "btnCancel");
-            this.btnCancel.BackgroundImage = null;
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Font = null;
             this.btnCancel.Name = "btnCancel";
             // 
             // button1
             // 
-            this.button1.AccessibleDescription = null;
-            this.button1.AccessibleName = null;
             resources.ApplyResources(this.button1, "button1");
-            this.button1.BackgroundImage = null;
-            this.button1.Font = null;
             this.button1.Name = "button1";
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // btnOK
             // 
-            this.btnOK.AccessibleDescription = null;
-            this.btnOK.AccessibleName = null;
             resources.ApplyResources(this.btnOK, "btnOK");
-            this.btnOK.BackgroundImage = null;
             this.btnOK.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.btnOK.Font = null;
             this.btnOK.Name = "btnOK";
             this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
             // 
             // panelParameters
             // 
-            this.panelParameters.AccessibleDescription = null;
-            this.panelParameters.AccessibleName = null;
             resources.ApplyResources(this.panelParameters, "panelParameters");
-            this.panelParameters.BackgroundImage = null;
-            this.panelParameters.Font = null;
             this.panelParameters.Name = "panelParameters";
             // 
             // panel3
             // 
-            this.panel3.AccessibleDescription = null;
-            this.panel3.AccessibleName = null;
             resources.ApplyResources(this.panel3, "panel3");
             this.panel3.BackColor = System.Drawing.Color.White;
-            this.panel3.BackgroundImage = null;
             this.panel3.Controls.Add(this.label3);
             this.panel3.Controls.Add(this.pictureBox1);
-            this.panel3.Font = null;
             this.panel3.Name = "panel3";
             // 
             // label3
             // 
-            this.label3.AccessibleDescription = null;
-            this.label3.AccessibleName = null;
             resources.ApplyResources(this.label3, "label3");
             this.label3.Name = "label3";
             // 
             // pictureBox1
             // 
-            this.pictureBox1.AccessibleDescription = null;
-            this.pictureBox1.AccessibleName = null;
             resources.ApplyResources(this.pictureBox1, "pictureBox1");
-            this.pictureBox1.BackgroundImage = null;
-            this.pictureBox1.Font = null;
             this.pictureBox1.Image = global::gView.DB.UI.Properties.Resources.db_connect1;
-            this.pictureBox1.ImageLocation = null;
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.TabStop = false;
             // 
             // FormConnectionString
             // 
-            this.AccessibleDescription = null;
-            this.AccessibleName = null;
             resources.ApplyResources(this, "$this");
-            this.BackgroundImage = null;
             this.Controls.Add(this.panelParameters);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel3);
-            this.Font = null;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.Icon = null;
             this.Name = "FormConnectionString";
             this.Load += new System.EventHandler(this.FormConnectionString_Load);
             this.panel1.ResumeLayout(false);
