@@ -121,7 +121,7 @@ namespace gView.Framework.OGC.DB
                                 continue;
                             }
 
-                            if (row["IsIdentity"] != null && (bool)row["IsIdentity"] == true)
+                            if (schema.Columns["IsIdentity"] != null && row["IsIdentity"] != null && (bool)row["IsIdentity"] == true)
                             {
                                 if (foundId == false)
                                     _idfield = row["ColumnName"].ToString();
@@ -163,7 +163,9 @@ namespace gView.Framework.OGC.DB
 
 
                             field.size = Convert.ToInt32(row["ColumnSize"]);
-                            field.precision = Convert.ToInt32(row["NumericPrecision"]);
+                            int precision;
+                            if (int.TryParse(row["NumericPrecision"]?.ToString(), out precision))
+                                field.precision = precision;
 
                             _fields.Add(field);
                         }

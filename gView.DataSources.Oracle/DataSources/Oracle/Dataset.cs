@@ -46,6 +46,19 @@ namespace gView.DataSources.OracleGeometry
             return new Dataset(_factory);
         }
 
+        public override string OgcDictionary(string ogcExpression)
+        {
+            switch(ogcExpression.ToLower())
+            {
+                case "gview_id":
+                case "gid":
+                    return "ID";
+                case "the_geom":
+                    return "SHAPE";
+            }
+            return base.OgcDictionary(ogcExpression);
+        }
+
         public override string DbDictionary(IField field)
         {
             switch (field.type)
@@ -53,7 +66,7 @@ namespace gView.DataSources.OracleGeometry
                 case FieldType.Shape:
                     return "SDO_GEOMETRY";
                 case FieldType.ID:
-                    return "NUMBER GENERATED ALWAYS as IDENTITY";
+                    return "NUMBER NOT NULL"; // GENERATED ALWAYS as IDENTITY(START with 1 INCREMENT by 1)";
                 case FieldType.smallinteger:
                     return "SHORTINTEGER NULL";
                 case FieldType.integer:
@@ -102,6 +115,38 @@ namespace gView.DataSources.OracleGeometry
             }
         }
 
+        protected override string CreateGidSequence(string tableName)
+        {
+            return @"CREATE SEQUENCE seq_id_" + tableName + @"
+ START WITH     1
+ INCREMENT BY   1
+ NOCACHE
+ NOCYCLE";
+        }
+
+        protected override string CreateGidTrigger(string tableName, string gid)
+        {
+            return @"CREATE OR REPLACE TRIGGER trg_id_" + tableName + @"
+BEFORE INSERT OR UPDATE ON " + tableName + @"
+FOR EACH ROW
+BEGIN
+   SELECT seq_id_" + tableName + @".NextVal
+   INTO :new." + gid + @"
+   FROM dual;
+END;";
+        }
+
+        protected override string AddGeometryColumn(string schemaName, string tableName, string colunName, string srid, string geomTypeString)
+        {
+            // DoTo: Create Table
+            return String.Empty;
+        }
+
+        protected override string DropGeometryTable(string schemaName, string tableName)
+        {
+            return "drop table " + tableName + ";drop sequence seq_id_" + tableName;
+        }
+
         public override DbCommand SelectSpatialReferenceIds(gView.Framework.OGC.DB.OgcSpatialFeatureclass fc)
         {
             //string cmdText = "select distinct " + fc.ShapeFieldName + ".STSrid as srid from " + fc.Name + " where " + fc.ShapeFieldName + " is not null";
@@ -117,9 +162,14 @@ namespace gView.DataSources.OracleGeometry
             return colName;
         }
 
+        protected override string DbParameterName(string name)
+        {
+            return ":" + name;
+        }
+
         override protected object ShapeParameterValue(OgcSpatialFeatureclass featureClass, IGeometry shape, int srid, out bool AsSqlParameter)
         {
-            AsSqlParameter = true;
+            AsSqlParameter = false;
 
             return SdoGeometry.FromGeometry(shape, srid);
         }
@@ -143,7 +193,7 @@ namespace gView.DataSources.OracleGeometry
 
                             DbDataAdapter adapter = this.ProviderFactory.CreateDataAdapter();
                             adapter.SelectCommand = this.ProviderFactory.CreateCommand();
-                            adapter.SelectCommand.CommandText = @"SELECT TABLE_NAME, column_name from user_tab_columns WHERE data_type='NUMBERY' ORDER BY TABLE_NAME";
+                            adapter.SelectCommand.CommandText = @"SELECT TABLE_NAME, column_name from user_tab_columns WHERE data_type='SDO_GEOMETRY' ORDER BY TABLE_NAME";
                             adapter.SelectCommand.Connection = conn;
                             adapter.Fill(tables);
 
@@ -165,7 +215,7 @@ namespace gView.DataSources.OracleGeometry
                         {
                             Featureclass fc = new Featureclass(this,
                                 row["TABLE_NAME"].ToString(),
-                                IDFieldName(row["TABLE_NAME"].ToString()),
+                                String.Empty, //IDFieldName(row["TABLE_NAME"].ToString()),
                                 row["column_name"].ToString(), false);
 
                             if (fc.Fields.Count > 0)
@@ -179,7 +229,7 @@ namespace gView.DataSources.OracleGeometry
                         {
                             Featureclass fc = new Featureclass(this,
                                 row["TABLE_NAME"].ToString(),
-                                IDFieldName(row["TABLE_NAME"].ToString()),
+                                String.Empty, // IDFieldName(row["TABLE_NAME"].ToString()),
                                 row["column_name"].ToString(), true);
 
                             if (fc.Fields.Count > 0)
@@ -191,6 +241,52 @@ namespace gView.DataSources.OracleGeometry
                     _layers = layers;
                 }
                 return _layers;
+            }
+        }
+
+        public override IDatasetElement this[string title]
+        {
+            get
+            {
+                try
+                {
+                    DataTable tab = new DataTable();
+                    using (DbConnection conn = this.ProviderFactory.CreateConnection())
+                        {
+                            conn.ConnectionString = _connectionString;
+                            conn.Open();
+
+                            DbDataAdapter adapter = this.ProviderFactory.CreateDataAdapter();
+                            adapter.SelectCommand = this.ProviderFactory.CreateCommand();
+                            adapter.SelectCommand.CommandText = @"SELECT TABLE_NAME, column_name from user_tab_columns WHERE data_type='SDO_GEOMETRY' and TABLE_NAME='" + title + "'";
+                            adapter.SelectCommand.Connection = conn;
+                            adapter.Fill(tab);
+
+                            // DoTo: Views
+
+                            conn.Close();
+                    }
+                    if (tab.Rows.Count != 1)
+                    {
+                        _errMsg = "Layer not found: " + title;
+                        return null;
+                    }
+
+                    Featureclass fc = new Featureclass(this,
+                                tab.Rows[0]["TABLE_NAME"].ToString(),
+                                String.Empty, //IDFieldName(row["TABLE_NAME"].ToString()),
+                                tab.Rows[0]["column_name"].ToString(), false);
+
+                    if (fc.Fields.Count > 0)
+                        return new DatasetElement(fc);
+
+                    return null;
+                }
+                catch (Exception ex)
+                {
+                    _errMsg = ex.Message;
+                    return null;
+                }
             }
         }
 

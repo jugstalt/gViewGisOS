@@ -80,7 +80,7 @@ namespace gView.DataSources.OracleGeometry.Types
 
         private static string FromPointGeometry(IPoint point, int? srs = null)
         {
-            string SDO_POINT = point.X.ToString(_nhi) + "," + point.Y.ToString(_nhi);
+            string SDO_POINT = point.X.ToString(_nhi) + "," + point.Y.ToString(_nhi) + ",NULL";  // 2D
             //string SDO_ELEM_INFO = "NULL";
             //string SDO_ORDINATES = "NULL";
 
@@ -181,11 +181,12 @@ namespace gView.DataSources.OracleGeometry.Types
 
         private static string ToGeometryString(SdoGeometryTypes.GTYPE SDO_GTYPE, int? srs = null, string SDO_POINT = null, string SDO_ELEM_INFO = null, string SDO_ORDINATES = null)
         {
-            return "MDSYS.SDO_GEOMETRY(" + SdoGeometryTypes.DIMENSION.DIM2D + "0" + SDO_GTYPE.ToString() +
-                "," + srs != null ? srs.Value.ToString() : "NULL" +
-                "," + SDO_POINT != null ? "MDSYS.SDO_POINT_TYPE(" + SDO_POINT + ")" : "NULL" +
-                "," + SDO_ELEM_INFO != null ? "MDSYS.SDO_ELEM_INFO_ARRAY(" + SDO_ELEM_INFO + ")" : "NULL" +
-                "," + SDO_ORDINATES != null ? " MDSYS.SDO_ORDINATE_ARRAY(" + SDO_ORDINATES + ")" : "NULL" + ")";
+            string ret = "MDSYS.SDO_GEOMETRY(" + (int)SdoGeometryTypes.DIMENSION.DIM2D + "0" + ((int)SDO_GTYPE).ToString().PadLeft(2, '0') +
+                "," + (srs != null && srs > 0 ? srs.Value.ToString() : "NULL") +
+                "," + (SDO_POINT != null ? "MDSYS.SDO_POINT_TYPE(" + SDO_POINT + ")" : "NULL") +
+                "," + (SDO_ELEM_INFO != null ? "MDSYS.SDO_ELEM_INFO_ARRAY(" + SDO_ELEM_INFO + ")" : "NULL") +
+                "," + (SDO_ORDINATES != null ? " MDSYS.SDO_ORDINATE_ARRAY(" + SDO_ORDINATES + ")" : "NULL") + ")";
+            return ret;
         }
 
         #endregion
