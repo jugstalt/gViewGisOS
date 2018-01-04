@@ -7,6 +7,9 @@ using System.Data.Common;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using gView.Framework.Geometry;
+using gView.Framework.OGC.DB;
+using gView.DataSources.OracleGeometry.Types;
 
 namespace gView.DataSources.OracleGeometry
 {
@@ -47,10 +50,10 @@ namespace gView.DataSources.OracleGeometry
         {
             switch (field.type)
             {
-                //case FieldType.Shape:
-                //    return "SDO_GEOMETRY";
+                case FieldType.Shape:
+                    return "SDO_GEOMETRY";
                 case FieldType.ID:
-                    return "NUMBER";// GENERATED ALWAYS as IDENTITY";
+                    return "NUMBER GENERATED ALWAYS as IDENTITY";
                 case FieldType.smallinteger:
                     return "SHORTINTEGER NULL";
                 case FieldType.integer:
@@ -112,6 +115,13 @@ namespace gView.DataSources.OracleGeometry
         protected override string DbColumnName(string colName)
         {
             return colName;
+        }
+
+        override protected object ShapeParameterValue(OgcSpatialFeatureclass featureClass, IGeometry shape, int srid, out bool AsSqlParameter)
+        {
+            AsSqlParameter = true;
+
+            return SdoGeometry.FromGeometry(shape, srid);
         }
 
         #region IDataset 

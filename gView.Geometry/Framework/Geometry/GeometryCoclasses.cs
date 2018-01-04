@@ -1860,6 +1860,7 @@ namespace gView.Framework.Geometry
                 //
                 // Hier sollte getestet werden, welche ringe löcher sind und welche nicht...
                 //
+                VerifyHoles();
 
                 double A = 0.0;
                 for (int i = 0; i < RingCount; i++)
@@ -1873,6 +1874,9 @@ namespace gView.Framework.Geometry
                 return A;
             }
         }
+
+        
+
         #endregion
 
         #region IGeometry Member
@@ -1961,7 +1965,7 @@ namespace gView.Framework.Geometry
         {
             _rings.Sort(new RingComparerAreaInv());
         }
-        internal void VerifyHoles()
+        public void VerifyHoles()
         {
             if (_ringsChecked == _rings.Count) return;
 

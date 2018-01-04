@@ -11,6 +11,7 @@
     <AssemblyName>gView.DataSources.Oracle</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -46,6 +47,7 @@
   <ItemGroup>
     <Compile Include="DataSources\Oracle\Dataset.cs" />
     <Compile Include="DataSources\Oracle\FeatureClass.cs" />
+    <Compile Include="DataSources\Oracle\Types\SdoGeometry.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

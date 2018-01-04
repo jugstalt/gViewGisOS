@@ -167,6 +167,8 @@ namespace gView.Framework.Geometry
         int RingCount { get; }
         IRing this[int ringIndex] { get; }
 
+        void VerifyHoles();
+
         double Area { get; }
     }
 
