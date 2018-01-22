@@ -41,6 +41,9 @@
        <schema name="Postgre/Npgsql">
          Server=[Server];Port=[Port];Userid=[User];Password=[Password];Database=[Database];Protocol=3;SSL=true; Pooling=true;MinPoolSize=3;MaxPoolSize=20;Encoding=UNICODE;Timeout=20;SslMode=Disable;
        </schema>
+       <schema name="Postgre/Npgsql + Schema">
+         Server=[Server];Port=[Port];Userid=[User];Password=[Password];Database=[Database];SearchPath=[Schema];Protocol=3;SSL=true; Pooling=true;MinPoolSize=3;MaxPoolSize=20;Encoding=UNICODE;Timeout=20;SslMode=Disable;
+       </schema>
        <schema name="Postgre/Npgsql SSL">
          Server=[Server];Port=[Port];Userid=[User];Password=[Password];Database=[Database];Protocol=3;SSL=true; Pooling=true;MinPoolSize=3;MaxPoolSize=20;Encoding=UNICODE;Timeout=20;SslMode=Require;
        </schema>

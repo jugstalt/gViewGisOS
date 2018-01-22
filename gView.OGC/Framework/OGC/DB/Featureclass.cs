@@ -29,7 +29,14 @@ namespace gView.Framework.OGC.DB
             {
                 _lastException = null;
 
-                _name = geometry_columns_row[_dataset.OgcDictionary("geometry_columns.f_table_name")].ToString();
+                string schema = String.Empty;
+                try
+                {
+                    if (!String.IsNullOrEmpty(_dataset.OgcDictionary("geometry_columns.f_table_schema")))
+                        schema = geometry_columns_row[_dataset.OgcDictionary("geometry_columns.f_table_schema")].ToString() + ".";
+                }
+                catch { schema = ""; }
+                _name = schema + geometry_columns_row[_dataset.OgcDictionary("geometry_columns.f_table_name")].ToString();
                 _shapefield = geometry_columns_row[_dataset.OgcDictionary("geometry_columns.f_geometry_column")].ToString();
                 _idfield = _dataset.OgcDictionary("gid");
 

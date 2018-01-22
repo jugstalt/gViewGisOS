@@ -142,9 +142,10 @@ namespace gView.DataSources.PostGIS
 
         public override string DbTableName(string tableName)
         {
-            string schema = GetTableDbSchema(tableName), tabName = "\"" + tableName + "\"";
+            string schema = GetTableDbSchema(tableName);
+            string tabName = "\"" + tableName.Replace(".", "\".\"") + "\"";  // falls tablename schon schema enthält -> . durch "." ersetzen -> "schema"."tablename"
 
-            return String.IsNullOrEmpty(schema) ? tabName : schema + "." + tabName;
+            return String.IsNullOrEmpty(schema) ? tabName : "\"" + schema + "\"" + "." + tabName;
         }
 
         protected override string AddGeometryColumn(string schemaName, string tableName, string colunName, string srid, string geomTypeString)
@@ -190,6 +191,9 @@ namespace gView.DataSources.PostGIS
         {
             try
             {
+                if (tableName.Contains("."))  // Tablename includes schema
+                    return String.Empty;
+
                 if (_tableDbSchema.ContainsKey(tableName))
                     return _tableDbSchema[tableName];
 
