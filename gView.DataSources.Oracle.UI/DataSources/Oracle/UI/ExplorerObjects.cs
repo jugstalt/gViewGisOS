@@ -19,7 +19,7 @@ using System.Windows.Forms;
 
 namespace gView.DataSources.Oracle.UI
 {
-    [RegisterPlugIn("6F9DF597-9AE1-4A94-8BDC-A780C6DA0A6E")]
+    //[RegisterPlugIn("6F9DF597-9AE1-4A94-8BDC-A780C6DA0A6E")]
     public class OracleExplorerGroupObject : ExplorerParentObject, IOgcGroupExplorerObject, IPlugInDependencies
     {
         private IExplorerIcon _icon = new OracleIcon();
@@ -112,7 +112,7 @@ namespace gView.DataSources.Oracle.UI
         #endregion
     }
 
-    [RegisterPlugIn("88C52DA3-6933-4529-BD41-A9D65A702E66")]
+    //[RegisterPlugIn("88C52DA3-6933-4529-BD41-A9D65A702E66")]
     public class OracleNewConnectionObject : ExplorerObjectCls, IExplorerSimpleObject, IExplorerObjectDoubleClick, IExplorerObjectCreatable
     {
         private IExplorerIcon _icon = new OracleNewConnectionIcon();
@@ -417,7 +417,7 @@ namespace gView.DataSources.Oracle.UI
         #endregion
     }
 
-    [gView.Framework.system.RegisterPlugIn("56E94E3B-CB00-4481-9293-AE45E2E360D2")]
+    //[gView.Framework.system.RegisterPlugIn("56E94E3B-CB00-4481-9293-AE45E2E360D2")]
     public class OracleFeatureClassExplorerObject : ExplorerObjectCls, IExplorerSimpleObject, ISerializableExplorerObject, IExplorerObjectDeletable, IPlugInDependencies
     {
         private string _fcname = "", _type = "";
