@@ -231,7 +231,17 @@ namespace gView.Framework.OGC.DB
 
                         DbDataAdapter adapter = this.ProviderFactory.CreateDataAdapter();
                         adapter.SelectCommand = this.ProviderFactory.CreateCommand();
-                        adapter.SelectCommand.CommandText = "SELECT * FROM " + DbSchemaPrefix + OgcDictionary("geometry_columns") + " WHERE " + OgcDictionary("geometry_columns.f_table_name") + "='" + title + "'";
+
+                        if (title.Contains("."))
+                        {
+                            string schema = title.Split('.')[0];
+                            string table = title.Substring(schema.Length + 1);
+                            adapter.SelectCommand.CommandText = "SELECT * FROM " + DbSchemaPrefix + OgcDictionary("geometry_columns") + " WHERE " + OgcDictionary("geometry_columns.f_table_name") + "='" + table + "' AND " + OgcDictionary("geometry_columns.f_table_schema") + "='" + schema + "'";
+                        }
+                        else
+                        {
+                            adapter.SelectCommand.CommandText = "SELECT * FROM " + DbSchemaPrefix + OgcDictionary("geometry_columns") + " WHERE " + OgcDictionary("geometry_columns.f_table_name") + "='" + title + "'";
+                        }
                         adapter.SelectCommand.Connection = conn;
 
                         adapter.Fill(tab);

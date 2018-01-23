@@ -209,10 +209,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "gView.MapServer.Portable", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "gView.Cmd.ExecuteSerializable", "gView.Cmd.ExecuteSerializable\gView.Cmd.ExecuteSerializable.csproj", "{F1EE7A0D-5D58-4C9A-8E91-AF4754B7CB20}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "gView.DataSources.Oracle", "gView.DataSources.Oracle\gView.DataSources.Oracle.csproj", "{5EB6EA8B-82CA-4ED3-AACC-0385506A9DA1}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "gView.DataSources.Oracle.UI", "gView.DataSources.Oracle.UI\gView.DataSources.Oracle.UI.csproj", "{5C2FA884-2147-425B-AE0C-F454E61D4039}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -1267,30 +1263,6 @@ Global
 		{F1EE7A0D-5D58-4C9A-8E91-AF4754B7CB20}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{F1EE7A0D-5D58-4C9A-8E91-AF4754B7CB20}.Release|x86.ActiveCfg = Release|Any CPU
 		{F1EE7A0D-5D58-4C9A-8E91-AF4754B7CB20}.Release|x86.Build.0 = Release|Any CPU
-		{5EB6EA8B-82CA-4ED3-AACC-0385506A9DA1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5EB6EA8B-82CA-4ED3-AACC-0385506A9DA1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5EB6EA8B-82CA-4ED3-AACC-0385506A9DA1}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{5EB6EA8B-82CA-4ED3-AACC-0385506A9DA1}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{5EB6EA8B-82CA-4ED3-AACC-0385506A9DA1}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{5EB6EA8B-82CA-4ED3-AACC-0385506A9DA1}.Debug|x86.Build.0 = Debug|Any CPU
-		{5EB6EA8B-82CA-4ED3-AACC-0385506A9DA1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5EB6EA8B-82CA-4ED3-AACC-0385506A9DA1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5EB6EA8B-82CA-4ED3-AACC-0385506A9DA1}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{5EB6EA8B-82CA-4ED3-AACC-0385506A9DA1}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{5EB6EA8B-82CA-4ED3-AACC-0385506A9DA1}.Release|x86.ActiveCfg = Release|Any CPU
-		{5EB6EA8B-82CA-4ED3-AACC-0385506A9DA1}.Release|x86.Build.0 = Release|Any CPU
-		{5C2FA884-2147-425B-AE0C-F454E61D4039}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5C2FA884-2147-425B-AE0C-F454E61D4039}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5C2FA884-2147-425B-AE0C-F454E61D4039}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{5C2FA884-2147-425B-AE0C-F454E61D4039}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{5C2FA884-2147-425B-AE0C-F454E61D4039}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{5C2FA884-2147-425B-AE0C-F454E61D4039}.Debug|x86.Build.0 = Debug|Any CPU
-		{5C2FA884-2147-425B-AE0C-F454E61D4039}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5C2FA884-2147-425B-AE0C-F454E61D4039}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5C2FA884-2147-425B-AE0C-F454E61D4039}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{5C2FA884-2147-425B-AE0C-F454E61D4039}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{5C2FA884-2147-425B-AE0C-F454E61D4039}.Release|x86.ActiveCfg = Release|Any CPU
-		{5C2FA884-2147-425B-AE0C-F454E61D4039}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
