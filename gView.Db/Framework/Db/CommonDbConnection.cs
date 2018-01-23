@@ -7,7 +7,7 @@ using System.Data.SqlClient;
 using System.Xml;
 using System.Text;
 using System.Collections.Generic;
-using Oracle.ManagedDataAccess.Client;
+using System.Data.OracleClient;
 
 namespace gView.Framework.Db
 {

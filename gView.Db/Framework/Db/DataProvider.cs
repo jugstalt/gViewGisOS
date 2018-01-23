@@ -8,7 +8,7 @@ using System.Xml;
 using System.Text;
 using System.Reflection;
 using gView.Framework.system;
-using Oracle.ManagedDataAccess.Client;
+using System.Data.OracleClient;
 
 namespace gView.Framework.Db
 {
