@@ -14,7 +14,7 @@ using gView.DataSources.OracleGeometry.Types;
 namespace gView.DataSources.OracleGeometry
 {
     [UseDatasetNameCase(DatasetNameCase.classNameUpper)]
-    [RegisterPlugIn("1C567195-B2C7-4202-8DC0-5FF27C876AF3")]
+    //[RegisterPlugIn("1C567195-B2C7-4202-8DC0-5FF27C876AF3")]
     public class Dataset : gView.Framework.OGC.DB.OgcSpatialDataset
     {
         protected DbProviderFactory _factory = null;

@@ -33,7 +33,9 @@ namespace gView.Framework.OGC.DB
                 try
                 {
                     if (!String.IsNullOrEmpty(_dataset.OgcDictionary("geometry_columns.f_table_schema")))
-                        schema = geometry_columns_row[_dataset.OgcDictionary("geometry_columns.f_table_schema")].ToString() + ".";
+                        schema = geometry_columns_row[_dataset.OgcDictionary("geometry_columns.f_table_schema")].ToString();
+                    if (!String.IsNullOrEmpty(schema))
+                        schema += ".";
                 }
                 catch { schema = ""; }
                 _name = schema + geometry_columns_row[_dataset.OgcDictionary("geometry_columns.f_table_name")].ToString();
