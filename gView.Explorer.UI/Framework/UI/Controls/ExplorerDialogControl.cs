@@ -31,7 +31,14 @@ namespace gView.Framework.UI.Controls
 
             contentsList1.View = View.List;
             contentsList1.AllowContextMenu = false;
+
+            using (Graphics graphics = this.CreateGraphics())
+            {
+                this.FontScaleFactor = graphics.DpiX / 96f;
+            }
         }
+
+        private float FontScaleFactor { get; set; }
 
         public List<Filter.ExplorerDialogFilter> Filters
         {

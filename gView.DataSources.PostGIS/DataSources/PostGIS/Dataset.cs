@@ -265,7 +265,7 @@ namespace gView.DataSources.PostGIS
             if (!String.IsNullOrWhiteSpace(schema))
             {
                 return @"SELECT
-c.column_name, c.data_type, tc.table_schema
+c.column_name
 FROM
 information_schema.table_constraints tc 
 JOIN information_schema.constraint_column_usage AS ccu USING (constraint_schema, constraint_name) 
@@ -275,7 +275,7 @@ where constraint_type = 'PRIMARY KEY' and tc.table_schema='" + schema + "' and t
             else
             {
                 return @"SELECT
-c.column_name, c.data_type, tc.table_schema
+c.column_name
 FROM
 information_schema.table_constraints tc 
 JOIN information_schema.constraint_column_usage AS ccu USING (constraint_schema, constraint_name) 

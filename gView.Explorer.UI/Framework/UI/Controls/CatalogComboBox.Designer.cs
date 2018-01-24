@@ -42,8 +42,9 @@
             this.cmbCatalog.FormattingEnabled = true;
             this.cmbCatalog.ItemHeight = 16;
             this.cmbCatalog.Location = new System.Drawing.Point(0, 0);
+            this.cmbCatalog.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.cmbCatalog.Name = "cmbCatalog";
-            this.cmbCatalog.Size = new System.Drawing.Size(285, 22);
+            this.cmbCatalog.Size = new System.Drawing.Size(428, 22);
             this.cmbCatalog.TabIndex = 0;
             this.cmbCatalog.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmbCatalog_DrawItem);
             this.cmbCatalog.SelectedIndexChanged += new System.EventHandler(this.cmbCatalog_SelectedIndexChanged);
@@ -63,11 +64,12 @@
             // 
             // CatalogComboBox
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.cmbCatalog);
+            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "CatalogComboBox";
-            this.Size = new System.Drawing.Size(285, 25);
+            this.Size = new System.Drawing.Size(428, 38);
             this.Load += new System.EventHandler(this.CatalogComboBox_Load);
             this.ResumeLayout(false);
 

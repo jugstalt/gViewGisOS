@@ -42,6 +42,11 @@ namespace gView.Framework.OGC.DB
                 _shapefield = geometry_columns_row[_dataset.OgcDictionary("geometry_columns.f_geometry_column")].ToString();
                 _idfield = _dataset.OgcDictionary("gid");
 
+                // Read Primary Key -> PostGIS id is not always "gid";
+                string pKey = GetPKey();
+                if (!String.IsNullOrWhiteSpace(pKey) && !pKey.Equals(_idfield))
+                    _idfield = pKey;
+
                 _geometry_columns_type = geometry_columns_row[_dataset.OgcDictionary("geometry_columns.type")].ToString().ToUpper();
                 switch (_geometry_columns_type)
                 {
@@ -82,31 +87,6 @@ namespace gView.Framework.OGC.DB
                 }
                 catch { }
                 ReadSchema();
-
-                if (_fields.FindField(_idfield) == null)
-                {
-                    string pKeySelect = _dataset.PrimaryKeyField(_name);
-                    if (!String.IsNullOrWhiteSpace(pKeySelect))
-                    {
-                        using (DbConnection connection = _dataset.ProviderFactory.CreateConnection())
-                        {
-                            connection.ConnectionString = _dataset.ConnectionString; ;
-                            connection.Open();
-
-                            DbCommand command = _dataset.ProviderFactory.CreateCommand();
-                            command.CommandText = pKeySelect;
-                            command.Connection = connection;
-
-                            string pkField = command.ExecuteScalar()?.ToString();
-
-                            if (!String.IsNullOrWhiteSpace(pkField) && _fields.FindField(pkField) is Field)
-                            {
-                                ((Field)_fields.FindField(pkField)).type = FieldType.ID;
-                                _idfield = pkField;
-                            }
-                        }
-                    }
-                }
             }
             catch (Exception ex)
             {
@@ -215,6 +195,30 @@ namespace gView.Framework.OGC.DB
         public string GeometryTypeString
         {
             get { return _geometry_columns_type; }
+        }
+
+        private string GetPKey()
+        {
+            string pKeySelect = _dataset.PrimaryKeyField(_name);
+            try
+            {
+                if (!String.IsNullOrWhiteSpace(pKeySelect))
+                {
+                    using (DbConnection connection = _dataset.ProviderFactory.CreateConnection())
+                    {
+                        connection.ConnectionString = _dataset.ConnectionString; ;
+                        connection.Open();
+
+                        DbCommand command = _dataset.ProviderFactory.CreateCommand();
+                        command.CommandText = pKeySelect;
+                        command.Connection = connection;
+
+                        return command.ExecuteScalar()?.ToString();
+                    }
+                }
+            }
+            catch { }
+            return String.Empty;
         }
 
         #region IFeatureClass Member

@@ -497,14 +497,18 @@ namespace gView.Framework.UI.Controls
         /// </summary>
         protected override void Dispose(bool disposing)
         {
-            if (disposing)
+            try
             {
-                if (components != null)
+                if (disposing)
                 {
-                    components.Dispose();
+                    if (components != null)
+                    {
+                        components.Dispose();
+                    }
                 }
+                base.Dispose(disposing);
             }
-            base.Dispose(disposing);
+            catch { }
         }
 
         #region Vom Komponenten-Designer generierter Code

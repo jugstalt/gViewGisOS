@@ -11,66 +11,71 @@ using gView.Framework.system;
 
 namespace gView.Framework.Db.UI
 {
-	/// <summary>
-	/// Zusammenfassung für FormConnectionString.
-	/// </summary>
-	public class FormConnectionString : System.Windows.Forms.Form
-	{
-		private System.Windows.Forms.Label label1;
-		/// <summary>
-		/// Erforderliche Designervariable.
-		/// </summary>
-		private System.ComponentModel.Container components = null;
-		private System.Windows.Forms.ComboBox cmbConnections;
-		private System.Windows.Forms.Label label2;
-		private System.Windows.Forms.ComboBox cmbTypes;
-		private System.Windows.Forms.Panel panel1;
-		private System.Windows.Forms.Panel panel2;
-		private System.Windows.Forms.Panel panelParameters;
-		private System.Windows.Forms.Button btnOK;
-		private System.Windows.Forms.Button button1;
+    /// <summary>
+    /// Zusammenfassung für FormConnectionString.
+    /// </summary>
+    public class FormConnectionString : System.Windows.Forms.Form
+    {
+        private System.Windows.Forms.Label label1;
+        /// <summary>
+        /// Erforderliche Designervariable.
+        /// </summary>
+        private System.ComponentModel.Container components = null;
+        private System.Windows.Forms.ComboBox cmbConnections;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ComboBox cmbTypes;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Panel panelParameters;
+        private System.Windows.Forms.Button btnOK;
+        private System.Windows.Forms.Button button1;
         private Panel panel3;
         private PictureBox pictureBox1;
         private Button btnCancel;
         private Label label3;
-		private XmlDocument _config;
+        private XmlDocument _config;
         private Dictionary<string, string> _values = new Dictionary<string, string>();
         private DbConnectionString _initialConnString = null;
 
-		public FormConnectionString()
-		{
-			InitializeComponent();
-		}
-        public FormConnectionString(DbConnectionString initialConnString) 
+        public FormConnectionString()
+        {
+            InitializeComponent();
+        }
+        public FormConnectionString(DbConnectionString initialConnString)
             : this()
         {
             _initialConnString = initialConnString;
             if (_initialConnString != null)
                 _useProvider = _initialConnString.UseProviderInConnectionString;
+
+            using (Graphics graphics = this.CreateGraphics())
+            {
+                this.FontScaleFactor = graphics.DpiX / 96f;
+            }
         }
 
-		/// <summary>
-		/// Die verwendeten Ressourcen bereinigen.
-		/// </summary>
-		protected override void Dispose( bool disposing )
-		{
-			if( disposing )
-			{
-				if(components != null)
-				{
-					components.Dispose();
-				}
-			}
-			base.Dispose( disposing );
-		}
+        /// <summary>
+        /// Die verwendeten Ressourcen bereinigen.
+        /// </summary>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                if (components != null)
+                {
+                    components.Dispose();
+                }
+            }
+            base.Dispose(disposing);
+        }
 
-		#region Vom Windows Form-Designer generierter Code
-		/// <summary>
-		/// Erforderliche Methode für die Designerunterstützung. 
-		/// Der Inhalt der Methode darf nicht mit dem Code-Editor geändert werden.
-		/// </summary>
-		private void InitializeComponent()
-		{
+        #region Vom Windows Form-Designer generierter Code
+        /// <summary>
+        /// Erforderliche Methode für die Designerunterstützung. 
+        /// Der Inhalt der Methode darf nicht mit dem Code-Editor geändert werden.
+        /// </summary>
+        private void InitializeComponent()
+        {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormConnectionString));
             this.cmbConnections = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -193,13 +198,15 @@ namespace gView.Framework.Db.UI
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
-		}
-		#endregion
+        }
+        #endregion
 
-		private void FormConnectionString_Load(object sender, System.EventArgs e)
-		{
+        private void FormConnectionString_Load(object sender, System.EventArgs e)
+        {
             LoadXml();
-		}
+        }
+
+        private float FontScaleFactor {get;set;}
 
         private string _providerID = String.Empty;
         public string ProviderID
@@ -293,7 +300,7 @@ namespace gView.Framework.Db.UI
                     cmbTypes.SelectedIndex == -1) cmbTypes.SelectedIndex = 0;
 			}
 		}
-
+        
 		private string _connectionString="";
 		public string ConnectionString 
 		{
@@ -376,7 +383,7 @@ namespace gView.Framework.Db.UI
                 Label label = new Label();
                 label.Text = param + ": ";
                 label.Left = 10;
-                label.Top = 10 + i * 24;
+                label.Top = 10 + (int)(i * 24 * this.FontScaleFactor);
                 label.TextAlign = ContentAlignment.MiddleRight;
                 panelParameters.Controls.Add(label);
 
@@ -418,7 +425,8 @@ namespace gView.Framework.Db.UI
                 i++;
             }
 
-            this.Height = panel1.Height + panel2.Height + panel3.Height + i * 24 + 40;
+
+            this.Height = panel1.Height + panel2.Height + panel3.Height + (int)((i * 24 + 40) * this.FontScaleFactor);
         }
 
         void box_TextChanged(object sender, EventArgs e)

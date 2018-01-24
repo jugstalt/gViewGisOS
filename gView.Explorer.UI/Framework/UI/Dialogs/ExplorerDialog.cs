@@ -26,7 +26,14 @@ namespace gView.Framework.UI.Dialogs
             explorerDialogControl1.ItemSelected += new ExplorerDialogControl.ItemClickedEvent(explorerDialogControl1_ItemSelected);
             explorerDialogControl1.ElementTextStatusChanged += new ExplorerDialogControl.ElementTextStatusChangedEvent(explorerDialogControl1_ElementTextStatusChanged);
             btnOK.Enabled = false;
+
+            using (Graphics graphics = this.CreateGraphics())
+            {
+                this.FontScaleFactor = graphics.DpiX / 96f;
+            }
         }
+
+        private float FontScaleFactor { get; set; }
 
         void explorerDialogControl1_ElementTextStatusChanged(TextBox tb)
         {
