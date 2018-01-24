@@ -240,7 +240,7 @@ namespace gView.DataSources.PostGIS
                     switch (command)
                     {
                         case EditCommands.Insert:
-                            _errMsg = "Can't insert features for geometrytype " + ogcFc.GeometryTypeString+".";
+                            _errMsg = "Can't insert features for geometrytype " + ogcFc.GeometryTypeString + ".";
                             return false;
                         case EditCommands.Update:
                             _errMsg = "Can't update features for geometrytype " + ogcFc.GeometryTypeString + ".";
@@ -248,9 +248,40 @@ namespace gView.DataSources.PostGIS
                     }
                 }
                 return true;
-                    
+
             }
             return false;
+        }
+
+        public override string PrimaryKeyField(string tableName)
+        {
+            string schema = "";
+            if (tableName.Contains("."))
+            {
+                schema = tableName.Split('.')[0];
+                tableName = tableName.Substring(schema.Length + 1);
+            }
+
+            if (!String.IsNullOrWhiteSpace(schema))
+            {
+                return @"SELECT
+c.column_name, c.data_type, tc.table_schema
+FROM
+information_schema.table_constraints tc 
+JOIN information_schema.constraint_column_usage AS ccu USING (constraint_schema, constraint_name) 
+JOIN information_schema.columns AS c ON c.table_schema = tc.constraint_schema AND tc.table_name = c.table_name AND ccu.column_name = c.column_name
+where constraint_type = 'PRIMARY KEY' and tc.table_schema='" + schema + "' and tc.table_name = '" + tableName + "'";
+            }
+            else
+            {
+                return @"SELECT
+c.column_name, c.data_type, tc.table_schema
+FROM
+information_schema.table_constraints tc 
+JOIN information_schema.constraint_column_usage AS ccu USING (constraint_schema, constraint_name) 
+JOIN information_schema.columns AS c ON c.table_schema = tc.constraint_schema AND tc.table_name = c.table_name AND ccu.column_name = c.column_name
+where constraint_type = 'PRIMARY KEY' and tc.table_name = '" + tableName + "'";
+            }
         }
     }
 }

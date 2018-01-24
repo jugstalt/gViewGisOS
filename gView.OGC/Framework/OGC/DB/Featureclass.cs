@@ -82,6 +82,31 @@ namespace gView.Framework.OGC.DB
                 }
                 catch { }
                 ReadSchema();
+
+                if (_fields.FindField(_idfield) == null)
+                {
+                    string pKeySelect = _dataset.PrimaryKeyField(_name);
+                    if (!String.IsNullOrWhiteSpace(pKeySelect))
+                    {
+                        using (DbConnection connection = _dataset.ProviderFactory.CreateConnection())
+                        {
+                            connection.ConnectionString = _dataset.ConnectionString; ;
+                            connection.Open();
+
+                            DbCommand command = _dataset.ProviderFactory.CreateCommand();
+                            command.CommandText = pKeySelect;
+                            command.Connection = connection;
+
+                            string pkField = command.ExecuteScalar()?.ToString();
+
+                            if (!String.IsNullOrWhiteSpace(pkField) && _fields.FindField(pkField) is Field)
+                            {
+                                ((Field)_fields.FindField(pkField)).type = FieldType.ID;
+                                _idfield = pkField;
+                            }
+                        }
+                    }
+                }
             }
             catch (Exception ex)
             {
