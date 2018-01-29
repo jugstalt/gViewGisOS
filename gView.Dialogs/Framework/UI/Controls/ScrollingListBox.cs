@@ -14,7 +14,11 @@ namespace gView.Framework.UI.Controls
         public ScrollingListBox()
         {
             InitializeComponent();
+
+            this.CalcFontScaleFactor();
         }
+
+        public float FontScaleFactor { get; set; }
 
         public int HorizontalScrollPos
         {
@@ -62,6 +66,22 @@ namespace gView.Framework.UI.Controls
                 }
             }
         }
+
+        public void CalcFontScaleFactor()
+        {
+            try
+            {
+                using (Graphics graphics = this.CreateGraphics())
+                {
+                    this.FontScaleFactor = graphics.DpiX / 96f;
+                }
+
+                this.ItemHeight = (int)(this.ItemHeight * this.FontScaleFactor);
+            }
+            catch { this.FontScaleFactor = 1f; }
+        }
+
+
         #region Scrolling
         
         ScrollInfoStruct _vsi=new ScrollInfoStruct();

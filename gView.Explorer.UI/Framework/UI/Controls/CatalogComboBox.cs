@@ -28,7 +28,16 @@ namespace gView.Framework.UI.Controls
             //    ExplorerImageList.List.AddImages(imageList1);
             //}
             //if (FormExplorer.globalImageList == null) FormExplorer.globalImageList = imageList1;
+
+            using (Graphics graphics = this.CreateGraphics())
+            {
+                this.FontScaleFactor = graphics.DpiX / 96f;
+            }
+
+            cmbCatalog.ItemHeight = (int)(cmbCatalog.ItemHeight * this.FontScaleFactor);
         }
+
+        private float FontScaleFactor { get; set; }
 
         private void CatalogComboBox_Load(object sender, EventArgs e)
         {

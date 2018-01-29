@@ -69,6 +69,8 @@ namespace gView.Framework.UI.Controls
             // Dieser Aufruf ist für den Windows Form-Designer erforderlich.
             InitializeComponent();
 
+            
+
             _menuItemInsertGroup = new ToolStripMenuItem(LocalizedResources.GetResString("Menu.InsertGroup", "Insert Group"), iLMenuItem.Images[1]);
             _menuItemInsertGroup.Click += new EventHandler(this.clickInsertGroup);
             _menuItemMoveToGroup = new ToolStripMenuItem(LocalizedResources.GetResString("Menu.MoveToGroup", "Move to Group"), iLMenuItem.Images[2]);
@@ -101,6 +103,8 @@ namespace gView.Framework.UI.Controls
             LocalizedResources.GlobalizeMenuItem(menuStripGroupLayer);
             LocalizedResources.GlobalizeMenuItem(menuStripMap);
             LocalizedResources.GlobalizeMenuItem(connectionPropertiesToolStripMenuItem);
+
+            this.list.CalcFontScaleFactor();
         }
 
         void LockLayer_Click(object sender, EventArgs e)
@@ -663,6 +667,7 @@ namespace gView.Framework.UI.Controls
             this.debuggingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuUnreferencedLayers = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.iLMenuItem = new System.Windows.Forms.ImageList(this.components);
             this.menuStripGroupLayer = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
@@ -672,7 +677,6 @@ namespace gView.Framework.UI.Controls
             this.contextMenuStripDataset = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.connectionPropertiesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.list = new gView.Framework.UI.Controls.ScrollingListBox();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.menuStripMap.SuspendLayout();
             this.menuStripGroupLayer.SuspendLayout();
             this.contextMenuStripDataset.SuspendLayout();
@@ -706,11 +710,13 @@ namespace gView.Framework.UI.Controls
             // 
             // menuStripFeatureLayer
             // 
+            this.menuStripFeatureLayer.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.menuStripFeatureLayer.Name = "menuStripFeatureLayer";
             this.menuStripFeatureLayer.Size = new System.Drawing.Size(61, 4);
             // 
             // menuStripMap
             // 
+            this.menuStripMap.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.menuStripMap.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMapActivate,
             this.toolStripSeparator2,
@@ -723,72 +729,77 @@ namespace gView.Framework.UI.Controls
             this.toolStripMenuItem1,
             this.toolStripSeparator1});
             this.menuStripMap.Name = "menuStripMap";
-            this.menuStripMap.Size = new System.Drawing.Size(153, 182);
+            this.menuStripMap.Size = new System.Drawing.Size(193, 208);
             // 
             // toolStripMapActivate
             // 
             this.toolStripMapActivate.Name = "toolStripMapActivate";
-            this.toolStripMapActivate.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMapActivate.Size = new System.Drawing.Size(192, 30);
             this.toolStripMapActivate.Text = "Activate";
             this.toolStripMapActivate.Click += new System.EventHandler(this.toolStripMapActivate_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(189, 6);
             // 
             // toolStripMapNewMap
             // 
             this.toolStripMapNewMap.Name = "toolStripMapNewMap";
-            this.toolStripMapNewMap.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMapNewMap.Size = new System.Drawing.Size(192, 30);
             this.toolStripMapNewMap.Text = "New Map";
             this.toolStripMapNewMap.Click += new System.EventHandler(this.toolStripMapNewMap_Click);
             // 
             // toolStripMapDeleteMap
             // 
             this.toolStripMapDeleteMap.Name = "toolStripMapDeleteMap";
-            this.toolStripMapDeleteMap.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMapDeleteMap.Size = new System.Drawing.Size(192, 30);
             this.toolStripMapDeleteMap.Text = "Delete Map";
             this.toolStripMapDeleteMap.Click += new System.EventHandler(this.toolStripMapDeleteMap_Click);
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(189, 6);
             // 
             // toolStripMenuUnlock
             // 
             this.toolStripMenuUnlock.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuUnlock.Image")));
             this.toolStripMenuUnlock.Name = "toolStripMenuUnlock";
-            this.toolStripMenuUnlock.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuUnlock.Size = new System.Drawing.Size(192, 30);
             this.toolStripMenuUnlock.Text = "Unlock Layer";
             // 
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator4.Size = new System.Drawing.Size(189, 6);
             // 
             // debuggingToolStripMenuItem
             // 
             this.debuggingToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menuUnreferencedLayers});
             this.debuggingToolStripMenuItem.Name = "debuggingToolStripMenuItem";
-            this.debuggingToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.debuggingToolStripMenuItem.Size = new System.Drawing.Size(192, 30);
             this.debuggingToolStripMenuItem.Text = "Debugging";
             // 
             // menuUnreferencedLayers
             // 
             this.menuUnreferencedLayers.Name = "menuUnreferencedLayers";
-            this.menuUnreferencedLayers.Size = new System.Drawing.Size(187, 22);
+            this.menuUnreferencedLayers.Size = new System.Drawing.Size(267, 30);
             this.menuUnreferencedLayers.Text = "Unreferenced Layers...";
             this.menuUnreferencedLayers.Click += new System.EventHandler(this.menuUnreferencedLayers_Click);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(192, 30);
             this.toolStripMenuItem1.Text = "Properties";
             this.toolStripMenuItem1.Click += new System.EventHandler(this.MapProperties_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(189, 6);
             // 
             // iLMenuItem
             // 
@@ -802,16 +813,17 @@ namespace gView.Framework.UI.Controls
             // 
             // menuStripGroupLayer
             // 
+            this.menuStripGroupLayer.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.menuStripGroupLayer.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripSeparator5,
             this.menuApply});
             this.menuStripGroupLayer.Name = "menuStripGroupLayer";
-            this.menuStripGroupLayer.Size = new System.Drawing.Size(102, 32);
+            this.menuStripGroupLayer.Size = new System.Drawing.Size(132, 40);
             // 
             // toolStripSeparator5
             // 
             this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(98, 6);
+            this.toolStripSeparator5.Size = new System.Drawing.Size(128, 6);
             // 
             // menuApply
             // 
@@ -819,34 +831,35 @@ namespace gView.Framework.UI.Controls
             this.menuGroupApplyVisibility,
             this.menuGroupApplyScales});
             this.menuApply.Name = "menuApply";
-            this.menuApply.Size = new System.Drawing.Size(101, 22);
+            this.menuApply.Size = new System.Drawing.Size(131, 30);
             this.menuApply.Text = "Apply";
             // 
             // menuGroupApplyVisibility
             // 
             this.menuGroupApplyVisibility.Name = "menuGroupApplyVisibility";
-            this.menuGroupApplyVisibility.Size = new System.Drawing.Size(111, 22);
+            this.menuGroupApplyVisibility.Size = new System.Drawing.Size(161, 30);
             this.menuGroupApplyVisibility.Text = "Visibility";
             this.menuGroupApplyVisibility.Click += new System.EventHandler(this.menuGroupApplyVisibility_Click);
             // 
             // menuGroupApplyScales
             // 
             this.menuGroupApplyScales.Name = "menuGroupApplyScales";
-            this.menuGroupApplyScales.Size = new System.Drawing.Size(111, 22);
+            this.menuGroupApplyScales.Size = new System.Drawing.Size(161, 30);
             this.menuGroupApplyScales.Text = "Scales";
             this.menuGroupApplyScales.Click += new System.EventHandler(this.menuGroupApplyScales_Click);
             // 
             // contextMenuStripDataset
             // 
+            this.contextMenuStripDataset.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.contextMenuStripDataset.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.connectionPropertiesToolStripMenuItem});
             this.contextMenuStripDataset.Name = "contextMenuStripDataset";
-            this.contextMenuStripDataset.Size = new System.Drawing.Size(178, 26);
+            this.contextMenuStripDataset.Size = new System.Drawing.Size(255, 34);
             // 
             // connectionPropertiesToolStripMenuItem
             // 
             this.connectionPropertiesToolStripMenuItem.Name = "connectionPropertiesToolStripMenuItem";
-            this.connectionPropertiesToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
+            this.connectionPropertiesToolStripMenuItem.Size = new System.Drawing.Size(254, 30);
             this.connectionPropertiesToolStripMenuItem.Text = "ConnectionProperties";
             this.connectionPropertiesToolStripMenuItem.Click += new System.EventHandler(this.connectionPropertiesToolStripMenuItem_Click);
             // 
@@ -859,27 +872,23 @@ namespace gView.Framework.UI.Controls
             this.list.HorizontalScrollbar = true;
             this.list.HorizontalScrollPos = 0;
             this.list.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.list.ItemHeight = 30;
             this.list.Location = new System.Drawing.Point(0, 0);
             this.list.Name = "list";
             this.list.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
             this.list.Size = new System.Drawing.Size(160, 392);
             this.list.TabIndex = 0;
             this.list.VerticalScrollPos = 0;
-            this.list.MouseUp += new System.Windows.Forms.MouseEventHandler(this.list_MouseUp);
             this.list.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.list_DrawItem);
             this.list.MeasureItem += new System.Windows.Forms.MeasureItemEventHandler(this.list_MeasureItem);
             this.list.SelectedIndexChanged += new System.EventHandler(this.list_SelectedIndexChanged);
-            this.list.DragDrop += new System.Windows.Forms.DragEventHandler(this.list_DragDrop);
-            this.list.DoubleClick += new System.EventHandler(this.list_DoubleClick);
-            this.list.MouseMove += new System.Windows.Forms.MouseEventHandler(this.list_MouseMove);
-            this.list.MouseDown += new System.Windows.Forms.MouseEventHandler(this.list_MouseDown);
-            this.list.DragEnter += new System.Windows.Forms.DragEventHandler(this.list_DragEnter);
             this.list.SelectedValueChanged += new System.EventHandler(this.list_SelectedValueChanged);
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
+            this.list.DragDrop += new System.Windows.Forms.DragEventHandler(this.list_DragDrop);
+            this.list.DragEnter += new System.Windows.Forms.DragEventHandler(this.list_DragEnter);
+            this.list.DoubleClick += new System.EventHandler(this.list_DoubleClick);
+            this.list.MouseDown += new System.Windows.Forms.MouseEventHandler(this.list_MouseDown);
+            this.list.MouseMove += new System.Windows.Forms.MouseEventHandler(this.list_MouseMove);
+            this.list.MouseUp += new System.Windows.Forms.MouseEventHandler(this.list_MouseUp);
             // 
             // TOCControl
             // 
@@ -909,6 +918,8 @@ namespace gView.Framework.UI.Controls
             {
                 e.ItemHeight = 20;
             }
+
+            e.ItemHeight = (int)(e.ItemHeight * list.FontScaleFactor);
         }
 
         private int _lastLayerLevel = 0;
