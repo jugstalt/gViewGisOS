@@ -925,10 +925,10 @@ namespace gView.Framework.OGC.DB
                         string[] c1 = xy[0].Split(' ');
                         string[] c2 = xy[1].Split(' ');
                         envelope = new Envelope(
-                            Convert.ToDouble(c1[0], gView.Framework.OGC.OGC.numberFormat_EnUS),
-                            Convert.ToDouble(c1[1], gView.Framework.OGC.OGC.numberFormat_EnUS),
-                            Convert.ToDouble(c2[0], gView.Framework.OGC.OGC.numberFormat_EnUS),
-                            Convert.ToDouble(c2[1], gView.Framework.OGC.OGC.numberFormat_EnUS));
+                             gView.Framework.OGC.OGC.ToDouble(c1[0]),
+                             gView.Framework.OGC.OGC.ToDouble(c1[1]),
+                             gView.Framework.OGC.OGC.ToDouble(c2[0]),
+                             gView.Framework.OGC.OGC.ToDouble(c2[1]));
                     }
                     catch { }
                 }

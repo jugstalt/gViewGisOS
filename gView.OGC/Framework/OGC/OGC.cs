@@ -649,5 +649,25 @@ namespace gView.Framework.OGC
             else
                 writer.Write(val);
         }
+
+        public static double ToDouble(string number)
+        {
+            double ret = 0D;
+            try
+            {
+                ret = Convert.ToDouble(number, gView.Framework.OGC.OGC.numberFormat_EnUS);
+            }
+            catch(OverflowException)
+            {
+                if (number.Trim().StartsWith("-"))
+                    return double.MinValue;
+                return double.MaxValue;
+            }
+            catch
+            {
+                return 0D;
+            }
+            return ret;
+        }
     }
 }

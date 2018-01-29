@@ -59,6 +59,8 @@ namespace gView.Framework.OGC.DB
                         break;
                     case "POINT":
                     case "POINTM":
+                    case "MULTIPOINT":
+                    case "MULTIPOINTM":
                         _geomType = geometryType.Point;
                         break;
                     default:
