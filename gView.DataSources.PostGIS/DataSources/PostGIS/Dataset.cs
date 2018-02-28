@@ -253,7 +253,7 @@ namespace gView.DataSources.PostGIS
             return false;
         }
 
-        public override string PrimaryKeyField(string tableName)
+        private /*override*/ string PrimaryKeyField_old(string tableName)
         {
             string schema = "";
             if (tableName.Contains("."))
@@ -282,6 +282,29 @@ JOIN information_schema.constraint_column_usage AS ccu USING (constraint_schema,
 JOIN information_schema.columns AS c ON c.table_schema = tc.constraint_schema AND tc.table_name = c.table_name AND ccu.column_name = c.column_name
 where constraint_type = 'PRIMARY KEY' and tc.table_name = '" + tableName + "'";
             }
+        }
+
+        public override string PrimaryKeyField(string tableName)
+        {
+            string schema = "";
+            if (tableName.Contains("."))
+            {
+                schema = tableName.Split('.')[0];
+                tableName = tableName.Substring(schema.Length + 1);
+            }
+
+            return @"SELECT               
+  pg_attribute.attname, 
+  format_type(pg_attribute.atttypid, pg_attribute.atttypmod) 
+FROM pg_index, pg_class, pg_attribute, pg_namespace 
+WHERE 
+  pg_class.oid = '" + tableName + @"'::regclass AND 
+  indrelid = pg_class.oid AND 
+  nspname = '" + (String.IsNullOrWhiteSpace(schema) ? "public" : schema) + @"' AND 
+  pg_class.relnamespace = pg_namespace.oid AND 
+  pg_attribute.attrelid = pg_class.oid AND 
+  pg_attribute.attnum = any(pg_index.indkey)
+ AND indisprimary";
         }
     }
 }
