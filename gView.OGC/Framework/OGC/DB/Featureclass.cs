@@ -201,7 +201,7 @@ namespace gView.Framework.OGC.DB
 
         private string GetPKey()
         {
-            string pKeySelect = _dataset.PrimaryKeyField(_name);
+            string pKeySelect = _dataset.IntegerPrimaryKeyField(_name);
             try
             {
                 if (!String.IsNullOrWhiteSpace(pKeySelect))

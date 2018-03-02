@@ -865,7 +865,7 @@ namespace gView.Framework.OGC.DB
             return "SELECT " + DbSchemaPrefix + "AddGeometryColumn ('" + schemaName + "','" + tableName + "','" + colunName + "','" + srid + "','" + geomTypeString + "','2')";
         }
 
-        virtual public string PrimaryKeyField(string tableName)
+        virtual public string IntegerPrimaryKeyField(string tableName)
         {
             return String.Empty;
         }

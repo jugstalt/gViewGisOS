@@ -253,58 +253,73 @@ namespace gView.DataSources.PostGIS
             return false;
         }
 
-        private /*override*/ string PrimaryKeyField_old(string tableName)
+        //        public override string PrimaryKeyField(string tableName)
+        //        {
+        //            string schema = "";
+        //            if (tableName.Contains("."))
+        //            {
+        //                schema = tableName.Split('.')[0];
+        //                tableName = tableName.Substring(schema.Length + 1);
+        //            }
+
+        //            if (!String.IsNullOrWhiteSpace(schema))
+        //            {
+        //                return @"SELECT
+        //c.column_name
+        //FROM
+        //information_schema.table_constraints tc 
+        //JOIN information_schema.constraint_column_usage AS ccu USING (constraint_schema, constraint_name) 
+        //JOIN information_schema.columns AS c ON c.table_schema = tc.constraint_schema AND tc.table_name = c.table_name AND ccu.column_name = c.column_name
+        //where constraint_type = 'PRIMARY KEY' and tc.table_schema='" + schema + "' and tc.table_name = '" + tableName + "'";
+        //            }
+        //            else
+        //            {
+        //                return @"SELECT
+        //c.column_name
+        //FROM
+        //information_schema.table_constraints tc 
+        //JOIN information_schema.constraint_column_usage AS ccu USING (constraint_schema, constraint_name) 
+        //JOIN information_schema.columns AS c ON c.table_schema = tc.constraint_schema AND tc.table_name = c.table_name AND ccu.column_name = c.column_name
+        //where constraint_type = 'PRIMARY KEY' and tc.table_name = '" + tableName + "'";
+        //            }
+        //        }
+
+        //        public override string PrimaryKeyField(string tableName)
+        //        {
+        //            string schema = "";
+        //            if (tableName.Contains("."))
+        //            {
+        //                schema = tableName.Split('.')[0];
+        //                tableName = tableName.Substring(schema.Length + 1);
+        //            }
+
+        //            return @"SELECT               
+        //  pg_attribute.attname, 
+        //  format_type(pg_attribute.atttypid, pg_attribute.atttypmod) 
+        //FROM pg_index, pg_class, pg_attribute, pg_namespace 
+        //WHERE 
+        //  pg_class.oid = '" + tableName + @"'::regclass AND 
+        //  indrelid = pg_class.oid AND 
+        //  nspname = '" + (String.IsNullOrWhiteSpace(schema) ? "public" : schema) + @"' AND 
+        //  pg_class.relnamespace = pg_namespace.oid AND 
+        //  pg_attribute.attrelid = pg_class.oid AND 
+        //  pg_attribute.attnum = any(pg_index.indkey)
+        // AND indisprimary";
+        //        }
+
+        public override string IntegerPrimaryKeyField(string tableName)
         {
-            string schema = "";
+            string schema = "public";
             if (tableName.Contains("."))
             {
                 schema = tableName.Split('.')[0];
                 tableName = tableName.Substring(schema.Length + 1);
             }
 
-            if (!String.IsNullOrWhiteSpace(schema))
-            {
-                return @"SELECT
-c.column_name
-FROM
-information_schema.table_constraints tc 
-JOIN information_schema.constraint_column_usage AS ccu USING (constraint_schema, constraint_name) 
-JOIN information_schema.columns AS c ON c.table_schema = tc.constraint_schema AND tc.table_name = c.table_name AND ccu.column_name = c.column_name
-where constraint_type = 'PRIMARY KEY' and tc.table_schema='" + schema + "' and tc.table_name = '" + tableName + "'";
-            }
-            else
-            {
-                return @"SELECT
-c.column_name
-FROM
-information_schema.table_constraints tc 
-JOIN information_schema.constraint_column_usage AS ccu USING (constraint_schema, constraint_name) 
-JOIN information_schema.columns AS c ON c.table_schema = tc.constraint_schema AND tc.table_name = c.table_name AND ccu.column_name = c.column_name
-where constraint_type = 'PRIMARY KEY' and tc.table_name = '" + tableName + "'";
-            }
-        }
-
-        public override string PrimaryKeyField(string tableName)
-        {
-            string schema = "";
-            if (tableName.Contains("."))
-            {
-                schema = tableName.Split('.')[0];
-                tableName = tableName.Substring(schema.Length + 1);
-            }
-
-            return @"SELECT               
-  pg_attribute.attname, 
-  format_type(pg_attribute.atttypid, pg_attribute.atttypmod) 
-FROM pg_index, pg_class, pg_attribute, pg_namespace 
-WHERE 
-  pg_class.oid = '" + tableName + @"'::regclass AND 
-  indrelid = pg_class.oid AND 
-  nspname = '" + (String.IsNullOrWhiteSpace(schema) ? "public" : schema) + @"' AND 
-  pg_class.relnamespace = pg_namespace.oid AND 
-  pg_attribute.attrelid = pg_class.oid AND 
-  pg_attribute.attnum = any(pg_index.indkey)
- AND indisprimary";
+            return @"SELECT a.attname
+FROM pg_index i
+JOIN pg_attribute a ON a.attrelid=i.indrelid AND a.attnum=ANY(i.indkey)
+WHERE i.indrelid='" + schema + "." + tableName + @"'::regclass AND i.indisprimary AND format_type(a.atttypid, a.atttypmod)='integer'";
         }
     }
 }
