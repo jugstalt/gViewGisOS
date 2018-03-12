@@ -17,7 +17,7 @@ namespace gView.Interoperability.ArcXML.Dataset
     {
         IExplorerIcon _icon = new ArcIMSIcon();
 
-        public ArcIMSExplorerObjects() : base(null, null) { }
+        public ArcIMSExplorerObjects() : base(null, null, 0) { }
 
         #region IExplorerObject Member
 
@@ -95,12 +95,12 @@ namespace gView.Interoperability.ArcXML.Dataset
         IExplorerIcon _icon = new ArcIMSNewConnectionIcon();
 
         public ArcIMSNewConnectionExplorerObject()
-            : base(null, null)
+            : base(null, null, 0)
         {
         }
 
         public ArcIMSNewConnectionExplorerObject(IExplorerObject parent)
-            : base(parent, null)
+            : base(parent, null, 0)
         {
         }
 
@@ -198,9 +198,9 @@ namespace gView.Interoperability.ArcXML.Dataset
         private string _name = "", _connectionString = "";
         private IExplorerIcon _icon = new ArcIMSConnectionIcon();
 
-        public ArcIMSConnectionExplorerObject() : base(null, null) { }
+        public ArcIMSConnectionExplorerObject() : base(null, null, 0) { }
         internal ArcIMSConnectionExplorerObject(IExplorerObject parent, string name, string connectionString)
-            : base(parent,null)
+            : base(parent,null, 0)
         {
             _name = name;
             _connectionString = connectionString;
@@ -353,7 +353,7 @@ namespace gView.Interoperability.ArcXML.Dataset
         private ArcIMSConnectionExplorerObject _parent = null;
 
         internal ArcIMSServiceExplorerObject(ArcIMSConnectionExplorerObject parent, string name, string connectionString)
-            : base(parent,typeof(ArcIMSClass))
+            : base(parent,typeof(ArcIMSClass), 1)
         {
             _name = name;
             _connectionString = connectionString;

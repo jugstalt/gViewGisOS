@@ -25,7 +25,7 @@ namespace gView.DataSources.Fdb.UI
         private FDBImport _import = null;
 
         public ExplorerObjectFeatureClassImport(IExplorerObject parent, Type type)
-           : base(parent, type)
+           : base(parent, type, 0)
         {
         }
 

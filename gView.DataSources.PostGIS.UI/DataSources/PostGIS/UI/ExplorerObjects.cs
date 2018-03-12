@@ -24,7 +24,7 @@ namespace gView.DataSources.PostGIS.UI
     {
         private IExplorerIcon _icon = new PostGISIcon();
 
-        public PostGISExplorerGroupObject() : base(null, null) { }
+        public PostGISExplorerGroupObject() : base(null, null, 0) { }
 
         #region IExplorerGroupObject Members
 
@@ -125,12 +125,12 @@ namespace gView.DataSources.PostGIS.UI
         private IExplorerIcon _icon = new PostGISNewConnectionIcon();
 
         public PostGISNewConnectionObject()
-            : base(null, null)
+            : base(null, null, 0)
         {
         }
 
         public PostGISNewConnectionObject(IExplorerObject parent)
-            : base(parent, null)
+            : base(parent, null, 0)
         {
         }
 
@@ -460,9 +460,9 @@ namespace gView.DataSources.PostGIS.UI
         private IFeatureClass _fc = null;
         private PostGISExplorerObject _parent = null;
 
-        public PostGISFeatureClassExplorerObject() : base(null, typeof(IFeatureClass)) { }
+        public PostGISFeatureClassExplorerObject() : base(null, typeof(IFeatureClass), 1) { }
         public PostGISFeatureClassExplorerObject(PostGISExplorerObject parent, IDatasetElement element)
-            : base(parent, typeof(IFeatureClass))
+            : base(parent, typeof(IFeatureClass), 1)
         {
             if (element == null || !(element.Class is IFeatureClass)) return;
 

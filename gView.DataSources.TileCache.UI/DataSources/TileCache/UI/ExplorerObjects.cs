@@ -17,7 +17,7 @@ namespace gView.DataSources.TileCache.UI
         private IExplorerIcon _icon = new TileCacheGroupIcon();
 
         public TileCacheGroupExplorerObject()
-            : base(null, null)
+            : base(null, null, 0)
         {
         }
 
@@ -93,9 +93,9 @@ namespace gView.DataSources.TileCache.UI
         private IExplorerIcon _icon = new TileCacheNewConnectionIcon();
 
         public TileCacheNewConnectionObject()
-            : base(null, null) { }
+            : base(null, null, 0) { }
         public TileCacheNewConnectionObject(IExplorerObject parent)
-            : base(parent, null) { }
+            : base(parent, null, 0) { }
 
         #region IExplorerSimpleObject Members
 
@@ -194,9 +194,9 @@ namespace gView.DataSources.TileCache.UI
         private IExplorerIcon _icon = new TileCacheLocalCachePropertiesIcon();
 
         public TileCacheLocalCacheProperties()
-            : base(null, null) { }
+            : base(null, null, 1) { }
         public TileCacheLocalCacheProperties(IExplorerObject parent)
-            : base(parent, null) { }
+            : base(parent, null, 1) { }
 
         #region IExplorerSimpleObject Members
 
@@ -297,9 +297,9 @@ namespace gView.DataSources.TileCache.UI
         private Dataset _dataset = null;
 
         public TileCacheDatasetExplorerObject()
-            : base(null, null) { }
+            : base(null, null, 0) { }
         public TileCacheDatasetExplorerObject(IExplorerObject parent, string name, string connectionString)
-            : base(parent, null)
+            : base(parent, null, 0)
         {
             _name = name;
             _connectionString = connectionString;
@@ -491,9 +491,9 @@ namespace gView.DataSources.TileCache.UI
         private IRasterClass _rc = null;
         private TileCacheDatasetExplorerObject _parent = null;
 
-        public TileCacheLayerExplorerObject() : base(null, typeof(FeatureClass)) { }
+        public TileCacheLayerExplorerObject() : base(null, typeof(FeatureClass), 1) { }
         public TileCacheLayerExplorerObject(TileCacheDatasetExplorerObject parent, IDatasetElement element)
-            : base(parent, typeof(FeatureClass))
+            : base(parent, typeof(FeatureClass), 1)
         {
             if (element == null) return;
 

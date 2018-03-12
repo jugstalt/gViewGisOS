@@ -31,7 +31,7 @@ namespace gView.DataSources.Fdb.UI.MSSql
     {
         private IExplorerIcon _icon = new SqlFDBConnectionsIcon();
 
-        public SqlFDBExplorerGroupObject() : base(null, null) { }
+        public SqlFDBExplorerGroupObject() : base(null, null, 0) { }
 
         #region IExplorerGroupObject Members
 
@@ -124,7 +124,7 @@ namespace gView.DataSources.Fdb.UI.MSSql
         private IExplorerObject _parent;
 
         public SqlFDBNewFDBDatabase()
-            : base(null, null)
+            : base(null, null, 0)
         {
         }
 
@@ -200,9 +200,9 @@ namespace gView.DataSources.Fdb.UI.MSSql
         private IExplorerIcon _icon = new SqlFDBNewConnectionIcon();
 
         public SqlFDBNewConnectionObject()
-            : base(null, null) { }
+            : base(null, null, 0) { }
         public SqlFDBNewConnectionObject(IExplorerObject parent)
-            : base(parent, null) { }
+            : base(parent, null, 0) { }
 
         #region IExplorerSimpleObject Members
 
@@ -318,9 +318,9 @@ namespace gView.DataSources.Fdb.UI.MSSql
         private DbConnectionString _dbConnectionString = null;
 
         public SqlFDBExplorerObject()
-            : base(null, null) { }
+            : base(null, null, 1) { }
         public SqlFDBExplorerObject(IExplorerObject parent, string server, string connectionString)
-            : base(parent, null)
+            : base(parent, null, 1)
         {
             _server = server;
             _connectionString = connectionString;
@@ -1168,9 +1168,9 @@ namespace gView.DataSources.Fdb.UI.MSSql
         private ToolStripItem[] _contextItems = null;
         private bool _isNetwork = false;
 
-        public SqlFDBFeatureClassExplorerObject() : base(null, typeof(_IMClass)) { }
+        public SqlFDBFeatureClassExplorerObject() : base(null, typeof(_IMClass), 1) { }
         public SqlFDBFeatureClassExplorerObject(SqlFDBDatasetExplorerObject parent, string dsname, IDatasetElement element)
-            : base(parent, typeof(_IMClass))
+            : base(parent, typeof(_IMClass), 1)
         {
             if (element == null) return;
 
@@ -1554,7 +1554,7 @@ namespace gView.DataSources.Fdb.UI.MSSql
     [gView.Framework.system.RegisterPlugIn("97914E6A-3084-4fc0-8B31-4A6D2C990F72")]
     public class SqlFDBNetworkClassExplorerObject : ExplorerObjectCls, IExplorerSimpleObject, IExplorerObjectCreatable
     {
-        public SqlFDBNetworkClassExplorerObject() : base(null, typeof(SqlFDBNetworkFeatureclass)) { }
+        public SqlFDBNetworkClassExplorerObject() : base(null, typeof(SqlFDBNetworkFeatureclass), 0) { }
 
         #region IExplorerObject Member
 
@@ -1722,6 +1722,8 @@ namespace gView.DataSources.Fdb.UI.MSSql
             get { return null; }
         }
 
+        public int Priority { get { return 1; } }
+
         #endregion
 
         #region IDisposable Member
@@ -1840,6 +1842,8 @@ namespace gView.DataSources.Fdb.UI.MSSql
             get { return null; }
         }
 
+        public int Priority { get { return 1; } }
+
         #endregion
 
         #region IDisposable Member
@@ -1864,7 +1868,7 @@ namespace gView.DataSources.Fdb.UI.MSSql
     //[gView.Framework.system.RegisterPlugIn("C3D1F9CA-69B5-46e9-B4DB-05534512F8B9")]
     public class SqlFDBTileGridClassExplorerObject : ExplorerObjectCls, IExplorerSimpleObject, IExplorerObjectCreatable
     {
-        public SqlFDBTileGridClassExplorerObject() : base(null, null) { }
+        public SqlFDBTileGridClassExplorerObject() : base(null, null, 1) { }
 
         #region IExplorerObject Member
 

@@ -16,9 +16,9 @@ namespace gView.Interoperability.OGC.UI.Dataset.WMS
     {
         IExplorerIcon _icon = new WMSIcon();
 
-        public WMSExplorerObject() : base(null, null) { }
+        public WMSExplorerObject() : base(null, null, 0) { }
         public WMSExplorerObject(IExplorerObject parent)
-            : base(parent, null)
+            : base(parent, null, 0)
         {
         }
 
@@ -99,12 +99,12 @@ namespace gView.Interoperability.OGC.UI.Dataset.WMS
         IExplorerParentObject _parent;
 
         public WMSNewConnectionExplorerObject()
-            : base(null, null)
+            : base(null, null, 0)
         {
             _parent = null;
         }
         public WMSNewConnectionExplorerObject(IExplorerParentObject parent)
-            : base(parent as IExplorerObject, null)
+            : base(parent as IExplorerObject, null, 0)
         {
             _parent = parent;
         }
@@ -223,7 +223,7 @@ namespace gView.Interoperability.OGC.UI.Dataset.WMS
         private string _type = "OGC WMS Service";
 
         internal WMSServiceExplorerObject(IExplorerParentObject parent, string name, string connectionString)
-            : base(parent as IExplorerObject, typeof(WMSClass))
+            : base(parent as IExplorerObject, typeof(WMSClass), 1)
         {
             _name = name;
             _connectionString = connectionString;

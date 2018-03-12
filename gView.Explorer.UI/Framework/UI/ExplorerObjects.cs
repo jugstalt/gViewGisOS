@@ -23,9 +23,9 @@ namespace gView.Framework.UI
         static private IExplorerIcon _icon = new DirectoryExplorerIcon();
         string _path = "";
 
-        public DirectoryObject() : base(null, null) { }
+        public DirectoryObject() : base(null, null, 1) { }
         public DirectoryObject(IExplorerObject parent, string path)
-            : base(parent, null)
+            : base(parent, null, 1)
         {
             _path = path;
         }
@@ -585,7 +585,7 @@ namespace gView.Framework.UI
         private string _type = "";
 
         public DriveObject(IExplorerObject parent, string drive, uint type)
-            : base(parent, null)
+            : base(parent, null, -1)
         {
             _drive = drive;
             switch (type)
@@ -737,7 +737,7 @@ namespace gView.Framework.UI
         IApplication _application = null;
 
         public ComputerObject(IApplication application)
-            : base(null, null)
+            : base(null, null, 0)
         {
             _application = application;
         }

@@ -19,9 +19,9 @@ namespace gView.DataSources.OGR.UI
         private AccessFDBIcon _icon = new AccessFDBIcon();
         private string _filename = "", _errMsg = "";
 
-        public PersonalGDBExplorerObject() : base(null, null) { }
+        public PersonalGDBExplorerObject() : base(null, null, 2) { }
         public PersonalGDBExplorerObject(IExplorerObject parent, string filename)
-            : base(parent, null)
+            : base(parent, null, 2)
         {
             _filename = filename;
         }
@@ -194,9 +194,9 @@ namespace gView.DataSources.OGR.UI
         private IFeatureClass _fc = null;
         private PersonalGDBExplorerObject _parent = null;
 
-        public PersonalGDBFeatureClassExplorerObject() : base(null, typeof(FeatureClass)) { }
+        public PersonalGDBFeatureClassExplorerObject() : base(null, typeof(FeatureClass),1) { }
         public PersonalGDBFeatureClassExplorerObject(PersonalGDBExplorerObject parent, string filename, IDatasetElement element)
-            : base(parent, typeof(FeatureClass))
+            : base(parent, typeof(FeatureClass),1)
         {
             if (element == null) return;
 
@@ -308,9 +308,9 @@ namespace gView.DataSources.OGR.UI
         private AccessFDBIcon _icon = new AccessFDBIcon();
         private string _filename = "", _errMsg = "";
 
-        public DxfExplorerObject() : base(null, typeof(FeatureClass)) { }
+        public DxfExplorerObject() : base(null, typeof(FeatureClass), 2) { }
         public DxfExplorerObject(IExplorerObject parent, string filename)
-            : base(parent, typeof(FeatureClass))
+            : base(parent, typeof(FeatureClass), 2)
         {
             _filename = filename;
         }
@@ -471,9 +471,9 @@ namespace gView.DataSources.OGR.UI
         private IFeatureClass _fc = null;
         private DxfExplorerObject _parent = null;
 
-        public DxfFeatureClassExplorerObject() : base(null, typeof(FeatureClass)) { }
+        public DxfFeatureClassExplorerObject() : base(null, typeof(FeatureClass), 1) { }
         public DxfFeatureClassExplorerObject(DxfExplorerObject parent, string filename, IDatasetElement element)
-            : base(parent, typeof(FeatureClass))
+            : base(parent, typeof(FeatureClass), 1)
         {
             if (element == null) return;
 
@@ -581,9 +581,9 @@ namespace gView.DataSources.OGR.UI
         private AccessFDBIcon _icon = new AccessFDBIcon();
         private string _filename = "", _errMsg = "";
 
-        public KmlExplorerObject() : base(null, null) { }
+        public KmlExplorerObject() : base(null, null, 2) { }
         public KmlExplorerObject(IExplorerObject parent, string filename)
-            : base(parent, null)
+            : base(parent, null, 2)
         {
             _filename = filename;
         }
@@ -695,7 +695,7 @@ namespace gView.DataSources.OGR.UI
             {
                 foreach (IDatasetElement element in elements)
                 {
-                    base.AddChildObject(new KmleatureClassExplorerObject(this, _filename, element));
+                    base.AddChildObject(new KmlFeatureClassExplorerObject(this, _filename, element));
                 }
             }
         }
@@ -737,16 +737,16 @@ namespace gView.DataSources.OGR.UI
         #endregion
     }
 
-    public class KmleatureClassExplorerObject : ExplorerObjectCls, IExplorerSimpleObject, ISerializableExplorerObject
+    public class KmlFeatureClassExplorerObject : ExplorerObjectCls, IExplorerSimpleObject, ISerializableExplorerObject
     {
         private string _filename = "", _fcname = "", _type = "";
         private IExplorerIcon _icon = new AccessFDBLineIcon();
         private IFeatureClass _fc = null;
         private KmlExplorerObject _parent = null;
 
-        public KmleatureClassExplorerObject() : base(null, typeof(FeatureClass)) { }
-        public KmleatureClassExplorerObject(KmlExplorerObject parent, string filename, IDatasetElement element)
-            : base(parent, typeof(FeatureClass))
+        public KmlFeatureClassExplorerObject() : base(null, typeof(FeatureClass), 1) { }
+        public KmlFeatureClassExplorerObject(KmlExplorerObject parent, string filename, IDatasetElement element)
+            : base(parent, typeof(FeatureClass), 1)
         {
             if (element == null) return;
 
@@ -854,9 +854,9 @@ namespace gView.DataSources.OGR.UI
         private IFeatureClass _fc = null;
         private IExplorerIcon _icon = new AccessFDBLineIcon();
 
-        public OGRFeatureClassExplorerObject() : base(null, typeof(FeatureClass)) { }
+        public OGRFeatureClassExplorerObject() : base(null, typeof(FeatureClass), 1) { }
         public OGRFeatureClassExplorerObject(IExplorerObject parent, string filename)
-            : base(parent, typeof(FeatureClass))
+            : base(parent, typeof(FeatureClass), 1)
         {
             _filename = filename;
 
@@ -1044,7 +1044,7 @@ namespace gView.DataSources.OGR.UI
         private IExplorerIcon _icon = new OgrDatasetGroupIcon();
 
         public OgrDatasetGroupObject()
-            : base(null, null)
+            : base(null, null, 0)
         {
         }
 
@@ -1130,9 +1130,9 @@ namespace gView.DataSources.OGR.UI
         private IExplorerIcon _icon = new OgrNewConnectionIcon();
 
         public OgrNewConnectionObject()
-            : base(null, null) { }
+            : base(null, null, 0) { }
         public OgrNewConnectionObject(IExplorerObject parent)
-            : base(parent, null) { }
+            : base(parent, null, 0) { }
 
         #region IExplorerSimpleObject Members
 
@@ -1234,9 +1234,9 @@ namespace gView.DataSources.OGR.UI
         private Dataset _dataset = null;
 
         public OgrDatasetExplorerObject()
-            : base(null, null) { }
+            : base(null, null, 0) { }
         public OgrDatasetExplorerObject(IExplorerObject parent, string name, string connectionString)
-            : base(parent, null)
+            : base(parent, null, 0)
         {
             _name = name;
             _connectionString = connectionString;
@@ -1457,9 +1457,9 @@ namespace gView.DataSources.OGR.UI
         private IFeatureClass _fc = null;
         private OgrDatasetExplorerObject _parent = null;
 
-        public OgrLayerExplorerObject() : base(null, typeof(FeatureClass)) { }
+        public OgrLayerExplorerObject() : base(null, typeof(FeatureClass), 1) { }
         public OgrLayerExplorerObject(OgrDatasetExplorerObject parent, IDatasetElement element)
-            : base(parent, typeof(FeatureClass))
+            : base(parent, typeof(FeatureClass), 1)
         {
             if (element == null) return;
 

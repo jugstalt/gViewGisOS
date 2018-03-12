@@ -393,6 +393,8 @@ namespace gView.Framework.UI
 
         object Object { get; }
         Type ObjectType { get; }
+
+        int Priority { get; }
     }
 
     public interface IExporerOjectSchema

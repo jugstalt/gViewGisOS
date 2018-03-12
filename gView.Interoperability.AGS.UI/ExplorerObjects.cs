@@ -17,7 +17,7 @@ namespace gView.Interoperability.AGS.UI
     {
         IExplorerIcon _icon = new AGSIcon();
 
-        public AGSExplorerObjects() : base(null, null) { }
+        public AGSExplorerObjects() : base(null, null, 0) { }
 
         #region IExplorerObject Member
 
@@ -94,8 +94,8 @@ namespace gView.Interoperability.AGS.UI
     {
         private IExplorerIcon _icon = new AGSNewConnectionIcon();
 
-        public AGSNewConnectionExplorerObject() : base(null, null) { }
-        public AGSNewConnectionExplorerObject(IExplorerObject parent) : base(parent, null) { }
+        public AGSNewConnectionExplorerObject() : base(null, null, 0) { }
+        public AGSNewConnectionExplorerObject(IExplorerObject parent) : base(parent, null, 0) { }
 
         #region IExplorerObject Member
 
@@ -191,9 +191,9 @@ namespace gView.Interoperability.AGS.UI
         private string _name = String.Empty, _connectionString = String.Empty;
         private IExplorerIcon _icon = new AGSConnectionIcon();
 
-        public AGSConnectionExplorerObject() : base(null, null) { }
+        public AGSConnectionExplorerObject() : base(null, null, 0) { }
         internal AGSConnectionExplorerObject(IExplorerObject parent, string name, string connectionString)
-            : base(parent, null)
+            : base(parent, null, 0)
         {
             _name = name;
             _connectionString = connectionString;
@@ -332,7 +332,7 @@ namespace gView.Interoperability.AGS.UI
         private AGSConnectionExplorerObject _parent = null;
 
         internal AGSServiceExplorerObject(AGSConnectionExplorerObject parent, string name, string connectionString)
-            : base(parent,typeof(AGSClass))
+            : base(parent,typeof(AGSClass), 1)
         {
             _name = name;
             _connectionString = connectionString;

@@ -26,9 +26,9 @@ namespace gView.DataSources.Fdb.UI.MSAccess
         private AccessFDBIcon _icon = new AccessFDBIcon();
         private string _filename = "", _errMsg = "";
 
-        public AccessFDBExplorerObject() : base(null, null) { }
+        public AccessFDBExplorerObject() : base(null, null, 0) { }
         public AccessFDBExplorerObject(IExplorerObject parent, string filename)
-            : base(parent, null)
+            : base(parent, null, 0)
         {
             _filename = filename;
         }
@@ -585,9 +585,9 @@ namespace gView.DataSources.Fdb.UI.MSAccess
         private AccessFDBDatasetExplorerObject _parent = null;
         private ToolStripItem[] _contextItems = null;
 
-        public AccessFDBFeatureClassExplorerObject() : base(null, typeof(FeatureClass)) { }
+        public AccessFDBFeatureClassExplorerObject() : base(null, typeof(FeatureClass), 1) { }
         public AccessFDBFeatureClassExplorerObject(AccessFDBDatasetExplorerObject parent, string filename, string dsname, IDatasetElement element)
-            : base(parent, typeof(FeatureClass))
+            : base(parent, typeof(FeatureClass), 1)
         {
             if (element == null) return;
 
@@ -999,6 +999,8 @@ namespace gView.DataSources.Fdb.UI.MSAccess
         {
             get { return null; }
         }
+
+        public int Priority { get { return 1; } }
 
         #endregion
 

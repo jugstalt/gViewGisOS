@@ -16,9 +16,9 @@ namespace gView.Framework.UI
         private string _filename = "";
         private MapDocument _mapDocument = null;
 
-        public MapDocumentExplorerObject() : base(null, typeof(MapDocument)) { }
+        public MapDocumentExplorerObject() : base(null, typeof(MapDocument), 2) { }
         public MapDocumentExplorerObject(IExplorerObject parent, string filename)
-            : base(parent, typeof(MapDocument))
+            : base(parent, typeof(MapDocument), 2)
         {
             _filename = filename;
         }
@@ -135,9 +135,9 @@ namespace gView.Framework.UI
         private string _filename = "";
         private IExplorerIcon _icon = new MapDocumentExploererIcon(1);
 
-        public MapExplorerObject() : base(null, typeof(Map)) { }
+        public MapExplorerObject() : base(null, typeof(Map), 2) { }
         internal MapExplorerObject(IExplorerObject parent, string filename, IMap map)
-            : base(parent, typeof(Map))
+            : base(parent, typeof(Map), 2)
         {
             _map = map;
             _filename = filename;
@@ -249,7 +249,7 @@ namespace gView.Framework.UI
         private IExplorerIcon _icon = new MapDocumentExploererIcon(1);
 
         internal FeatureLayerExplorerObject(IExplorerObject parent, ILayer layer)
-            : base(parent, typeof(ILayer))
+            : base(parent, typeof(ILayer), 1)
         {
             _parent = parent;
             _layer = layer;
@@ -330,9 +330,9 @@ namespace gView.Framework.UI
         protected ITOCElement _element;
         protected IExplorerIcon _icon;
 
-        public TOCElementExplorerObject() : base(null, typeof(ITOCElement)) { }
+        public TOCElementExplorerObject() : base(null, typeof(ITOCElement), 2) { }
         internal TOCElementExplorerObject(IExplorerObject parent, ITOCElement element)
-            : base(parent, typeof(ITOCElement))
+            : base(parent, typeof(ITOCElement), 2)
         {
             _parent = parent;
             _element = element;

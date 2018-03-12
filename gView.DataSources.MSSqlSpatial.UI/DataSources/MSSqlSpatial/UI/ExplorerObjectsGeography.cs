@@ -23,7 +23,7 @@ namespace gView.DataSources.MSSqlSpatial.UI
         private IExplorerIcon _icon = new MsSql2008SpatialGeographyIcon();
 
         public MsSql2008SpatialGeographyExplorerGroupObject()
-            : base(null,null)
+            : base(null,null, 0)
         {
         }
 
@@ -108,11 +108,11 @@ namespace gView.DataSources.MSSqlSpatial.UI
         private IExplorerIcon _icon = new MsSql2008SpatialGeographyNewConnectionIcon();
 
         public MsSql2008SpatialGeographyNewConnectionObject()
-            : base(null,null)
+            : base(null,null, 0)
         {
         }
         public MsSql2008SpatialGeographyNewConnectionObject(IExplorerObject parent)
-            : base(parent,null)
+            : base(parent,null, 0)
         {
         }
         #region IExplorerSimpleObject Members
@@ -369,9 +369,9 @@ namespace gView.DataSources.MSSqlSpatial.UI
         private IFeatureClass _fc = null;
         private MsSql2008SpatialGeographyExplorerObject _parent = null;
 
-        public MsSql2008SpatialGeographyFeatureClassExplorerObject() : base(null,typeof(IFeatureClass)) { }
+        public MsSql2008SpatialGeographyFeatureClassExplorerObject() : base(null,typeof(IFeatureClass), 1) { }
         public MsSql2008SpatialGeographyFeatureClassExplorerObject(MsSql2008SpatialGeographyExplorerObject parent, IDatasetElement element)
-            : base(parent,typeof(IFeatureClass))
+            : base(parent,typeof(IFeatureClass), 1)
         {
             if (element == null || !(element.Class is IFeatureClass)) return;
 

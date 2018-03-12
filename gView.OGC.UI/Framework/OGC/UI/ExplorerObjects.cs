@@ -19,7 +19,7 @@ namespace gView.Framework.OGC.UI
     {
         private IExplorerIcon _icon = new OGCExplorerGroupObjectIcon();
 
-        public OGCExplorerGroupObject() : base(null, null) { }
+        public OGCExplorerGroupObject() : base(null, null, 0) { }
 
         #region IExplorerGroupObject Members
 

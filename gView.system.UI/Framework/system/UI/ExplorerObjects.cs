@@ -10,10 +10,11 @@ namespace gView.Framework.system.UI
         private IExplorerObject _parent;
         private Type _type = null;
 
-        public ExplorerObjectCls(IExplorerObject parent, Type type)
+        public ExplorerObjectCls(IExplorerObject parent, Type type, int priority)
         {
             _parent = parent;
             _type = type;
+            this.Priority = priority;
         }
 
         public IExplorerObject ParentExplorerObject
@@ -25,14 +26,16 @@ namespace gView.Framework.system.UI
         {
             get { return _type; }
         }
+
+        public int Priority { get; }
     }
 
     public class ExplorerParentObject : ExplorerObjectCls, IExplorerParentObject
     {
         private List<IExplorerObject> _childObjects = null;
 
-        public ExplorerParentObject(IExplorerObject parent, Type type)
-            : base(parent, type)
+        public ExplorerParentObject(IExplorerObject parent, Type type, int priority)
+            : base(parent, type, priority)
         {
         }
 

@@ -17,9 +17,9 @@ namespace gView.DataSources.GDAL.UI
         private string _filename = "";
         private IRasterClass _class = null;
 
-        public GDALRasterFileExplorerObject() : base(null, typeof(RasterClass)) { }
+        public GDALRasterFileExplorerObject() : base(null, typeof(RasterClass), 2) { }
         private GDALRasterFileExplorerObject(IExplorerObject parent, string filename)
-            : base(parent, typeof(RasterClass))
+            : base(parent, typeof(RasterClass), 2)
         {
             _filename = filename;
         }

@@ -26,7 +26,7 @@ namespace gView.MapServer.Lib.UI
         IExplorerIcon _icon = new MapServerIcon();
 
         public MapServerExplorerObjects()
-            : base(null, null)
+            : base(null, null, 0)
         {
         }
 
@@ -107,12 +107,12 @@ namespace gView.MapServer.Lib.UI
         IExplorerIcon _icon = new MapServerNewConnectionIcon();
 
         public MapServerNewConnectionExplorerObject()
-            : base(null, null)
+            : base(null, null, 0)
         {
         }
 
         public MapServerNewConnectionExplorerObject(IExplorerObject parent)
-            : base(null, null)
+            : base(null, null, 0)
         {
         }
 
@@ -213,7 +213,7 @@ namespace gView.MapServer.Lib.UI
         private ToolStripItem[] _contextItems;
 
         public MapServerConnectionExplorerObject(IExplorerObject parent)
-            : base(parent, null)
+            : base(parent, null, 0)
         {
             List<ToolStripItem> contextItems = new List<ToolStripItem>();
 
@@ -684,7 +684,7 @@ namespace gView.MapServer.Lib.UI
         private MapServiceType _type;
         private ToolStripItem[] _menuitems;
         public MapServerServiceExplorerObject()
-            : base(null, typeof(MapServerClass))
+            : base(null, typeof(MapServerClass), 2)
         {
             _menuitems = new ToolStripItem[]{
                    new ToolStripMenuItem("Pre-Render Tiles...",null,this.MapServerServiceExplorerObject_PreRenderTiles)
@@ -692,7 +692,7 @@ namespace gView.MapServer.Lib.UI
         }
 
         internal MapServerServiceExplorerObject(MapServerConnectionExplorerObject parent, string name, string connectionString, MapServiceType type)
-            : base(parent, typeof(MapServerClass))
+            : base(parent, typeof(MapServerClass), 2)
         {
             _menuitems = new ToolStripItem[]{
                    new ToolStripMenuItem("Pre-Render Tiles...",null,this.MapServerServiceExplorerObject_PreRenderTiles)

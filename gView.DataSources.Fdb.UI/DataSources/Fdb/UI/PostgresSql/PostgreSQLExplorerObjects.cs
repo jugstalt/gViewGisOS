@@ -27,7 +27,7 @@ namespace gView.DataSources.Fdb.UI.PostgreSql
     {
         private IExplorerIcon _icon = new gView.DataSources.Fdb.UI.MSSql.SqlFDBConnectionsIcon();
 
-        public ExplorerGroupObject() : base(null, null) { }
+        public ExplorerGroupObject() : base(null, null, 0) { }
 
         #region IExplorerGroupObject Members
 
@@ -118,7 +118,7 @@ namespace gView.DataSources.Fdb.UI.PostgreSql
     {
         private SqlFDBIcon _icon = new SqlFDBIcon();
 
-        public NewFDBDatabase() : base(null, null) { }
+        public NewFDBDatabase() : base(null, null, 1) { }
 
         #region IExplorerObject Member
 
@@ -191,7 +191,7 @@ namespace gView.DataSources.Fdb.UI.PostgreSql
     {
         private IExplorerIcon _icon = new SqlFDBNewConnectionIcon();
 
-        public NewConnectionObject() : base(null, null) { }
+        public NewConnectionObject() : base(null, null, 1) { }
 
         #region IExplorerSimpleObject Members
 
@@ -296,9 +296,9 @@ namespace gView.DataSources.Fdb.UI.PostgreSql
         private ToolStripItem[] _contextItems = null;
         private DbConnectionString _dbConnectionString = null;
 
-        public ExplorerObject() : base(null, null) { }
+        public ExplorerObject(int priority) : base(null, null, priority) { }
         public ExplorerObject(IExplorerObject parent, string server, string connectionString)
-            : base(parent, null)
+            : base(parent, null, parent != null ? parent.Priority : 1)
         {
             _server = server;
             _connectionString = connectionString;
@@ -755,7 +755,7 @@ namespace gView.DataSources.Fdb.UI.PostgreSql
             string fdbName = FullName.Substring(0, lastIndex);
             string dsName = FullName.Substring(lastIndex + 1, FullName.Length - lastIndex - 1);
 
-            ExplorerObject fdbObject = new ExplorerObject();
+            ExplorerObject fdbObject = new ExplorerObject(1);
             fdbObject = (ExplorerObject)fdbObject.CreateInstanceByFullName(fdbName, cache);
             if (fdbObject == null || fdbObject.ChildObjects == null) return null;
 
@@ -906,9 +906,9 @@ namespace gView.DataSources.Fdb.UI.PostgreSql
         private ToolStripItem[] _contextItems = null;
         private bool _isNetwork = false;
 
-        public FeatureClassExplorerObject() : base(null, typeof(pgFeatureClass)) { }
+        public FeatureClassExplorerObject() : base(null, typeof(pgFeatureClass), 1) { }
         public FeatureClassExplorerObject(DatasetExplorerObject parent, string dsname, IDatasetElement element)
-            : base(parent, typeof(pgFeatureClass))
+            : base(parent, typeof(pgFeatureClass), 1)
         {
             if (element == null) return;
 
@@ -1271,7 +1271,7 @@ namespace gView.DataSources.Fdb.UI.PostgreSql
     [gView.Framework.system.RegisterPlugIn("18830A3E-FFEA-477c-B3E1-E4624F828034")]
     public class NetworkClassExplorerObject : ExplorerObjectCls, IExplorerSimpleObject, IExplorerObjectCreatable
     {
-        public NetworkClassExplorerObject() : base(null, typeof(pgFeatureClass)) { }
+        public NetworkClassExplorerObject() : base(null, typeof(pgFeatureClass), 1) { }
 
         #region IExplorerObject Member
 
@@ -1442,6 +1442,8 @@ namespace gView.DataSources.Fdb.UI.PostgreSql
             get { return null; }
         }
 
+        public int Priority { get { return 1; } }
+
         #endregion
 
         #region IDisposable Member
@@ -1555,6 +1557,8 @@ namespace gView.DataSources.Fdb.UI.PostgreSql
             get { return null; }
         }
 
+        public int Priority { get { return 1; } }
+
         #endregion
 
         #region IDisposable Member
@@ -1579,7 +1583,7 @@ namespace gView.DataSources.Fdb.UI.PostgreSql
     //[gView.Framework.system.RegisterPlugIn("9B5B718C-2ECA-47ee-851F-9D33E3D82C55")]
     public class SqlFDBTileGridClassExplorerObject : ExplorerObjectCls, IExplorerSimpleObject, IExplorerObjectCreatable
     {
-        public SqlFDBTileGridClassExplorerObject() : base(null, null) { }
+        public SqlFDBTileGridClassExplorerObject() : base(null, null, 1) { }
 
         #region IExplorerObject Member
 
@@ -1610,6 +1614,8 @@ namespace gView.DataSources.Fdb.UI.PostgreSql
         {
             get { return null; }
         }
+
+        public int Priority { get { return 1; } }
 
         #endregion
 

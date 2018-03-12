@@ -18,9 +18,9 @@ namespace gView.DataSources.Shape.UI
         private IDatasetElement _shape = null;
         private ShapeFileIcon _icon = null;
 
-        public ShapeFileExplorerObject() : base(null, typeof(IFeatureClass)) { }
+        public ShapeFileExplorerObject() : base(null, typeof(IFeatureClass), 2) { }
         public ShapeFileExplorerObject(IExplorerObject parent, string filename)
-            : base(parent, typeof(IFeatureClass))
+            : base(parent, typeof(IFeatureClass), 2)
         {
             _filename = filename;
             OpenShape();

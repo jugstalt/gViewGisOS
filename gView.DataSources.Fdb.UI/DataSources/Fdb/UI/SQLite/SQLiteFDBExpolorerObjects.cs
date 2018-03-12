@@ -26,9 +26,9 @@ namespace gView.DataSources.Fdb.UI.SQLite
         private SQLiteFDBIcon _icon = new SQLiteFDBIcon();
         private string _filename = "", _errMsg = "";
 
-        public SQLiteFDBExplorerObject() : base(null, null) { }
+        public SQLiteFDBExplorerObject() : base(null, null, 2) { }
         public SQLiteFDBExplorerObject(IExplorerObject parent, string filename)
-            : base(parent, null)
+            : base(parent, null, 2)
         {
             _filename = filename;
         }
@@ -582,9 +582,9 @@ namespace gView.DataSources.Fdb.UI.SQLite
         private ToolStripItem[] _contextItems = null;
         private bool _isNetwork = false;
 
-        public SQLiteFDBFeatureClassExplorerObject() : base(null, typeof(FeatureClass)) { }
+        public SQLiteFDBFeatureClassExplorerObject() : base(null, typeof(FeatureClass), 1) { }
         public SQLiteFDBFeatureClassExplorerObject(SQLiteFDBDatasetExplorerObject parent, string filename, string dsname, IDatasetElement element)
-            : base(parent, typeof(FeatureClass))
+            : base(parent, typeof(FeatureClass), 1)
         {
             if (element == null) return;
 
@@ -1006,6 +1006,8 @@ namespace gView.DataSources.Fdb.UI.SQLite
             get { return null; }
         }
 
+        public int Priority { get { return 1; } }
+
         #endregion
 
         #region IDisposable Member
@@ -1030,7 +1032,7 @@ namespace gView.DataSources.Fdb.UI.SQLite
     [gView.Framework.system.RegisterPlugIn("AFDE90FF-D063-4224-BD31-1B30C266D55B")]
     public class SQLiteFDBNetworkClassExplorerObject : ExplorerObjectCls, IExplorerSimpleObject, IExplorerObjectCreatable
     {
-        public SQLiteFDBNetworkClassExplorerObject() : base(null, typeof(SQLiteFDBNetworkFeatureClass)) { }
+        public SQLiteFDBNetworkClassExplorerObject() : base(null, typeof(SQLiteFDBNetworkFeatureClass), 1) { }
 
         #region IExplorerObject Member
 

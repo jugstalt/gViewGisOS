@@ -19,7 +19,7 @@ namespace gView.DataSources.EventTable.UI
         private EventTableConnectionsIcon _icon = new EventTableConnectionsIcon();
 
         public EventTableGroupObject()
-            : base(null, null)
+            : base(null, null, 0)
         {
         }
 
@@ -95,12 +95,12 @@ namespace gView.DataSources.EventTable.UI
         private IExplorerIcon _icon = new EventTableNewConnectionIcon();
 
         public EventTableNewConnectionObject()
-            : base(null, null)
+            : base(null, null, 1)
         {
         }
 
         public EventTableNewConnectionObject(IExplorerObject parent)
-            : base(parent, null)
+            : base(parent, null, 1)
         {
         }
 
@@ -208,9 +208,9 @@ namespace gView.DataSources.EventTable.UI
         private string _name = String.Empty;
         private IFeatureClass _fc = null;
 
-        public EventTableObject() : base(null, typeof(IFeatureClass)) { }
+        public EventTableObject() : base(null, typeof(IFeatureClass), 1) { }
         public EventTableObject(IExplorerObject parent, string name, EventTableConnection etconn)
-            : base(parent, typeof(IFeatureClass))
+            : base(parent, typeof(IFeatureClass), 1)
         {
             _name = name;
             _etconn = etconn;

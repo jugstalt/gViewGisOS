@@ -14,9 +14,9 @@ namespace gView.Framework.UI
         private ISpatialReference _sRef;
         private PrjIcon _icon = new PrjIcon();
 
-        public PrjExplorerObject() : base(null, typeof(SpatialReference)) { }
+        public PrjExplorerObject() : base(null, typeof(SpatialReference), 2) { }
         public PrjExplorerObject(IExplorerObject parent, string filename)
-            : base(parent, typeof(SpatialReference))
+            : base(parent, typeof(SpatialReference), 2)
         {
             _filename = filename;
         }

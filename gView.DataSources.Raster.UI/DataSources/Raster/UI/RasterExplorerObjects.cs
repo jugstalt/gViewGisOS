@@ -120,9 +120,9 @@ namespace gView.DataSources.Raster.UI
         private string _filename = "";
         private PyramidFileClass _class = null;
 
-        public RasterPyramidExplorerObject() : base(null, typeof(PyramidFileClass)) { }
+        public RasterPyramidExplorerObject() : base(null, typeof(PyramidFileClass), 2) { }
         public RasterPyramidExplorerObject(IExplorerObject parent, string filename)
-            : base(parent, typeof(PyramidFileClass))
+            : base(parent, typeof(PyramidFileClass), 2)
         {
             _filename = filename;
         }
@@ -256,9 +256,9 @@ namespace gView.DataSources.Raster.UI
         private string _filename = "";
         private IRasterClass _class = null;
 
-        public RasterFileExplorerObject() : base(null, typeof(IRasterClass)) { }
+        public RasterFileExplorerObject() : base(null, typeof(IRasterClass), 2) { }
         private RasterFileExplorerObject(IExplorerObject parent, string filename)
-            : base(parent, typeof(IRasterClass))
+            : base(parent, typeof(IRasterClass), 2)
         {
             _filename = filename;
         }

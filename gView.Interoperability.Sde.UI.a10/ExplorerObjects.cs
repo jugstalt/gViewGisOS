@@ -19,7 +19,7 @@ namespace gView.Interoperability.Sde.UI.a10
     {
         private IExplorerIcon _icon = new SdeConnectionsIcon();
 
-        public SdeExplorerGroupObject() : base(null, null) { }
+        public SdeExplorerGroupObject() : base(null, null, 0) { }
 
         #region IExplorerGroupObject Members
 
@@ -111,12 +111,12 @@ namespace gView.Interoperability.Sde.UI.a10
         private IExplorerIcon _icon = new SdeNewConnectionIcon();
 
         public SdeNewConnectionObject()
-            : base(null, null)
+            : base(null, null, 0)
         {
         }
 
         public SdeNewConnectionObject(IExplorerObject parent)
-            : base(parent, null)
+            : base(parent, null, 0)
         {
         }
 
@@ -231,9 +231,9 @@ namespace gView.Interoperability.Sde.UI.a10
         private string _server = "", _connectionString = "", _errMsg = "";
         SdeDataset _dataset = null;
 
-        public SdeExplorerObject() : base(null,typeof(SdeDataset)) { }
+        public SdeExplorerObject() : base(null,typeof(SdeDataset), 0) { }
         public SdeExplorerObject(IExplorerObject parent, string server, string connectionString)
-            : base(parent, typeof(SdeDataset))
+            : base(parent, typeof(SdeDataset), 0)
         {
             _server = server;
             _connectionString = connectionString;
@@ -392,9 +392,9 @@ namespace gView.Interoperability.Sde.UI.a10
         private IFeatureClass _fc = null;
         private SdeExplorerObject _parent;
 
-        public SdeFeatureClassExplorerObject() : base(null,typeof(IFeatureClass)) { }
+        public SdeFeatureClassExplorerObject() : base(null,typeof(IFeatureClass), 1) { }
         public SdeFeatureClassExplorerObject(SdeExplorerObject parent, IDatasetElement element)
-            : base(parent,typeof(IFeatureClass))
+            : base(parent,typeof(IFeatureClass), 1)
         {
             if (element == null) return;
 

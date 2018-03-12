@@ -222,6 +222,7 @@ namespace gView.Framework.UI.Controls
         }
 
         #region BuildListThread
+
         private void BuildListThread(object chkTreeNodes)
         {
             bool checkTreeNodes = (bool)chkTreeNodes;
@@ -318,7 +319,30 @@ namespace gView.Framework.UI.Controls
             }
             else
             {
-                listView.Items.Add(item);
+                //listView.Items.Add(item);
+                int index = listView.Items.Count, count = listView.Items.Count;
+                if (item is ExplorerObjectListViewItem) {
+                    var exObject = ((ExplorerObjectListViewItem)item).ExplorerObject;
+                    if (exObject != null) {
+                        for (index = 0; index < count; index++)
+                        {
+                            ListViewItem listItem = listView.Items[index];
+                            if(listItem is ExplorerObjectListViewItem)
+                            {
+                                var listExObject = ((ExplorerObjectListViewItem)listItem).ExplorerObject;
+                                if(listExObject!=null)
+                                {
+                                    if (exObject.Priority < listExObject.Priority)
+                                        break;
+                                    if (exObject.Priority == listExObject.Priority &&
+                                        exObject.Name.ToLower().CompareTo(listExObject.Name.ToLower()) < 0)
+                                        break;
+                                }
+                            }
+                        }
+                    }
+                }
+                listView.Items.Insert(Math.Min(count, index), item);
             }
         }
 

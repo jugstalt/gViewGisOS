@@ -16,9 +16,9 @@ namespace gView.Interoperability.OGC.UI.Dataset.GML
         internal gView.Interoperability.OGC.Dataset.GML.Dataset _dataset = null;
         private GMLIcon _icon = new GMLIcon();
 
-        public GMLExplorerObject() : base(null, typeof(OGC.Dataset.GML.Dataset)) { }
+        public GMLExplorerObject() : base(null, typeof(OGC.Dataset.GML.Dataset), 2) { }
         public GMLExplorerObject(IExplorerObject parent, string filename)
-            : base(parent, typeof(OGC.Dataset.GML.Dataset))
+            : base(parent, typeof(OGC.Dataset.GML.Dataset),2)
         {
             _filename = filename;
 
@@ -28,7 +28,7 @@ namespace gView.Interoperability.OGC.UI.Dataset.GML
             _dataset.Open();
         }
         internal GMLExplorerObject(IExplorerObject parent, GMLExplorerObject exObject)
-            : base(parent, typeof(OGC.Dataset.GML.Dataset))
+            : base(parent, typeof(OGC.Dataset.GML.Dataset), 2)
         {
             _filename = exObject._filename;
             _dataset = exObject._dataset;
@@ -167,7 +167,7 @@ namespace gView.Interoperability.OGC.UI.Dataset.GML
         private GMLFeatureClassIcon _icon = new GMLFeatureClassIcon();
 
         public GMLFeatureClassExplorerObject(GMLExplorerObject parent, string fcName)
-            : base(parent, typeof(IFeatureClass))
+            : base(parent, typeof(IFeatureClass), 1)
         {
             _parent = parent;
             _fcName = fcName;

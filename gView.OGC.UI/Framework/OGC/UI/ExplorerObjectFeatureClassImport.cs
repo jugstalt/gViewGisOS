@@ -14,7 +14,7 @@ namespace gView.Framework.OGC.UI
     public class ExplorerObjectFeatureClassImport : ExplorerParentObject, IExplorerObjectContentDragDropEvents
     {
         public ExplorerObjectFeatureClassImport(IExplorerObject parent, Type type)
-            : base(parent, type)
+            : base(parent, type, 0)
         {
         }
 
