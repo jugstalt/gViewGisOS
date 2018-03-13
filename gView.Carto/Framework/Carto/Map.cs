@@ -1470,9 +1470,9 @@ namespace gView.Framework.Carto
             _layerIDSequece = (IntegerSequence)stream.Load("layerIDSequence", new IntegerSequence(), new IntegerSequence());
 
             IDataset dataset;
-            while ((dataset = (IDataset)stream.Load("IDataset", /*new gView.Carto.Framework.Carto.UnknownDataset()*/ null)) != null)
+            //while ((dataset = (IDataset)stream.Load("IDataset", /*new gView.Carto.Framework.Carto.UnknownDataset()*/ null)) != null)
+            while ((dataset = stream.LoadPlugin<IDataset>("IDataset", new gView.Carto.Framework.Carto.UnknownDataset()/* null*/)) != null)
             {
-                //this.AddDataset(dataset, order++);
                 if (dataset.State != DatasetState.opened)
                 {
                     dataset.Open();

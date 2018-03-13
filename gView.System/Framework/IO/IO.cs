@@ -361,6 +361,32 @@ namespace gView.Framework.IO
 			}
 		}
 
+        public T LoadPlugin<T>(string key, T unknownPlugin = default(T))
+        {
+            if (_parent == null) return default(T);
+            XmlNode xmlnode = _parent.Next(key);
+            if (xmlnode == null) return default(T);
+
+            if (xmlnode.Attributes["GUID"] != null)
+            {
+                PlugInManager compManager = new PlugInManager();
+                T comp = (T)compManager.CreateInstance(new Guid(xmlnode.Attributes["GUID"].Value));
+                if (comp == null) return unknownPlugin;
+
+                if (comp is IPersistable)
+                {
+                    XmlNodePlus parent = _parent;
+                    _parent = new XmlNodePlus(xmlnode, _parent.NumberFormat);
+                    ((IPersistable)comp).Load(this);
+                    _parent = parent;
+                }
+
+                return comp;
+            }
+
+            return unknownPlugin;
+        }
+
         public void Save(string key, object val)
         {
             Save(key, val, false);

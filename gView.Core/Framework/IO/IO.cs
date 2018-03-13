@@ -9,6 +9,8 @@ namespace gView.Framework.IO
 		object Load(string key);
 		object Load(string key,object defVal);
 		object Load(string key,object defVal,object objectInstance);
+        T LoadPlugin<T>(string key, T unknownPlugin=default(T));
+
 		void Save(string key,object val);
         void SaveEncrypted(string key, string val);
         //void Save(string key, object val, object objectInstance);
