@@ -1374,6 +1374,7 @@ namespace gView.Framework.Symbology
         #endregion
     }
 
+
     [gView.Framework.system.RegisterPlugIn("71E22086-D511-4a41-AAE1-BBC78572F277")]
     public sealed class TrueTypeMarkerSymbol : LegendItem, IPropertyPage, IPointSymbol, ISymbolRotation, IFontColor, ISymbolPositioningUI, ISymbolSize
     {
