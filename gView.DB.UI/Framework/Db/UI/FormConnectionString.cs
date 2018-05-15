@@ -40,6 +40,11 @@ namespace gView.Framework.Db.UI
         public FormConnectionString()
         {
             InitializeComponent();
+
+            using (Graphics graphics = this.CreateGraphics())
+            {
+                this.FontScaleFactor = graphics.DpiX / 96f;
+            }
         }
         public FormConnectionString(DbConnectionString initialConnString)
             : this()
@@ -47,11 +52,6 @@ namespace gView.Framework.Db.UI
             _initialConnString = initialConnString;
             if (_initialConnString != null)
                 _useProvider = _initialConnString.UseProviderInConnectionString;
-
-            using (Graphics graphics = this.CreateGraphics())
-            {
-                this.FontScaleFactor = graphics.DpiX / 96f;
-            }
         }
 
         /// <summary>
@@ -426,7 +426,7 @@ namespace gView.Framework.Db.UI
             }
 
 
-            this.Height = panel1.Height + panel2.Height + panel3.Height + (int)((i * 24 + 40) * this.FontScaleFactor);
+            this.Height = panel1.Height + panel2.Height + panel3.Height + 60 + (int)((i * 24 + 40) * this.FontScaleFactor);
         }
 
         void box_TextChanged(object sender, EventArgs e)

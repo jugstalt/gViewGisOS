@@ -9,6 +9,7 @@ using gView.Framework.system.UI;
 using gView.Framework.Offline;
 using gView.DataSources.Fdb.UI;
 using gView.DataSources.Fdb.MSAccess;
+using gView.Framework.Geometry;
 
 namespace copyFeatureClass
 {
@@ -26,6 +27,7 @@ namespace copyFeatureClass
             string parent_rights = "iud";
             string conflict_handling = "normal";
             ISpatialIndexDef treeDef = null;
+            geometryType? sourceGeometryType = null;
 
             for (int i = 0; i < args.Length - 1; i++)
             {
@@ -57,6 +59,15 @@ namespace copyFeatureClass
                 {
                     checkout = true;
                     checkoutDescription = args[++i];
+                }
+                else if(args[i]=="-source_geometrytype")
+                {
+                    geometryType geomType;
+                    if (Enum.TryParse<geometryType>(args[++i], out geomType))
+                    {
+                        sourceGeometryType = geomType;
+                        Console.WriteLine("Source geometry type: " + sourceGeometryType);
+                    }
                 }
 
                 else if (args[i] == "-pr")
@@ -91,6 +102,8 @@ namespace copyFeatureClass
                 Console.WriteLine("                -pr ... parent rights. <iud|iu|ud|...> (i..INSERT, u..UPDATE, d..DELETE)");
                 Console.WriteLine("                -cr ... child rights.  <iud|iu|ud|...> (i..INSERT, u..UPDATE, d..DELETE)");
                 Console.WriteLine("                -ch <none|normal|parent_wins|child_wins|newer_wins> ... conflict handling");
+                Console.WriteLine("   optional:");
+                Console.WriteLine("                -source_geometrytype <Point,Polyline,Polygon> ... if source geometrytype is not explizit specified (SQL Geometry)");
                 return;
             }
 
@@ -256,7 +269,8 @@ namespace copyFeatureClass
                         }
                     }
 
-                    if (!import.ImportToNewFeatureclass((IFeatureDatabase)destDS.Database, destDS.DatasetName, dest_fc, sourceFC, fieldTranslation, true, null, treeDef))
+                    if (!import.ImportToNewFeatureclass((IFeatureDatabase)destDS.Database, destDS.DatasetName, dest_fc, sourceFC, fieldTranslation, true, null, treeDef,
+                        sourceGeometryType: sourceGeometryType))
                     {
                         Console.WriteLine("ERROR: " + import.lastErrorMsg);
                     }
@@ -272,7 +286,8 @@ namespace copyFeatureClass
                     import.ReportAction += new FeatureImport.ReportActionEvent(import_ReportAction2);
                     import.ReportProgress += new FeatureImport.ReportProgressEvent(import_ReportProgress2);
 
-                    if (!import.ImportToNewFeatureclass(destDS, dest_fc, sourceFC, fieldTranslation, true))
+                    if (!import.ImportToNewFeatureclass(destDS, dest_fc, sourceFC, fieldTranslation, true, 
+                        sourceGeometryType: sourceGeometryType))
                     {
                         Console.WriteLine("ERROR: " + import.lastErrorMsg);
                     }

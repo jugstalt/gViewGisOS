@@ -52,12 +52,12 @@ namespace gView.Framework.system.UI
 
         private int FeatureBufferSize { get; set; }
 
-        public bool ImportToNewFeatureclass(IFeatureDataset destDS, string fcname, IFeatureClass sourceFC, FieldTranslation fieldTranslation, bool project)
+        public bool ImportToNewFeatureclass(IFeatureDataset destDS, string fcname, IFeatureClass sourceFC, FieldTranslation fieldTranslation, bool project, geometryType? sourceGeometryType = null)
         {
-            return ImportToNewFeatureclass(destDS, fcname, sourceFC, fieldTranslation, project, null);
+            return ImportToNewFeatureclass(destDS, fcname, sourceFC, fieldTranslation, project, null, sourceGeometryType);
         }
 
-        public bool ImportToNewFeatureclass(IFeatureDataset destDS, string fcname, IFeatureClass sourceFC, FieldTranslation fieldTranslation, bool project, List<IQueryFilter> filters)
+        public bool ImportToNewFeatureclass(IFeatureDataset destDS, string fcname, IFeatureClass sourceFC, FieldTranslation fieldTranslation, bool project, List<IQueryFilter> filters, geometryType? sourceGeometryType = null)
         {
             if (destDS == null) return false;
 
@@ -67,10 +67,10 @@ namespace gView.Framework.system.UI
                 if (attribute is UseDatasetNameCase)
                     nameCase = ((UseDatasetNameCase)attribute).Value;
             }
-            return ImportToNewFeatureclass(destDS, fcname, sourceFC, fieldTranslation, project, filters, nameCase);
+            return ImportToNewFeatureclass(destDS, fcname, sourceFC, fieldTranslation, project, filters, nameCase, sourceGeometryType);
         }
 
-        private bool ImportToNewFeatureclass(IFeatureDataset destDS, string fcname, IFeatureClass sourceFC, FieldTranslation fieldTranslation, bool project, List<IQueryFilter> filters, DatasetNameCase namecase)
+        private bool ImportToNewFeatureclass(IFeatureDataset destDS, string fcname, IFeatureClass sourceFC, FieldTranslation fieldTranslation, bool project, List<IQueryFilter> filters, DatasetNameCase namecase, geometryType? sourceGeometryType=null)
         {
             if (!_cancelTracker.Continue) return true;
 
@@ -135,9 +135,14 @@ namespace gView.Framework.system.UI
                 }
 
                 if (destLayer != null) fdb.DeleteFeatureClass(fcname);
+
+                GeometryDef geomDef = new GeometryDef(sourceFC);
+                if (geomDef.GeometryType == geometryType.Unknown && sourceGeometryType != null)
+                    geomDef.GeometryType = sourceGeometryType.Value;
+
                 int fcID = fdb.CreateFeatureClass(destDS.DatasetName,
                                                   fcname,
-                                                  sourceFC,
+                                                  geomDef,
                                                   (fieldTranslation == null) ?
                                                   ((sourceFC.Fields != null) ? (IFields)sourceFC.Fields.Clone() : new Fields()) :
                                                   fieldTranslation.DestinationFields);
