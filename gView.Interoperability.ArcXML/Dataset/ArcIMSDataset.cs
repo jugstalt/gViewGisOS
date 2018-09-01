@@ -37,7 +37,10 @@ namespace gView.Interoperability.ArcXML.Dataset
 
         internal ArcIMSClass WebServiceClass
         {
-            get { return _class as ArcIMSClass; }
+            get
+            {
+                return _class as ArcIMSClass;
+            }
         }
 
         public XmlDocument Properties
