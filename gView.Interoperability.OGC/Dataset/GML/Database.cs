@@ -78,10 +78,14 @@ namespace gView.Interoperability.OGC.Dataset.GML
 
         public string lastErrorMsg
         {
-            get { return _errMsg; }
+            get
+            {
+                return _errMsg;
+            }
         }
 
         public Exception lastException { get { return null; } }
+
         #endregion
 
         #region IFeatureDatabase Member
@@ -279,16 +283,23 @@ namespace gView.Interoperability.OGC.Dataset.GML
                 // use always the same GMLFile...
                 if (!_gmlFiles.TryGetValue(((Dataset)fClass.Dataset).ConnectionString, out gmlFile))
                 {
+                    _errMsg = "Can't get gmlfile form dictionary";
                     return false;
                 }
             }
-            catch
+            catch(Exception ex)
             {
+                _errMsg = ex.Message;
                 return false;
             }
             if (gmlFile == null) return false;
 
-            return gmlFile.Flush();
+            if (!gmlFile.Flush())
+            {
+                _errMsg = gmlFile.LastErrorMessage;
+                return false;
+            }
+            return true;
         }
 
         public string DatabaseName

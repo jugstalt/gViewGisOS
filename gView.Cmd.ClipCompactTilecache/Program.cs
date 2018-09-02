@@ -21,6 +21,7 @@ namespace gView.Cmd.ClipCompactTilecache
             string cacheSource = String.Empty;
             string cacheTarget = String.Empty;
             int jpegQuality = -1, maxlevel = -1;
+            bool listFilenames = false;
 
             for (int i = 0; i < args.Length - 1; i++)
             {
@@ -44,6 +45,10 @@ namespace gView.Cmd.ClipCompactTilecache
                 {
                     maxlevel = int.Parse(args[++i]);
                 }
+                else if(args[i] == "-listfilenames")
+                {
+                    listFilenames = true;
+                }
             }
 
             if (String.IsNullOrWhiteSpace(gmlSource) || String.IsNullOrWhiteSpace(cacheSource) || String.IsNullOrWhiteSpace(cacheTarget))
@@ -51,6 +56,7 @@ namespace gView.Cmd.ClipCompactTilecache
                 Console.WriteLine("USAGE:");
                 Console.WriteLine("gView.Cmd.ClipCompactTilecache.exe -gml <Filename> -cache <cachedirectory> -target <cachetarget>");
                 Console.WriteLine("                      [-jpeg-qual <quality  0..100>] -maxlevel <level>");
+                Console.WriteLine("                      [-listfilenames]");
                 return;
             }
 
@@ -79,7 +85,8 @@ namespace gView.Cmd.ClipCompactTilecache
                 }
             }
 
-            Console.WriteLine(sourcePolygons.Count + " polygons found for clipping...");
+            if (!listFilenames)
+                Console.WriteLine(sourcePolygons.Count + " polygons found for clipping...");
 
             FileInfo configFile = new FileInfo(cacheSource + @"\conf.json");
             if (!configFile.Exists)
@@ -108,7 +115,8 @@ namespace gView.Cmd.ClipCompactTilecache
 
             foreach (var level in cacheConfig.Levels)
             {
-                Console.WriteLine("Level: " + level.Level + " Scale=" + level.Scale);
+                if (!listFilenames)
+                    Console.WriteLine("Level: " + level.Level + " Scale=" + level.Scale);
 
                 double resolution = (level.Scale / dpm);
                 double tileWorldWidth = cacheConfig.TileSize[0] * resolution;
@@ -133,6 +141,12 @@ namespace gView.Cmd.ClipCompactTilecache
 
                     if (!Intersect(bundleEnvelope, sourcePolygons))
                         continue;
+
+                    if(listFilenames)
+                    {
+                        Console.WriteLine(bundleFile.FullName);
+                        continue;
+                    }
 
                     Console.WriteLine("Clip bundle: " + bundleFile.FullName);
 

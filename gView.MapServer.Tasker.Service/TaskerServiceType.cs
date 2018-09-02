@@ -305,6 +305,7 @@ namespace gView.MapServer.Tasker.Service
             string txt = LoadHtml(name);
             return WriteValue(txt);
         }
+
         #endregion
 
         public Stream AddMap(string name, Stream data)
@@ -553,6 +554,7 @@ namespace gView.MapServer.Tasker.Service
         }
 
         #region ArcXML
+
         public System.IO.Stream AxlGet()
         {
             return AxlPost(null);
@@ -613,6 +615,7 @@ namespace gView.MapServer.Tasker.Service
                 return WriteUnauthorized();
             }
         }
+
         #endregion
 
         #region Helper

@@ -197,7 +197,7 @@ namespace gView.Framework.system.UI
                 {
                     if (!((IFileFeatureDatabase)fdb).Flush(destFC))
                     {
-                        _errMsg = "Error executing flush for file database...";
+                        _errMsg = "Error executing flush for file database..." + fdb.lastErrorMsg;
                         return false;
                     }
                 }

@@ -69,31 +69,35 @@ namespace gView.Interoperability.OGC.Dataset.GML
                 XmlSchemaWriter schemaWriter = new XmlSchemaWriter(featureClass);
                 string schema = schemaWriter.Write();
 
-                StreamWriter sw = new StreamWriter(xsd_filename, false, Encoding.UTF8);
-                sw.WriteLine(schema.Trim());
-                sw.Flush();
-                sw.Close();
+                using (StreamWriter sw = new StreamWriter(xsd_filename, false, Encoding.UTF8))
+                {
+                    sw.WriteLine(schema.Trim());
+                    sw.Flush();
+                    sw.Close();
+                }
 
-                sw = new StreamWriter(gml_filename, false, Encoding.UTF8);
-                sw.Write(@"<?xml version=""1.0"" encoding=""UTF-8""?>
+                using (StreamWriter sw = new StreamWriter(gml_filename, false, Encoding.UTF8))
+                {
+                    sw.Write(@"<?xml version=""1.0"" encoding=""UTF-8""?>
 <gml:FeatureCollection xmlns:gml=""http://www.opengis.net/gml"" 
                        xmlns:xlink=""http://www.w3.org/1999/xlink"" 
                        xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" 
                        xmlns:gv=""http://www.gViewGIS.com/server"" 
                        xsi:schemaLocation=""http://www.gview.com/gml " + name + @".xsd"">".Trim());
 
-                string boundingBox = GeometryTranslator.Geometry2GML(new Envelope(), String.Empty, gmlVersion);
-                sw.WriteLine(@"
+                    string boundingBox = GeometryTranslator.Geometry2GML(new Envelope(), String.Empty, gmlVersion);
+                    sw.WriteLine(@"
    <gml:boundedBy>");
-                sw.Write(boundingBox);
-                sw.Write(@"
+                    sw.Write(boundingBox);
+                    sw.Write(@"
    </gml:boundedBy>");
 
-                sw.Write(@"
+                    sw.Write(@"
 </gml:FeatureCollection>");
 
-                sw.Flush();
-                sw.Close();
+                    sw.Flush();
+                    sw.Close();
+                }
 
                 return true;
             }
@@ -212,16 +216,26 @@ namespace gView.Interoperability.OGC.Dataset.GML
             return true;
         }
 
+        public string LastErrorMessage { get { return _errMsg; } }
+
         public bool Flush()
         {
-            if (_doc == null) return false;
+            if (_doc == null)
+            {
+                _errMsg = "No gml document";
+                return false;
+            }
             try
             {
-                _doc.Save(_filename);
+                using (StreamWriter sw = new StreamWriter(_filename, false, Encoding.UTF8))
+                {
+                    _doc.Save(sw);
+                }
                 return true;
             }
-            catch
+            catch(Exception ex)
             {
+                _errMsg = ex.Message;
                 return false;
             }
         }
