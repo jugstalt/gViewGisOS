@@ -171,7 +171,7 @@ namespace gView.DataSources.MSSqlSpatial
                     {
                         connection.ConnectionString = _connectionString;
                         DbCommand command = connection.CreateCommand();
-                        command.CommandText = "select [" + fc.ShapeFieldName + "].MakeValid().STEnvelope().STAsBinary() as envelope from [" + fc.Name + "] where [" + fc.ShapeFieldName + "] is not null";
+                        command.CommandText = "select " + ToDbName(fc.ShapeFieldName) + ".MakeValid().STEnvelope().STAsBinary() as envelope from " + ToDbName(fc.Name) + " where " + ToDbName(fc.ShapeFieldName) + " is not null";
                         connection.Open();
 
                         using (DbDataReader reader = command.ExecuteReader())
@@ -194,6 +194,7 @@ namespace gView.DataSources.MSSqlSpatial
             catch (Exception ex)
             {
                 string msg = ex.Message;
+                Console.WriteLine("Exception (Envelope): " + msg);
             }
             if (env == null)
                 return new Envelope(-1000, -1000, 1000, 1000);
@@ -508,6 +509,14 @@ namespace gView.DataSources.MSSqlSpatial
             catch { }
 
             return tableName;
+        }
+
+        private string ToDbName(string name)
+        {
+            if (!name.StartsWith("["))
+                return "[" + name.Replace(".", "].[") + "]";
+
+            return name;
         }
 
         protected bool EqualsTableName(string tableName, string title, bool isView)
