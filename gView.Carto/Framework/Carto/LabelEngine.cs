@@ -98,6 +98,7 @@ namespace gView.Framework.Carto
                 if (aPolygons != null)
                 {
                     #region Check Outside
+
                     foreach (IAnnotationPolygonCollision polyCollision in aPolygons)
                     {
                         AnnotationPolygonEnvelope env = polyCollision.Envelope;
@@ -106,6 +107,7 @@ namespace gView.Framework.Carto
                             return LabelAppendResult.Outside;
                         }
                     }
+                    
                     #endregion
 
                     foreach (IAnnotationPolygonCollision polyCollision in aPolygons)
@@ -148,6 +150,7 @@ namespace gView.Framework.Carto
                             else
                             {
                                 #region Geometrie Methode
+
                                 labelPolyon = polyCollision;
                                 foreach (List<IAnnotationPolygonCollision> indexedPolygons in _gridArrayPolygons.Collect(new Envelope(env.MinX, env.MinY, env.MaxX, env.MaxY)))
                                 {
@@ -157,6 +160,7 @@ namespace gView.Framework.Carto
                                             return LabelAppendResult.Overlap;
                                     }
                                 }
+
                                 #endregion
                             }
                         }

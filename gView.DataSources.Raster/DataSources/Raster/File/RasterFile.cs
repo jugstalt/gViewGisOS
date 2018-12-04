@@ -1488,6 +1488,9 @@ namespace gView.DataSources.Raster.File
                     _bm.Dispose();
                 _bm = new Bitmap(totalWidth, totalHeight, PixelFormat.Format24bppRgb);
                 bitmapData = _bm.LockBits(new Rectangle(0, 0, totalWidth, totalHeight), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
+
+                Console.Write(bitmapData.Scan0); 
+
                 MrSidWrapper.ReadBandData(bufferData, bitmapData.Scan0, (uint)3, (uint)bitmapData.Stride);
                 
                 //_bm.Save(@"C:\temp\pic\" + Guid.NewGuid() + ".jpg", ImageFormat.Jpeg);
