@@ -973,9 +973,10 @@ namespace gView.Framework.Symbology
                             if (superScript)
                             {
                                 yOffset -= subFont.Size * .4f;
-                            } else
+                            }
+                            else
                             {
-                                yOffset += subFont.Size * .4f;
+                                yOffset += (subFont.Size/.9f) * .4f;
                             }
                         }
 
@@ -985,7 +986,8 @@ namespace gView.Framework.Symbology
                             if (superScript)
                             {
                                 fontSize *= .9f;
-                            } else
+                            }
+                            else
                             {
                                 fontSize /= .9f;
                             }
