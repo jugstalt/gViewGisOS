@@ -81,6 +81,7 @@
   <ItemGroup>
     <Compile Include="Framework\OGC\DB\Featureclass.cs" />
     <Compile Include="Framework\OGC\DB\FeatureCursor.cs" />
+    <Compile Include="Framework\OGC\DB\IRepoProvider.cs" />
     <Compile Include="Framework\OGC\DB\OgcSpatialDb.cs" />
     <Compile Include="Framework\OGC\GeoJson\GeoJson.cs" />
     <Compile Include="Framework\OGC\GML\Feature.cs" />

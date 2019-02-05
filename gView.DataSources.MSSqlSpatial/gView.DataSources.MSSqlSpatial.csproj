@@ -73,6 +73,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataSources\MSSqlSpatial\Dataset.cs" />
+    <Compile Include="DataSources\Sde\Repo\SdeGeometryColumn.cs" />
+    <Compile Include="DataSources\Sde\Repo\SdeTypes.cs" />
+    <Compile Include="DataSources\Sde\SdeDataset.cs" />
+    <Compile Include="DataSources\Sde\Repo\RepoProvider.cs" />
+    <Compile Include="DataSources\Sde\Repo\SdeColumn.cs" />
+    <Compile Include="DataSources\Sde\Repo\SdeLayer.cs" />
+    <Compile Include="DataSources\Sde\Repo\SdeSpatialReference.cs" />
+    <Compile Include="DataSources\Sde\SdeFeatureClass.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

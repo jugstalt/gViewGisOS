@@ -171,7 +171,7 @@ namespace gView.DataSources.MSSqlSpatial
                     {
                         connection.ConnectionString = _connectionString;
                         DbCommand command = connection.CreateCommand();
-                        command.CommandText = "select " + ToDbName(fc.ShapeFieldName) + ".MakeValid().STEnvelope().STAsBinary() as envelope from " + ToDbName(fc.Name) + " where " + ToDbName(fc.ShapeFieldName) + " is not null";
+                        command.CommandText = "select top(1000) " + ToDbName(fc.ShapeFieldName) + ".MakeValid().STEnvelope().STAsBinary() as envelope from " + ToDbName(fc.Name) + " where " + ToDbName(fc.ShapeFieldName) + " is not null";
                         connection.Open();
 
                         using (DbDataReader reader = command.ExecuteReader())
@@ -179,7 +179,7 @@ namespace gView.DataSources.MSSqlSpatial
                             while (reader.Read())
                             {
                                 byte[] envelope = (byte[])reader["envelope"];
-                                IGeometry geometry = OGC.WKBToGeometry(envelope);
+                                IGeometry geometry = gView.Framework.OGC.OGC.WKBToGeometry(envelope);
                                 if (geometry == null) continue;
 
                                 if (env == null)
@@ -329,16 +329,42 @@ namespace gView.DataSources.MSSqlSpatial
         {
             try
             {
+                string schemaName = String.Empty;
+                if (tabName.Contains("."))
+                {
+                    schemaName = tabName.Split('.')[0];
+                    tabName = tabName.Split('.')[1];
+                }
+
+                string idFieldName = String.Empty;
+
                 using (DbConnection conn = this.ProviderFactory.CreateConnection())
                 {
                     conn.ConnectionString = _connectionString;
                     conn.Open();
 
                     DbCommand command = this.ProviderFactory.CreateCommand();
-                    command.CommandText = "select c.name from sys.tables t join sys.columns c on (t.object_id = c.object_id) join sys.types types on (c.user_type_id = types.user_type_id) where t.name='"+tabName+"' and c.is_identity = 1";
+
+                    command.CommandText = "SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE WHERE OBJECTPROPERTY(OBJECT_ID(CONSTRAINT_SCHEMA + '.' + QUOTENAME(CONSTRAINT_NAME)), 'IsPrimaryKey') = 1 AND TABLE_NAME = '" + tabName + "'";
+                    if (!String.IsNullOrWhiteSpace(schemaName))
+                    {
+                        command.CommandText += " AND TABLE_SCHEMA = '" + schemaName + "'";
+                    }
                     command.Connection = conn;
 
-                    string idFieldName = command.ExecuteScalar() as string;
+                    try
+                    {
+                        idFieldName = command.ExecuteScalar() as string;
+                    }
+                    catch { }
+
+                    if (String.IsNullOrWhiteSpace(idFieldName))
+                    {
+                        command.CommandText = "select c.name from sys.tables t join sys.columns c on (t.object_id = c.object_id) join sys.types types on (c.user_type_id = types.user_type_id) where t.name='" + tabName + "' and c.is_identity = 1";
+                        command.Connection = conn;
+
+                        idFieldName = command.ExecuteScalar() as string;
+                    }
                     return idFieldName;
                 }
             }
@@ -477,17 +503,40 @@ namespace gView.DataSources.MSSqlSpatial
 
         public override DbCommand SelectSpatialReferenceIds(gView.Framework.OGC.DB.OgcSpatialFeatureclass fc)
         {
-            string cmdText = "select distinct [" + fc.ShapeFieldName + "].STSrid as srid from " + fc.Name + " where [" + fc.ShapeFieldName + "] is not null";
+            string cmdText = "select top(100) " + ToDbName(fc.ShapeFieldName) + ".STSrid as srid from " + ToDbName(fc.Name) + " where " + ToDbName(fc.ShapeFieldName) + " is not null";
             DbCommand command = this.ProviderFactory.CreateCommand();
             command.CommandText = cmdText;
 
             return command;
         }
 
+        private Dictionary<string, string> _tableSchemas = new Dictionary<string, string>();
+        private Dictionary<string, string> _viewSchemas = new Dictionary<string, string>();
+
+        private string TableNamePlusSchemaFromCache(string tableName, bool isView)
+        {
+            if (isView)
+            {
+                if (_viewSchemas.ContainsKey(tableName.ToLower()))
+                    return _viewSchemas[tableName.ToLower()] + "." + tableName;
+            }
+            else
+            {
+                if (_tableSchemas.ContainsKey(tableName.ToLower()))
+                    return _tableSchemas[tableName.ToLower()] + "." + tableName;
+            }
+
+            return null;
+        }
+
         internal string TableNamePlusSchema(string tableName, bool isView)
         {
             if (tableName.Contains("."))
                 return tableName;
+
+            string ret = TableNamePlusSchemaFromCache(tableName, isView);
+            if (ret != null)
+                return ret;
 
             try
             {
@@ -499,16 +548,32 @@ namespace gView.DataSources.MSSqlSpatial
                     var command = this.ProviderFactory.CreateCommand();
                     command.Connection = conn;
                     string sysTable = isView ? "sys.views" : "sys.tables";
-                    command.CommandText = "select SCHEMA_NAME(schema_id) from " + sysTable + " where name='" + tableName + "'";
-                    string schema = command.ExecuteScalar()?.ToString();
+                    //command.CommandText = "select SCHEMA_NAME(schema_id) from " + sysTable + " where name='" + tableName + "'";
+                    //string schema = command.ExecuteScalar()?.ToString();
 
-                    if (!string.IsNullOrWhiteSpace(schema))
-                        return schema + "." + tableName;
+                    command.CommandText = "select SCHEMA_NAME(schema_id) as dbschema, name as dbname from " + sysTable;
+
+                    using (var reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            if (isView)
+                            {
+                                _viewSchemas[reader["dbname"]?.ToString().ToLower()] = reader["dbschema"]?.ToString();
+                            }
+                            else
+                            {
+                                _tableSchemas[reader["dbname"]?.ToString().ToLower()] = reader["dbschema"]?.ToString();
+                            }
+                        }
+                    }
                 }
+
+                ret = TableNamePlusSchemaFromCache(tableName, isView);
             }
             catch { }
 
-            return tableName;
+            return ret ?? tableName;
         }
 
         private string ToDbName(string name)

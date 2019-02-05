@@ -74,6 +74,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataSources\MSSqlSpatial\UI\ExplorerObjectsSde.cs" />
     <Compile Include="DataSources\MSSqlSpatial\UI\ExplorerObjects.cs" />
     <Compile Include="DataSources\MSSqlSpatial\UI\ExplorerObjectsGeography.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
