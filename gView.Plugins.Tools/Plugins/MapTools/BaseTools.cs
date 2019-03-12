@@ -347,6 +347,13 @@ namespace gView.Plugins.MapTools
                 gView.Plugins.Tools.MapTools.Dialogs.FormSaveEncrypted saveEncDlg = new Tools.MapTools.Dialogs.FormSaveEncrypted();
                 if (saveEncDlg.ShowDialog() == DialogResult.OK)
                 {
+                    if(saveEncDlg.Compress==true)
+                    {
+                        foreach(var map in _doc.Maps)
+                        {
+                            map.Compress();
+                        }
+                    }
                     ((IMapApplication)_doc.Application).SaveMapDocument(dlg.FileName, saveEncDlg.SaveEncrypted);
                 }
             }

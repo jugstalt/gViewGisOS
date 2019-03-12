@@ -12,6 +12,7 @@ using gView.Framework.IO;
 using gView.Framework.system;
 using gView.Framework.UI;
 using gView.Framework.Carto.UI;
+using System.Linq;
 
 namespace gView.Framework.Carto
 {
@@ -1435,6 +1436,66 @@ namespace gView.Framework.Carto
             {
                 return null;
             }
+        }
+
+        public void Compress()
+        {
+            #region remove unused dataset
+
+            var datasetIds = _layers.Where(l => l.Class != null).Select(l => l.DatasetID).Distinct().OrderBy(id => id).ToArray();
+
+            for (var datasetId = 0; datasetId < datasetIds.Max(); datasetId++)
+            {
+                if (!datasetIds.Contains(datasetId))
+                {
+                    _datasets.RemoveAt(datasetId);
+                    foreach (var datasetElement in _layers.Where(l => l.DatasetID > datasetId))
+                    {
+                        datasetElement.DatasetID -= 1;
+                    }
+                    Compress();
+                    return;
+                }
+            }
+
+            #endregion
+
+            #region remove double datasets
+
+            for (int datasetId = 0; datasetId < _datasets.Count() - 1; datasetId++)
+            {
+                var dataset = _datasets[datasetId];
+
+                for (int candidateId = datasetId + 1; candidateId < _datasets.Count(); candidateId++)
+                {
+                    var candidate = _datasets[candidateId];
+
+                    if (dataset.GetType().ToString() == candidate.GetType().ToString() && dataset.ConnectionString == candidate.ConnectionString)
+                    {
+                        foreach (var datasetElement in _layers.Where(l => l.DatasetID == candidateId))
+                        {
+                            datasetElement.DatasetID = datasetId;
+                        }
+
+                        _datasets.RemoveAt(candidateId);
+                        foreach (var datasetElement in _layers.Where(l => l.DatasetID > candidateId))
+                        {
+                            datasetElement.DatasetID -= 1;
+                        }
+
+                        Compress();
+                    }
+                }
+            }
+
+            #endregion
+
+            foreach(var removeLayer in _toc.Layers.Where(l=>l.Class==null).ToArray())
+            {
+                _toc.RemoveLayer(removeLayer);
+            }
+            
+            _layers = _layers.Where(l => l.Class != null).ToList();
         }
 
         public void Load(IPersistStream stream)

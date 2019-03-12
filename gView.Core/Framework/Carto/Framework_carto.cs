@@ -95,6 +95,8 @@ namespace gView.Framework.Carto
             get;
             set;
         }
+
+        void Compress();
     }
 
     /*
