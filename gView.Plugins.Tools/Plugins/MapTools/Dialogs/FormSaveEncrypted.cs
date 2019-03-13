@@ -23,13 +23,5 @@ namespace gView.Plugins.Tools.MapTools.Dialogs
                 return chkSaveEncrypted.Checked;
             }
         }
-
-        public bool Compress
-        {
-            get
-            {
-                return chkCompressMap.Checked;
-            }
-        }
     }
 }

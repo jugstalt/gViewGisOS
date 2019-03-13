@@ -31,13 +31,13 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormException));
             this.panel1 = new System.Windows.Forms.Panel();
             this.lblMessage = new System.Windows.Forms.TextBox();
+            this.panel3 = new System.Windows.Forms.Panel();
             this.lblContinue = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.txtDetails = new System.Windows.Forms.TextBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.btnOK = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
-            this.panel3 = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -59,6 +59,12 @@
             this.lblMessage.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.lblMessage.Name = "lblMessage";
             this.lblMessage.ReadOnly = true;
+            // 
+            // panel3
+            // 
+            resources.ApplyResources(this.panel3, "panel3");
+            this.panel3.BackgroundImage = global::gView.system.UI.Properties.Resources.Warning_notification;
+            this.panel3.Name = "panel3";
             // 
             // lblContinue
             // 
@@ -99,12 +105,6 @@
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.UseVisualStyleBackColor = false;
-            // 
-            // panel3
-            // 
-            resources.ApplyResources(this.panel3, "panel3");
-            this.panel3.BackgroundImage = global::gView.system.UI.Properties.Resources.Warning_notification;
-            this.panel3.Name = "panel3";
             // 
             // FormException
             // 

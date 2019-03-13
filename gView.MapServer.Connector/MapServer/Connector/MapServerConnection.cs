@@ -6,23 +6,38 @@ using System.Xml;
 using System.ServiceModel;
 using gView.Framework.MapServer;
 using gView.Framework.Web;
+using gView.Framework.system;
 
 
 // wsdl /namespace:gView.MapServer.Connector /protocol:soap /out:MapServerProxy.cs /language:cs http://localhost:8001/MapServer?wsdl
 namespace gView.MapServer.Connector
 {
-    public class MapServerConnection
+    public class MapServerConnection : IErrorMessage
     {
         private string _url = String.Empty;
 
         public MapServerConnection(string url)
         {
             _url = url;
-            if (!_url.ToLower().StartsWith("http"))
+            if (!_url.ToLower().StartsWith("http://") && !_url.ToLower().StartsWith("https://"))
                 _url = "http://" + _url;
 
             this.Timeout = 0;
         }
+
+        #region Static
+
+        static public string ServerUrl(string server, int port)
+        {
+            if(port>0 && port!=80 && port!=443)
+            {
+                server += ":" + port;
+            }
+
+            return server;
+        }
+
+        #endregion
 
         public int Timeout { get; set; }
 
@@ -106,6 +121,7 @@ namespace gView.MapServer.Connector
             }
             catch (Exception ex)
             {
+                lastErrorMsg = ex.Message;
                 return false;
             }
         }
@@ -113,13 +129,25 @@ namespace gView.MapServer.Connector
         public bool AddMap(string name, string mxl, string usr, string pwd)
         {
             string ret = WebFunctions.HttpSendRequest(_url + "/addmap/" + name, "POST", Encoding.UTF8.GetBytes(mxl), usr, pwd, this.Timeout * 1000);
-            return ret.ToString().ToLower().Trim() == "true";
+            if (ret.ToString().ToLower().Trim() != "true")
+            {
+                lastErrorMsg = ret;
+                return false;
+            }
+            return true;
         }
         public bool RemoveMap(string name, string usr, string pwd)
         {
             string ret = WebFunctions.HttpSendRequest(_url + "/removemap/" + name, "GET", null, usr, pwd, this.Timeout * 1000);
-            return ret.ToString().ToLower().Trim() == "true";
+            if (ret.ToString().ToLower().Trim() != "true")
+            {
+                lastErrorMsg = ret;
+                return false;
+            }
+            return true;
         }
+
+        public string lastErrorMsg { get; set; }
 
 
         #region PasswordHash

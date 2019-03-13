@@ -32,7 +32,6 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.chkSaveEncrypted = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.chkCompressMap = new System.Windows.Forms.CheckBox();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -40,7 +39,7 @@
             // 
             this.btnOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnOK.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.btnOK.Location = new System.Drawing.Point(365, 205);
+            this.btnOK.Location = new System.Drawing.Point(365, 165);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(75, 23);
             this.btnOK.TabIndex = 0;
@@ -53,12 +52,11 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.BackColor = System.Drawing.Color.White;
-            this.panel1.Controls.Add(this.chkCompressMap);
             this.panel1.Controls.Add(this.chkSaveEncrypted);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Location = new System.Drawing.Point(-2, 1);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(456, 198);
+            this.panel1.Size = new System.Drawing.Size(456, 158);
             this.panel1.TabIndex = 1;
             // 
             // chkSaveEncrypted
@@ -85,24 +83,11 @@
     "ecommended!\r\nOtherwise all connection strings in der Map-XML files are in clear " +
     "text.";
             // 
-            // chkCompressMap
-            // 
-            this.chkCompressMap.AutoSize = true;
-            this.chkCompressMap.Checked = true;
-            this.chkCompressMap.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkCompressMap.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkCompressMap.Location = new System.Drawing.Point(17, 142);
-            this.chkCompressMap.Name = "chkCompressMap";
-            this.chkCompressMap.Size = new System.Drawing.Size(332, 20);
-            this.chkCompressMap.TabIndex = 2;
-            this.chkCompressMap.Text = "Compress (remove unused datasets & layers)";
-            this.chkCompressMap.UseVisualStyleBackColor = true;
-            // 
             // FormSaveEncrypted
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(452, 240);
+            this.ClientSize = new System.Drawing.Size(452, 200);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.btnOK);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
@@ -121,6 +106,5 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.CheckBox chkSaveEncrypted;
-        private System.Windows.Forms.CheckBox chkCompressMap;
     }
 }

@@ -101,6 +101,12 @@
     <Compile Include="Framework\system\UI\FormException.Designer.cs">
       <DependentUpon>FormException.cs</DependentUpon>
     </Compile>
+    <Compile Include="Framework\system\UI\FormToolException.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Framework\system\UI\FormToolException.Designer.cs">
+      <DependentUpon>FormToolException.cs</DependentUpon>
+    </Compile>
     <Compile Include="Framework\system\UI\IUIImageList.cs" />
     <Compile Include="Framework\system\UI\PluginManagerControl.cs">
       <SubType>UserControl</SubType>
@@ -177,6 +183,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Framework\system\UI\FormException.resx">
       <DependentUpon>FormException.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Framework\system\UI\FormToolException.resx">
+      <DependentUpon>FormToolException.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Framework\system\UI\PluginManagerControl.resx">
       <DependentUpon>PluginManagerControl.cs</DependentUpon>

@@ -21,6 +21,13 @@ namespace gView.Plugins.MapTools.Dialogs
 
             _map = map;
 
+            InitUI();
+        }
+
+        private void InitUI()
+        {
+            tvDatasets.Nodes.Clear();
+
             MapTreeNode root = new MapTreeNode() { Map = _map };
 
             int i = 0;
@@ -28,10 +35,20 @@ namespace gView.Plugins.MapTools.Dialogs
             while ((dataset = _map[i++]) != null)
             {
                 int count = (from l in _map.MapElements where l.DatasetID == (i - 1) select l).Count();
-                root.Nodes.Add(new DatasetTreeNode() { Dataset = dataset, LayerCount = count });
+
+                var datasetNode = new DatasetTreeNode() { Dataset = dataset, LayerCount = count };
+                root.Nodes.Add(datasetNode);
 
                 if (btnRemoveUnusedDatasets.Enabled == false)
                     btnRemoveUnusedDatasets.Enabled = count == 0;
+
+                if(count>0)
+                {
+                    foreach(var layer in _map.MapElements.Where(l=>l.DatasetID==i-1))
+                    {
+                        datasetNode.Nodes.Add(new LayerTreeNode(layer));
+                    }
+                }
             }
 
             tvDatasets.Nodes.Add(root);
@@ -106,6 +123,23 @@ namespace gView.Plugins.MapTools.Dialogs
             }
         }
 
+        private class LayerTreeNode : TreeNode
+        {
+            public LayerTreeNode(IDatasetElement layer)
+            {
+                base.ImageIndex = base.SelectedImageIndex = 1;
+                this.Layer = layer;
+                base.Text = this.ToString();
+            }
+
+            public IDatasetElement Layer { get; set; }
+
+            public override string ToString()
+            {
+                return Layer?.Title ?? "???";
+            }
+        }
+
         #endregion
 
         private void tvDatasets_AfterSelect(object sender, TreeViewEventArgs e)
@@ -154,8 +188,17 @@ namespace gView.Plugins.MapTools.Dialogs
                 r.Remove();
             }
 
-            tvDatasets_AfterSelect(tvDatasets, null);
-            btnRemoveUnusedDatasets.Enabled = false;
+            //tvDatasets_AfterSelect(tvDatasets, null);
+            //btnRemoveUnusedDatasets.Enabled = false;
+
+            InitUI();
+        }
+
+        private void btnCompressMap_Click(object sender, EventArgs e)
+        {
+            _map.Compress();
+
+            InitUI();
         }
     }
 }

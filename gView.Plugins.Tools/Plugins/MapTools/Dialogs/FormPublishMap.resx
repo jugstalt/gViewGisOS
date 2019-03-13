@@ -133,8 +133,8 @@
   <data name="btnOk.Location" type="System.Drawing.Point, System.Drawing">
     <value>307, 337</value>
   </data>
-  <data name="label5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>56, 13</value>
+  <data name="label6.Text" xml:space="preserve">
+    <value>Publish map to a gView MapServer instance.</value>
   </data>
   <data name="&gt;&gt;btnOk.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -170,8 +170,8 @@
   <data name="txtServer.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="btnOk.Size" type="System.Drawing.Size, System.Drawing">
-    <value>111, 31</value>
+  <data name="&gt;&gt;txtServer.Parent" xml:space="preserve">
+    <value>$this</value>
   </data>
   <data name="&gt;&gt;label3.Parent" xml:space="preserve">
     <value>$this</value>
@@ -206,9 +206,6 @@
   <data name="panel1.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
   </data>
-  <data name="txtPassword.Location" type="System.Drawing.Point, System.Drawing">
-    <value>83, 212</value>
-  </data>
   <data name="&gt;&gt;label1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
@@ -242,6 +239,9 @@
   <data name="&gt;&gt;btnCancel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;btnOk.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
   <data name="txtServer.Location" type="System.Drawing.Point, System.Drawing">
     <value>84, 132</value>
   </data>
@@ -269,10 +269,6 @@
   <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
     <value>10, 13</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="panel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Top</value>
-  </data>
   <data name="&gt;&gt;label5.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
@@ -281,6 +277,9 @@
   </data>
   <data name="&gt;&gt;label5.ZOrder" xml:space="preserve">
     <value>4</value>
+  </data>
+  <data name="label4.Text" xml:space="preserve">
+    <value>Username:</value>
   </data>
   <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
     <value>213, 135</value>
@@ -297,17 +296,17 @@
   <data name="txtPassword.Size" type="System.Drawing.Size, System.Drawing">
     <value>126, 20</value>
   </data>
-  <data name="label4.Text" xml:space="preserve">
-    <value>Username:</value>
+  <data name="txtPassword.Location" type="System.Drawing.Point, System.Drawing">
+    <value>83, 212</value>
   </data>
   <data name="txtUserName.Size" type="System.Drawing.Size, System.Drawing">
     <value>126, 20</value>
   </data>
-  <data name="label6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>218, 13</value>
-  </data>
   <data name="label5.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
+  </data>
+  <data name="&gt;&gt;btnOk.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
   <data name="label3.Text" xml:space="preserve">
     <value>Servicename:</value>
@@ -321,8 +320,9 @@
   <data name="&gt;&gt;label4.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;txtServer.Parent" xml:space="preserve">
-    <value>$this</value>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="panel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
   </data>
   <data name="&gt;&gt;label4.ZOrder" xml:space="preserve">
     <value>6</value>
@@ -330,8 +330,8 @@
   <data name="btnCancel.Location" type="System.Drawing.Point, System.Drawing">
     <value>18, 337</value>
   </data>
-  <data name="&gt;&gt;label2.Name" xml:space="preserve">
-    <value>label2</value>
+  <data name="&gt;&gt;label6.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="&gt;&gt;panel1.ZOrder" xml:space="preserve">
     <value>0</value>
@@ -351,8 +351,8 @@
   <data name="&gt;&gt;txtPassword.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;btnOk.ZOrder" xml:space="preserve">
-    <value>2</value>
+  <data name="&gt;&gt;txtServiceName.ZOrder" xml:space="preserve">
+    <value>7</value>
   </data>
   <data name="label5.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -383,9 +383,6 @@
   </data>
   <data name="btnOk.Text" xml:space="preserve">
     <value>Publish</value>
-  </data>
-  <data name="&gt;&gt;label6.ZOrder" xml:space="preserve">
-    <value>0</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>FormPublishMap</value>
@@ -429,6 +426,9 @@
   <data name="btnCancel.Text" xml:space="preserve">
     <value>Cancel</value>
   </data>
+  <data name="label5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>56, 13</value>
+  </data>
   <data name="&gt;&gt;btnOk.Name" xml:space="preserve">
     <value>btnOk</value>
   </data>
@@ -438,11 +438,11 @@
   <data name="&gt;&gt;txtPassword.Name" xml:space="preserve">
     <value>txtPassword</value>
   </data>
-  <data name="&gt;&gt;txtServiceName.ZOrder" xml:space="preserve">
-    <value>7</value>
+  <data name="label6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>218, 13</value>
   </data>
-  <data name="label6.Text" xml:space="preserve">
-    <value>Publish map to a gView MapServer instance.</value>
+  <data name="&gt;&gt;label2.Name" xml:space="preserve">
+    <value>label2</value>
   </data>
   <data name="&gt;&gt;txtUserName.Name" xml:space="preserve">
     <value>txtUserName</value>
@@ -477,8 +477,8 @@
   <data name="&gt;&gt;label3.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;btnOk.Parent" xml:space="preserve">
-    <value>$this</value>
+  <data name="btnOk.Size" type="System.Drawing.Size, System.Drawing">
+    <value>111, 31</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>

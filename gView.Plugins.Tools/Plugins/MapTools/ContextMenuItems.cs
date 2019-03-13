@@ -402,8 +402,15 @@ namespace gView.Plugins.MapTools
         {
             if (_doc != null && element is IMap)
             {
-                FormMapDatasets dlg = new FormMapDatasets((IMap)element);
+                var map = (IMap)element;
+
+                FormMapDatasets dlg = new FormMapDatasets(map);
                 dlg.ShowDialog();
+
+                if (_doc.Application is IMapApplication)
+                {
+                    ((IMapApplication)_doc.Application).RefreshTOC();
+                }
             }
         }
 

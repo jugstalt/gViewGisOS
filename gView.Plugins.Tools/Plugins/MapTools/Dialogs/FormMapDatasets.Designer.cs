@@ -35,6 +35,7 @@
             this.datasetInfoControl1 = new gView.Framework.UI.Controls.DatasetInfoControl();
             this.btnRemoveDataset = new System.Windows.Forms.Button();
             this.btnRemoveUnusedDatasets = new System.Windows.Forms.Button();
+            this.btnCompressMap = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // tvDatasets
@@ -46,7 +47,7 @@
             this.tvDatasets.Location = new System.Drawing.Point(1, 1);
             this.tvDatasets.Name = "tvDatasets";
             this.tvDatasets.SelectedImageIndex = 0;
-            this.tvDatasets.Size = new System.Drawing.Size(225, 347);
+            this.tvDatasets.Size = new System.Drawing.Size(225, 539);
             this.tvDatasets.TabIndex = 0;
             this.tvDatasets.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.tvDatasets_AfterSelect);
             // 
@@ -65,16 +66,17 @@
             this.datasetInfoControl1.Dataset = null;
             this.datasetInfoControl1.Location = new System.Drawing.Point(229, 2);
             this.datasetInfoControl1.Name = "datasetInfoControl1";
-            this.datasetInfoControl1.Size = new System.Drawing.Size(515, 309);
+            this.datasetInfoControl1.Size = new System.Drawing.Size(518, 488);
             this.datasetInfoControl1.TabIndex = 1;
             this.datasetInfoControl1.Visible = false;
             // 
             // btnRemoveDataset
             // 
+            this.btnRemoveDataset.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnRemoveDataset.Enabled = false;
-            this.btnRemoveDataset.Location = new System.Drawing.Point(257, 317);
+            this.btnRemoveDataset.Location = new System.Drawing.Point(257, 496);
             this.btnRemoveDataset.Name = "btnRemoveDataset";
-            this.btnRemoveDataset.Size = new System.Drawing.Size(132, 23);
+            this.btnRemoveDataset.Size = new System.Drawing.Size(111, 23);
             this.btnRemoveDataset.TabIndex = 2;
             this.btnRemoveDataset.Text = "Remove Dataset";
             this.btnRemoveDataset.UseVisualStyleBackColor = true;
@@ -82,20 +84,34 @@
             // 
             // btnRemoveUnusedDatasets
             // 
+            this.btnRemoveUnusedDatasets.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnRemoveUnusedDatasets.Enabled = false;
-            this.btnRemoveUnusedDatasets.Location = new System.Drawing.Point(406, 317);
+            this.btnRemoveUnusedDatasets.Location = new System.Drawing.Point(374, 496);
             this.btnRemoveUnusedDatasets.Name = "btnRemoveUnusedDatasets";
-            this.btnRemoveUnusedDatasets.Size = new System.Drawing.Size(187, 23);
+            this.btnRemoveUnusedDatasets.Size = new System.Drawing.Size(141, 23);
             this.btnRemoveUnusedDatasets.TabIndex = 3;
             this.btnRemoveUnusedDatasets.Text = "Remove Unused Dataset";
             this.btnRemoveUnusedDatasets.UseVisualStyleBackColor = true;
             this.btnRemoveUnusedDatasets.Click += new System.EventHandler(this.btnRemoveUnusedDatasets_Click);
             // 
+            // btnCompressMap
+            // 
+            this.btnCompressMap.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCompressMap.Location = new System.Drawing.Point(521, 496);
+            this.btnCompressMap.Name = "btnCompressMap";
+            this.btnCompressMap.Size = new System.Drawing.Size(211, 23);
+            this.btnCompressMap.TabIndex = 4;
+            this.btnCompressMap.Text = "Compress/Clean (recomended)";
+            this.btnCompressMap.UseVisualStyleBackColor = true;
+            this.btnCompressMap.Click += new System.EventHandler(this.btnCompressMap_Click);
+            // 
             // FormMapDatasets
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(749, 349);
+            this.ClientSize = new System.Drawing.Size(752, 541);
+            this.Controls.Add(this.btnCompressMap);
             this.Controls.Add(this.btnRemoveUnusedDatasets);
             this.Controls.Add(this.btnRemoveDataset);
             this.Controls.Add(this.datasetInfoControl1);
@@ -114,5 +130,6 @@
         private Framework.UI.Controls.DatasetInfoControl datasetInfoControl1;
         private System.Windows.Forms.Button btnRemoveDataset;
         private System.Windows.Forms.Button btnRemoveUnusedDatasets;
+        private System.Windows.Forms.Button btnCompressMap;
     }
 }
