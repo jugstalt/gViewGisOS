@@ -492,9 +492,25 @@ namespace gView.Plugins.MapTools
                     if (_doc.Application is IGUIApplication)
                         ((IGUIApplication)_doc.Application).SetCursor(Cursors.WaitCursor);
 
-                    XmlStream stream = new XmlStream("MapDocument");
-                    stream.Save("IMap", map);
-                    stream.ReduceDocument("//IMap");
+                    XmlStream stream;
+
+                    if (dlg.Version == FormPublishMap.ServerVersion.gViewServer5)
+                    {
+                        var mapDocument = new MapDocument(_doc.Application as IMapApplication);
+                        mapDocument.AddMap(map);
+
+                        stream = new XmlStream("root");
+                        stream.Save("MapDocument", mapDocument);
+
+                        stream.ReduceDocument("//MapDocument");
+                    }
+                    else
+                    {
+                        stream = new XmlStream("MapDocument");
+                        stream.Save("IMap", map);
+
+                        stream.ReduceDocument("//IMap");
+                    }
 
                     StringBuilder sb = new StringBuilder();
                     StringWriter sw = new StringWriter(sb);

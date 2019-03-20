@@ -43,6 +43,8 @@
             this.btnCancel = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.cmbServerVersion = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.numPort)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -114,23 +116,23 @@
             // 
             // btnOk
             // 
-            resources.ApplyResources(this.btnOk, "btnOk");
             this.btnOk.DialogResult = System.Windows.Forms.DialogResult.OK;
+            resources.ApplyResources(this.btnOk, "btnOk");
             this.btnOk.Name = "btnOk";
             this.btnOk.UseVisualStyleBackColor = true;
             // 
             // btnCancel
             // 
-            resources.ApplyResources(this.btnCancel, "btnCancel");
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            resources.ApplyResources(this.btnCancel, "btnCancel");
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             // 
             // panel1
             // 
-            resources.ApplyResources(this.panel1, "panel1");
             this.panel1.BackColor = System.Drawing.Color.White;
             this.panel1.Controls.Add(this.label6);
+            resources.ApplyResources(this.panel1, "panel1");
             this.panel1.Name = "panel1";
             // 
             // label6
@@ -138,10 +140,27 @@
             resources.ApplyResources(this.label6, "label6");
             this.label6.Name = "label6";
             // 
+            // label7
+            // 
+            resources.ApplyResources(this.label7, "label7");
+            this.label7.Name = "label7";
+            // 
+            // cmbServerVersion
+            // 
+            this.cmbServerVersion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbServerVersion.FormattingEnabled = true;
+            this.cmbServerVersion.Items.AddRange(new object[] {
+            resources.GetString("cmbServerVersion.Items"),
+            resources.GetString("cmbServerVersion.Items1")});
+            resources.ApplyResources(this.cmbServerVersion, "cmbServerVersion");
+            this.cmbServerVersion.Name = "cmbServerVersion";
+            // 
             // FormPublishMap
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.cmbServerVersion);
+            this.Controls.Add(this.label7);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOk);
@@ -159,6 +178,7 @@
             this.Name = "FormPublishMap";
             ((System.ComponentModel.ISupportInitialize)(this.numPort)).EndInit();
             this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -180,5 +200,7 @@
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.ComboBox cmbServerVersion;
     }
 }

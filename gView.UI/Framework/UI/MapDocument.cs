@@ -71,29 +71,33 @@ namespace gView.Framework.UI
             return null;
         }
 
-		public bool AddMap(IMap map) 
-		{
-			if(_maps.Contains(map)) return true;
+        public bool AddMap(IMap map)
+        {
+            if (_maps.Contains(map)) return true;
 
-            int c=1;
+            int c = 1;
             string alias = map.Name, alias2 = alias;
-		    while (GetMap(alias2) != null)
+            while (GetMap(alias2) != null)
             {
                 alias2 = alias + "_" + c.ToString();
                 c++;
             }
             map.Name = alias2;
 
-			_maps.Add(map);
-			map.LayerAdded+=new gView.Framework.Carto.LayerAddedEvent(map_LayerAdded);
+            _maps.Add(map);
+
+            map.LayerAdded += new gView.Framework.Carto.LayerAddedEvent(map_LayerAdded);
             map.LayerRemoved += new LayerRemovedEvent(map_LayerRemoved);
-            if (map.Display!=null)
+            if (map.Display != null)
             {
-                map.Display.MapScaleChanged+=new gView.Framework.Carto.MapScaleChangedEvent(Display_MapScaleChanged);
+                map.Display.MapScaleChanged += new gView.Framework.Carto.MapScaleChangedEvent(Display_MapScaleChanged);
             }
-            if(MapAdded!=null) MapAdded(map);
+
+            if (MapAdded != null)
+                MapAdded(map);
+
             return true;
-		}
+        }
 
 		public bool RemoveMap(IMap map) 
 		{
