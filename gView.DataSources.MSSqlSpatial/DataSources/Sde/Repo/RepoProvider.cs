@@ -32,6 +32,10 @@ namespace gView.DataSources.MSSqlSpatial.DataSources.Sde.Repo
 
             var providerFactory = System.Data.SqlClient.SqlClientFactory.Instance;
 
+            string sdeSchemaName = TableSchemaName("sde_layers");
+            if (String.IsNullOrWhiteSpace(sdeSchemaName))
+                throw new Exception("Can't determine sde db-schema");
+
             using (DbConnection connection = providerFactory.CreateConnection())
             {
                 connection.ConnectionString = _connectionString;
@@ -40,16 +44,16 @@ namespace gView.DataSources.MSSqlSpatial.DataSources.Sde.Repo
                 var command = providerFactory.CreateCommand();
                 command.Connection = connection;
 
-                command.CommandText = "select * from sde.sde_layers";
+                command.CommandText = "select * from " + sdeSchemaName + ".sde_layers";
                 using (var reader = command.ExecuteReader())
                 {
-                    while(reader.Read())
+                    while (reader.Read())
                     {
                         SdeLayers.Add(new SdeLayer(reader));
                     }
                 }
 
-                command.CommandText = "select * from sde.sde_spatial_references";
+                command.CommandText = "select * from " + sdeSchemaName + ".sde_spatial_references";
                 using (var reader = command.ExecuteReader())
                 {
                     while (reader.Read())
@@ -58,7 +62,7 @@ namespace gView.DataSources.MSSqlSpatial.DataSources.Sde.Repo
                     }
                 }
 
-                command.CommandText = "select * from sde.sde_column_registry";
+                command.CommandText = "select * from " + sdeSchemaName + ".sde_column_registry";
                 using (var reader = command.ExecuteReader())
                 {
                     while (reader.Read())
@@ -67,7 +71,7 @@ namespace gView.DataSources.MSSqlSpatial.DataSources.Sde.Repo
                     }
                 }
 
-                command.CommandText = "select * from sde.sde_geometry_columns";
+                command.CommandText = "select * from " + sdeSchemaName + ".sde_geometry_columns";
                 using (var reader = command.ExecuteReader())
                 {
                     while (reader.Read())
@@ -84,6 +88,36 @@ namespace gView.DataSources.MSSqlSpatial.DataSources.Sde.Repo
         private List<SdeGeometryColumn> SdeGeometryColumns = new List<SdeGeometryColumn>();
 
         public IEnumerable<SdeLayer> Layers => this.SdeLayers.ToArray();
+
+        public string TableSchemaName(string dbName)
+        {
+            var providerFactory = System.Data.SqlClient.SqlClientFactory.Instance;
+
+            using (DbConnection connection = providerFactory.CreateConnection())
+            {
+                connection.ConnectionString = _connectionString;
+                connection.Open();
+
+                var command = providerFactory.CreateCommand();
+                command.Connection = connection;
+
+                command.CommandText = "select SCHEMA_NAME(schema_id) as dbschema, name from sys.tables where [name]=@dbname";
+                var parameter = providerFactory.CreateParameter();
+                parameter.ParameterName = "@dbName";
+                parameter.Value = dbName;
+                command.Parameters.Add(parameter);
+
+                using(var reader=command.ExecuteReader())
+                {
+                    while(reader.Read())
+                    {
+                        return reader["dbschema"]?.ToString();
+                    }
+                }
+            }
+
+            return String.Empty;
+        }
 
         #region IRepoProvider 
 
@@ -163,7 +197,5 @@ namespace gView.DataSources.MSSqlSpatial.DataSources.Sde.Repo
         }
 
         #endregion
-
-
     }
 }
