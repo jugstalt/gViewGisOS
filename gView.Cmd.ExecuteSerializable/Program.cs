@@ -13,7 +13,7 @@ namespace gView.Cmd.ExecuteSerializable
 {
     class Program
     {
-        static void Main(string[] args)
+        static int Main(string[] args)
         {
             try
             {
@@ -43,7 +43,7 @@ namespace gView.Cmd.ExecuteSerializable
                     Console.WriteLine("gView.Cmd.ExecuteSerializable -config <Config Filename>");
                     Console.WriteLine("                              -assembly <assembly name>");
                     Console.WriteLine("                              -instance <instance name>");
-                    return;
+                    return 1;
                 }
 
                 var assembly = Assembly.LoadFrom(SystemVariables.ApplicationDirectory + @"\" + assemblyName);
@@ -69,12 +69,16 @@ namespace gView.Cmd.ExecuteSerializable
                 {
                     throw new Exception("Type " + instanceType + " do not implement ISerializableExecute");
                 }
+
+                return 0;
             }
             catch (Exception ex)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine(ex.Message);
                 Console.ResetColor();
+
+                return 1;
             }
         }
 

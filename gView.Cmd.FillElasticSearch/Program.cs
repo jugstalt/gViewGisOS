@@ -17,7 +17,7 @@ namespace gView.Cmd.FillElasticSearch
     {
         private static IFormatProvider _nhi = System.Globalization.CultureInfo.InvariantCulture.NumberFormat;
 
-        static void Main(string[] args)
+        static int Main(string[] args)
         {
             string cmd = "fill", jsonFile = (args.Length == 1  && args[0]!="fill" ? args[0] : String.Empty), indexUrl = String.Empty, indexName=String.Empty, category = String.Empty;
             bool replace = false;
@@ -47,13 +47,13 @@ namespace gView.Cmd.FillElasticSearch
             if (args.Length == 0)
             {
                 Console.WriteLine("Usage: gView.Cmd.ElasticSearch fill|remove-catetory [Options]");
-                return;
+                return 1;
             }
 
             if (cmd == "fill" && String.IsNullOrEmpty(jsonFile))
             {
                 Console.WriteLine("Usage: gView.Cmd.ElasticSearch fill {json-file}");
-                return;
+                return 1;
             }
             else if (cmd == "remove-category" && (String.IsNullOrWhiteSpace(indexUrl) || String.IsNullOrWhiteSpace(category)))
             {
@@ -62,7 +62,7 @@ namespace gView.Cmd.FillElasticSearch
                 Console.WriteLine("            _ae_, _oe_, _ue_   =>  ä, ö, ü");
                 Console.WriteLine("            _Ae_, _Oe_, _Ue_   =>  Ä, Ö, Ü");
                 Console.WriteLine("            _sz_               =>  ß");
-                return;
+                return 1;
             }
 
             try
@@ -196,10 +196,14 @@ namespace gView.Cmd.FillElasticSearch
 
                     #endregion
                 }
+
+                return 0;
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
+
+                return 1;
             }
         }
 

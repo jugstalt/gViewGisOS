@@ -15,7 +15,7 @@ namespace gView.Cmd.CompactTileBundle
             Explode = 1
         };
 
-        static void Main(string[] args)
+        static int Main(string[] args)
         {
             Action action = Action.None;
 
@@ -43,7 +43,7 @@ namespace gView.Cmd.CompactTileBundle
                 Console.WriteLine("USAGE:");
                 Console.WriteLine("gView.Cmd.CompactTileBundle <-explode> -bundle <Filename>");
                 Console.WriteLine("                      [-jpeg-qual <quality  0..100>]");
-                return;
+                return 1;
             }
 
             FileInfo bundleFile = new FileInfo(bundlePath);
@@ -91,6 +91,8 @@ namespace gView.Cmd.CompactTileBundle
 
                 #endregion
             }
+
+            return 0;
         }
     }
 }

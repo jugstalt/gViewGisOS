@@ -8,7 +8,7 @@ namespace CreateAccessFDB
 {
     class Program
     {
-        static void Main(string[] args)
+        static int Main(string[] args)
         {
             string mdb = "";
             bool delExisting = true;
@@ -30,7 +30,7 @@ namespace CreateAccessFDB
                 Console.WriteLine("USAGE:");
                 Console.WriteLine("gView.Cmd.CreateAccessFDB -mdb <dest. Filename>");
                 Console.WriteLine("                     [-delexisting <true|false>]");
-                return;
+                return 1;
             }
 
             try
@@ -56,13 +56,17 @@ namespace CreateAccessFDB
                 if (!fdb.Create(mdb))
                 {
                     Console.WriteLine("\n\nERROR: " + fdb.lastErrorMsg);
-                    return;
+                    return 1;
                 }
                 Console.WriteLine(mdb + " created...");
+
+                return 0;
             }
             catch (Exception ex)
             {
                 Console.WriteLine("\n\nERROR: " + ex.Message);
+
+                return 1;
             }
         }
     }

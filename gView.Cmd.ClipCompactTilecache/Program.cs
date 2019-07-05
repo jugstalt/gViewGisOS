@@ -15,7 +15,7 @@ namespace gView.Cmd.ClipCompactTilecache
 {
     class Program
     {
-        static void Main(string[] args)
+        static int Main(string[] args)
         {
             string gmlSource = String.Empty;
             string cacheSource = String.Empty;
@@ -57,7 +57,7 @@ namespace gView.Cmd.ClipCompactTilecache
                 Console.WriteLine("gView.Cmd.ClipCompactTilecache.exe -gml <Filename> -cache <cachedirectory> -target <cachetarget>");
                 Console.WriteLine("                      [-jpeg-qual <quality  0..100>] -maxlevel <level>");
                 Console.WriteLine("                      [-listfilenames]");
-                return;
+                return 1;
             }
 
             PlugInManager compMan = new PlugInManager();
@@ -215,6 +215,8 @@ namespace gView.Cmd.ClipCompactTilecache
                 if (maxlevel >= 0 && level.Level >= maxlevel)
                     break;
             }
+
+            return 0;
         }
 
         static bool Intersect(IEnvelope envelope, List<IPolygon> polygons)

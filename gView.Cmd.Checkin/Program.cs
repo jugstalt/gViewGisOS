@@ -13,7 +13,7 @@ namespace checkin
         static string _checkInResults = String.Empty;
         static bool _silent = false;
 
-        static void Main(string[] args)
+        static int Main(string[] args)
         {
             string source_connstr = "", source_fc = "";
             string dest_connstr = "", dest_fc = "";
@@ -59,7 +59,7 @@ namespace checkin
                 Console.WriteLine("                  -dest_fc <Featureclass name>");
                 Console.WriteLine("                  [-reconcile]");
                 Console.WriteLine("                  [-silent]");
-                return;
+                return 1;
             }
 
             Console.WriteLine("\n" + source_fc + ":");
@@ -69,13 +69,13 @@ namespace checkin
             if (sourceDS==null)
             {
                 Console.WriteLine("ERROR: Component with GUID '" + source_guid.ToString() + "' not found...");
-                return;
+                return 1;
             }
             IFeatureDataset destDS = compMan.CreateInstance(dest_guid) as IFeatureDataset;
             if (destDS == null)
             {
                 Console.WriteLine("ERROR: Component with GUID '" + dest_guid.ToString() + "' not found...");
-                return;
+                return 1;
             }
 
             sourceDS.ConnectionString = source_connstr;
@@ -83,12 +83,12 @@ namespace checkin
             if (!sourceDS.Open() || !(sourceDS.Database is IFeatureDatabaseReplication))
             {
                 Console.WriteLine("ERROR: Component with GUID '" + source_guid.ToString() + "' is not a replicatable feature dataset...");
-                return;
+                return 1;
             }
             if (!destDS.Open() || !(destDS.Database is IFeatureDatabaseReplication))
             {
                 Console.WriteLine("ERROR: Component with GUID '" + dest_guid.ToString() + "' is not a replicatable feature dataset...");
-                return;
+                return 1;
             }
 
             IDatasetElement sourceElement = sourceDS[source_fc];
@@ -99,12 +99,12 @@ namespace checkin
             if (sourceFC == null)
             {
                 Console.WriteLine("ERROR: Featureclass " + source_fc + " is not available...");  
-                return;
+                return 1;
             }
             if (destFC == null)
             {
                 Console.WriteLine("ERROR: Featureclass " + dest_fc + " is not available...");
-                return;
+                return 1;
             }
 
             string errMsg = String.Empty;
@@ -156,7 +156,8 @@ namespace checkin
                 }
             }
             Console.WriteLine("------------------------------------------------------------");
-                    
+
+            return 0;
         }
 
         static void repl_CheckIn_Message(Replication sender, string message)

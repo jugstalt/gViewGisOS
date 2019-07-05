@@ -8,7 +8,7 @@ namespace CreateAccessFDBDataset
 {
     class Program
     {
-        static void Main(string[] args)
+        static int Main(string[] args)
         {
             string mdb = "",dataset="";
             bool delExisting = true;
@@ -34,7 +34,7 @@ namespace CreateAccessFDBDataset
                 Console.WriteLine("USAGE:");
                 Console.WriteLine("gView.Cmd.CreateAccessFDBDataset -mdb <Filename> -ds <Datasetname>");
                 Console.WriteLine("                      [-delexisting <true|false>]");
-                return;
+                return 1;
             }
 
             try
@@ -43,7 +43,7 @@ namespace CreateAccessFDBDataset
                 if (!fdb.Open(mdb))
                 {
                     Console.WriteLine("\n\nERROR: " + fdb.lastErrorMsg);
-                    return;
+                    return 1;
                 }
 
                 //SpatialReference sRef = new SpatialReference();
@@ -52,14 +52,18 @@ namespace CreateAccessFDBDataset
                 {
                     Console.WriteLine("\n\nERROR: " + fdb.lastErrorMsg);
                     fdb.Dispose();
-                    return;
+                    return 1;
                 }
                 fdb.Dispose();
                 Console.WriteLine(mdb + ": Dataset " + dataset + " created...");
+
+                return 0;
             }
             catch (Exception ex)
             {
                 Console.WriteLine("\n\nERROR: " + ex.Message);
+
+                return 1;
             }
         }
     }

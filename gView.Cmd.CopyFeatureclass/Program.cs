@@ -15,7 +15,7 @@ namespace copyFeatureClass
 {
     class Program
     {
-        static void Main(string[] args)
+        static int Main(string[] args)
         {
             string source_connstr = "", source_fc = "";
             string dest_connstr = "", dest_fc = "";
@@ -104,7 +104,7 @@ namespace copyFeatureClass
                 Console.WriteLine("                -ch <none|normal|parent_wins|child_wins|newer_wins> ... conflict handling");
                 Console.WriteLine("   optional:");
                 Console.WriteLine("                -source_geometrytype <Point,Polyline,Polygon> ... if source geometrytype is not explizit specified (SQL Geometry)");
-                return;
+                return 1;
             }
 
             IFeatureDataset sourceDS, destDS;
@@ -116,7 +116,7 @@ namespace copyFeatureClass
             if (!(comp is IFeatureDataset))
             {
                 Console.WriteLine("Component with GUID '" + source_guid.ToString() + "' is not a feature dataset...");
-                return;
+                return 1;
             }
             sourceDS = (IFeatureDataset)comp;
             sourceDS.ConnectionString = source_connstr;
@@ -126,7 +126,7 @@ namespace copyFeatureClass
             {
                 Console.WriteLine("Can't find featureclass '" + source_fc + "' in source dataset...");
                 sourceDS.Dispose();
-                return;
+                return 1;
             }
 
      
@@ -157,7 +157,7 @@ namespace copyFeatureClass
                 {
                     Console.WriteLine("Error in field definition...");
                     sourceDS.Dispose();
-                    return;
+                    return 1;
                 }
                 for (int i = 0; i < sourceFields.Length; i++)
                 {
@@ -166,7 +166,7 @@ namespace copyFeatureClass
                     {
                         Console.WriteLine("Error: Can't find field '" + sourceFields[i] + "'...");
                         sourceDS.Dispose();
-                        return;
+                        return 1;
                     }
                     fieldTranslation.Add(field, destFields[i]);
                 }
@@ -191,7 +191,7 @@ namespace copyFeatureClass
                 if (!fileDB.Open(dest_connstr))
                 {
                     Console.WriteLine("Error opening destination database:" + fileDB.lastErrorMsg);
-                    return;
+                    return 1;
                 }
                 destDS = fileDB[dest_connstr];
             }
@@ -202,13 +202,13 @@ namespace copyFeatureClass
                 if (!destDS.Open())
                 {
                     Console.WriteLine("Error opening destination dataset:" + destDS.lastErrorMsg);
-                    return;
+                    return 1;
                 }
             }
             else
             {
                 Console.WriteLine("Component with GUID '" + dest_guid.ToString() + "' is not a feature dataset...");
-                return;
+                return 1;
             }
 
             string replIDField = String.Empty;
@@ -218,13 +218,13 @@ namespace copyFeatureClass
                     !(sourceDS.Database is IFeatureDatabaseReplication))
                 {
                     Console.WriteLine("Can't checkout FROM/TO databasetype...");
-                    return;
+                    return 1;
                 }
                 replIDField = Replication.FeatureClassReplicationIDFieldname(sourceFC);
                 if (String.IsNullOrEmpty(replIDField))
                 {
                     Console.WriteLine("Can't checkout from source featureclass. No replication ID!");
-                    return;
+                    return 1;
                 }
                 IDatasetElement element = destDS[dest_fc];
                 if (element != null)
@@ -237,7 +237,7 @@ namespace copyFeatureClass
                         foreach (Guid g in checkout_guids)
                             errMsg += "   CHECKOUT_GUID: " + g.ToString();
                         Console.WriteLine("ERROR:\n" + errMsg);
-                        return;
+                        return 1;
                     }
                 }
             }
@@ -290,6 +290,8 @@ namespace copyFeatureClass
                         sourceGeometryType: sourceGeometryType))
                     {
                         Console.WriteLine("ERROR: " + import.lastErrorMsg);
+
+                        return 1;
                     }
                 }
 
@@ -299,7 +301,7 @@ namespace copyFeatureClass
                     if (element == null)
                     {
                         Console.WriteLine("ERROR: Can't write checkout information...");
-                        return;
+                        return 1;
                     }
                     IFeatureClass destFC = element.Class as IFeatureClass;
 
@@ -307,7 +309,7 @@ namespace copyFeatureClass
                     if (!Replication.InsertReplicationIDFieldname(destFC, replIDField, out errMsg))
                     {
                         Console.WriteLine("ERROR: " + errMsg);
-                        return;
+                        return 1;
                     }
 
                     Replication.VersionRights cr = Replication.VersionRights.NONE;
@@ -350,13 +352,13 @@ namespace copyFeatureClass
                         out errMsg))
                     {
                         Console.WriteLine("ERROR: " + errMsg);
-                        return;
+                        return 1;
                     }
 
                     if (!Replication.InsertCheckoutLocks(sourceFC, destFC, out errMsg))
                     {
                         Console.WriteLine("ERROR: " + errMsg);
-                        return;
+                        return 1;
                     }
                 }
             }
@@ -364,9 +366,13 @@ namespace copyFeatureClass
             {
                 Console.WriteLine("Destination dataset has no feature database...");
                 Console.WriteLine("Can't create featureclasses for this kind of dataset...");
+
+                return 1;
             }
             sourceDS.Dispose();
             destDS.Dispose();
+
+            return 0;
         }
 
         static bool newLine = false;

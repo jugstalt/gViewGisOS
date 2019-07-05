@@ -21,7 +21,7 @@ namespace gView.Cmd.Fdb
             DropIndex = 2
         }
 
-        static void Main(string[] args)
+        static int Main(string[] args)
         {
             string connString=String.Empty, fcName=String.Empty, fields=String.Empty, name=String.Empty;
             Guid dsGuid=new Guid();
@@ -64,7 +64,7 @@ namespace gView.Cmd.Fdb
                 Console.WriteLine("USAGE:");
                 Console.WriteLine("gView.Cmd.Fdb -connstr <ConnectionString> -guid <DatasetGuid>");
                 Console.WriteLine("              -c <CreateIndex|DropIndex>");
-                return;
+                return 1;
             }
 
             IFeatureDataset dataset;
@@ -75,7 +75,7 @@ namespace gView.Cmd.Fdb
             if (!(comp is IFeatureDataset))
             {
                 Console.WriteLine("Component with GUID '" + dsGuid.ToString() + "' is not a feature dataset...");
-                return;
+                return 1;
             }
 
             dataset = (IFeatureDataset)comp;
@@ -83,14 +83,14 @@ namespace gView.Cmd.Fdb
             if (!(dataset.Database is AccessFDB))
             {
                 Console.WriteLine("Component dataset is not a gView Feature-Database...");
-                return;
+                return 1;
             }
 
             AccessFDB fdb = (AccessFDB)dataset.Database;
             if (!fdb.Open(connString))
             {
                 Console.WriteLine("Can't open database");
-                return;
+                return 1;
             }
 
             if (command == Command.CreateIndex)
@@ -103,7 +103,7 @@ namespace gView.Cmd.Fdb
                     Console.WriteLine("gView.Cmd.Fdb -connstr <ConnectionString> -guid <DatasetGuid>");
                     Console.WriteLine("              -c <CreateIndex>");
                     Console.WriteLine("              -fc <FeatureClassName> -fields <Fields>"); 
-                    return;
+                    return 1;
                 }
 
                 string indexName = "IDX_FC_" + fcName + "_" + fields.Replace(",", "_").Replace(" ", "");
@@ -120,11 +120,11 @@ namespace gView.Cmd.Fdb
                 {
                     Console.WriteLine("ERROR:");
                     Console.WriteLine(fdb.lastErrorMsg);
-                    return;
+                    return 1;
                 }
 
                 Console.WriteLine("Index created...");
-                return;
+                return 0;
 
                 #endregion
             }
@@ -138,7 +138,7 @@ namespace gView.Cmd.Fdb
                     Console.WriteLine("gView.Cmd.Fdb -connstr <ConnectionString> -guid <DatasetGuid>");
                     Console.WriteLine("              -c <DropIndex>");
                     Console.WriteLine("              -name <IndexName>"); 
-                    return;
+                    return 1;
                 }
 
                 Console.WriteLine("Try drop index...");
@@ -146,14 +146,16 @@ namespace gView.Cmd.Fdb
                 {
                     Console.WriteLine("ERROR:");
                     Console.WriteLine(fdb.lastErrorMsg);
-                    return;
+                    return 1;
                 }
 
                 Console.WriteLine("Index dropped...");
-                return;
+                return 0;
 
                 #endregion
             }
+
+            return 0;
         }
     }
 }

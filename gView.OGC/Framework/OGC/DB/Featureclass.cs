@@ -187,6 +187,11 @@ namespace gView.Framework.OGC.DB
 
                             _fields.Add(field);
                         }
+
+                        if (foundId == false)
+                        {
+                            _idfield = String.Empty;
+                        }
                     }
                 }
             }

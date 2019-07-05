@@ -9,7 +9,7 @@ namespace CreateSqlFDB
 {
     class Program
     {
-        static void Main(string[] args)
+        static int Main(string[] args)
         {
             string server = "", uid = "", pwd = "", database = "", mdf = String.Empty;
             UserData userData = new UserData();
@@ -53,7 +53,7 @@ namespace CreateSqlFDB
                 Console.WriteLine("            [-_Parametername <parameter>]");
                 Console.WriteLine("Example:");
                 Console.WriteLine("CreateSqlFDB -server localhost -database NEW_FDB -_filename c:\\myDatabase.mdf -_size 300 -_filegrowth 50");
-                return;
+                return 1;
             }
 
             // Path setzen, damit in fdb.Create die createdatabase.sql gefunden wird...
@@ -79,7 +79,7 @@ namespace CreateSqlFDB
             {
                 Console.WriteLine("ERROR :" + fdb.lastErrorMsg);
                 fdb.Dispose();
-                return;
+                return 1;
             }
 
             if (!String.IsNullOrEmpty(mdf))
@@ -88,7 +88,7 @@ namespace CreateSqlFDB
                 {
                     Console.WriteLine("ERROR :" + fdb.lastErrorMsg);
                     fdb.Dispose();
-                    return;
+                    return 1;
                 }
             }
             else
@@ -110,11 +110,13 @@ namespace CreateSqlFDB
                 {
                     Console.WriteLine("ERROR :" + fdb.lastErrorMsg);
                     fdb.Dispose();
-                    return;
+                    return 1;
                 }
             }
             fdb.Dispose();
             Console.WriteLine("...done");
+
+            return 0;
         }
     }
 }

@@ -9,7 +9,7 @@ namespace CreateSqlFDBDataset
 {
     class Program
     {
-        static void Main(string[] args)
+        static int Main(string[] args)
         {
             string server = "", database = "", uid = "", pwd = "", dataset = "", imageSpace="database";
             string connectionString = "";
@@ -58,7 +58,7 @@ namespace CreateSqlFDBDataset
                 Console.WriteLine("gView.Cmd.CreateSqlFDBDataset -server <Filename> -database <Database> OR -connectionstring <ConnectionString>");
                 Console.WriteLine("                    -ds <Datasetname>");
                 Console.WriteLine("                   [-uid <User> -pwd <Password> -imagedataset -imagespace <Image Space Directory (Database)>]");
-                return;
+                return 1;
             }
 
             try
@@ -79,7 +79,7 @@ namespace CreateSqlFDBDataset
                 if (!fdb.Open(connectionString))
                 {
                     Console.WriteLine("\n\nERROR: " + fdb.lastErrorMsg);
-                    return;
+                    return 1;
                 }
 
                 //SpatialReference sRef = new SpatialReference();
@@ -91,7 +91,7 @@ namespace CreateSqlFDBDataset
                     {
                         fdb.Dispose();
                         Console.WriteLine("\n\nERROR: " + fdb.lastErrorMsg);
-                        return;
+                        return 1;
                     }
                 }
                 else
@@ -100,16 +100,20 @@ namespace CreateSqlFDBDataset
                     {
                         fdb.Dispose();
                         Console.WriteLine("\n\nERROR: " + fdb.lastErrorMsg);
-                        return;
+                        return 1;
                     }
                 }
 
                 fdb.Dispose();
                 Console.WriteLine(server + @"\" + database + ": Dataset " + dataset + " created...");
+
+                return 0;
             }
             catch (Exception ex)
             {
                 Console.WriteLine("\n\nERROR: " + ex.Message);
+
+                return 1;
             }
         }
     }
