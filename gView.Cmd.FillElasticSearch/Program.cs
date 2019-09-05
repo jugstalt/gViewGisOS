@@ -7,9 +7,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace gView.Cmd.FillElasticSearch
 {
@@ -19,7 +16,7 @@ namespace gView.Cmd.FillElasticSearch
 
         static int Main(string[] args)
         {
-            string cmd = "fill", jsonFile = (args.Length == 1  && args[0]!="fill" ? args[0] : String.Empty), indexUrl = String.Empty, indexName=String.Empty, category = String.Empty;
+            string cmd = "fill", jsonFile = (args.Length == 1 && args[0] != "fill" ? args[0] : String.Empty), indexUrl = String.Empty, indexName = String.Empty, category = String.Empty;
             bool replace = false;
 
             for (int i = 0; i < args.Length; i++)
@@ -35,13 +32,24 @@ namespace gView.Cmd.FillElasticSearch
                     cmd = "remove-category";
                 }
                 if (args[i] == "-s" && i < args.Length - 1)
+                {
                     indexUrl = args[i + 1];
+                }
+
                 if (args[i] == "-i" && i < args.Length - 1)
+                {
                     indexName = args[i + 1];
+                }
+
                 if (args[i] == "-c" && i < args.Length - 1)
+                {
                     category = args[i + 1];
+                }
+
                 if (args[i] == "-r")
+                {
                     replace = true;
+                }
             }
 
             if (args.Length == 0)
@@ -84,7 +92,9 @@ namespace gView.Cmd.FillElasticSearch
                     var searchContext = new ElasticSearchContext(importConfig.Connection.Url, importConfig.Connection.DefaultIndex);
 
                     if (importConfig.Connection.DeleteIndex)
+                    {
                         searchContext.DeleteIndex();
+                    }
 
                     searchContext.CreateIndex();
                     searchContext.Map<Item>();
@@ -97,11 +107,15 @@ namespace gView.Cmd.FillElasticSearch
                     foreach (var datasetConfig in importConfig.Datasets)
                     {
                         if (datasetConfig.FeatureClasses == null)
+                        {
                             continue;
+                        }
 
                         IDataset dataset = new PlugInManager().CreateInstance(datasetConfig.DatasetGuid) as IDataset;
                         if (dataset == null)
+                        {
                             throw new ArgumentException("Can't load dataset with guid " + datasetConfig.DatasetGuid.ToString());
+                        }
 
                         dataset.ConnectionString = datasetConfig.ConnectionString;
                         dataset.Open();
@@ -110,7 +124,9 @@ namespace gView.Cmd.FillElasticSearch
                         {
                             var itemProto = featureClassConfig.IndexItemProto;
                             if (itemProto == null)
+                            {
                                 continue;
+                            }
 
                             string metaId = Guid.NewGuid().ToString("N").ToLower();
                             category = featureClassConfig.Category;
@@ -132,10 +148,15 @@ namespace gView.Cmd.FillElasticSearch
 
                             IDatasetElement dsElement = dataset[featureClassConfig.Name];
                             if (dsElement == null)
+                            {
                                 throw new ArgumentException("Unknown dataset element " + featureClassConfig.Name);
+                            }
+
                             IFeatureClass fc = dsElement.Class as IFeatureClass;
                             if (fc == null)
+                            {
                                 throw new ArgumentException("Dataobject is not a featureclass " + featureClassConfig.Name);
+                            }
 
                             Console.WriteLine("Index " + fc.Name);
                             Console.WriteLine("=====================================================================");
@@ -158,9 +179,11 @@ namespace gView.Cmd.FillElasticSearch
                             using (GeometricTransformer transformer = new GeometricTransformer())
                             {
                                 if (useGeometry)
+                                {
                                     transformer.SetSpatialReferences(sRef, sRefTarget);
+                                }
 
-                                IFeatureCursor cursor = (IFeatureCursor)fc.GetFeatures(filter);
+                                IFeatureCursor cursor = fc.GetFeatures(filter);
                                 IFeature feature;
                                 while ((feature = cursor.NextFeature) != null)
                                 {
@@ -238,10 +261,14 @@ namespace gView.Cmd.FillElasticSearch
 
                     count += items.Count();
                     if (items.Count() == 0 || count > 1e7)
+                    {
                         break;
+                    }
 
                     if (searchContext.RemoveMany<Item>(items, indexName))
+                    {
                         Console.WriteLine("Successfully deleted " + items.Count() + " items");
+                    }
 
                     System.Threading.Thread.Sleep(1000);
                 }
@@ -251,7 +278,9 @@ namespace gView.Cmd.FillElasticSearch
                 Console.WriteLine();
 
                 if (searchContext.Remove<Meta>(meta.Id, indexName))
+                {
                     Console.WriteLine("Successfully deleted meta info " + meta.Category + " id=" + meta.Id);
+                }
             }
 
             return true;
@@ -268,7 +297,9 @@ namespace gView.Cmd.FillElasticSearch
             {
                 var idFieldValue = feature.FindField(featureClassDef.ObjectOidField);
                 if (idFieldValue != null)
+                {
                     oid = idFieldValue.Value?.ToString();
+                }
             }
 
             result.Id = metaId + "." + oid;
@@ -277,25 +308,25 @@ namespace gView.Cmd.FillElasticSearch
             result.ThumbnailUrl = ParseFeatureField(feature, proto.ThumbnailUrl);
             result.Category = category;
 
-            if(replace!=null)
+            if (replace != null)
             {
-                foreach(var r in replace)
+                foreach (var r in replace)
                 {
                     result.SuggestedText = result.SuggestedText?.Replace(r.From, r.To);
                     result.SubText = result.SubText?.Replace(r.From, r.To);
                 }
             }
 
-            if(useGeometry == true && feature.Shape!=null)
+            if (useGeometry == true && feature.Shape != null)
             {
                 IGeometry shape = feature.Shape;
 
-                if(shape is IPoint)
+                if (shape is IPoint)
                 {
                     IPoint point = (IPoint)transformer.Transform2D(feature.Shape);
                     result.Geo = new Nest.GeoLocation(point.Y, point.X);
                 }
-                else if(shape is IPolyline)
+                else if (shape is IPolyline)
                 {
                     IEnvelope env = shape.Envelope;
                     if (env != null)
@@ -311,7 +342,7 @@ namespace gView.Cmd.FillElasticSearch
                         result.BBox = GetBBox(env, transformer);
                     }
                 }
-                else if(shape is IPolygon)
+                else if (shape is IPolygon)
                 {
                     IEnvelope env = shape.Envelope;
                     if (env != null)
@@ -334,13 +365,18 @@ namespace gView.Cmd.FillElasticSearch
         static private string ParseFeatureField(IFeature feature, string pattern)
         {
             if (pattern == null || !pattern.Contains("{"))
+            {
                 return pattern;
+            }
 
             string[] parameters = GetKeyParameters(pattern);
-            foreach(string parameter in parameters)
+            foreach (string parameter in parameters)
             {
                 var fieldValue = feature.FindField(parameter);
-                if (fieldValue == null) continue;
+                if (fieldValue == null)
+                {
+                    continue;
+                }
 
                 string val = fieldValue.Value != null ? fieldValue.Value.ToString() : String.Empty;
                 pattern = pattern.Replace("{" + parameter + "}", val);
@@ -358,15 +394,27 @@ namespace gView.Cmd.FillElasticSearch
             while (pos1 != -1)
             {
                 pos2 = pattern.IndexOf("}", pos1);
-                if (pos2 == -1) break;
-                if (parameters != "") parameters += ";";
+                if (pos2 == -1)
+                {
+                    break;
+                }
+
+                if (parameters != "")
+                {
+                    parameters += ";";
+                }
+
                 parameters += pattern.Substring(pos1 + 1, pos2 - pos1 - 1);
                 pos1 = pattern.IndexOf("{", pos2);
             }
             if (parameters != "")
+            {
                 return parameters.Split(';');
+            }
             else
+            {
                 return new string[0];
+            }
         }
 
         static private string GetBBox(IEnvelope env, GeometricTransformer transformer)
