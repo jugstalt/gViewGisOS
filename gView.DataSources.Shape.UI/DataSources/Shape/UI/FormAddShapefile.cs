@@ -51,52 +51,52 @@ namespace gView.DataSources.Shape.UI
 		/// </summary>
 		private void InitializeComponent()
 		{
-			this.getFile = new System.Windows.Forms.Button();
-			this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-			this.txtShp = new System.Windows.Forms.TextBox();
-			this.btnAdd = new System.Windows.Forms.Button();
-			this.SuspendLayout();
-			// 
-			// getFile
-			// 
-			this.getFile.Location = new System.Drawing.Point(328, 16);
-			this.getFile.Name = "getFile";
-			this.getFile.Size = new System.Drawing.Size(40, 24);
-			this.getFile.TabIndex = 0;
-			this.getFile.Text = "...";
-			this.getFile.Click += new System.EventHandler(this.getFile_Click);
-			// 
-			// openFileDialog1
-			// 
-			this.openFileDialog1.Filter = "Shapefile (*.shp)|*.shp";
-			// 
-			// txtShp
-			// 
-			this.txtShp.Location = new System.Drawing.Point(8, 16);
-			this.txtShp.Name = "txtShp";
-			this.txtShp.Size = new System.Drawing.Size(320, 20);
-			this.txtShp.TabIndex = 1;
-			this.txtShp.Text = "";
-			// 
-			// btnAdd
-			// 
-			this.btnAdd.DialogResult = System.Windows.Forms.DialogResult.OK;
-			this.btnAdd.Location = new System.Drawing.Point(240, 56);
-			this.btnAdd.Name = "btnAdd";
-			this.btnAdd.Size = new System.Drawing.Size(128, 32);
-			this.btnAdd.TabIndex = 2;
-			this.btnAdd.Text = "OK";
-			// 
-			// FormAddShapefile
-			// 
-			this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
-			this.ClientSize = new System.Drawing.Size(384, 285);
-			this.Controls.Add(this.btnAdd);
-			this.Controls.Add(this.txtShp);
-			this.Controls.Add(this.getFile);
-			this.Name = "FormAddShapefile";
-			this.Text = "FormAddShapefile";
-			this.ResumeLayout(false);
+            this.getFile = new System.Windows.Forms.Button();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.txtShp = new System.Windows.Forms.TextBox();
+            this.btnAdd = new System.Windows.Forms.Button();
+            this.SuspendLayout();
+            // 
+            // getFile
+            // 
+            this.getFile.Location = new System.Drawing.Point(525, 23);
+            this.getFile.Name = "getFile";
+            this.getFile.Size = new System.Drawing.Size(64, 35);
+            this.getFile.TabIndex = 0;
+            this.getFile.Text = "...";
+            this.getFile.Click += new System.EventHandler(this.getFile_Click);
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.Filter = "Shapefile (*.shp)|*.shp";
+            // 
+            // txtShp
+            // 
+            this.txtShp.Location = new System.Drawing.Point(13, 23);
+            this.txtShp.Name = "txtShp";
+            this.txtShp.Size = new System.Drawing.Size(512, 26);
+            this.txtShp.TabIndex = 1;
+            // 
+            // btnAdd
+            // 
+            this.btnAdd.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.btnAdd.Location = new System.Drawing.Point(384, 82);
+            this.btnAdd.Name = "btnAdd";
+            this.btnAdd.Size = new System.Drawing.Size(205, 47);
+            this.btnAdd.TabIndex = 2;
+            this.btnAdd.Text = "OK";
+            // 
+            // FormAddShapefile
+            // 
+            this.AutoScaleBaseSize = new System.Drawing.Size(8, 19);
+            this.ClientSize = new System.Drawing.Size(633, 225);
+            this.Controls.Add(this.btnAdd);
+            this.Controls.Add(this.txtShp);
+            this.Controls.Add(this.getFile);
+            this.Name = "FormAddShapefile";
+            this.Text = "FormAddShapefile";
+            this.ResumeLayout(false);
+            this.PerformLayout();
 
 		}
 		#endregion

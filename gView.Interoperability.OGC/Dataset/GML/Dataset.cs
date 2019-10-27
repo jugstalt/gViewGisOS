@@ -164,7 +164,7 @@ namespace gView.Interoperability.OGC.Dataset.GML
                 _xsd_file = fi_xsd.FullName;
 
                 XmlDocument schema = new XmlDocument();
-                schema.Load(fi_xsd.FullName);
+                schema.Load(System.IO.File.ReadAllText(fi_xsd.FullName));
                 XmlSchemaReader schemaReader = new XmlSchemaReader(schema);
                 string targetNamespace = schemaReader.TargetNamespaceURI;
                 if (targetNamespace == String.Empty) return false;
@@ -186,12 +186,15 @@ namespace gView.Interoperability.OGC.Dataset.GML
                     _elements.Add(layer);
                 }
 
-                XmlTextReader xmlTextReader = new XmlTextReader(fi_gml.FullName);
-                xmlTextReader.ReadToDescendant("boundedBy", "http://www.opengis.net/gml");
-                string boundedBy = xmlTextReader.ReadOuterXml();
-
                 _doc = new XmlDocument();
-                _doc.LoadXml(boundedBy);
+               
+                using (XmlTextReader xmlTextReader = new XmlTextReader(fi_gml.FullName))
+                {
+                    xmlTextReader.ReadToDescendant("boundedBy", "http://www.opengis.net/gml");
+                    string boundedBy = xmlTextReader.ReadOuterXml();
+                    _doc.LoadXml(boundedBy);
+                }
+
                 _ns = new XmlNamespaceManager(_doc.NameTable);
                 _ns.AddNamespace("GML", "http://www.opengis.net/gml");
                 _ns.AddNamespace("WFS", "http://www.opengis.net/wfs");
