@@ -3,7 +3,7 @@
 
 gView GIS - Userfriendly open source GI framework
 
-!! Visit Current Version!!
+!! Visit Current Version !!
 
 [Current Version](https://github.com/jugstalt/gview5)
 
